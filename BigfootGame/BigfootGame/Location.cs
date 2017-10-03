@@ -4,6 +4,12 @@ using System.Text;
 
 namespace BigfootGame
 {
+        //Examples of what would be in here for JSON
+        //public string Email { get; set; }
+        //public bool Active { get; set; }
+        //public DateTime CreatedDate { get; set; }
+        //public IList<string> Roles { get; set; }
+
     class Location
     {
         Dictionary<string, string> locationItems;
