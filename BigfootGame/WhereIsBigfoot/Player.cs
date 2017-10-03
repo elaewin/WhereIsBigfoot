@@ -6,10 +6,11 @@ namespace BigfootGame
 {
     class Player
     {
-        string playerName, playerGender, playerHair, playerLocation, inventory;
+        string playerName, playerGender, playerHair, inventory;
+        Location playerLocation;
         //Dictionary<string, string> inventory;
 
-        public Player(string playerName, string playerGender, string playerHair, string playerLocation, string inventory)
+        public Player(string playerName, string playerGender, string playerHair, Location playerLocation, string inventory)
         {
             this.playerName = playerName;
             this.playerGender = playerGender;
