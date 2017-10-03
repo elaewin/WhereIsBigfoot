@@ -6,8 +6,8 @@
       "Exits": {
           "north": "tent",
           "south": "woods3",
-          "east": "woods1",
-        },
+          "east": "woods1"
+      },
       "NPCs": "",
       "Objects": [
         "clearing", "cedars", "campsite", "trails", "forest"
