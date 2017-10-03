@@ -6,11 +6,11 @@ namespace BigfootGame
 {
     class Player
     {
-        string playerName, playerGender, playerHair, inventory;
+        string playerName, playerGender, playerHair;
         Location playerLocation;
-        //Dictionary<string, string> inventory;
+        Dictionary<string, Item> inventory;
 
-        public Player(string playerName, string playerGender, string playerHair, Location playerLocation, string inventory)
+        public Player(string playerName, string playerGender, string playerHair, Location playerLocation, Dictionary<string, Item> inventory)
         {
             this.playerName = playerName;
             this.playerGender = playerGender;
@@ -34,15 +34,15 @@ namespace BigfootGame
             get { return this.playerHair; }
         }
 
-        public string PlayerLocation
+        public Location PlayerLocation
         {
             get { return this.playerLocation; }
         }
 
-        //public Dictionary<string, string> Inventory
-        //{
-        //    get { return this.inventory;  }
-        //    set { this.inventory = value; }
-        //}
+        public Dictionary<string, Item> Inventory 
+        { 
+            get { return this.inventory; }
+            set { this.inventory = value; }
+        }
     }
 }

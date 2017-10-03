@@ -6,13 +6,13 @@ namespace BigfootGame
 {
     class Location
     {
-        //Dictionary<string, string> locationItems;
-        //Dictionary<string, string> characters;
 
-        string locationName, locationShort, locationLong, characters, items, objects;
+        string locationName, locationShort, locationLong, objects;
         Dictionary<string, string> exits;
+        Dictionary<string, Item> items;
+        Dictionary<string, Character> characters;
 
-        public Location(string locationName, string locationShort, string locationLong, string items, string objects, string characters)
+        public Location(string locationName, string locationShort, string locationLong, Dictionary<string, Item> items, string objects, string characters)
         {
             this.locationName = locationName;
             this.locationShort = locationShort;
@@ -38,7 +38,7 @@ namespace BigfootGame
             get{ return this.locationName; }
         }
 
-        public string Items 
+        public Dictionary<string, Item> Items 
         { 
             get{ return this.items; }
         }
@@ -58,31 +58,12 @@ namespace BigfootGame
             {
                 this.exits = value;
             }
-        } 
+        }
 
-
-        //public Dictionary<string, string> LocationItems
-        //{
-        //    get
-        //    {
-        //        return this.locationItems;
-        //    }
-        //    set
-        //    {
-        //        this.locationItems = value;
-        //    }
-        //}
-
-        //public Dictionary<string, string> Characters
-        //{
-        //    get
-        //    {
-        //        return this.characters;
-        //    }
-        //    set
-        //    {
-        //        this.characters = value;
-        //    }
-        //}
+        public Dictionary<string, Character> Characters
+        {
+            get { return this.characters; }
+            set { this.characters = value; }
+        }
     }
 }
