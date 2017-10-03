@@ -11,7 +11,8 @@ namespace BigfootGame
             Console.WriteLine("Hello World!");
             
 
-            //Serialize a Location
+            //Serialize a Location:
+
             //Location location = new Location
             //{
                 //Email = "james@example.com",
@@ -36,6 +37,19 @@ namespace BigfootGame
             // }
 
             //Console.WriteLine(json);
+
+
+            //Deserialize JSON from a file:
+            // read file into a string and deserialize JSON to a type
+            //Location location1 = JsonConvert.DeserializeObject<Movie>(File.ReadAllText(@"c:\location.json"));
+
+            // deserialize JSON directly from a file
+            //using (StreamReader file = File.OpenText(@"c:\location.json"))
+            //{
+            //    JsonSerializer serializer = new JsonSerializer();
+            //    Location location2 = (Movie)serializer.Deserialize(file, typeof(Movie));
+            //}
+
 
         }
     }
