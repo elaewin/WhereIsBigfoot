@@ -8,6 +8,7 @@ namespace BigfootGame
     {
         //Dictionary<string, string> locationItems;
         //Dictionary<string, string> characters;
+
         string locationName, locationShort, locationLong, characters, items, objects;
         Dictionary<string, string> exits;
 
