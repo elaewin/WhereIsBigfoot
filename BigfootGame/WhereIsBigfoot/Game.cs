@@ -9,7 +9,7 @@ namespace BigfootGame
 {
     class Game
     {
-        public List<Location> location;
+        public List<Location> locations;
         // Parsing (Erika + Tyler) 
 
         // Populate Location Items and Populate characters dictionary 
@@ -52,12 +52,13 @@ namespace BigfootGame
 
             //Deserialize JSON from a file:
 
-            string jsonFile = @"locations.json";
+            string jsonFile = @"..\..\locations.json";
+            Game g = new Game();
            
-            List<Location> location = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonFile));
+           g.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonFile));
 
-            foreach(Location location in locations) 
-                Console.WriteLine(location.locationName);
+            foreach(Location location in g.locations) 
+                Console.WriteLine(location.LocationName);
 
 
         }

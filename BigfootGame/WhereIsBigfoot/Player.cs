@@ -41,7 +41,7 @@ namespace BigfootGame
 
         //public Dictionary<string, string> Inventory
         //{
-        //    get { return this.inventory;  }
+        //    get { return this.inventory; }
         //    set { this.inventory = value; }
         //}
     }

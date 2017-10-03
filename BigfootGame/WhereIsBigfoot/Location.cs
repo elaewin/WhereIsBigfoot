@@ -9,10 +9,11 @@ namespace BigfootGame
         //Dictionary<string, string> locationItems;
         //Dictionary<string, string> characters;
 
-        string locationName, locationShort, locationLong, characters, items, objects;
+        string locationName, locationShort, locationLong, characters, items;
+        string[] objects;
         Dictionary<string, string> exits;
 
-        public Location(string locationName, string locationShort, string locationLong, string items, string objects, string characters)
+        public Location(string locationName, string locationShort, string locationLong, string items, string[] objects, string characters)
         {
             this.locationName = locationName;
             this.locationShort = locationShort;
@@ -43,7 +44,7 @@ namespace BigfootGame
             get{ return this.items; }
         }
 
-        public string Objects 
+        public string [] Objects 
         { 
             get{ return this.objects; }
         }
