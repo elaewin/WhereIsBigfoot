@@ -4,22 +4,20 @@ using System.Text;
 
 namespace BigfootGame
 {
-        //Examples of what would be in here for JSON
-        //public string Email { get; set; }
-        //public bool Active { get; set; }
-        //public DateTime CreatedDate { get; set; }
-        //public IList<string> Roles { get; set; }
-
     class Location
     {
-        Dictionary<string, string> locationItems;
-        Dictionary<string, string> characters;
-        string locationShort, locationLong;
+        //Dictionary<string, string> locationItems;
+        //Dictionary<string, string> characters;
+        string locationShort, locationLong, locationItems, characters;
+        List<string> possibleDirections;
 
-        public Location(string shortDescription, string longDescription)
+        public Location(string shortDescription, string longDescription, string locationItems, string characters)
         {
             this.locationShort = shortDescription;
             this.locationLong = longDescription;
+
+            this.locationItems = locationItems;
+            this.characters = characters; 
         }
 
         public string LocationShort
@@ -32,28 +30,28 @@ namespace BigfootGame
             get{ return this.locationLong; }
         }
 
-        public Dictionary<string, string> LocationItems
-        {
-            get
-            {
-                return this.locationItems;
-            }
-            set
-            {
-                this.locationItems = value;
-            }
-        }
+        //public Dictionary<string, string> LocationItems
+        //{
+        //    get
+        //    {
+        //        return this.locationItems;
+        //    }
+        //    set
+        //    {
+        //        this.locationItems = value;
+        //    }
+        //}
 
-        public Dictionary<string, string> Characters
-        {
-            get
-            {
-                return this.characters;
-            }
-            set
-            {
-                this.characters = value;
-            }
-        }
+        //public Dictionary<string, string> Characters
+        //{
+        //    get
+        //    {
+        //        return this.characters;
+        //    }
+        //    set
+        //    {
+        //        this.characters = value;
+        //    }
+        //}
     }
 }
