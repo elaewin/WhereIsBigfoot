@@ -8,10 +8,10 @@ namespace BigfootGame
     {
         //Dictionary<string, string> locationItems;
         //Dictionary<string, string> characters;
-        string locationShort, locationLong, locationItems, characters;
+        string locationShort, locationLong, locationItems, characters, name;
         List<string> possibleDirections;
 
-        public Location(string shortDescription, string longDescription, string locationItems, string characters)
+        public Location(string name, string shortDescription, string longDescription, string locationItems, string characters)
         {
             this.locationShort = shortDescription;
             this.locationLong = longDescription;
