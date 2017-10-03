@@ -10,7 +10,9 @@ namespace BigfootGame
 
         // Populate Location Items and Populate characters dictionary 
 
+        // product of parser is dictionary<string, string> 
 
+        
         
         static void Main(string[] args)
         {
