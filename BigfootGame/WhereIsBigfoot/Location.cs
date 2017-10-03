@@ -6,13 +6,14 @@ namespace BigfootGame
 {
     class Location
     {
-
-        string locationName, locationShort, locationLong, objects;
+        string locationName, locationShort, locationLong;
+        string[] objects;
         Dictionary<string, string> exits;
         Dictionary<string, Item> items;
         Dictionary<string, Character> characters;
 
         public Location(string locationName, string locationShort, string locationLong, Dictionary<string, Item> items, string objects, string characters)
+
         {
             this.locationName = locationName;
             this.locationShort = locationShort;
@@ -43,7 +44,7 @@ namespace BigfootGame
             get{ return this.items; }
         }
 
-        public string Objects 
+        public string [] Objects 
         { 
             get{ return this.objects; }
         }

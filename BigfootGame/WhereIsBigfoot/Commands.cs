@@ -19,10 +19,10 @@ namespace BigfootGame
         {
             // check player current location
 
-           Location currentLocation = p.PlayerLocation;
-           string newLocation = ""; 
+            Location currentLocation = p.PlayerLocation;
+            string newLocation = "";
 
-            if(currentLocation.Exits.ContainsKey(direction))
+            if (currentLocation.Exits.ContainsKey(direction))
             {
                 newLocation = currentLocation.Exits[direction]; 
             }
