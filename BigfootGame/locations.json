@@ -9,7 +9,9 @@
           "east": "woods1",
         },
       "NPCs": "",
-      "Objects": "clearing, cedars, campsite, trails, forest",
+      "Objects": [
+        "clearing", "cedars", "campsite", "trails", "forest"
+      ],
       "Items": ""
    },
    "dan": {
@@ -49,15 +51,15 @@
       "Items": ""
    },
    "tent": {
-      "First Description": "It's so good to have your own tent rather than sharing one with anybody. Your tent contains your sleeping bag,  a change of clothes, a small backpack, and the satisfaction of knowing you can rough it in the great outdoors. Oh, you should probably grab your backpack before you go. And charge your phone.\n\nDarn. You forgot your phone charger. The outdoors are a nightmare.",
-      "Full Description": "",
+      "First Description": "It's so good to have your own tent rather than sharing one with anybody. Your tent contains your sleeping bag, a change of clothes, a small backpack, and the satisfaction of knowing you can rough it in the great outdoors. Oh, you should probably grab your backpack before you go. And charge your phone.\n\nDarn. You forgot your phone charger. The outdoors are a nightmare.",
+      "Full Description": "You're in your tent. ",
       "Short Description": "You are in your tent.",
       "Exits": {
         "south": "campsite"
       },
       "NPCs": "",
       "Objects": "",
-      "Items": "matches, book"
+      "Items": "matches, book, phone"
    },
    "tree": {
       "First Description": "You climb into the branches of the tall cedar tree. It's easier than when you were a kid. Your arms and legs are longer. You're stronger.\n\nYou're also bigger now. Heavier. So it's really kind of a wash. Speaking of a wash, all this sap on your hands makes you wish you'd packed some wet-naps.\n\nThe tree octopus watches you climb. You're not sure if it's impressed. Now that you're closer, you see its arms wrapped around a lantern. How did it get the lantern up here? It has eight arms'maybe that should be a clue about how it does anything. You've only got two arms and you can barely get around at all.\n\nThe tree octopus seems kind of possessive of the lantern. You weren't even that possessive of your favorite teddy bear when you were four. Then again, you only had two arms to hold it.\n",
