@@ -15,13 +15,28 @@ namespace BigfootGame
         // give
         // go 
 
-        public void Go(string direction)
+        public void Go(Player p, Location l, string direction)
         {
             // check player current location
 
+            string currentLocation = p.PlayerLocation;
+
+           if(l.PossibleDirections.Contains(direction))
+            {
+
+            }
+
+
             // check if can go direction
 
-            // yes - 
+            // if yes: go to location
+
+            //if no: throw a message: not possible to go there.
+        }
+
+        public void get(string item)
+        {
+            Console.WriteLine("");
         }
     }
 }
