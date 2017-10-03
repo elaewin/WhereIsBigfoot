@@ -1,12 +1,15 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.Data;
+using System.Collections.Generic;
+using System.IO;
 
 
 namespace BigfootGame
 {
     class Game
     {
+        public List<Location> locations;
         // Parsing (Erika + Tyler) 
 
         // Populate Location Items and Populate characters dictionary 
@@ -17,7 +20,6 @@ namespace BigfootGame
         
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             
 
             //Serialize a Location:
@@ -49,15 +51,14 @@ namespace BigfootGame
 
 
             //Deserialize JSON from a file:
-            // read file into a string and deserialize JSON to a type
-            //Location location1 = JsonConvert.DeserializeObject<Movie>(File.ReadAllText(@"c:\location.json"));
 
-            // deserialize JSON directly from a file
-            //using (StreamReader file = File.OpenText(@"c:\location.json"))
-            //{
-            //    JsonSerializer serializer = new JsonSerializer();
-            //    Location location2 = (Movie)serializer.Deserialize(file, typeof(Movie));
-            //}
+            string jsonFile = @"..\..\locations.json";
+            Game g = new Game();
+           
+           g.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonFile));
+
+            foreach(Location location in g.locations) 
+                Console.WriteLine(location.LocationName);
 
 
         }
