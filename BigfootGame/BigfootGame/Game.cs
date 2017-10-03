@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using System.Data;
 
 
 namespace BigfootGame
@@ -10,7 +11,9 @@ namespace BigfootGame
 
         // Populate Location Items and Populate characters dictionary 
 
+        // product of parser is dictionary<string, string> 
 
+        
         
         static void Main(string[] args)
         {
