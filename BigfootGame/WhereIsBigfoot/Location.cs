@@ -33,6 +33,21 @@ namespace BigfootGame
             get{ return this.locationLong; }
         }
 
+        public string LocationName 
+        { 
+            get{ return this.locationName; }
+        }
+
+        public string Items 
+        { 
+            get{ return this.items; }
+        }
+
+        public string Objects 
+        { 
+            get{ return this.objects; }
+        }
+
         public Dictionary<string,string> Exits
         {
             get
