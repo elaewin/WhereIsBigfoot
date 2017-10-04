@@ -21,9 +21,9 @@ namespace WhereIsBigfoot
             string jsonItemFile = @"../../items.json";
             string jsonCharacterFile = @"../../characters.json";
 
-            game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonLocationFile));
             game.items = JsonConvert.DeserializeObject<List<Item>>(File.ReadAllText(jsonItemFile));
             game.characters = JsonConvert.DeserializeObject<List<Character>>(File.ReadAllText(jsonCharacterFile));
+            game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonLocationFile));
 
             //Testing to make sure the objects are being de-serialized by writing them to the console.
             foreach (Location location in game.locations)
@@ -36,12 +36,18 @@ namespace WhereIsBigfoot
             foreach (Location location in game.locations)
             {
                 foreach (Item item in game.items)
-               {
-                    if (location.Items.ContainsKey(item.ItemName))
-                    {
-                        location.Items.Add(item.ItemName, item);
-                        Console.WriteLine(location.Items);
-                    }
+                //Console.WriteLine("Test loop 1");
+                {
+                    //Console.WriteLine("Test Loop 2");
+                    //while (!location.Items.ContainsKey(null))
+                    //{
+                        if (location.Items.ContainsKey(item.ItemName))
+                        {
+                            location.Items[item.ItemName] = item;
+                            Console.WriteLine("Test if statement");
+                            Console.WriteLine($"{item.ItemName}");
+                        }
+                    //}
                 }
             }
         }

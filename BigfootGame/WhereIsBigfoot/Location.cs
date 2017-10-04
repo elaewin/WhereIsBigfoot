@@ -10,7 +10,7 @@ namespace WhereIsBigfoot
         string[] objects;
         Dictionary<string, string> exits;
         Dictionary<string, Item> items;
-        bool visited = false;
+        //bool visited = false;
         //Dictionary<string, Character> characters;
 
         public Location(string locationName, string locationShort, string locationLong, string[] objects)
@@ -40,6 +40,7 @@ namespace WhereIsBigfoot
         public Dictionary<string, Item> Items 
         { 
             get{ return this.items; }
+            set { this.items = value; }
         }
 
         public string[] Objects 
