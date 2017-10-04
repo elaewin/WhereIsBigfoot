@@ -24,14 +24,14 @@ namespace BigfootGame
 
             if (currentLocation.Exits.ContainsKey(direction))
             {
-                newLocation = currentLocation.Exits[direction]; 
+                newLocation = currentLocation.Exits[direction];
             }
             else
             {
                 Console.WriteLine("You run into an impenetrable barrier and must return.");
             }
-
             return newLocation;
+
         }
 
         public void GetItem(Player p, string item)
