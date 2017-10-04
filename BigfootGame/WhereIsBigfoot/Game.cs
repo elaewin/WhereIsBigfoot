@@ -9,13 +9,14 @@ namespace WhereIsBigfoot
 {
     class Game
     {
-		//
+        //
         public List<Location> locations;
         public List<Item> items;
         public List<Character> characters;
 
         // Deserialize JSON from a file. 
-        public void LoadData(Game game) {
+        public void LoadData(Game game)
+        {
             string jsonLocationFile = @"../../locations.json";
             string jsonItemFile = @"../../items.json";
             string jsonCharacterFile = @"../../characters.json";
@@ -24,8 +25,7 @@ namespace WhereIsBigfoot
             game.items = JsonConvert.DeserializeObject<List<Item>>(File.ReadAllText(jsonItemFile));
             game.characters = JsonConvert.DeserializeObject<List<Character>>(File.ReadAllText(jsonCharacterFile));
 
-
-
+            //Testing to make sure the objects are being de-serialized by writing them to the console.
             foreach (Location location in game.locations)
                 Console.WriteLine(location.LocationName);
             foreach (Item item in game.items)
@@ -33,11 +33,22 @@ namespace WhereIsBigfoot
             foreach (Character character in game.characters)
                 Console.WriteLine(character.CharacterName);
 
+            foreach (Location location in game.locations)
+            {
+                foreach (Item item in game.items)
+               {
+                    if (location.Items.ContainsKey(item.ItemName))
+                    {
+                        location.Items.Add(item.ItemName, item);
+                        Console.WriteLine(location.Items);
+                    }
+                }
+            }
         }
 
         static void Main(string[] args)
         {
-            
+
             Game game = new Game();
 
             game.LoadData(game);
