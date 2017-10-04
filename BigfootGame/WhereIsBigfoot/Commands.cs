@@ -7,35 +7,56 @@ namespace BigfootGame
 {
     class Commands
     {
-        // get
-        // drop
         // use
         // talk to
         // give
-        // go 
 
-        public string Go(Player p, string direction)
+        public void Go(Player p, string direction, List<Location> locations)
         {
-            // check player current location
-
             Location currentLocation = p.PlayerLocation;
-            string newLocation = "";
+            string newLocation;
 
             if (currentLocation.Exits.ContainsKey(direction))
             {
                 newLocation = currentLocation.Exits[direction];
+                foreach (Location location in locations)
+                {
+                    if (location.LocationName == newLocation)
+                    {
+                        p.PlayerLocation = location;
+                    }
+                }
             }
             else
             {
                 Console.WriteLine("You run into an impenetrable barrier and must return.");
             }
-            return newLocation;
 
         }
 
-        public void GetItem(Player p, string item)
+        public void Get(Player p, string item)
         {
-            
+            if (p.PlayerLocation.Items.ContainsKey(item))
+            {
+                p.Inventory.Add(item, p.PlayerLocation.Items[item]);
+                p.PlayerLocation.Items.Remove(item);
+            }
+            else
+            {
+                Console.WriteLine($"There is no {item}");
+            }
+        }
+
+        public void Drop(Player p, string item)
+        {
+            p.PlayerLocation.Items.Add(item, p.Inventory[item]);
+            p.Inventory.Remove(item);
+            Console.WriteLine($"You dropped, {item}");
+        }
+
+        public void Give(Player p, string item, Character c)
+        {
+
         }
     }
 }

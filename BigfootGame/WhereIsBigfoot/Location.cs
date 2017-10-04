@@ -18,10 +18,7 @@ namespace BigfootGame
             this.locationName = locationName;
             this.locationShort = locationShort;
             this.locationLong = locationLong;
-
-            //this.items = items;
             this.objects = objects;
-            //this.characters = characters; 
         }
 
         public string LocationShort

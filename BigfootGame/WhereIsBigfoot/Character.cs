@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WhereIsBigfoot
+namespace BigfootGame
 {
-    public class Character
+    class Character
     {
         string name, descriptionShort, descriptionLong, flavorText1, flavorText2, target;
         Dictionary<string, string> actions;
