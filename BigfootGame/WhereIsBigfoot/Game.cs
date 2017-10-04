@@ -36,20 +36,22 @@ namespace WhereIsBigfoot
             foreach (Location location in game.locations)
             {
                 foreach (Item item in game.items)
-                //Console.WriteLine("Test loop 1");
                 {
-                    //Console.WriteLine("Test Loop 2");
-                    //while (!location.Items.ContainsKey(null))
-                    //{
                         if (location.Items.ContainsKey(item.ItemName))
                         {
                             location.Items[item.ItemName] = item;
-                            Console.WriteLine("Test if statement");
-                            Console.WriteLine($"{item.ItemName}");
+                            Console.WriteLine("=======");
+
+                     
                         }
-                    //}
+                }
+
+                foreach (var value in location.Items.Values)
+                {
+                    Console.WriteLine("Value of the Dictionary Item is: {0}", value);
                 }
             }
+
         }
 
         static void Main(string[] args)

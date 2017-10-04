@@ -68,31 +68,31 @@ namespace WhereIsBigfoot
 
         // TODO: alter json to reflect abstracted method for stuff inheriting from parent
 
-        private void TransferObject(Player p, string item, List<Object> list)
-        {
-            foreach (Object obj in list)
-            {
-                if (obj.Name == newLocation)
-                {
-                    p.PlayerLocation = location;
-                }
-            }
-            foreach ()
-        }
+        //private void TransferObject(Player p, string item, List<Object> list)
+        //{
+        //    foreach (Object obj in list)
+        //    {
+        //        if (obj.Name == newLocation)
+        //        {
+        //            p.PlayerLocation = location;
+        //        }
+        //    }
+        //    foreach ()
+        //}
 
-        private void DanCheck(Player p, string item, List<Character> characters)
-        {
-            if (p.PlayerLocation.Name == "dan")
-            {
-                if(p.PlayerLocation.Characters.ContainsKey("danCooking"))
-                {
-                    TransferItem(p, item);
-                    foreach (Character c in characters)
-                    {
-                        if()
-                    }
-                }
-            }
-        }
+        //private void DanCheck(Player p, string item, List<Character> characters)
+        //{
+        //    if (p.PlayerLocation.Name == "dan")
+        //    {
+        //        if(p.PlayerLocation.Characters.ContainsKey("danCooking"))
+        //        {
+        //            TransferItem(p, item);
+        //            foreach (Character c in characters)
+        //            {
+        //                if()
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
