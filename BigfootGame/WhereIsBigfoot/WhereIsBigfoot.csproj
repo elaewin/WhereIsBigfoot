@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asset.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Item.cs" />
