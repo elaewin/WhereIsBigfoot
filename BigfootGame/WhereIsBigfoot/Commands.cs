@@ -20,13 +20,13 @@ namespace WhereIsBigfoot
             if (currentLocation.Exits.ContainsKey(direction))
             {
                 newLocation = currentLocation.Exits[direction];
-                foreach (Location location in locations)
-                {
-                    if (location.Name == newLocation)
-                    {
-                        p.PlayerLocation = location;
-                    }
-                }
+                //foreach (Location location in locations)
+                //{
+                //    if (location.Name == newLocation)
+                //    {
+                //        p.PlayerLocation = location;
+                //    }
+                //}
             }
             else
             {
@@ -57,13 +57,27 @@ namespace WhereIsBigfoot
 
         public void Give(Player p, string item, Character c)
         {
-
+            // 
         }
 
         private void TransferItem(Player p, string item)
         {
             p.Inventory.Add(item, p.PlayerLocation.Items[item]);
             p.PlayerLocation.Items.Remove(item);
+        }
+
+        // TODO: alter json to reflect abstracted method for stuff inheriting from parent
+
+        private void TransferObject(Player p, string item, List<Object> list)
+        {
+            foreach (Object obj in list)
+            {
+                if (obj.Name == newLocation)
+                {
+                    p.PlayerLocation = location;
+                }
+            }
+            foreach ()
         }
 
         private void DanCheck(Player p, string item, List<Character> characters)
@@ -73,7 +87,10 @@ namespace WhereIsBigfoot
                 if(p.PlayerLocation.Characters.ContainsKey("danCooking"))
                 {
                     TransferItem(p, item);
-                    foreach (Character c in characters) ;
+                    foreach (Character c in characters)
+                    {
+                        if()
+                    }
                 }
             }
         }
