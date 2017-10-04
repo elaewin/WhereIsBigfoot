@@ -9,7 +9,8 @@ namespace WhereIsBigfoot
         string locationName, locationShort, locationLong;
         string[] objects;
         Dictionary<string, string> exits;
-        Dictionary<string, Item> items;
+        //Dictionary<string, Item> items;
+        Dictionary<string, string> items;
         //bool visited = false;
         //Dictionary<string, Character> characters;
 
@@ -37,7 +38,7 @@ namespace WhereIsBigfoot
             get{ return this.locationName; }
         }
 
-        public Dictionary<string, Item> Items 
+        public Dictionary<string, string> Items 
         { 
             get{ return this.items; }
             set { this.items = value; }

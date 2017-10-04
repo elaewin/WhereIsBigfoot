@@ -35,36 +35,36 @@ namespace WhereIsBigfoot
 
         }
 
-        public void Get(Player p, string item)
-        {
-            if (p.PlayerLocation.Items.ContainsKey(item))
-            {
+        //public void Get(Player p, string item)
+        //{
+        //    if (p.PlayerLocation.Items.ContainsKey(item))
+        //    {
                 
-                TransferItem(p, item);
-            }
-            else
-            {
-                Console.WriteLine($"There is no {item}");
-            }
-        }
+        //        TransferItem(p, item);
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine($"There is no {item}");
+        //    }
+        //}
 
-        public void Drop(Player p, string item)
-        {
-            p.PlayerLocation.Items.Add(item, p.Inventory[item]);
-            p.Inventory.Remove(item);
-            Console.WriteLine($"You dropped, {item}");
-        }
+        //public void Drop(Player p, string item)
+        //{
+        //    p.PlayerLocation.Items.Add(item, p.Inventory[item]);
+        //    p.Inventory.Remove(item);
+        //    Console.WriteLine($"You dropped, {item}");
+        //}
 
         public void Give(Player p, string item, Character c)
         {
             // 
         }
 
-        private void TransferItem(Player p, string item)
-        {
-            p.Inventory.Add(item, p.PlayerLocation.Items[item]);
-            p.PlayerLocation.Items.Remove(item);
-        }
+        //private void TransferItem(Player p, string item)
+        //{
+        //    p.Inventory.Add(item, p.PlayerLocation.Items[item]);
+        //    p.PlayerLocation.Items.Remove(item);
+        //}
 
         // TODO: alter json to reflect abstracted method for stuff inheriting from parent
         // TODO: asset class
