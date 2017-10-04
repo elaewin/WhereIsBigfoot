@@ -46,7 +46,7 @@ namespace WhereIsBigfoot
 
                 foreach (var value in location.Items.Values)
                 {
-                    Console.WriteLine("Value of the Dictionary Item is: {0}", value);
+                    Console.WriteLine("Value of the Dictionary Item is: {0}", value.ToString());
                 }
             }
 
