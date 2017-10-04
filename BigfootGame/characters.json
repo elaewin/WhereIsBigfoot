@@ -1,9 +1,13 @@
 [
 	{
 		"name": "danCooking",
-		"descriptionShort": "You see Dan here, cooking bacon.",
+    "parseValue": [
+      "dan",
+      "friend",
+      "dude"
+    ],
+		"descriptionShort": "Dan is cooking bacon at a small camp stove and humming to himself.",
 		"descriptionLong": "Dan is a tall white dude with shaggy brownish hair. He is wearing ripped up jeans and a faded henley under and old red trail jacket. Dan is humming to himself while he cooks bacon over his camp stove.",
-		"target": "",
     "actions": {
       "get": "",
       "talk": "Dan smiles at you, but is busy with what he's doing.",
@@ -12,9 +16,13 @@
 	},
   {
 		"name": "danReading",
+    "parseValue": [
+      "dan",
+      "friend",
+      "dude"
+    ],
 		"descriptionShort": "You see Dan here, reading and cooking bacon.",
 		"descriptionLong": "Dan is a tall white dude with shaggy brownish hair. He is wearing ripped up jeans and a faded henley under and old red trail jacket. Dan is muttering to himself while he reads and cooks bacon over his camp stove.",
-		"target": "",
     "actions": {
       "get": "",
       "talk": "Dan smiles at you, but is busy with what he's doing.",
@@ -23,8 +31,14 @@
 	},
 	{
 		"name": "octopus",
+    "parseValue": [
+      "octopus",
+      "tree octopus",
+      "cephalopod",
+      "octo"
+    ],
 		"descriptionShort": "You see a Pacific Northwest tree octopus here, coiled around your missing camping lantern.",
-		"descriptionLong": "The Pacific Northwest tree octopus (INSERT SCIENTIFIC NAME HERE) is a small cephalopod with brown skin that is mottled with green and white--perfect camouflage for hiding in a Pacific Northwest rainforest. They're an endangered species, and you've never heard of one living in this part of the state. Maybe this is a new species! The octopus' tentacles are coiled around your missing camping lantern.",
+		"descriptionLong": "The Pacific Northwest tree octopus (Octopus paxarbolis) is a small cephalopod with brown skin that is mottled with green and white--perfect camouflage for hiding in a Pacific Northwest rainforest. They're an endangered species, and you've never heard of one living in this part of the state. Maybe this is a new species! The octopus' tentacles are coiled around your missing camping lantern.",
 		"target": "",
     "actions": {
       "get": "You try to grab the octopus, but it tentaclates (is that the right word?) up higher in the tree. When you try to climb after it, the branches creak ominously, so you return to the lower, stronger branches.",
@@ -34,11 +48,12 @@
 	},
 	{
 		"name": "bigfootHostile",
+    "parseValue": [
+      "bigfoot",
+      "sasquatch"
+    ],
 		"descriptionShort": "",
 		"descriptionLong": "",
-		"flavorText1": "",
-		"flavorText2": "",
-		"target": "",
     "actions": {
       "get": "",
       "talk": "",
@@ -47,11 +62,12 @@
 	},
   {
 		"name": "bigfootFriendly",
+    "parseValue": [
+      "bigfoot",
+      "sasquatch"
+    ],
 		"descriptionShort": "",
 		"descriptionLong": "",
-		"flavorText1": "",
-		"flavorText2": "",
-		"target": "",
     "actions": {
       "get": "",
       "talk": "",
