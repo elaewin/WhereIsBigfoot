@@ -30,10 +30,15 @@
         },
         "characters": "Dan",
         "objects": [
-            
-            "stove", "pan", "shelter"
+
+            "stove",
+            "pan",
+            "shelter"
         ],
-        "items": "bacon, can of bacon grease"
+        "items": {
+            "bacon": "",
+            "grease": ""
+        }
     },
     {
         "locationName": "lakeshore",
@@ -71,7 +76,11 @@
         },
         "characters": "",
         "objects": "",
-        "items": "matches, book, phone"
+        "items": {
+            "matches": "",
+            "book": "",
+            "phone": ""
+        }
     },
     {
         "locationName": "tree",
@@ -83,7 +92,9 @@
         },
         "characters": "octopus",
         "objects": "",
-        "items": "lantern"
+        "items": {
+            "lantern": ""
+        }
     },
     {
         "locationName": "tunnel1",
@@ -188,10 +199,16 @@
         },
         "characters": "",
         "objects": [
-            
-            "brambles", "bees", "sunlight", "stump", "water"
+
+            "brambles",
+            "bees",
+            "sunlight",
+            "stump",
+            "water"
         ],
-        "items": "walking stick"
+        "items": {
+            "walking stick": ""
+        }
     },
     {
         "locationName": "woods3",

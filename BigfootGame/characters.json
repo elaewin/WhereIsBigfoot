@@ -6,9 +6,11 @@
 		"flavorText1": "",
 		"flavorText2": "",
 		"target": "",
-		"get": "",
-		"talk": "",
-		"give": ""
+    "actions": {
+      "get": "",
+      "talk": "",
+      "give": ""
+    }
 	},
 	{
 		"name": "octopus",
@@ -17,9 +19,11 @@
 		"flavorText1": "The octopus' tentacles are coiled around a glass lantern.",
 		"flavorText2": "",
 		"target": "",
-		"get": "",
-		"talk": "You think that talking to the octopus might do some good. You're not sure what to say. What is it they advise with scared animals? It's not what you say, but how you say it in a calming voice?\n\nYou recite the first twenty lines of Charge of the Light Brigade to the octopus.\n\nIt doesn't respond.\n\nEveryone's a critic.",
-		"give": ""
+    "actions": {
+      "get": "",
+      "talk": "You think that talking to the octopus might do some good. You're not sure what to say. What is it they advise with scared animals? It's not what you say, but how you say it in a calming voice?\n\nYou recite the first twenty lines of Charge of the Light Brigade to the octopus.\n\nIt doesn't respond.\n\nEveryone's a critic.",
+      "give": ""
+    }
 	},
 	{
 		"name": "bigfoot",
@@ -28,8 +32,10 @@
 		"flavorText1": "",
 		"flavorText2": "",
 		"target": "",
-		"get": "",
-		"talk": "",
-		"give": ""
+    "actions": {
+      "get": "",
+      "talk": "",
+      "give": ""
+    }
 	}
 ]

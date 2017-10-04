@@ -11,21 +11,25 @@ namespace BigfootGame
     {
 		//
         public List<Location> locations;
-        
+        public List<Item> items;
+        //public List<Character> characters;
+
+        // Deserialize JSON from a file. 
+        public void LoadData(Game game) {
+            string jsonFile = @"../../locations.json";
+
+            game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonFile));
+
+            foreach (Location location in game.locations)
+                Console.WriteLine(location.LocationName);
+        }
+
         static void Main(string[] args)
         {
             
-            Game g = new Game();
+            Game game = new Game();
 
-			//Deserialize JSON from a file:
-
-            string jsonFile = @"..\..\locations.json";
-           
-            g.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonFile));
-
-            foreach(Location location in g.locations) 
-                Console.WriteLine(location.LocationName);
-
+            game.LoadData(game);
 
         }
     }
