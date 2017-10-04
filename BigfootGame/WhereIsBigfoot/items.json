@@ -1,6 +1,6 @@
 [
     {
-        "name": "backpack",
+        "itemName": "backpack",
         "parseValue": [
             "backpack",
             "pack",
@@ -21,7 +21,7 @@
         }
     },
     {
-        "name": "bacon",
+        "itemName": "bacon",
         "parseValue": [
             "bacon",
             "delicious bacon",
@@ -40,7 +40,7 @@
         }
     },
     {
-        "name": "blackberries",
+        "itemName": "blackberries",
         "parseValue": [
             "berries",
             "delicious berries",
@@ -58,7 +58,7 @@
         }
     },
     {
-        "name": "book",
+        "itemName": "book",
         "parseValue": [
             "book",
             "hardcover",
@@ -83,7 +83,7 @@
         }
     },
     {
-        "name": "canOfBerries",
+        "itemName": "canOfBerries",
         "parseValue": [
             "berries",
             "tin",
@@ -108,7 +108,7 @@
         }
     },
     {
-        "name": "cellPhone",
+        "itemName": "cellPhone",
         "parseValue": [
             "phone",
             "cell phone",
@@ -128,7 +128,7 @@
         }
     },
     {
-        "name": "emptyCan",
+        "itemName": "emptyCan",
         "parseValue": [
             "tin",
             "can",
@@ -149,7 +149,7 @@
         }
     },
     {
-        "name": "filledLantern",
+        "itemName": "filledLantern",
         "parseValue": [
             "lantern",
             "lamp",
@@ -171,7 +171,7 @@
         }
     },
     {
-        "name": "glowingLantern",
+        "itemName": "glowingLantern",
         "parseValue": [
             "glowing lantern",
             "glowing lamp",
@@ -201,7 +201,7 @@
         }
     },
     {
-        "name": "grease",
+        "itemName": "grease",
         "parseValue": [
             "grease",
             "tin",
@@ -228,7 +228,7 @@
         }
     },
     {
-        "name": "lantern",
+        "itemName": "lantern",
         "parseValue": [
             "lantern",
             "lamp",
@@ -250,7 +250,7 @@
         }
     },
     {
-        "name": "matches",
+        "itemName": "matches",
         "parseValue": [
             "matches",
             "box of matches",
@@ -272,7 +272,7 @@
         }
     },
     {
-        "name": "stick",
+        "itemName": "stick",
         "parseValue": [
             "stick",
             "walking stick",
@@ -294,9 +294,8 @@
             "give": "doesn't want that."
         }
     },
-
     {
-        "name": "tree",
+        "itemName": "tree",
         "descriptionShort": "An enormous cedar tree.",
         "parseValue": [
             "tree",
