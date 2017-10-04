@@ -34,7 +34,7 @@ namespace BigfootGame
             get { return this.playerHair; }
         }
 
-        public string PlayerLocation
+        public Location PlayerLocation
         {
             get { return this.playerLocation; }
         }

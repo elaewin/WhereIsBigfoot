@@ -24,12 +24,12 @@ namespace BigfootGame
 
             if (currentLocation.Exits.ContainsKey(direction))
             {
-                newLocation = currentLocation.exits[direction];
+                newLocation = currentLocation.Exits[direction];
             }
             else
             {
             }
-
+			return "return";
             // check if can go direction
 
             // if yes: go to location
