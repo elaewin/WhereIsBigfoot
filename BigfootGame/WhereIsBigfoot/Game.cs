@@ -29,7 +29,7 @@ namespace WhereIsBigfoot
             foreach (Location location in game.locations)
                 Console.WriteLine(location.Name);
             foreach (Item item in game.items)
-                Console.WriteLine(item.ItemName);
+                Console.WriteLine(item.Name);
             foreach (Character character in game.characters)
                 Console.WriteLine(character.CharacterName);
 

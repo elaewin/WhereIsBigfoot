@@ -6,17 +6,27 @@ namespace WhereIsBigfoot
 {
     class Item : IAsset
     {
-        string _name, _shortDescription, _longDescription;
-        public Item(string name, string shortDescription, string longDescription) 
+        string name, descriptionFirst, descriptionShort, descriptionLong;
+        string[] parseValue;
+        Dictionary<string, string> actions;
+
+        public Item(string name, string descriptionShort, string descriptionLong, string[] parseValue, string target, Dictionary<string, string> actions) 
         {
-            _name = name;
-            _shortDescription = shortDescription;
-            _longDescription = longDescription; 
+            this.name = name;
+            this.descriptionShort = descriptionShort;
+            this.descriptionLong = descriptionLong;
+            this.parseValue = parseValue;
+            this.actions = actions;
         }
 
-        public string Name{ get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string FirstDescription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ShortDescription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string LongDescription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Name { get => this.name; set => this.name = value; }
+
+        public string DescriptionFirst { get => this.descriptionFirst; set => this.descriptionFirst = value; }
+
+        public string DescriptionShort { get => this.descriptionShort; set => this.descriptionShort = value; }
+
+        public string DescriptionLong { get => this.descriptionLong; set => this.descriptionLong = value; }
+
+        public string[] ParseValue { get => this.parseValue; set => this.parseValue = value; }
     }
 }

@@ -9,8 +9,8 @@ namespace WhereIsBigfoot
     interface IAsset
     {
         string Name { get; set; }
-        string FirstDescription { get; set; }
-        string ShortDescription { get; set; }
-        string LongDescription { get; set; }
+        string DescriptionFirst { get; set; }
+        string DescriptionShort { get; set; }
+        string DescriptionLong { get; set; }
     }
 }
