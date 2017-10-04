@@ -39,14 +39,14 @@ namespace WhereIsBigfoot
                 {
                         if (location.Items.ContainsKey(item.Name))
                         {
-                            location.Items[item.Name] = item;
+                            location.Items[item.Name] = item.Name;
                             Console.WriteLine("=======");
                         }
                 }
 
-                foreach (var key in location.Items.Keys)
+                foreach (var value in location.Items.Values)
                 {
-                    Console.WriteLine("Value of the Dictionary Item is: {0}", key);
+                    Console.WriteLine("Value of the Dictionary Item is: {0}", value);
                 }
             }
 
