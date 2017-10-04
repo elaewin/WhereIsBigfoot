@@ -6,8 +6,7 @@ namespace BigfootGame
 {
     class Item
     {
-        string itemName;
-        string itemShort, itemLong;
+        string itemName, itemShort, itemLong;
 
         public Item(string itemName, string itemShort, string itemLong)
         {

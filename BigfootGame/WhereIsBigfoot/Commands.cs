@@ -20,7 +20,7 @@ namespace BigfootGame
             // check player current location
 
             Location currentLocation = p.PlayerLocation;
-            string newLocation;
+            string newLocation = "";
 
             if (currentLocation.Exits.ContainsKey(direction))
             {
@@ -28,18 +28,15 @@ namespace BigfootGame
             }
             else
             {
+                Console.WriteLine("You run into an impenetrable barrier and must return.");
             }
-			return "return";
-            // check if can go direction
+            return newLocation;
 
-            // if yes: go to location
-
-            //if no: throw a message: not possible to go there.
         }
 
-        public void get(string item)
+        public void GetItem(Player p, string item)
         {
-            Console.WriteLine("");
+            
         }
     }
 }
