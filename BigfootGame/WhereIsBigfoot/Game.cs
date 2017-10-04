@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 
 
-namespace BigfootGame
+namespace WhereIsBigfoot
 {
     class Game
     {

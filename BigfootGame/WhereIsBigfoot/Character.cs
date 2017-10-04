@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WhereIsBigfoot
 {
-    public class Character
+    class Character
     {
         string name, descriptionShort, descriptionLong, flavorText1, flavorText2, target;
         Dictionary<string, string> actions;

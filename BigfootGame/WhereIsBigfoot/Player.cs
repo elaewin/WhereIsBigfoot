@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BigfootGame
+namespace WhereIsBigfoot
 {
     class Player
     {
@@ -37,6 +37,7 @@ namespace BigfootGame
         public Location PlayerLocation
         {
             get { return this.playerLocation; }
+            set { this.playerLocation = value; }
         }
 
         public Dictionary<string, Item> Inventory 
