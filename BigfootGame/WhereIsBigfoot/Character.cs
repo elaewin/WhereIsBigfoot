@@ -45,5 +45,9 @@ namespace WhereIsBigfoot
         {
             get { return this.parseValue; }
         }
+        public string CharacterName
+        {
+            get { return this.name; }
+        }
     }
 }
