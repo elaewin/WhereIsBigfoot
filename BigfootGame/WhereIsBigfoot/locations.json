@@ -17,7 +17,9 @@
             "trails",
             "forest"
         ],
-        "items": ""
+        "items": {
+            "empty": ""
+        }
     },
     {
         "name": "dan",
@@ -51,7 +53,9 @@
         },
         "characters": "",
         "objects": "",
-        "items": ""
+        "items": {
+            "empty": ""
+        }
     },
     {
         "name": "mountain",
@@ -64,7 +68,9 @@
         },
         "characters": "",
         "objects": "",
-        "items": ""
+        "items": {
+            "empty": ""
+        }
     },
     {
         "name": "tent",
@@ -107,7 +113,9 @@
         },
         "characters": "",
         "objects": "",
-        "items": ""
+        "items": {
+            "empty": ""
+        }
     },
     {
         "name": "tunnel2",
@@ -120,7 +128,9 @@
         },
         "characters": "",
         "objects": "",
-        "items": ""
+        "items": {
+            "empty": ""
+        }
     },
     {
         "name": "tunnel3",
@@ -133,7 +143,9 @@
         },
         "characters": "",
         "objects": "",
-        "items": ""
+        "items": {
+            "empty": ""
+        }
     },
     {
         "name": "tunnel4",
@@ -146,7 +158,9 @@
         },
         "characters": "",
         "objects": "",
-        "items": ""
+        "items": {
+            "empty": ""
+        }
     },
     {
         "name": "tunnel5",
@@ -159,7 +173,9 @@
         },
         "characters": "",
         "objects": "",
-        "items": ""
+        "items": {
+            "empty": ""
+        }
     },
     {
         "name": "valley",
@@ -171,7 +187,9 @@
         },
         "characters": "bigfoot",
         "objects": "",
-        "items": ""
+        "items": {
+            "empty": ""
+        }
     },
     {
         "name": "woods1",
@@ -185,7 +203,9 @@
         },
         "characters": "",
         "objects": "",
-        "items": ""
+        "items": {
+            "empty": ""
+        }
     },
     {
         "name": "woods2",
@@ -223,7 +243,9 @@
         },
         "characters": "",
         "objects": "",
-        "items": ""
+        "items": {
+            "empty": ""
+        }
     },
     {
         "name": "woods4",
@@ -237,7 +259,9 @@
         },
         "characters": "",
         "objects": "",
-        "items": ""
+        "items": {
+            "empty": ""
+        }
     },
     {
         "name": "woods5",
@@ -251,7 +275,9 @@
         },
         "characters": "",
         "objects": "",
-        "items": ""
+        "items": {
+            "empty": ""
+        }
     }
 
 ]
