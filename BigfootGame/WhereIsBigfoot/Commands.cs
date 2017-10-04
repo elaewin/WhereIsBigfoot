@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Data; 
+using System.Data;
 
-namespace BigfootGame
+namespace WhereIsBigfoot
 {
     class Commands
     {

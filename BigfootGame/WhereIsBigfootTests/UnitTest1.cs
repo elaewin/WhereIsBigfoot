@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BigfootGameTests
+namespace WhereIsBigfootTests
 {
 	[TestClass]
 	public class UnitTest1
