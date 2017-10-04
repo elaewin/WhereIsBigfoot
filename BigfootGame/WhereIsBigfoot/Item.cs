@@ -4,30 +4,19 @@ using System.Text;
 
 namespace WhereIsBigfoot
 {
-    class Item
+    class Item : IAsset
     {
-        string itemName, itemShort, itemLong;
-
-        public Item(string itemName, string itemShort, string itemLong)
+        string _name, _shortDescription, _longDescription;
+        public Item(string name, string shortDescription, string longDescription) 
         {
-            this.itemName = itemName;
-            this.itemShort = itemShort;
-            this.itemLong = itemLong; 
+            _name = name;
+            _shortDescription = shortDescription;
+            _longDescription = longDescription; 
         }
 
-        public string ItemName
-        {
-            get { return this.itemName; }
-        }
-
-        public string ItemShort
-        {
-            get { return this.itemShort; }
-        }
-
-        public string ItemLong
-        {
-            get { return this.itemLong; }
-        }
+        public string Name{ get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string FirstDescription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string ShortDescription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string LongDescription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }
