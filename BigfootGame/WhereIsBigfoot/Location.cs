@@ -10,6 +10,7 @@ namespace BigfootGame
         string[] objects;
         Dictionary<string, string> exits;
         Dictionary<string, Item> items;
+        bool visited = false;
         //Dictionary<string, Character> characters;
 
         public Location(string locationName, string locationShort, string locationLong, string[] objects)
