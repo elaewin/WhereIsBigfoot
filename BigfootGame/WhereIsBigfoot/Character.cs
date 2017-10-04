@@ -19,13 +19,9 @@ namespace WhereIsBigfoot
             this.target = target;
             this.actions = actions;
         }
-
         public string CharacterName
         {
-            get
-            {
-                return name;
-            }
+            get { return this.name; }
         }
     }
 }
