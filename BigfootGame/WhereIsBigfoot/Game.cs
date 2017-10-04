@@ -9,23 +9,23 @@ namespace WhereIsBigfoot
 {
     class Game
     {
-		//
+        //
         public List<Location> locations;
         public List<Item> items;
         public List<Character> characters;
 
         // Deserialize JSON from a file. 
-        public void LoadData(Game game) {
+        public void LoadData(Game game)
+        {
             string jsonLocationFile = @"../../locations.json";
             string jsonItemFile = @"../../items.json";
             string jsonCharacterFile = @"../../characters.json";
 
-            game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonLocationFile));
             game.items = JsonConvert.DeserializeObject<List<Item>>(File.ReadAllText(jsonItemFile));
             game.characters = JsonConvert.DeserializeObject<List<Character>>(File.ReadAllText(jsonCharacterFile));
+            game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonLocationFile));
 
-
-
+            //Testing to make sure the objects are being de-serialized by writing them to the console.
             foreach (Location location in game.locations)
                 Console.WriteLine(location.Name);
             foreach (Item item in game.items)
@@ -33,11 +33,28 @@ namespace WhereIsBigfoot
             foreach (Character character in game.characters)
                 Console.WriteLine(character.CharacterName);
 
+            foreach (Location location in game.locations)
+            {
+                foreach (Item item in game.items)
+                //Console.WriteLine("Test loop 1");
+                {
+                    //Console.WriteLine("Test Loop 2");
+                    //while (!location.Items.ContainsKey(null))
+                    //{
+                        if (location.Items.ContainsKey(item.ItemName))
+                        {
+                            location.Items[item.ItemName] = item;
+                            Console.WriteLine("Test if statement");
+                            Console.WriteLine($"{item.ItemName}");
+                        }
+                    //}
+                }
+            }
         }
 
         static void Main(string[] args)
         {
-            
+
             Game game = new Game();
 
             game.LoadData(game);

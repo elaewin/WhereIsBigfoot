@@ -6,17 +6,17 @@ namespace WhereIsBigfoot
 {
     class Location
     {
-        string name, locationShort, locationLong;
+        string locationName, locationShort, locationLong;
         string[] objects;
         Dictionary<string, string> exits;
         Dictionary<string, Item> items;
-        bool visited = false;
-        Dictionary<string, Character> characters;
+        //bool visited = false;
+        //Dictionary<string, Character> characters;
 
-        public Location(string name, string locationShort, string locationLong, string[] objects)
+        public Location(string locationName, string locationShort, string locationLong, string[] objects)
 
         {
-            this.name = name;
+            this.locationName = locationName;
             this.locationShort = locationShort;
             this.locationLong = locationLong;
             this.objects = objects;
@@ -32,14 +32,15 @@ namespace WhereIsBigfoot
             get{ return this.locationLong; }
         }
 
-        public string Name 
+        public string LocationName 
         { 
-            get{ return this.name; }
+            get{ return this.locationName; }
         }
 
         public Dictionary<string, Item> Items 
         { 
             get{ return this.items; }
+            set { this.items = value; }
         }
 
         public string[] Objects 
@@ -59,10 +60,10 @@ namespace WhereIsBigfoot
             }
         }
 
-        public Dictionary<string, Character> Characters
-        {
-            get { return this.characters; }
-            set { this.characters = value; }
-        }
+        //public Dictionary<string, Character> Characters
+        //{
+        //    get { return this.characters; }
+        //    set { this.characters = value; }
+        //}
     }
 }
