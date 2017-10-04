@@ -9,7 +9,6 @@ namespace BigfootGame
     {
         // get
         // drop
-        // put
         // use
         // talk to
         // give
