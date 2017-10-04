@@ -8,8 +8,6 @@ namespace WhereIsBigfoot
     {
         string itemName, itemShort, itemLong;
 
-        public Item() {}
-
         public Item(string itemName, string itemShort, string itemLong)
         {
             this.itemName = itemName;

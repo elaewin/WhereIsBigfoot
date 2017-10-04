@@ -12,7 +12,7 @@ namespace WhereIsBigfoot
 		//
         public List<Location> locations;
         public List<Item> items;
-        //public List<Character> characters;
+        public List<Character> characters;
 
         // Deserialize JSON from a file. 
         public void LoadData(Game game) {
