@@ -11,7 +11,7 @@ namespace WhereIsBigfoot
         Dictionary<string, Character> characters;
         string[] objects;
         Dictionary<string, Item> items;
-        //bool visited = false;
+        bool visited = false;
 
         public Location(string name, 
                         string descriptionFirst, 
@@ -19,10 +19,11 @@ namespace WhereIsBigfoot
                         string descriptionShort, 
                         Dictionary<string, string> exits, 
                         Dictionary<string, Character> characters, 
-                        string[] objects, Dictionary<string, Item> items) : base(name, 
-                                                                                 descriptionFirst, 
-                                                                                 descriptionShort, 
-                                                                                 descriptionLong)
+                        string[] objects, 
+                        Dictionary<string, Item> items) : base(name, 
+                                                               descriptionFirst, 
+                                                               descriptionShort, 
+                                                               descriptionLong)
         {
             this.name = name;
             this.descriptionFirst = descriptionFirst;

@@ -31,7 +31,7 @@
         "descriptionFirst": "",
         "descriptionShort": "bacon",
         "descriptionLong": "The bacon looks chock-full of deliciousness. It's been fried to perfection.",
-        "location": "danCooking",
+        "location": "danCamp",
         "target": "octopus",
         "actions": {
             "get": "You grab a few pieces of bacon, wrap them in a handy paper towel, and stick them in your pocket.",
@@ -77,7 +77,7 @@
         "descriptionShort": "Bigfoot Legends of the Pacific Northwest",
         "descriptionLong": "The book is a rather beat up old hardcover book titled \"Bigfoot Legends of the Pacific Northwest\". Dan loaned it to you ages ago.",
         "location": "tent",
-        "target": "danCooking",
+        "target": "danCamp",
         "actions": {
             "get": "You pick up the book.",
             "put": "",
@@ -225,7 +225,7 @@
         "descriptionFirst": "As you watch, Dan carefully pours hot grease out of the frying pan and into the can. Dan looks up at you and grins. \"Hey, <name>, there you are!\" he says. \"Grab some bacon.\" ",
         "descriptionShort": "A tin can half full of bacon grease",
         "descriptionLong": "The tin can is full of bacon grease. At the top of the can, congealed fat has formed a solid mass, sealing it like a gross, bacon flecked cork.",
-        "location": "danCooking",
+        "location": "",
         "target": "",
         "actions": {
             "get": "You casually reach out and snag the tin of bacon grease. It's, well, greasy. Dan is too engrossed in his book to notice.\n",
