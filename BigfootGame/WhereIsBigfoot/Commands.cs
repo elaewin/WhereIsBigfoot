@@ -103,12 +103,18 @@ namespace WhereIsBigfoot
             }
         }
 
-        private void talkTo(Character c)
+        public void TalkTo(Player p, Character c)
         {
-            Console.WriteLine(c.Actions["talk"]);
+            if (p.PlayerLocation.Characters.ContainsKey(c.Name))
+                Console.WriteLine(c.Actions["talk"]);
+            else
+                Console.WriteLine("This character does not exist in this location.");
         }
 
-        private void put()
+        public void Put()
+        {
+
+        }
 
 
     }
