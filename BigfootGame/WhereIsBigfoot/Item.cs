@@ -4,30 +4,31 @@ using System.Text;
 
 namespace WhereIsBigfoot
 {
-    class Item
+    class Item : Asset
     {
-        string itemName, itemShort, itemLong;
+        string name, descriptionFirst, descriptionShort, descriptionLong;
+        string[] parseValue;
+        Dictionary<string, string> actions;
 
-        public Item(string itemName, string itemShort, string itemLong)
+        public Item(string name, string descriptionFirst, string descriptionShort, string descriptionLong, string[] parseValue, string target, Dictionary<string, string> actions) : base(name, descriptionFirst, descriptionShort, descriptionLong)
         {
-            this.itemName = itemName;
-            this.itemShort = itemShort;
-            this.itemLong = itemLong; 
+            this.name = name;
+            this.descriptionShort = descriptionShort;
+            this.descriptionLong = descriptionLong;
+            this.parseValue = parseValue;
+            this.actions = actions;
         }
 
-        public string ItemName
+        public string[] ParseValue
         {
-            get { return this.itemName; }
+            get => this.parseValue;
+            set => this.parseValue = value;
         }
 
-        public string ItemShort
+        public Dictionary<string, string> Actions
         {
-            get { return this.itemShort; }
-        }
-
-        public string ItemLong
-        {
-            get { return this.itemLong; }
+            get => this.actions;
+            set => this.actions = value;
         }
     }
 }
