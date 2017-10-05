@@ -26,7 +26,7 @@ namespace WhereIsBigfoot
             game.characters = JsonConvert.DeserializeObject<List<Character>>(File.ReadAllText(jsonCharacterFile));
             game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonLocationFile));
 
-            //Testing to make sure the objects are being de-serialized by writing them to the console.
+            ////Testing to make sure the objects are being de-serialized by writing them to the console.
             //WriteLine("Locations:");
             //foreach (Location location in game.locations)
             //    WriteLine(location.Name);
@@ -75,7 +75,7 @@ namespace WhereIsBigfoot
                 }
             }
 
-            // Test assignment of characters by count of the characters dict on the location.
+            //// Test assignment of characters by count of the characters dict on the location.
             //WriteLine("\nLocation Characters count:");
             //foreach (Location location in game.locations)
                 //WriteLine($"Location: {location.Name}, # of items: {location.Characters.Count}");
@@ -85,6 +85,10 @@ namespace WhereIsBigfoot
             //foreach (Location location in game.locations)
                 //WriteLine($"Location has {location.Exits.Count}");
 
+        }
+
+        public void GetInput() {
+            
         }
 
         static void Main(string[] args)
