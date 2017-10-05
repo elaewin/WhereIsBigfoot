@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WhereIsBigfoot
 {
-    class Item : Asset
+    public class Item : Asset
     {
         string name, descriptionFirst, descriptionShort, descriptionLong;
         string[] parseValue;

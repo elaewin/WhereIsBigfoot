@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WhereIsBigfoot
 {
-    class Asset
+    public class Asset
     {
         string name, descriptionFirst, descriptionShort, descriptionLong;
 
