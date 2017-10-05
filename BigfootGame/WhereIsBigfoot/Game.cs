@@ -130,7 +130,7 @@ namespace WhereIsBigfoot
                 else
                 {
                     // call help method.
-                    WriteLine("Bad input.");
+                    WriteLine("Bad input. Needs help method");
                 }
                 if (split.Length == 2)
                 {
@@ -186,7 +186,7 @@ namespace WhereIsBigfoot
             string input = "placeholder";
             Console.Write(prompt);
             input = ReadLine();
-            return input;
+            return input.ToLower().Trim();
         }
 
     }
