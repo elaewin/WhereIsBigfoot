@@ -52,19 +52,19 @@ namespace WhereIsBigfoot
 			game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonLocationFile));
 
 			////Testing to make sure the objects are being de-serialized by writing them to the console.
-			//WriteLine("Locations:");
+			//TypeLine("Locations:");
 			//foreach (Location location in game.locations)
-			//    WriteLine(location.Name);
+			//    TypeLine(location.Name);
 
-			//WriteLine("\nItems:");
+			//TypeLine("\nItems:");
 			//foreach (Item item in game.Items) { 
-			//    WriteLine($"Item {item.Name} is in location {item.Location}");
+			//    TypeLine($"Item {item.Name} is in location {item.Location}");
 			//    foreach (string word in item.ParseValue)
-			//        Console.WriteLine(word);
+			//        commands.TypeLine(word);
 			//}
-			//WriteLine("\nCharacters:");
+			//TypeLine("\nCharacters:");
 			//foreach (Character character in game.characters)
-			//WriteLine(character.CharacterName);
+			//TypeLine(character.CharacterName);
 
 			// Go through each item and assign the item to the items dict in each location, 
 			// based on the location property of the item.
@@ -78,15 +78,15 @@ namespace WhereIsBigfoot
 					if (location.Name == name)
 					{
 						location.Items.Add(key, item);
-						//WriteLine($"Assigned item key {key} on location {location.Name}");
+						//TypeLine($"Assigned item key {key} on location {location.Name}");
 					}
 				}
 			}
 
 			//// Test assignment of items by count of the items dict on the location.
-			//WriteLine("\nLocation Items count:");
+			//TypeLine("\nLocation Items count:");
 			//foreach (Location location in game.locations)
-			//WriteLine($"Location: {location.Name}, # of items: {location.Items.Count}");
+			//TypeLine($"Location: {location.Name}, # of items: {location.Items.Count}");
 
 			// Go through each character and assign the character to the character dict in each location, 
 			// based on the location property of the characger.
@@ -100,26 +100,27 @@ namespace WhereIsBigfoot
 					if (location.Name == name)
 					{
 						location.Characters.Add(key, character);
-						//WriteLine($"Assigned character with key {key} on location {location.Name}");
+						//TypeLine($"Assigned character with key {key} on location {location.Name}");
 					}
 				}
 			}
 
 			//// Test assignment of characters by count of the characters dict on the location.
-			//WriteLine("\nLocation Characters count:");
+			//TypeLine("\nLocation Characters count:");
 			//foreach (Location location in game.locations)
-			//WriteLine($"Location: {location.Name}, # of items: {location.Characters.Count}");
+			//TypeLine($"Location: {location.Name}, # of items: {location.Characters.Count}");
 
 			// Test existence of exits dict by count of the characters array on the location.
-			//WriteLine("\nLocation Exits count:");
+			//TypeLine("\nLocation Exits count:");
 			//foreach (Location location in game.locations)
-			//WriteLine($"Location has {location.Exits.Count}");
+			//TypeLine($"Location has {location.Exits.Count}");
 
 		}
 
 		public void ParseInput(string prompt)
 		{
 			string input = GetInput(prompt).ToLower().Trim();
+			
 
 			if (IsValidInput(input) && (input != "") && input != null)
 			{
@@ -128,7 +129,7 @@ namespace WhereIsBigfoot
 
 				if (parsed.Length == 0)
 				{
-					Console.WriteLine($"Sorry, {this.Player.PlayerName} I didn't catch that.");
+					commands.TypeLine($"Sorry, {this.Player.PlayerName} I didn't catch that.");
 					return;
 				}
 
@@ -146,22 +147,22 @@ namespace WhereIsBigfoot
 						case "get":
 							commands.Get(Player, parsed[1]);
 							break;
-						case "give":
+                        case "give":
                             string giveTarget = GetInput($"Who do you want to give {parsed[1]}?");
-							commands.Give(Player, parsed[1], Player.PlayerLocation.Characters, giveTarget);
-							break;
-						case "look":
+                            commands.Give(Player, parsed[1], Player.PlayerLocation.Characters, giveTarget);
+                            break;
+                        case "look":
 							commands.Look(Player, parsed[1]);
 							break;
 						case "use":
                             string useTarget = GetInput($"What do you want to use {parsed[1]} on?");
 							commands.Use(Player, parsed[1], useTarget);
 							break;
-						case "talk":
-							string getTarget = GetInput($"Who do you want to talk to?");
-							commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters, getTarget);
-							break;
-						case "put":
+                        case "talk":
+                            string getTarget = GetInput($"Who do you want to talk to?");
+                            commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters, getTarget);
+                            break;
+                        case "put":
 							commands.Put(Player, parsed[1], items);
 							break;
 						case "help":
@@ -180,14 +181,14 @@ namespace WhereIsBigfoot
 				}
 				else
 				{
-					WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\". \n");
+					commands.TypeLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\". \n");
 				}
 				if (parsed[0] != "look" && parsed[0] != "quit" && parsed[0] != "go")
-					WriteLine($"{this.Player.PlayerLocation.DescriptionShort} \n");
+                    commands.TypeLine($"{this.Player.PlayerLocation.DescriptionShort} \n");
 			}
 			else
 			{
-				WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\". \n");
+                commands.TypeLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\". \n");
 			}
 		}
 
@@ -253,8 +254,8 @@ namespace WhereIsBigfoot
 			// Assign Player instance to game
 			game.Player = newPlayer;
 
-			// Show starting room
-			Console.WriteLine();
+            // Show starting room
+            Console.WriteLine();
 			game.commands.ShowLocation(game.Player.PlayerLocation);
 
 			do
