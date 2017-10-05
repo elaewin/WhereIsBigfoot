@@ -100,7 +100,7 @@
     {
         "name": "tree",
         "descriptionFirst": "You climb into the branches of the tall cedar tree. It's easier than when you were a kid. Your arms and legs are longer. You're stronger.\n\nYou're also bigger now. Heavier. So it's really kind of a wash. Speaking of a wash, all this sap on your hands makes you wish you'd packed some wet-naps.",
-        "descriptionLong": "",
+        "descriptionLong": "You are in the branches of a tall cedar tree.",
         "descriptionShort": "You are in the branches of a tall cedar tree.",
         "exits": {
             "down": "woods4"
