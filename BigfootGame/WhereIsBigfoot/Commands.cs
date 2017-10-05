@@ -269,7 +269,9 @@ namespace WhereIsBigfoot
             {
                 Console.Write(line[i]);
                 System.Threading.Thread.Sleep(150); // Sleep for 150 milliseconds
-            }
+           }
+            Console.WriteLine();
+            Console.WriteLine();
         }
 
     }
