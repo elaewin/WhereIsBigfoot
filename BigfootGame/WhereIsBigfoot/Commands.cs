@@ -70,32 +70,34 @@ namespace WhereIsBigfoot
 		}
 
 		public void Get(Player p, string name)
-		{
-			foreach (Item i in p.PlayerLocation.Items.Values)
-			{
-				if (i.ParseValue.Contains(name))
-				{
-					TransferItem(p, name);
-					break;
-				}
-
-				else if (p.PlayerLocation.Characters.ContainsKey(name))
-				{
-					if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
-					{
-						Console.WriteLine(p.PlayerLocation.Characters[name].Actions["get"]);
-					}
-					else
-					{
-						CannotVerbNoun("get", name);
-					}
-				}
-				else
-				{
-					CannotVerbNoun("get", name);
-				}
-			}
-		}
+        {
+            if (p.PlayerLocation.Items.ContainsKey(name))
+            {
+                if (p.PlayerLocation.Items[name].Actions.ContainsKey("get"))
+                {
+                    TransferItem(p, name);
+                }
+                else
+                {
+                    CannotVerbNoun("get", name);
+                }
+            }
+            else if (p.PlayerLocation.Characters.ContainsKey(name))
+            {
+                if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
+                {
+                    TypeLine(p.PlayerLocation.Characters[name].Actions["get"]);
+                }
+                else
+                {
+                    CannotVerbNoun("get", name);
+                }
+            }
+            else
+            {
+                CannotVerbNoun("get", name);
+            }
+        }
 
 		public void Drop(Player p, string item)
 		{
