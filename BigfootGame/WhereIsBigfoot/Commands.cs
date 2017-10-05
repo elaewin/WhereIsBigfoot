@@ -34,16 +34,11 @@ namespace WhereIsBigfoot
                         }
                         else
                         {
-                            CannotVerbNoun("use", item);
-                            TypeLine($"That {item} does not exist here");
-                        }
-                        else
-                        {
                             TypeLine(itemToUse.Actions["use"]);
                         }
                     }
                 }
-            }         
+            }
         }
 
 
@@ -73,28 +68,29 @@ namespace WhereIsBigfoot
 
         public void Get(Player p, string name)
         {
-            foreach(Item i in p.PlayerLocation.Items.Values)
+            foreach (Item i in p.PlayerLocation.Items.Values)
             {
-                if(i.ParseValue.Contains(name))
+                if (i.ParseValue.Contains(name))
                 {
                     TransferItem(p, name);
                     break;
                 }
-            }
-            else if (p.PlayerLocation.Characters.ContainsKey(name))
-            {
-                if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
+
+                else if (p.PlayerLocation.Characters.ContainsKey(name))
                 {
-                    Console.WriteLine(p.PlayerLocation.Characters[name].Actions["get"]);
+                    if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
+                    {
+                        Console.WriteLine(p.PlayerLocation.Characters[name].Actions["get"]);
+                    }
+                    else
+                    {
+                        CannotVerbNoun("get", name);
+                    }
                 }
                 else
                 {
                     CannotVerbNoun("get", name);
                 }
-            }
-            else
-            {
-                CannotVerbNoun("get", name);
             }
         }
 
@@ -157,19 +153,39 @@ namespace WhereIsBigfoot
 
         public void Put(Player p, string name, List<Item> items)
         {
-            if (p.Inventory.ContainsKey("lantern") && p.Inventory.ContainsKey("grease"))
+            TypeLine("What are you trying to put? you need 2 items.");
+
+            TypeLine("Type the first item:");
+            string item1 = Console.ReadLine();
+            Console.WriteLine();
+            TypeLine("Type the second item:");
+            string item2 = Console.ReadLine();
+            Console.WriteLine();
+            List<string> tools = new List<string>();
+            tools.Add(item1);
+            tools.Add(item2);
+
+            if (tools.Contains("lantern") && tools.Contains("grease"))
             {
-                TypeLine("Now your lantern is full and you can use it to go in the cave.");
-                p.Inventory.Remove("lantern");
-                foreach (Item i in items)
+                if (p.Inventory.ContainsKey("lantern") && p.Inventory.ContainsKey("grease"))
                 {
-                    if (i.Name == "filledLantern")
-                        p.Inventory.Add("filledLantern", i);
+                    TypeLine("Now your lantern is full and you can use it to go in the cave.");
+                    p.Inventory.Remove("lantern");
+                    foreach (Item i in items)
+                    {
+                        if (i.Name == "filledLantern")
+                            p.Inventory.Add("filledLantern", i);
+                    }
+                }
+                else
+                {
+                    TypeLine("You need to have the lantern and the grease in your inventory before you can use it.");
                 }
             }
+
             else
             {
-                TypeLine("You need to have the lantern and the grease in your inventory before you can use it.");
+                TypeLine("You can only use \"put\" to fill your lantern with the bacon grease.");
             }
         }
 
@@ -243,7 +259,7 @@ namespace WhereIsBigfoot
                 TypeLine($"{location.DescriptionShort}");
 
                 foreach (Character character in location.Characters.Values)
-					Console.WriteLine($"{character.DescriptionShort}");
+                    Console.WriteLine($"{character.DescriptionShort}");
 
                 foreach (Item item in location.Items.Values)
                     TypeLine($"{item.DescriptionShort}");
@@ -262,7 +278,7 @@ namespace WhereIsBigfoot
             for (int i = 0; i < line.Length; i++)
             {
                 Console.Write(line[i]);
-                System.Threading.Thread.Sleep(40); 
+                System.Threading.Thread.Sleep(0);
             }
             Console.WriteLine();
             Console.WriteLine();
