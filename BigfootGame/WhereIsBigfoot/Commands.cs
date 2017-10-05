@@ -149,7 +149,15 @@ namespace WhereIsBigfoot
         {
           Console.WriteLine($"You can't {verb} {noun}");
         }
-        
+
+        public void Inventory(Player p)
+        {
+            Console.Write("You have the following inventory: ");
+            foreach (var item in p.Inventory.Values)
+            {
+                Console.Write($"{item.DescriptionShort} ");
+            }
+        }
     }
 
 }

@@ -7,7 +7,7 @@ namespace WhereIsBigfoot
     public class Character : Asset
     {
         string name, descriptionFirst, descriptionShort, descriptionLong;
-        string[] parseValue;
+        List<string> parseValue;
         Dictionary<string, string> actions;
         string location;
 
@@ -15,8 +15,8 @@ namespace WhereIsBigfoot
                          string descriptionFirst, 
                          string descriptionShort, 
                          string descriptionLong, 
-                         Dictionary<string, string> actions, 
-                         string[] parseValue,
+                         Dictionary<string, string> actions,
+                         List<string> parseValue,
                          string location) : base(name, 
                                                  descriptionFirst, 
                                                  descriptionShort, 
@@ -36,7 +36,7 @@ namespace WhereIsBigfoot
             set { this.actions = value; }
         }
 
-        public string[] ParseValue
+        public List<string> ParseValue
         {
             get { return this.parseValue; }
         }
