@@ -250,7 +250,7 @@
         "exits": {
             "north": "woods2",
             "east": "woods4",
-            "south": "dan",
+            "south": "danCamp",
             "west": "campsite"
         },
         "characters": {
@@ -268,7 +268,7 @@
         "descriptionShort": "You are in the woods.",
         "exits": {
             "up": "tree",
-            "south": "dan",
+            "south": "danCamp",
             "west": "woods3"
         },
         "characters": {
