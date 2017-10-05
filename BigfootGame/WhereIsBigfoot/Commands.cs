@@ -105,15 +105,32 @@ namespace WhereIsBigfoot
 
         public void TalkTo(Player p, Character c)
         {
-            if (p.PlayerLocation.Characters.ContainsKey(c.Name))
+            if(p.PlayerLocation.Characters.ContainsKey(c.Name))
+            {
                 Console.WriteLine(c.Actions["talk"]);
+            }
             else
+            {
                 Console.WriteLine("This character does not exist in this location.");
+            }
         }
 
-        public void Put()
+        public void Put(Player p, List<Item> items)
         {
-
+            if (p.Inventory.ContainsKey("lantern") && p.Inventory.ContainsKey("grease"))
+            {
+                Console.WriteLine("Now your lantern is full and you can use it to go in the cave.");
+                p.Inventory.Remove("lantern");
+                foreach (Item i in items)
+                {
+                    if (i.Name == "filledLantern")
+                        p.Inventory.Add("filledLantern", i);
+                }
+            }
+            else
+            {
+                Console.WriteLine("You need to have the lantern and the grease in your inventory before you can use it.");
+            }
         }
 
 
