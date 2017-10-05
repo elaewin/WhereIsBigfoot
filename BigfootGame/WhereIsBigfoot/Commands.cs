@@ -69,17 +69,21 @@ namespace WhereIsBigfoot
         // TODO: alter json to reflect abstracted method for stuff inheriting from parent
         // TODO: asset class
 
-        //private void TransferObject(Player p, string item, List<Object> list)
+        //private void TransferObject(Player p, string item, List<Asset> list, string name)
         //{
-        //    foreach (Object obj in list)
+        //    foreach (Asset obj in list)
         //    {
-        //        if (obj.Name == newLocation)
+        //        if (obj.Name == name)
         //        {
-        //            p.PlayerLocation = location;
+        //            p.PlayerLocation = (obj.GetType())obj;
         //        }
         //    }
-        //    foreach ()
         //}
+
+        private void ChangeLocation(Player p, Asset obj)
+        {
+            p.PlayerLocation = (Location)obj;
+        }
 
         //private void DanCheck(Player p, string item, List<Character> characters)
         //{

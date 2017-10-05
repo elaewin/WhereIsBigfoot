@@ -4,67 +4,47 @@ using System.Text;
 
 namespace WhereIsBigfoot
 {
-    class Location
+    class Location : Asset
     {
-        string locationName, locationShort, locationLong;
-        string[] objects;
+        string name, descriptionFirst, descriptionLong, descriptionShort;
         Dictionary<string, string> exits;
-        //Dictionary<string, Item> items;
-        Dictionary<string, string> items;
+        List<Character> characters;
+        string[] objects;
+        Dictionary<string, Item> items;
         //bool visited = false;
-        //Dictionary<string, Character> characters;
 
-        public Location(string locationName, string locationShort, string locationLong, string[] objects)
-
+        public Location(string name, string descriptionFirst, string descriptionLong, string descriptionShort, Dictionary<string, string> exits, List<Character> characters, string[] objects, Dictionary<string, Item> items) : base(name, descriptionFirst, descriptionShort, descriptionLong)
         {
-            this.locationName = locationName;
-            this.locationShort = locationShort;
-            this.locationLong = locationLong;
+            this.name = name;
+            this.descriptionFirst = descriptionFirst;
+            this.descriptionLong = descriptionLong;
+            this.descriptionShort = descriptionShort;
             this.objects = objects;
         }
 
-        public string LocationShort
+        public Dictionary<string, string> Exits
         {
-            get { return this.locationShort; }
+            get => this.exits;
+            set => this.exits = value;
         }
 
-        public string LocationLong
+        public List<Character> Characters
         {
-            get{ return this.locationLong; }
+            get => this.characters;
+            set => this.characters = value;
         }
 
-        public string LocationName 
-        { 
-            get{ return this.locationName; }
-        }
-
-        public Dictionary<string, string> Items 
-        { 
-            get{ return this.items; }
-            set { this.items = value; }
-        }
-
-        public string[] Objects 
-        { 
-            get{ return this.objects; }
-        }
-
-        public Dictionary<string,string> Exits
+        public string[] Objects
         {
-            get
-            {
-                return this.exits;
-            }
-            set
-            {
-                this.exits = value;
-            }
+            get => this.objects;
+            set => this.objects = value;
         }
 
-        //public Dictionary<string, Character> Characters
-        //{
-        //    get { return this.characters; }
-        //    set { this.characters = value; }
-        //}
+        public Dictionary<string, Item> Items
+        {
+            get => this.items;
+            set => this.items = value;
+        }
     }
 }
+
