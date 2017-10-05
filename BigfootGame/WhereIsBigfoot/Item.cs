@@ -10,7 +10,15 @@ namespace WhereIsBigfoot
         string[] parseValue;
         Dictionary<string, string> actions;
 
-        public Item(string name, string descriptionFirst, string descriptionShort, string descriptionLong, string[] parseValue, string target, Dictionary<string, string> actions) : base(name, descriptionFirst, descriptionShort, descriptionLong)
+        public Item(string name, 
+                    string descriptionFirst, 
+                    string descriptionShort, 
+                    string descriptionLong, 
+                    string[] parseValue, 
+                    string target, Dictionary<string, string> actions) : base(name, 
+                                                                              descriptionFirst, 
+                                                                              descriptionShort, 
+                                                                              descriptionLong)
         {
             this.name = name;
             this.descriptionShort = descriptionShort;

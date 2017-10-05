@@ -13,7 +13,16 @@ namespace WhereIsBigfoot
         Dictionary<string, Item> items;
         //bool visited = false;
 
-        public Location(string name, string descriptionFirst, string descriptionLong, string descriptionShort, Dictionary<string, string> exits, List<Character> characters, string[] objects, Dictionary<string, Item> items) : base(name, descriptionFirst, descriptionShort, descriptionLong)
+        public Location(string name, 
+                        string descriptionFirst, 
+                        string descriptionLong, 
+                        string descriptionShort, 
+                        Dictionary<string, string> exits, 
+                        List<Character> characters, 
+                        string[] objects, Dictionary<string, Item> items) : base(name, 
+                                                                                 descriptionFirst, 
+                                                                                 descriptionShort, 
+                                                                                 descriptionLong)
         {
             this.name = name;
             this.descriptionFirst = descriptionFirst;

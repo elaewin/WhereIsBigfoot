@@ -10,7 +10,15 @@ namespace WhereIsBigfoot
         string[] parseValue;
         Dictionary<string, string> actions;
 
-        public Character(string name, string descriptionFirst, string descriptionShort, string descriptionLong, Dictionary<string, string> actions, string[] parseValue) : base(name, descriptionFirst, descriptionShort, descriptionLong)
+        public Character(string name, 
+                         string descriptionFirst, 
+                         string descriptionShort, 
+                         string descriptionLong, 
+                         Dictionary<string, string> actions, 
+                         string[] parseValue) : base(name, 
+                                                     descriptionFirst, 
+                                                     descriptionShort, 
+                                                     descriptionLong)
         {
             this.name = name;
             this.descriptionShort = descriptionShort;
@@ -29,9 +37,11 @@ namespace WhereIsBigfoot
         {
             get { return this.parseValue; }
         }
+
         public string CharacterName
         {
             get { return this.name; }
         }
+
     }
 }

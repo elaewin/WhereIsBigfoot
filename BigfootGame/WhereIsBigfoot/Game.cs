@@ -27,7 +27,7 @@ namespace WhereIsBigfoot
 
             //Testing to make sure the objects are being de-serialized by writing them to the console.
             foreach (Location location in game.locations)
-                Console.WriteLine(location.LocationName);
+                Console.WriteLine(location.Name);
             foreach (Item item in game.items)
                 Console.WriteLine(item.Name);
             foreach (Character character in game.characters)
@@ -39,7 +39,7 @@ namespace WhereIsBigfoot
                 {
                         if (location.Items.ContainsKey(item.Name))
                         {
-                            location.Items[item.Name] = item.Name;
+                            location.Items[item.Name] = item;
                             Console.WriteLine("=======");
                         }
                 }
