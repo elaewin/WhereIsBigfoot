@@ -147,6 +147,13 @@ namespace WhereIsBigfoot
 				if (allowedVerbs.Contains(verb))
 				{
 					// Needs logic on how to use each verb.
+					switch (verb)
+					{
+						//case "get":
+							
+							// "go", //"give", //"look", //"use", //"talk", //"put", //"help", //"quit", //"inventory"
+					}
+
 					this.CurrentVerb = verb;
 					WriteLine($"Current Verb: {this.currentVerb}");
 					if (verb == "quit")
