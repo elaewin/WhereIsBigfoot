@@ -7,22 +7,29 @@ namespace WhereIsBigfoot
 {
     public class Commands
     {
-        // talk to
-        // put - two items interacting with each other
-        // help 
-
         // TODO: check if action is available 
+
+        // TODO: Write Go Method
+        // TODO: Use actions text 
+        // TODO: parse value
 
         public void Use(Player p, string item)
         {
             if (p.Inventory.ContainsKey(item))
             {
                 Item itemToUse = p.Inventory[item];
-                Console.WriteLine(itemToUse.Actions["use"]);
+                if (itemToUse.Actions.ContainsKey("use"))
+                {
+                    Console.WriteLine(itemToUse.Actions["use"]);
+                }
+                else
+                {
+                    CannotVerbNoun("use", item);
+                }
             }
             else
             {
-                Console.WriteLine($"You do not have {item} in your inventory. You'll have to try something else. \n");
+                CannotVerbNoun("use", item);
             }
         }
 
@@ -45,21 +52,39 @@ namespace WhereIsBigfoot
             }
             else
             {
-                Console.WriteLine("You run into an impenetrable barrier and must return. \n");
+                CannotVerbNoun("go", direction);
             }
 
         }
 
-        // fix Get to be able to take item and character 
-        public void Get(Player p, string item)
+        public void Get(Player p, string name)
         {
-            if (p.PlayerLocation.Items.ContainsKey(item))
+            if (p.PlayerLocation.Items.ContainsKey(name))
             {
-                TransferItem(p, item);
+                if (p.PlayerLocation.Items[name].Actions.ContainsKey("get"))
+                {
+                    TransferItem(p, name);
+                    Console.WriteLine(p.PlayerLocation.Items[name].Actions["get"]);
+                }
+                else
+                {
+                    CannotVerbNoun("get", name);
+                }
+            }
+            else if (p.PlayerLocation.Characters.ContainsKey(name))
+            {
+                if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
+                {
+                    Console.WriteLine(p.PlayerLocation.Characters[name].Actions["get"]);
+                }
+                else
+                {
+                    CannotVerbNoun("get", name);
+                }
             }
             else
             {
-                Console.WriteLine($"There is no {item} \n");
+                CannotVerbNoun("get", name);
             }
         }
 
@@ -75,6 +100,7 @@ namespace WhereIsBigfoot
             DanCheck(p, item, characters);
             p.Inventory.Remove(item);
         }
+
 
         private void TransferItem(Player p, string item)
         {
@@ -101,6 +127,35 @@ namespace WhereIsBigfoot
                         }
                     }
                 }
+            }
+        }
+        public void TalkTo(Player p, Character c)
+        {
+            if (p.PlayerLocation.Characters.ContainsKey(c.Name))
+            {
+                Console.WriteLine(c.Actions["talk"]);
+            }
+            else
+            {
+                Console.WriteLine("This character does not exist in this location.");
+            }
+        }
+
+        public void Put(Player p, List<Item> items)
+        {
+            if (p.Inventory.ContainsKey("lantern") && p.Inventory.ContainsKey("grease"))
+            {
+                Console.WriteLine("Now your lantern is full and you can use it to go in the cave.");
+                p.Inventory.Remove("lantern");
+                foreach (Item i in items)
+                {
+                    if (i.Name == "filledLantern")
+                        p.Inventory.Add("filledLantern", i);
+                }
+            }
+            else
+            {
+                Console.WriteLine("You need to have the lantern and the grease in your inventory before you can use it.");
             }
         }
 
@@ -182,7 +237,12 @@ namespace WhereIsBigfoot
 
 
 		}
-		}
-    }
 
+        private void CannotVerbNoun(string verb, string noun)
+        {
+            Console.WriteLine($"You can't {verb} {noun} \n");
+        }
+    }
 }
+
+
