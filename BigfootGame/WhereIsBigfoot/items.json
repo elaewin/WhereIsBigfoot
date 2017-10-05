@@ -123,7 +123,7 @@
         "descriptionFirst": "",
         "descriptionShort": "A dead cell phone",
         "descriptionLong": "Yep, it's your cell phone. Its battery sure is dead.",
-        "location": "tent",
+        "location": "",
         "target": "",
         "actions": {
             "get": "You already have your cell phone.",
