@@ -120,10 +120,6 @@ namespace WhereIsBigfoot
 		public void ParseInput(string prompt)
 		{
 			string input = GetInput(prompt).ToLower().Trim();
-<<<<<<< HEAD
-=======
-			commands.TypeLine(input);
->>>>>>> 4600a32700dab64d5dc25d628a2c1dec09b6cc1d
 
 			if (IsValidInput(input) && (input != "") && input != null)
 			{
@@ -150,37 +146,21 @@ namespace WhereIsBigfoot
 						case "get":
 							commands.Get(Player, parsed[1]);
 							break;
-						//case "give":
-<<<<<<< HEAD
-						//	string giveTarget = GetInput($"Who do you want to give {parsed[1]}?");
-						//	commands.Give(Player, parsed[1], Player.PlayerLocation.Characters, giveTarget);
-						//	break;
-=======
-                           // string giveTarget = GetInput($"Who do you want to give {parsed[1]}?");
-							//commands.Give(Player, parsed[1], Player.PlayerLocation.Characters, giveTarget);
-							//break;
->>>>>>> 4600a32700dab64d5dc25d628a2c1dec09b6cc1d
+						case "give":
+							string giveTarget = GetInput($"Who do you want to give {parsed[1]}?");
+							commands.Give(Player, parsed[1], Player.PlayerLocation.Characters, giveTarget);
+							break;
 						case "look":
 							commands.Look(Player, parsed[1]);
 							break;
 						case "use":
-<<<<<<< HEAD
 							string useTarget = GetInput($"What do you want to use {parsed[1]} on?");
 							commands.Use(Player, parsed[1], useTarget);
 							break;
-						//case "talk":
-						//	string getTarget = GetInput($"Who do you want to talk to?");
-						//	commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters, getTarget);
-						//	break;
-=======
-                            string useTarget = GetInput($"What do you want to use {parsed[1]} on?");
-							commands.Use(Player, parsed[1], useTarget);
+						case "talk":
+							string getTarget = GetInput($"Who do you want to talk to?");
+							commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters, getTarget);
 							break;
-						//case "talk":
-							//string getTarget = GetInput($"Who do you want to talk to?");
-							//commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters, getTarget);
-							//break;
->>>>>>> 4600a32700dab64d5dc25d628a2c1dec09b6cc1d
 						case "put":
 							commands.Put(Player, parsed[1], items);
 							break;
@@ -200,7 +180,6 @@ namespace WhereIsBigfoot
 				}
 				else
 				{
-<<<<<<< HEAD
 					WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\".");
 				}
 				if (parsed[0] != "look" && parsed[0] != "quit" && parsed[0] != "go")
@@ -209,16 +188,6 @@ namespace WhereIsBigfoot
 			else
 			{
 				WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\".");
-=======
-					commands.TypeLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\". \n");
-				}
-				if (parsed[0] != "look" && parsed[0] != "quit" && parsed[0] != "go")
-                    commands.TypeLine($"{this.Player.PlayerLocation.DescriptionShort} \n");
-			}
-			else
-			{
-                commands.TypeLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\". \n");
->>>>>>> 4600a32700dab64d5dc25d628a2c1dec09b6cc1d
 			}
 		}
 
