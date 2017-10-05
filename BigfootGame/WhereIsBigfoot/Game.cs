@@ -20,28 +20,7 @@ namespace WhereIsBigfoot
 
 		private Player player;
 
-		private string currentVerb;
-		private string currentNoun;
-		private string currentSubject;
 		bool running = true;
-
-		public string CurrentVerb
-		{
-			get => this.currentVerb;
-			set => this.currentVerb = value;
-		}
-
-		public string CurrentNoun
-		{
-			get => this.currentNoun;
-			set => this.currentNoun = value;
-		}
-
-		public string CurrentSubject
-		{
-			get => this.currentSubject;
-			set => this.currentSubject = value;
-		}
 
 		public Player Player
 		{
@@ -72,24 +51,24 @@ namespace WhereIsBigfoot
 			game.characters = JsonConvert.DeserializeObject<List<Character>>(File.ReadAllText(jsonCharacterFile));
 			game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonLocationFile));
 
-            ////Testing to make sure the objects are being de-serialized by writing them to the console.
-            //WriteLine("Locations:");
-            //foreach (Location location in game.locations)
-            //    WriteLine(location.Name);
+			////Testing to make sure the objects are being de-serialized by writing them to the console.
+			//WriteLine("Locations:");
+			//foreach (Location location in game.locations)
+			//    WriteLine(location.Name);
 
-            //WriteLine("\nItems:");
-            //foreach (Item item in game.Items) { 
-            //    WriteLine($"Item {item.Name} is in location {item.Location}");
-            //    foreach (string word in item.ParseValue)
-            //        Console.WriteLine(word);
-            //}
-            //WriteLine("\nCharacters:");
-            //foreach (Character character in game.characters)
-            //WriteLine(character.CharacterName);
+			//WriteLine("\nItems:");
+			//foreach (Item item in game.Items) { 
+			//    WriteLine($"Item {item.Name} is in location {item.Location}");
+			//    foreach (string word in item.ParseValue)
+			//        Console.WriteLine(word);
+			//}
+			//WriteLine("\nCharacters:");
+			//foreach (Character character in game.characters)
+			//WriteLine(character.CharacterName);
 
-            // Go through each item and assign the item to the items dict in each location, 
-            // based on the location property of the item.
-            foreach (Item item in game.items)
+			// Go through each item and assign the item to the items dict in each location, 
+			// based on the location property of the item.
+			foreach (Item item in game.items)
 			{
 				string name = item.Location;
 				string key = item.Name;
@@ -141,12 +120,18 @@ namespace WhereIsBigfoot
 		public void ParseInput(string prompt)
 		{
 			string input = GetInput(prompt).ToLower().Trim();
+			Console.WriteLine(input);
 
-			if (IsValidInput(input))
+			if (IsValidInput(input) && (input != "") && input != null)
 			{
 				string[] parsed = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
-
 				string verb = parsed[0];
+
+				if (parsed.Length == 0)
+				{
+					Console.WriteLine($"Sorry, {this.Player.PlayerName} I didn't catch that.");
+					return;
+				}
 
 				if (parsed.Length == 1)
 					parsed = new string[2] { parsed[0], "none" };
@@ -193,19 +178,14 @@ namespace WhereIsBigfoot
 				}
 				else
 				{
-					// call help method?
 					WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\". \n");
 				}
-				if (parsed.Length == 2)
-				{
-					this.CurrentNoun = parsed[1];
-				}
-				if (parsed[0] != "look")
+				if (parsed[0] != "look" && parsed[0] != "quit" && parsed[0] != "go")
 					WriteLine($"{this.Player.PlayerLocation.DescriptionShort} \n");
 			}
 			else
 			{
-				WriteLine("I'm afraid I didn't understand that.");
+				WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\". \n");
 			}
 		}
 
@@ -216,6 +196,10 @@ namespace WhereIsBigfoot
 		{
 			Console.Title = "Where Is Bigfoot?";
 			Console.CursorVisible = true;
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.BackgroundColor = ConsoleColor.Black;
+			Console.BufferHeight = 200;
+			Console.BufferWidth = 300;
 		}
 
 		public string[] GetPlayerDetails()
@@ -252,6 +236,9 @@ namespace WhereIsBigfoot
 			// Assign Player instance to game
 			game.Player = newPlayer;
 
+			// Show starting room
+			game.commands.ShowLocation(game.Player.PlayerLocation);
+
 			do
 			{
 				game.ParseInput("> ");
@@ -261,7 +248,7 @@ namespace WhereIsBigfoot
 
 		public static bool IsValidInput(string str)
 		{
-			Regex regexString = new Regex(@"[a-z\s']*$");
+			Regex regexString = new Regex(@"[a-z\s'\r]*$");
 			return regexString.IsMatch(str);
 		}
 
@@ -269,6 +256,8 @@ namespace WhereIsBigfoot
 		{
 			Console.Write(prompt);
 			string input = ReadLine();
+			if (input == null)
+				return "";
 			return input;
 		}
 
