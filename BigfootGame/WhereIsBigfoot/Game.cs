@@ -186,6 +186,8 @@ namespace WhereIsBigfoot
 
 			game.ParseInput("> ");
 
+            
+
 		}
 
 		public static bool IsValidInput(string str)

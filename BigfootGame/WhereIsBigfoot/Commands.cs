@@ -15,7 +15,7 @@ namespace WhereIsBigfoot
 
         public void Use(Player p, string item)
         {
-            if(p.Inventory.ContainsKey(item))
+            if (p.Inventory.ContainsKey(item))
             {
                 Item itemToUse = p.Inventory[item];
                 Console.WriteLine(itemToUse.Actions["use"]);
@@ -27,7 +27,7 @@ namespace WhereIsBigfoot
         }
 
         public void Go(Player p, string direction, List<Location> locations)
-        { 
+        {
             Location currentLocation = p.PlayerLocation;
             string newLocation;
 
@@ -83,7 +83,7 @@ namespace WhereIsBigfoot
             Console.WriteLine(itemToTransfer.Actions["get"]);
         }
 
-       private void DanCheck(Player p, string item, List<Character> characters)
+        private void DanCheck(Player p, string item, List<Character> characters)
         {
             if (p.PlayerLocation.Name == "dan")
             {
@@ -102,5 +102,14 @@ namespace WhereIsBigfoot
                 }
             }
         }
+
+        private void talkTo(Character c)
+        {
+            Console.WriteLine(c.Actions["talk"]);
+        }
+
+        private void put()
+
+
     }
 }
