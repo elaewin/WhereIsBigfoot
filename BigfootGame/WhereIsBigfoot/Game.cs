@@ -15,10 +15,8 @@ namespace WhereIsBigfoot
 		private List<Item> items;
 		private List<Character> characters;
 		List<string> allowedVerbs = new List<string>() { "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory" };
-<<<<<<< HEAD
-=======
+
 		Commands commands = new Commands();
->>>>>>> 556a14bc56e78762a2024d1a6d73d4326583ad3d
 
 		private Player player;
 
@@ -140,7 +138,7 @@ namespace WhereIsBigfoot
 
 		}
 
-		public string[] ParseInput(string prompt)
+		public void ParseInput(string prompt)
 		{
 			string input = GetInput(prompt).ToLower().Trim();
 
@@ -149,11 +147,9 @@ namespace WhereIsBigfoot
 				string[] parsed = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
 
 				string verb = parsed[0];
-<<<<<<< HEAD
-=======
+
 				if (parsed.Length == 1)
 					parsed = new string[2] { parsed[0], "none" };
->>>>>>> 556a14bc56e78762a2024d1a6d73d4326583ad3d
 
 				if (allowedVerbs.Contains(verb))
 				{
@@ -198,19 +194,14 @@ namespace WhereIsBigfoot
 				else
 				{
 					// call help method?
-					WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\".");
+					WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\". \n");
 				}
 				if (parsed.Length == 2)
 				{
 					this.CurrentNoun = parsed[1];
-					WriteLine($"Current Noun: {this.currentNoun}");
 				}
-<<<<<<< HEAD
-				return parsed;
-=======
 				if (parsed[0] != "look")
-					WriteLine($"location from parse method: {this.Player.PlayerLocation.DescriptionShort}");
->>>>>>> 556a14bc56e78762a2024d1a6d73d4326583ad3d
+					WriteLine($"{this.Player.PlayerLocation.DescriptionShort} \n");
 			}
 			else
 			{
