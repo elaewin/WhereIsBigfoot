@@ -7,22 +7,29 @@ namespace WhereIsBigfoot
 {
     class Commands
     {
-        // talk to
-        // put - two items interacting with each other
-        // help 
-
         // TODO: check if action is available 
+
+        // TODO: Write Go Method
+        // TODO: Use actions text 
+        // TODO: parse value
 
         public void Use(Player p, string item)
         {
             if (p.Inventory.ContainsKey(item))
             {
                 Item itemToUse = p.Inventory[item];
-                Console.WriteLine(itemToUse.Actions["use"]);
+                if (itemToUse.Actions.ContainsKey("use"))
+                {
+                    Console.WriteLine(itemToUse.Actions["use"]);
+                }
+                else
+                {
+                    CannotVerbNoun("use", item);
+                }
             }
             else
             {
-                Console.WriteLine($"You do not have {item} in your inventory. Please acquire {item}");
+                CannotVerbNoun("use", item);
             }
         }
 
@@ -44,21 +51,39 @@ namespace WhereIsBigfoot
             }
             else
             {
-                Console.WriteLine("You run into an impenetrable barrier and must return.");
+                CannotVerbNoun("go", direction);
             }
 
         }
 
-        // fix Get to be able to take item and character 
-        public void Get(Player p, string item)
+        public void Get(Player p, string name)
         {
-            if (p.PlayerLocation.Items.ContainsKey(item))
+            if (p.PlayerLocation.Items.ContainsKey(name))
             {
-                TransferItem(p, item);
+                if (p.PlayerLocation.Items[name].Actions.ContainsKey("get"))
+                {
+                    TransferItem(p, name);
+                    Console.WriteLine(p.PlayerLocation.Items[name].Actions["get"]);
+                }
+                else
+                {
+                    CannotVerbNoun("get", name);
+                }
+            }
+            else if (p.PlayerLocation.Characters.ContainsKey(name))
+            {
+                if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
+                {
+                    Console.WriteLine(p.PlayerLocation.Characters[name].Actions["get"]);
+                }
+                else
+                {
+                    CannotVerbNoun("get", name);
+                }
             }
             else
             {
-                Console.WriteLine($"There is no {item}");
+                CannotVerbNoun("get", name);
             }
         }
 
@@ -69,11 +94,12 @@ namespace WhereIsBigfoot
             Console.WriteLine($"You dropped, {item}");
         }
 
-        public void Give(Player p, string item, List<Character> characters)
+        public void Give(Player p, string item, Dictionary<string, Character> characters)
         {
             DanCheck(p, item, characters);
             p.Inventory.Remove(item);
         }
+
 
         private void TransferItem(Player p, string item)
         {
@@ -83,14 +109,14 @@ namespace WhereIsBigfoot
             Console.WriteLine(itemToTransfer.Actions["get"]);
         }
 
-        private void DanCheck(Player p, string item, List<Character> characters)
+        private void DanCheck(Player p, string item, Dictionary<string, Character> characters)
         {
-            if (p.PlayerLocation.Name == "dan")
+            if (p.PlayerLocation.Name == "danCamp")
             {
                 if (item == "book" && p.PlayerLocation.Characters.ContainsKey("danCooking"))
                 {
                     TransferItem(p, item);
-                    foreach (Character c in characters)
+                    foreach (Character c in characters.Values)
                     {
                         if (c.Name == "danReading")
                         {
@@ -102,11 +128,9 @@ namespace WhereIsBigfoot
                 }
             }
         }
-
-<<<<<<< HEAD
         public void TalkTo(Player p, Character c)
         {
-            if(p.PlayerLocation.Characters.ContainsKey(c.Name))
+            if (p.PlayerLocation.Characters.ContainsKey(c.Name))
             {
                 Console.WriteLine(c.Actions["talk"]);
             }
@@ -134,8 +158,6 @@ namespace WhereIsBigfoot
             }
         }
 
-
-=======
         public void Help(Player p)
         {
             Console.WriteLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
@@ -176,7 +198,12 @@ namespace WhereIsBigfoot
                 }
             }
         }
->>>>>>> 0221518482b2705ec8b9a0e7a15b843ddf0ded4a
+
+        private void CannotVerbNoun(string verb, string noun)
+        {
+            Console.WriteLine($"You can't {verb} {noun}");
+        }
     }
+}
 
 }
