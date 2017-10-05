@@ -9,14 +9,25 @@ namespace WhereIsBigfoot
         string name, descriptionFirst, descriptionShort, descriptionLong;
         string[] parseValue;
         Dictionary<string, string> actions;
+        string location;
 
-        public Character(string name, string descriptionFirst, string descriptionShort, string descriptionLong, Dictionary<string, string> actions, string[] parseValue) : base(name, descriptionFirst, descriptionShort, descriptionLong)
+        public Character(string name, 
+                         string descriptionFirst, 
+                         string descriptionShort, 
+                         string descriptionLong, 
+                         Dictionary<string, string> actions, 
+                         string[] parseValue,
+                         string location) : base(name, 
+                                                 descriptionFirst, 
+                                                 descriptionShort, 
+                                                 descriptionLong)
         {
             this.name = name;
             this.descriptionShort = descriptionShort;
             this.descriptionLong = descriptionLong;
             this.actions = actions;
             this.parseValue = parseValue;
+            this.location = location;
         }
 
         public Dictionary<string, string> Actions
@@ -29,9 +40,15 @@ namespace WhereIsBigfoot
         {
             get { return this.parseValue; }
         }
+
         public string CharacterName
         {
             get { return this.name; }
+        }
+
+        public string Location {
+            get => this.location;
+            set => this.location = value;
         }
     }
 }
