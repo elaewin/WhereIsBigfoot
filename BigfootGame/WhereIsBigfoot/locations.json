@@ -6,7 +6,6 @@
         "descriptionShort": "You are at your campsite.",
         "exits": {
             "north": "tent",
-            "south": "woods3",
             "east": "woods1"
         },
         "characters": {
@@ -49,7 +48,7 @@
     {
         "name": "lakeshore",
         "descriptionFirst": "This lake is huge. It stretches out before you, maybe even too big for you to swim across unless you were being chased by an angry Bigfoot or that last date you picked up from Tindr. Let's face it, some things can motivate you to great feats of prowess. But as it stands, this lake is way too big to swim and you're not that motivated. Hills with trees rise up in the distance, but from here you can't see the opposite shore.\n\nTrails lead north along the lakeshore and west into the woods.\n",
-        "descriptionLong": "Trails lead north along the lake and west into the woods.",
+        "descriptionLong": "You are on the shore of a huge lake--far too big to swim across. Hills with trees rise up in the distance, but from here you can't see the opposite shore. Trails lead north along the lake and west into the woods.",
         "descriptionShort": "You stand on the shore of a large lake.",
         "exits": {
             "north": "woods5",
@@ -65,7 +64,7 @@
     },
     {
         "name": "mountain",
-        "descriptionFirst": "",
+        "descriptionFirst": "The mountainside goes up, and up, and up. It's steep here, and bare of grass or other plants, but it's not too steep to keep going. You probably won't get to the point of needing to use your hands and feet to climb. Even so, this will be a workout.",
         "descriptionLong": "A trail leads south into the woods. To the east is a dark cave.",
         "descriptionShort": "You stand on a rough mountainside.",
         "exits": {
@@ -171,25 +170,8 @@
         "descriptionLong": "You are in a cave. It is dark here. You may be eaten by a grue.",
         "descriptionShort": "You are in a dark cave.",
         "exits": {
-            "north": "tunnel5",
-            "south": "tunnel3"
-        },
-        "characters": {
-            "empty": null
-        },
-        "objects": null,
-        "items": {
-            "empty": null
-        }
-    },
-    {
-        "name": "tunnel5",
-        "descriptionFirst": "",
-        "descriptionLong": "You are in a cave. It is dark here. You may be eaten by a grue.",
-        "descriptionShort": "You are in a dark cave.",
-        "exits": {
             "north": "valley",
-            "south": "tunnel4"
+            "south": "tunnel3"
         },
         "characters": {
             "empty": null
@@ -205,7 +187,7 @@
         "descriptionLong": "To the south is a dark cave.",
         "descriptionShort": "You are in a secluded mountain valley.",
         "exits": {
-            "south": "tunnel5"
+            "south": "tunnel4"
         },
         "characters": {
             "bigfootHostile": null
@@ -217,12 +199,13 @@
     },
     {
         "name": "woods1",
-        "descriptionFirst": "",
-        "descriptionLong": "Trails lead north, east, and west.",
+        "descriptionFirst": "Dan said you'd be camping out in the woods, and here they are. Yup. Woods. It's very woodsy. You see trees everywhere, and where you don't see trees, you see bushes. Tall trees, short bushes, vice versa, all of it. The birds are singing, too, but it's a little distant. What really makes an impact is the silence. You don't hear cars or music or the sound of a ventilation system. You only hear the soft breeze through the trees. Apparently, this is what people had to work with to get away from it all before they invented noise-canceling headphones.\n\nTrails lead north, south, east, and west.",
+        "descriptionLong": "You are in the woods. You are pretty sure that you could get back to your campsite by following the trail to the west. Other trails lead north, south, east.",
         "descriptionShort": "You are in the woods.",
         "exits": {
             "north": "woods5",
             "east": "woods2",
+            "south": "woods3",
             "west": "campsite"
         },
         "characters": {
@@ -236,7 +219,7 @@
     {
         "name": "woods2",
         "descriptionFirst": "At some point, a tree fell, leaving something of a clearing in the forest. A huge mass of blackberries have grown up and around the stump on the west end of the clearing. You hear the buzzing of bees as they bumble around in the warm sunlight streaming through the broken canopy. A walking stick is tangled in the brambles. A glint of water can be seen through the trees to the north. Trails lead south and west.",
-        "descriptionLong": "At some point, a tree fell, leaving something of a clearing in the forest. You hear the buzzing of bees as they bumble around in the warm sunlight streaming through the broken canopy. A glint of water can be seen through the trees to the north. Trails lead south and west.",
+        "descriptionLong": "At some point, a tree fell, leaving something of a clearing in the forest. You hear the buzzing of bees as they bumble around on the blackberries growing here. A glint of water can be seen through the trees to the north. Trails lead south and west.",
         "descriptionShort": "You are in the woods.",
         "exits": {
             "north": "lakeshore",
@@ -255,12 +238,13 @@
             "water"
         ],
         "items": {
-            "walking stick": null
+            "walking stick": null,
+            "blackberries": null
         }
     },
     {
         "name": "woods3",
-        "descriptionFirst": "",
+        "descriptionFirst": "It's a good thing that you like trees, because these woods are full of them! It's also a rainforest, which calls for a certain amount of dampness everywhere, but you're from Seattle--you're used to that. Something is different here, though.\n\nYou look around. Trees: check. Birds singing in the trees: Check. Scent of bacon on the wind--Wait, what?\n\nYou take a deep breath. Yep. The scent of bacon is definitely wafting up along the trail from the south. Other trails lead north, east, and west.",
         "descriptionLong": "The scent of bacon is wafting from the south. Trails lead north, east, and west through the woods.",
         "descriptionShort": "You are in the woods.",
         "exits": {
@@ -279,7 +263,7 @@
     },
     {
         "name": "woods4",
-        "descriptionFirst": "A huge cedar tree dominates one side of this part of the forest.",
+        "descriptionFirst": "Most of the woods around here are pretty similar. Trees, undergrowth, birds singing, that sort of thing. This place is a little different, because a HUGE tree dominates the puny, normal-sized trees around it.",
         "descriptionLong": "Something is rustling in the tree above you. Trails lead south and west.",
         "descriptionShort": "You are in the woods.",
         "exits": {
@@ -297,7 +281,7 @@
     },
     {
         "name": "woods5",
-        "descriptionFirst": "",
+        "descriptionFirst": "The woods seem to thin out a bit around here. A glint of water can be seen through the trees to the east. There seems to be a clearing to the north. A trail leads south.",
         "descriptionLong": "A glint of water can be seen through the trees to the east. There seems to be a clearing to the north. A trail leads south.",
         "descriptionShort": "You are in the woods.",
         "exits": {
