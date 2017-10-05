@@ -191,7 +191,7 @@ namespace WhereIsBigfoot
             TypeLine("You have the following inventory: \n");
             foreach (var item in p.Inventory.Values)
             {
-                TypeLine($"{item.DescriptionShort} \n\n");
+                TypeLine($"{item.DescriptionShort}");
             }
 
         }

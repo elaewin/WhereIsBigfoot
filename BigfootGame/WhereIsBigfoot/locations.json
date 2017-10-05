@@ -81,8 +81,8 @@
     },
     {
         "name": "tent",
-        "descriptionFirst": "It's so good to have your own tent rather than sharing one with anybody. Your tent contains your sleeping bag, a change of clothes, a small backpack, and the satisfaction of knowing you can rough it in the great outdoors. Oh, you should probably grab your backpack before you go. And charge your phone.\n\nDarn. You forgot your phone charger. The outdoors are a nightmare.",
-        "descriptionLong": "You're in your tent.",
+        "descriptionFirst": "It's so good to have your own tent rather than sharing one with anybody. Your tent contains your sleeping bag, a change of clothes, a small backpack, and the satisfaction of knowing you can rough it in the great outdoors. Oh, you should probably grab your backpack before you go. And charge your phone.\n...Darn. You forgot your phone charger!\n\nThe outdoors are a nightmare.",
+        "descriptionLong": "Home sweet camping home. Your tent contains a sleeping bag and a change of clothes. There's not much room for anything else.",
         "descriptionShort": "You are in your tent.",
         "exits": {
             "south": "campsite"
