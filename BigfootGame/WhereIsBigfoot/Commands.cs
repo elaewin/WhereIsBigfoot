@@ -15,7 +15,7 @@ namespace WhereIsBigfoot
                 if(!itemToUse.ParseValue.Contains(item))
                 {
                     CannotVerbNoun("use", item);
-                    Console.WriteLine($"That {item} is not in your inventory");
+                    Console.WriteLine($"That {item} is not in your inventory.\n");
                 }
                 else
                 {
@@ -24,7 +24,7 @@ namespace WhereIsBigfoot
                         if (!i.ParseValue.Contains(item))
                         {
                             CannotVerbNoun("use", item);
-                            Console.WriteLine($"That {item} does not exist here");
+                            Console.WriteLine($"That {item} does not exist here.\n");
                         }
                         else
                         {
@@ -36,7 +36,7 @@ namespace WhereIsBigfoot
                         if (!c.ParseValue.Contains(target))
                         {
                             CannotVerbNoun("use", item);
-                            Console.WriteLine($"That {item} does not exist here");
+                            Console.WriteLine($"That {item} does not exist here.\n");
                         }
                         else
                         {
@@ -55,12 +55,14 @@ namespace WhereIsBigfoot
 
             if (currentLocation.Exits.ContainsKey(direction))
             {
-                newLocation = currentLocation.Exits[direction];
+				Console.Title = Console.Title.Remove(16);
+				newLocation = currentLocation.Exits[direction];
                 foreach (Location location in locations)
                 {
                     if (location.Name == newLocation)
                     {
                         p.PlayerLocation = location;
+						Console.Title += $" {location.DescriptionShort}";
 						ShowLocation(location);
                     }
                 }
