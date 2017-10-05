@@ -103,6 +103,7 @@ namespace WhereIsBigfoot
             }
         }
 
+<<<<<<< HEAD
         public void TalkTo(Player p, Character c)
         {
             if(p.PlayerLocation.Characters.ContainsKey(c.Name))
@@ -134,5 +135,48 @@ namespace WhereIsBigfoot
         }
 
 
+=======
+        public void Help(Player p)
+        {
+            Console.WriteLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
+            Console.WriteLine($"ie. get item -or- go north");
+            Console.WriteLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
+        }
+
+        public void Inventory(Player p)
+        {
+            Console.Write("You have the following inventory: ");
+            foreach (var item in p.Inventory.Values)
+            {
+                Console.Write($"{item.DescriptionShort} ");
+            }
+        }
+
+        public void LookAt(Player p, string entry)
+        {
+            foreach (Item item in p.Inventory.Values)
+            {
+                if (item.ParseValue.Contains(entry))
+                {
+                    Console.Write($"{item.DescriptionLong} ");
+                }
+            }
+            foreach (Item item in p.PlayerLocation.Items.Values)
+            {
+                if (item.ParseValue.Contains(entry))
+                {
+                    Console.Write($"{item.DescriptionLong} ");
+                }
+            }
+            foreach (Character character in p.PlayerLocation.Characters.Values)
+            {
+                if (character.ParseValue.Contains(entry))
+                {
+                    Console.Write($"{character.DescriptionLong} ");
+                }
+            }
+        }
+>>>>>>> 0221518482b2705ec8b9a0e7a15b843ddf0ded4a
     }
+
 }

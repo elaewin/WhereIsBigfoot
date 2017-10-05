@@ -7,15 +7,15 @@ namespace WhereIsBigfoot
     public class Item : Asset
     {
         string name, descriptionFirst, descriptionShort, descriptionLong;
-        string[] parseValue;
+        List<string> parseValue;
         Dictionary<string, string> actions;
         string location;
 
         public Item(string name, 
                     string descriptionFirst, 
                     string descriptionShort, 
-                    string descriptionLong, 
-                    string[] parseValue, 
+                    string descriptionLong,
+                    List<string> parseValue, 
                     string target, Dictionary<string, string> actions,
                     string location) : base(name, 
                                             descriptionFirst, 
@@ -31,7 +31,7 @@ namespace WhereIsBigfoot
             this.location = location;
         }
 
-        public string[] ParseValue
+        public List<string> ParseValue
         {
             get => this.parseValue;
             set => this.parseValue = value;

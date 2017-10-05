@@ -70,22 +70,24 @@ namespace WhereIsBigfoot
 			game.characters = JsonConvert.DeserializeObject<List<Character>>(File.ReadAllText(jsonCharacterFile));
 			game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonLocationFile));
 
-			////Testing to make sure the objects are being de-serialized by writing them to the console.
-			//WriteLine("Locations:");
-			//foreach (Location location in game.locations)
-			//    WriteLine(location.Name);
+            ////Testing to make sure the objects are being de-serialized by writing them to the console.
+            //WriteLine("Locations:");
+            //foreach (Location location in game.locations)
+            //    WriteLine(location.Name);
 
-			//WriteLine("\nItems:");
-			//foreach (Item item in game.items)
-			//    WriteLine($"Item {item.Name} is in location {item.Location}");
+            //WriteLine("\nItems:");
+            //foreach (Item item in game.Items) { 
+            //    WriteLine($"Item {item.Name} is in location {item.Location}");
+            //    foreach (string word in item.ParseValue)
+            //        Console.WriteLine(word);
+            //}
+            //WriteLine("\nCharacters:");
+            //foreach (Character character in game.characters)
+            //WriteLine(character.CharacterName);
 
-			//WriteLine("\nCharacters:");
-			//foreach (Character character in game.characters)
-			//WriteLine(character.CharacterName);
-
-			// Go through each item and assign the item to the items dict in each location, 
-			// based on the location property of the item.
-			foreach (Item item in game.items)
+            // Go through each item and assign the item to the items dict in each location, 
+            // based on the location property of the item.
+            foreach (Item item in game.items)
 			{
 				string name = item.Location;
 				string key = item.Name;
