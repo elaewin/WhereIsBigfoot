@@ -9,7 +9,7 @@ using static System.Console;
 
 namespace WhereIsBigfoot
 {
-	class Game
+	public class Game
 	{
 		public List<Location> locations;
 		public List<Item> items;
@@ -125,6 +125,7 @@ namespace WhereIsBigfoot
 
 				if (allowedVerbs.Contains(verb))
 				{
+					// Needs logic on how to use each verb.
 					this.CurrentVerb = verb;
 					WriteLine($"Current Verb: {this.currentVerb}");
 				}

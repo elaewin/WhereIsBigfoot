@@ -16,7 +16,7 @@ namespace WhereIsBigfoot
             this.playerGender = playerGender;
             this.playerHair = playerHair;
             this.playerLocation = playerLocation;
-            this.inventory = inventory;
+            this.inventory = new Dictionary<string, Item>();
         }
 
         public string PlayerName
