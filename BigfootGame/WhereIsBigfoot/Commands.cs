@@ -32,11 +32,7 @@ namespace WhereIsBigfoot
                         {
                             Console.WriteLine(itemToUse.Actions["use"]);
                         }
-                        else
-                        {
-                            CannotVerbNoun("use", item);
-                            TypeLine($"That {item} does not exist here");
-                        }
+                        
                         else
                         {
                             TypeLine(itemToUse.Actions["use"]);
@@ -80,7 +76,6 @@ namespace WhereIsBigfoot
                     TransferItem(p, name);
                     break;
                 }
-            }
             else if (p.PlayerLocation.Characters.ContainsKey(name))
             {
                 if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
@@ -95,6 +90,7 @@ namespace WhereIsBigfoot
             else
             {
                 CannotVerbNoun("get", name);
+            }
             }
         }
 
