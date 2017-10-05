@@ -7,46 +7,21 @@ namespace WhereIsBigfoot
 {
     public class Commands
     {
-        public void Use(Player p, string item, string target)
+        public void Use(Player p, string item)
         {
-            Location location = p.PlayerLocation;
-            foreach(Item itemToUse in p.Inventory.Values)
+            foreach(Item i in p.Inventory.Values)
             {
-                if(!itemToUse.ParseValue.Contains(item))
+                if(i.ParseValue.Contains(item))
+                {
+                    Console.WriteLine(i.Actions["use"]);
+                }
+                else
                 {
                     CannotVerbNoun("use", item);
                     Console.WriteLine($"That {item} is not in your inventory");
                 }
-                else
-                {
-                    foreach (Item i in location.Items.Values)
-                    {
-                        if (!i.ParseValue.Contains(item))
-                        {
-                            CannotVerbNoun("use", item);
-                            Console.WriteLine($"That {item} does not exist here");
-                        }
-                        else
-                        {
-                            Console.WriteLine(itemToUse.Actions["use"]);
-                        }
-                    }
-                    foreach (Character c in location.Characters.Values)
-                    {
-                        if (!c.ParseValue.Contains(target))
-                        {
-                            CannotVerbNoun("use", item);
-                            Console.WriteLine($"That {item} does not exist here");
-                        }
-                        else
-                        {
-                            Console.WriteLine(itemToUse.Actions["use"]);
-                        }
-                    }
-                }
-            }         
+            }
         }
-
 
         public void Go(Player p, string direction, List<Location> locations)
         {
@@ -109,8 +84,7 @@ namespace WhereIsBigfoot
             Console.WriteLine($"You dropped {item} \n");
         }
 
-        // check from to 
-        public void Give(Player p, string item, Dictionary<string, Character> characters)
+        public void Give(Player p, string item, Dictionary<string, Character> characters, string target)
         {
             DanCheck(p, item, characters);
             p.Inventory.Remove(item);

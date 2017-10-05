@@ -148,14 +148,14 @@ namespace WhereIsBigfoot
 							commands.Get(Player, parsed[1]);
 							break;
 						case "give":
-							string giveTarget = GetInput($"Who do you want to give {parsed[1]}?")
+                            string giveTarget = GetInput($"Who do you want to give {parsed[1]}?");
 							commands.Give(Player, parsed[1], Player.PlayerLocation.Characters, giveTarget);
 							break;
 						case "look":
 							commands.Look(Player, parsed[1]);
 							break;
 						case "use":
-							string useTarget = GetInput($"What do you want to use {parsed[1]} on?")
+                            string useTarget = GetInput($"What do you want to use {parsed[1]} on?");
 							commands.Use(Player, parsed[1], useTarget);
 							break;
 						case "talk":
