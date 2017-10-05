@@ -11,10 +11,13 @@ namespace WhereIsBigfoot
 {
 	public class Game
 	{
-		public List<Location> locations;
-		public List<Item> items;
-		public List<Character> characters;
+		private List<Location> locations;
+		private List<Item> items;
+		private List<Character> characters;
 		List<string> allowedVerbs = new List<string>() { "get", "go", "give", "use", "talk", "put", "help", "quit", "inventory" };
+
+		private Player player;
+
 		private string currentVerb;
 		private string currentNoun;
 		private string currentSubject;
@@ -36,6 +39,12 @@ namespace WhereIsBigfoot
 		{
 			get => this.currentSubject;
 			set => this.currentSubject = value;
+		}
+
+		public Player Player
+		{
+			get => this.player;
+			set => this.player = value;
 		}
 
 		// Deserialize JSON from a file. 
@@ -115,7 +124,7 @@ namespace WhereIsBigfoot
 
 		public void ParseInput(string prompt)
 		{
-			string input = GetInput(prompt);
+			string input = GetInput(prompt).ToLower().Trim();
 
 			if (IsValidInput(input))
 			{
@@ -175,13 +184,31 @@ namespace WhereIsBigfoot
 			Console.CursorVisible = true;
 		}
 
+		public string[] GetPlayerDetails()
+		{
+			string name = GetInput("What is your name? ");
+			string gender = GetInput("What gender are you? ");
+			string hair = GetInput("Okay, now just so we know, what color is your hair? ");
+			string[] deets = new string[3] { name, gender, hair};
+			return deets;
+		}
+
 		static void Main(string[] args)
 		{
 
 			Game game = new Game();
 			game.FormatConsole();
-
 			game.LoadData(game);
+
+			// create Player instance
+			string[] playerDetails = game.GetPlayerDetails();
+			Player newPlayer = new Player(playerDetails[0], playerDetails[1], playerDetails[2]);
+
+			newPlayer.PlayerLocation = // tent;
+
+			// Assign Player instance to game
+			game.Player = newPlayer;
+			
 
 			game.ParseInput("> ");
 
@@ -197,7 +224,7 @@ namespace WhereIsBigfoot
 		{
 			Console.Write(prompt);
 			string input = ReadLine();
-			return input.ToLower().Trim();
+			return input;
 		}
 
 	}
