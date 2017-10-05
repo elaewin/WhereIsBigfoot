@@ -87,6 +87,7 @@ namespace WhereIsBigfoot
             }
         }
 
+        // add text 
         public void Drop(Player p, string item)
         {
             p.PlayerLocation.Items.Add(item, p.Inventory[item]);
@@ -94,13 +95,14 @@ namespace WhereIsBigfoot
             Console.WriteLine($"You dropped, {item}");
         }
 
+        // add text 
         public void Give(Player p, string item, Dictionary<string, Character> characters)
         {
             DanCheck(p, item, characters);
             p.Inventory.Remove(item);
         }
 
-
+        // add text
         private void TransferItem(Player p, string item)
         {
             Item itemToTransfer = p.PlayerLocation.Items[item];
@@ -204,6 +206,4 @@ namespace WhereIsBigfoot
             Console.WriteLine($"You can't {verb} {noun}");
         }
     }
-}
-
 }
