@@ -100,6 +100,7 @@ namespace WhereIsBigfoot
             p.Inventory.Remove(item);
         }
 
+
         private void TransferItem(Player p, string item)
         {
             Item itemToTransfer = p.PlayerLocation.Items[item];
