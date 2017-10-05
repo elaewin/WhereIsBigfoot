@@ -1,8 +1,8 @@
 [
     {
         "name": "campsite",
-        "descriptionFirst": "You are camped in a small clearing in the middle of the Mount Rainier National Forest. Second growth cedars tower above you, and heavy underbrush surrounds your campsite on all sides. On the north side of the campsite is your tent. \n\nYou look around and realize that your lantern is missing! You're sure that you left it out here last night, but now you don't see it anywhere. \n\nOh well, it was out of oil anyway, and you're pretty sure that the refill bottle is sitting on your kitchen counter where you left it after forgetting to pack it. \n\nTrails lead off through the underbrush to the south, east, and west.",
-        "descriptionLong": "Second growth cedars tower above you, and heavy underbrush surrounds your campsite on all sides. On the north side of the campsite is your tent. Trails lead off through the underbrush to the south, east, and west.",
+        "descriptionFirst": "You are camped in a small clearing in the middle of the Mount Rainier National Forest. Second growth cedars tower above you, and heavy underbrush surrounds your campsite on all sides. On the north side of the campsite is your tent. \n\nYou look around and realize that your lantern is missing! You're sure that you left it out here last night, but now you don't see it anywhere. \n\nOh well, it was out of oil anyway, and you're pretty sure that the refill bottle is sitting on your kitchen counter where you left it after forgetting to pack it. \n\nTrails lead off through the underbrush to the east, and west.",
+        "descriptionLong": "Second growth cedars tower above you, and heavy underbrush surrounds your campsite on all sides. On the north side of the campsite is your tent. Trails lead off through the underbrush to the east, and west.",
         "descriptionShort": "You are at your campsite.",
         "exits": {
             "north": "tent",
