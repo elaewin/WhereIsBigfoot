@@ -27,7 +27,7 @@ namespace WhereIsBigfoot
         }
 
         public void Go(Player p, string direction, List<Location> locations)
-        { 
+        {
             Location currentLocation = p.PlayerLocation;
             string newLocation;
 
@@ -83,7 +83,7 @@ namespace WhereIsBigfoot
             Console.WriteLine(itemToTransfer.Actions["get"]);
         }
 
-       private void DanCheck(Player p, string item, List<Character> characters)
+        private void DanCheck(Player p, string item, List<Character> characters)
         {
             if (p.PlayerLocation.Name == "dan")
             {
