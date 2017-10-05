@@ -7,27 +7,29 @@ namespace WhereIsBigfoot
 {
     class Commands
     {
-        // talk to - Rami
-        // put - two items interacting with each other
-        // help 
-        // inventory
-        // look - returns long description
-
-
         // TODO: check if action is available 
+
         // TODO: Write Go Method
         // TODO: Use actions text 
+        // TODO: parse value
 
         public void Use(Player p, string item)
         {
             if (p.Inventory.ContainsKey(item))
             {
                 Item itemToUse = p.Inventory[item];
-                Console.WriteLine(itemToUse.Actions["use"]);
+                if(itemToUse.Actions.ContainsKey("use"))
+                {
+                    Console.WriteLine(itemToUse.Actions["use"]);
+                }
+                else
+                {
+                    CannotVerbNoun("use", item);
+                }
             }
             else
             {
-                Console.WriteLine($"You do not have {item} in your inventory. Please acquire {item}");
+                CannotVerbNoun("use", item);
             }
         }
 
@@ -49,7 +51,7 @@ namespace WhereIsBigfoot
             }
             else
             {
-                Console.WriteLine("You run into an impenetrable barrier and must return.");
+                CannotVerbNoun("go", direction);
             }
 
         }
@@ -66,21 +68,24 @@ namespace WhereIsBigfoot
                 }
                 else
                 {
-                    CannotGet(name);
+                    CannotVerbNoun("get", name);
                 }
             }
             else if(p.PlayerLocation.Characters.ContainsKey(name))
             {
                 if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
                 {
-                    Console.WriteLine(p.PlayerLocation.Items[name].Actions["get"]);
+                    Console.WriteLine(p.PlayerLocation.Characters[name].Actions["get"]);
                 }
                 else
                 {
-                    CannotGet(name);
+                    CannotVerbNoun("get", name);
                 }
             }
-            
+            else
+            {
+                CannotVerbNoun("get", name);
+            }
         }
 
         public void Drop(Player p, string item)
@@ -94,6 +99,22 @@ namespace WhereIsBigfoot
         {
             DanCheck(p, item, characters);
             p.Inventory.Remove(item);
+        }
+
+        public void Help(Player p)
+        {
+            Console.WriteLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
+            Console.WriteLine($"ie. get item -or- go north");
+            Console.WriteLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
+        }
+
+        public void Inventory(Player p)
+        {
+            Console.Write("You have the following inventory: ");
+            foreach (var item in p.Inventory.Values)
+            {
+                Console.Write($"{item.DescriptionShort}");
+            }
         }
 
         private void TransferItem(Player p, string item)
@@ -124,26 +145,11 @@ namespace WhereIsBigfoot
             }
         }
 
-        private void CannotGet(string name)
+        private void CannotVerbNoun(string verb, string noun)
         {
-          Console.WriteLine($"You can't get {name}");
+          Console.WriteLine($"You can't {verb} {noun}");
         }
-
-        public void Help(Player p)
-        {
-            Console.WriteLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
-            Console.WriteLine($"ie. get item -or- go north");
-            Console.WriteLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
-        }
-
-        public void Inventory(Player p)
-        {
-            Console.Write("You have the following inventory: ");
-            foreach (var item in p.Inventory.Values)
-            {
-                Console.Write($"{item.DescriptionShort} ");
-            }
-        }
+        
     }
 
 }
