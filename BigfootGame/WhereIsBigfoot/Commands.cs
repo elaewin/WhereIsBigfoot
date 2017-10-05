@@ -102,9 +102,15 @@ namespace WhereIsBigfoot
 
         public void Help(Player p)
         {
-            Console.WriteLine($"Hey {p.PlayerHair}ie, I dont freaking understand that! Use the following 2 word command format: ");
-            Console.WriteLine($"ie. grab item -or- head north");
-            Console.WriteLine($"Possible commands: get, go, give, use, talk, put, help, quit, inventory");
+            Console.WriteLine($"Hey {p.PlayerHair}ie, I dont freaking understand that! Use a 2 word command format: ");
+            Console.WriteLine($"ie. grab item -or- go north");
+            Console.WriteLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
+            if (p.Inventory != null)
+                Console.Write("You have the following inventory: ");
+                foreach (var value in p.Inventory)
+                {
+                    Console.Write($"{value} ");
+                }
         }
     }
 }
