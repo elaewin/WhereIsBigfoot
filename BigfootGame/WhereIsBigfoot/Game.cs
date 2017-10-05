@@ -120,7 +120,6 @@ namespace WhereIsBigfoot
 		public void ParseInput(string prompt)
 		{
 			string input = GetInput(prompt).ToLower().Trim();
-			Console.WriteLine(input);
 
 			if (IsValidInput(input) && (input != "") && input != null)
 			{
