@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace WhereIsBigfoot
 {
@@ -30,10 +31,12 @@ namespace WhereIsBigfoot
             this.descriptionLong = descriptionLong;
             this.descriptionShort = descriptionShort;
             this.objects = objects;
+            this.exits = exits;
             this.items = new Dictionary<string, Item>();
             this.characters = new Dictionary<string, Character>();
         }
 
+        //[JsonConverter(typeof(Dictionary<string, string>))]
         public Dictionary<string, string> Exits
         {
             get => this.exits;

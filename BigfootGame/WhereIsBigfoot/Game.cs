@@ -27,17 +27,17 @@ namespace WhereIsBigfoot
             game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonLocationFile));
 
             //Testing to make sure the objects are being de-serialized by writing them to the console.
-            WriteLine("Locations:");
-            foreach (Location location in game.locations)
-                WriteLine(location.Name);
+            //WriteLine("Locations:");
+            //foreach (Location location in game.locations)
+            //    WriteLine(location.Name);
             
-            WriteLine("\nItems:");
-            foreach (Item item in game.items)
-                WriteLine($"Item {item.Name} is in location {item.Location}");
+            //WriteLine("\nItems:");
+            //foreach (Item item in game.items)
+            //    WriteLine($"Item {item.Name} is in location {item.Location}");
             
-            WriteLine("\nCharacters:");
-            foreach (Character character in game.characters)
-                WriteLine(character.CharacterName);
+            //WriteLine("\nCharacters:");
+            //foreach (Character character in game.characters)
+                //WriteLine(character.CharacterName);
 
             // Go through each item and assign the item to the items dict in each location, 
             // based on the location property of the item.
@@ -53,12 +53,11 @@ namespace WhereIsBigfoot
                 }
             }
 
-            // Test assignment of items by count of the items dict on the location.
-            WriteLine("\nLocation Items count:");
-            foreach (Location location in game.locations)
-                WriteLine($"Location: {location.Name}, # of items: {location.Items.Count}");
-
-
+            //// Test assignment of items by count of the items dict on the location.
+            //WriteLine("\nLocation Items count:");
+            //foreach (Location location in game.locations)
+                //WriteLine($"Location: {location.Name}, # of items: {location.Items.Count}");
+            
             // Go through each character and assign the character to the character dict in each location, 
             // based on the location property of the characger.
             foreach (Character character in game.characters)
@@ -77,14 +76,14 @@ namespace WhereIsBigfoot
             }
 
             // Test assignment of characters by count of the characters dict on the location.
-            WriteLine("\nLocation Characters count:");
-            foreach (Location location in game.locations)
-                WriteLine($"Location: {location.Name}, # of items: {location.Characters.Count}");
+            //WriteLine("\nLocation Characters count:");
+            //foreach (Location location in game.locations)
+                //WriteLine($"Location: {location.Name}, # of items: {location.Characters.Count}");
 
             // Test existence of exits dict by count of the characters array on the location.
-            WriteLine("\nLocation Exits count:");
-            foreach (Location location in game.locations)
-                WriteLine($"Location has {location.Exits.Count}");
+            //WriteLine("\nLocation Exits count:");
+            //foreach (Location location in game.locations)
+                //WriteLine($"Location has {location.Exits.Count}");
 
         }
 
