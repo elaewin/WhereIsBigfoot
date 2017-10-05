@@ -74,12 +74,12 @@
             "dan's book"
         ],
         "descriptionFirst": "There is a book lying next to your sleeping bag.",
-        "descriptionShort": "Bigfoot Legends of the Pacific Northwest",
+        "descriptionShort": "A beat-up, hardcover book",
         "descriptionLong": "The book is a rather beat up old hardcover book titled \"Bigfoot Legends of the Pacific Northwest\". Dan loaned it to you ages ago.",
         "location": "tent",
         "target": "danCamp",
         "actions": {
-            "get": "You pick up the book.",
+            "get": "You pick up the bettered copy of 'Bigfoot Legends of the Pacific Northwest'.",
             "put": "",
             "drop": "You drop the book. Shame on you, treating a book that way.",
             "use": "You flip through the book. It's got a lot of good information about Bigfoot. For instance, did you know that many scientists believe that Bigfoot is a vegetarian? True fact.",
