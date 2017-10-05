@@ -14,7 +14,8 @@ namespace WhereIsBigfoot
 		private List<Location> locations;
 		private List<Item> items;
 		private List<Character> characters;
-		List<string> allowedVerbs = new List<string>() { "get", "go", "give", "use", "talk", "put", "help", "quit", "inventory" };
+		List<string> allowedVerbs = new List<string>() { "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory" };
+		Commands commands = new Commands();
 
 		private Player player;
 
@@ -142,40 +143,72 @@ namespace WhereIsBigfoot
 
 			if (IsValidInput(input))
 			{
-				string[] split = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
+				string[] parsed = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
 
-				string verb = split[0];
+				string verb = parsed[0];
+				if (parsed.Length == 1)
+					parsed = new string[2] { parsed[0], "none" };
 
 				if (allowedVerbs.Contains(verb))
 				{
 					// Needs logic on how to use each verb.
-					this.CurrentVerb = verb;
-					WriteLine($"Current Verb: {this.currentVerb}");
+					switch (verb)
+					{
+						case "go":
+							commands.Go(Player, parsed[1], this.Locations);
+							break;
+						case "get":
+							commands.Get(Player, parsed[1]);
+							break;
+						case "give":
+							commands.Give(Player, parsed[1], Player.PlayerLocation.Characters);
+							break;
+						case "look":
+							commands.Look(Player, parsed[1]);
+							break;
+						case "use":
+							commands.Use(Player, parsed[1]);
+							break;
+						//case "talk":
+						//	commands.Talk(Player, parsed[1]);
+						//	break;
+						//case "put":
+						//	commands.Put(Player, parsed[1]);
+						//	break;
+						case "help":
+							commands.Help(Player);
+							break;
+						case "inventory":
+							commands.Inventory(Player);
+							break;
+						case "quit":
+							this.running = false;
+							break;
+						default:
+							commands.Help(Player);
+							break;
+					}
 				}
 				else
 				{
 					// call help method?
 					WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\".");
-					ParseInput(prompt);
 				}
-				if (split.Length == 2)
+				if (parsed.Length == 2)
 				{
-					this.CurrentNoun = split[1];
+					this.CurrentNoun = parsed[1];
 					WriteLine($"Current Noun: {this.currentNoun}");
 				}
-				if (verb == "quit")
-				{
-					this.running = false;
-				}
+				if (parsed[0] != "look")
+					WriteLine($"location from parse method: {this.Player.PlayerLocation.DescriptionShort}");
 			}
 			else
 			{
 				WriteLine("I'm afraid I didn't understand that.");
-				GetInput(prompt);
 			}
 		}
 
-        // TODO: Execute Command Method 
+		// TODO: Execute Command Method 
 
 		// Console formatting
 		public void FormatConsole()
@@ -189,7 +222,7 @@ namespace WhereIsBigfoot
 			string name = GetInput("What is your name? ");
 			string gender = GetInput("What gender are you? ");
 			string hair = GetInput("Okay, now just so we know, what color is your hair? ");
-			string[] deets = new string[3] { name, gender, hair};
+			string[] deets = new string[3] { name, gender, hair };
 			return deets;
 		}
 
@@ -217,11 +250,12 @@ namespace WhereIsBigfoot
 
 			// Assign Player instance to game
 			game.Player = newPlayer;
-			
-			game.ParseInput("> ");
 
-            
+			do
+			{
+				game.ParseInput("> ");
 
+			} while (game.running == true);
 		}
 
 		public static bool IsValidInput(string str)
