@@ -144,11 +144,80 @@ namespace WhereIsBigfoot
                 }
             }
         }
-
-        private void CannotVerbNoun(string verb, string noun)
+        public void TalkTo(Player p, Character c)
         {
+            if (p.PlayerLocation.Characters.ContainsKey(c.Name))
+            {
+                Console.WriteLine(c.Actions["talk"]);
+            }
+            else
+            {
+                Console.WriteLine("This character does not exist in this location.");
+            }
+        }
+
+        public void Put(Player p, List<Item> items)
+        {
+            if (p.Inventory.ContainsKey("lantern") && p.Inventory.ContainsKey("grease"))
+            {
+                Console.WriteLine("Now your lantern is full and you can use it to go in the cave.");
+                p.Inventory.Remove("lantern");
+                foreach (Item i in items)
+                {
+                    if (i.Name == "filledLantern")
+                        p.Inventory.Add("filledLantern", i);
+                }
+            }
+            else
+            {
+                Console.WriteLine("You need to have the lantern and the grease in your inventory before you can use it.");
+            }
+        }
+
+        
           Console.WriteLine($"You can't {verb} {noun}");
         }
+
+    public void Help(Player p)
+    {
+        Console.WriteLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
+        Console.WriteLine($"ie. get item -or- go north");
+        Console.WriteLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
     }
+
+    public void Inventory(Player p)
+    {
+        Console.Write("You have the following inventory: ");
+        foreach (var item in p.Inventory.Values)
+        {
+            Console.Write($"{item.DescriptionShort} ");
+        }
+    }
+
+    public void LookAt(Player p, string entry)
+    {
+        foreach (Item item in p.Inventory.Values)
+        {
+            if (item.ParseValue.Contains(entry))
+            {
+                Console.Write($"{item.DescriptionLong} ");
+            }
+        }
+        foreach (Item item in p.PlayerLocation.Items.Values)
+        {
+            if (item.ParseValue.Contains(entry))
+            {
+                Console.Write($"{item.DescriptionLong} ");
+            }
+        }
+        foreach (Character character in p.PlayerLocation.Characters.Values)
+        {
+            if (character.ParseValue.Contains(entry))
+            {
+                Console.Write($"{character.DescriptionLong} ");
+            }
+        }
+    }
+}
 
 }
