@@ -11,6 +11,7 @@
         "descriptionFirst": "Your backpack is lying near the entrance to the tent.",
         "descriptionShort": "Backpack",
         "descriptionLong": "A small camping backpack that you brought along to hold the various necessities of bigfoot hunting. Or, you know, other stuff.",
+        "location": "tent",
         "target": "back",
         "actions": {
             "get": "You grab your backpack and sling it over your shoulders. ",
@@ -30,6 +31,7 @@
         "descriptionFirst": "",
         "descriptionShort": "bacon",
         "descriptionLong": "The bacon looks chock-full of deliciousness. It's been fried to perfection.",
+        "location": "danCooking",
         "target": "octopus",
         "actions": {
             "get": "You grab a few pieces of bacon, wrap them in a handy paper towel, and stick them in your pocket.",
@@ -51,6 +53,7 @@
         "descriptionFirst": "A huge mass of blackberries have grown up and around the stump on the west end of the clearing.",
         "descriptionShort": "",
         "descriptionLong": "The blackberry vines are covered with huge, purplish-black berries. They look delicious.",
+        "location": "",
         "target": "emptyCan",
         "actions": {
             "get": "You pick a handful of ripe blackberries, but realize that if you put them in your pack, they'll just get squished and make a huge, sticky mess. So you decide to hold them in your stomach. \n\nGet it? You eat the blackberries. They're delicious!",
@@ -73,7 +76,8 @@
         "descriptionFirst": "There is a book lying next to your sleeping bag.",
         "descriptionShort": "Bigfoot Legends of the Pacific Northwest",
         "descriptionLong": "The book is a rather beat up old hardcover book titled \"Bigfoot Legends of the Pacific Northwest\". Dan loaned it to you ages ago.",
-        "target": "dan",
+        "location": "tent",
+        "target": "danCooking",
         "actions": {
             "get": "You pick up the book.",
             "put": "",
@@ -98,6 +102,7 @@
         "descriptionFirst": "",
         "descriptionShort": "A tin can full of blackberries",
         "descriptionLong": "You look at the tin can full of blackberries and admire your cleverness all over again.",
+        "location": "",
         "target": "bigfoot",
         "actions": {
             "get": "You pick up the tin can full of blackberries.",
@@ -118,6 +123,7 @@
         "descriptionFirst": "",
         "descriptionShort": "A dead cell phone",
         "descriptionLong": "Yep, it's your cell phone. Its battery sure is dead.",
+        "location": "tent",
         "target": "",
         "actions": {
             "get": "You already have your cell phone.",
@@ -140,6 +146,8 @@
         "descriptionFirst": "",
         "descriptionShort": "An empty tin can",
         "descriptionLong": "This tin can formerly held the grease that Dan poured off of his bacon. Now it's empty.",
+        "location": "",
+        "target": "",
         "actions": {
             "get": "You pick up the tin can.",
             "put": "You put the tin can on the ground.",
@@ -162,6 +170,7 @@
         "descriptionFirst": "",
         "descriptionShort": "Lantern (filled with oil)",
         "descriptionLong": "The lantern is a small, oil burning lantern that you bought to take on camping trips a few years ago. It smells vaguely of bacon grease, and sloshes gently when you move it.",
+        "location": "",
         "target": "",
         "actions": {
             "get": "You pick up your lantern.",
@@ -189,8 +198,7 @@
         "descriptionFirst": "",
         "descriptionShort": "A lit lantern",
         "descriptionLong": "Your camping lantern is lit and casting a bright glow all around you.",
-        "flavorText1": "",
-        "flavorText2": "You see a brightly glowing lantern here.",
+        "location": "",
         "target": "",
         "actions": {
             "get": "You pick up the brightly glowing lantern.",
@@ -217,6 +225,7 @@
         "descriptionFirst": "As you watch, Dan carefully pours hot grease out of the frying pan and into the can. Dan looks up at you and grins. \"Hey, <name>, there you are!\" he says. \"Grab some bacon.\" ",
         "descriptionShort": "A tin can half full of bacon grease",
         "descriptionLong": "The tin can is full of bacon grease. At the top of the can, congealed fat has formed a solid mass, sealing it like a gross, bacon flecked cork.",
+        "location": "danCooking",
         "target": "",
         "actions": {
             "get": "You casually reach out and snag the tin of bacon grease. It's, well, greasy. Dan is too engrossed in his book to notice.\n",
@@ -240,6 +249,7 @@
         "descriptionFirst": "\n\nThe tree octopus watches you climb. You're not sure if it's impressed. Now that you're closer, you see its arms wrapped around a lantern. How did it get the lantern up here? It has eight arms'maybe that should be a clue about how it does anything. You've only got two arms and you can barely get around at all.\n\nThe tree octopus seems kind of possessive of the lantern. You weren't even that possessive of your favorite teddy bear when you were four. Then again, you only had two arms to hold it.\n",
         "descriptionShort": "Lantern",
         "descriptionLong": "The lantern is a small, oil burning lantern that you bought to take on camping trips a few years ago.",
+        "location": "tree",
         "target": "",
         "actions": {
             "get": "You pick up your lantern.",
@@ -262,6 +272,7 @@
         "descriptionFirst": "",
         "descriptionShort": "box of matches",
         "descriptionLong": "The box of matches is a small box of strike anywhere matches. You glance inside briefly and see plenty of matches.",
+        "location": "campsite",
         "target": "lantern",
         "actions": {
             "get": "You pick up the box of matches.",
@@ -285,6 +296,7 @@
         "descriptionFirst": "A walking stick is tangled in the brambles.",
         "descriptionShort": "walking stick",
         "descriptionLong": "The walking stick is sturdy and interestingly gnarled. It's made of some kind of wood. You don't know enough about different types of wood to identify it, though.",
+        "location": "woods2",
         "target": "octopus",
         "actions": {
             "get": "You reach gingerly into the thick brambles and manage to grab the stick, at the cost of some nasty scratches from the blackberry thorns.",
@@ -306,6 +318,7 @@
         ],
         "descriptionFirst": "",
         "descriptionLong": "At first it's all just branches and leaves. Leaves? Are those called leaves? They're kind of needle-y. You could look up the proper term if your cell phone wasn't dead. You almost give up squinting through the branches before you see a NORTHWEST TREE OCTOPUS!\n\nYou pull out your cell phone to take a picture...only to remember you can't, because the battery is dead. Nature is the worst.\n\nThe tree octopus seems to have its arms wrapped around something. You can't tell what it is from here. You could probably climb up there and get a closer look.",
+        "location": "woods4",
         "target": "",
         "actions": {
             "get": "You can't possibly expect to take this HUGE TREE.",

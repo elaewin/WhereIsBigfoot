@@ -29,6 +29,7 @@ namespace WhereIsBigfoot
             this.descriptionLong = descriptionLong;
             this.descriptionShort = descriptionShort;
             this.objects = objects;
+            this.items = new Dictionary<string, Item>();
         }
 
         public Dictionary<string, string> Exits
