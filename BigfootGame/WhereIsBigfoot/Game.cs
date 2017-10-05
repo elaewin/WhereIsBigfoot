@@ -120,7 +120,7 @@ namespace WhereIsBigfoot
 		public void ParseInput(string prompt)
 		{
 			string input = GetInput(prompt).ToLower().Trim();
-			commands.TypeLine(input);
+			
 
 			if (IsValidInput(input) && (input != "") && input != null)
 			{
@@ -147,22 +147,22 @@ namespace WhereIsBigfoot
 						case "get":
 							commands.Get(Player, parsed[1]);
 							break;
-						//case "give":
-                           // string giveTarget = GetInput($"Who do you want to give {parsed[1]}?");
-							//commands.Give(Player, parsed[1], Player.PlayerLocation.Characters, giveTarget);
-							//break;
-						case "look":
+                        case "give":
+                            string giveTarget = GetInput($"Who do you want to give {parsed[1]}?");
+                            commands.Give(Player, parsed[1], Player.PlayerLocation.Characters, giveTarget);
+                            break;
+                        case "look":
 							commands.Look(Player, parsed[1]);
 							break;
 						case "use":
                             string useTarget = GetInput($"What do you want to use {parsed[1]} on?");
 							commands.Use(Player, parsed[1], useTarget);
 							break;
-						//case "talk":
-							//string getTarget = GetInput($"Who do you want to talk to?");
-							//commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters, getTarget);
-							//break;
-						case "put":
+                        case "talk":
+                            string getTarget = GetInput($"Who do you want to talk to?");
+                            commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters, getTarget);
+                            break;
+                        case "put":
 							commands.Put(Player, parsed[1], items);
 							break;
 						case "help":
