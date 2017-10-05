@@ -118,6 +118,31 @@ namespace WhereIsBigfoot
                 Console.Write($"{item.DescriptionShort} ");
             }
         }
+
+        public void LookAt(Player p, string entry)
+        {
+            foreach (Item item in p.Inventory.Values)
+            {
+                if (item.ParseValue.Contains(entry))
+                {
+                    Console.Write($"{item.DescriptionLong} ");
+                }
+            }
+            foreach (Item item in p.PlayerLocation.Items.Values)
+            {
+                if (item.ParseValue.Contains(entry))
+                {
+                    Console.Write($"{item.DescriptionLong} ");
+                }
+            }
+            foreach (Character character in p.PlayerLocation.Characters.Values)
+            {
+                if (character.ParseValue.Contains(entry))
+                {
+                    Console.Write($"{character.DescriptionLong} ");
+                }
+            }
+        }
     }
 
 }
