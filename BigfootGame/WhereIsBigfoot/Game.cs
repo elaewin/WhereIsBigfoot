@@ -14,7 +14,7 @@ namespace WhereIsBigfoot
 		private List<Location> locations;
 		private List<Item> items;
 		private List<Character> characters;
-		List<string> allowedVerbs = new List<string>() { "get", "go", "give", "use", "talk", "put", "help", "quit", "inventory" };
+		List<string> allowedVerbs = new List<string>() { "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory" };
 
 		private Player player;
 
@@ -134,15 +134,15 @@ namespace WhereIsBigfoot
 
 		}
 
-		public void ParseInput(string prompt)
+		public string[] ParseInput(string prompt)
 		{
 			string input = GetInput(prompt).ToLower().Trim();
 
 			if (IsValidInput(input))
 			{
-				string[] split = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
+				string[] parsed = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
 
-				string verb = split[0];
+				string verb = parsed[0];
 
 				if (allowedVerbs.Contains(verb))
 				{
@@ -156,15 +156,12 @@ namespace WhereIsBigfoot
 					WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\".");
 					ParseInput(prompt);
 				}
-				if (split.Length == 2)
+				if (parsed.Length == 2)
 				{
-					this.CurrentNoun = split[1];
+					this.CurrentNoun = parsed[1];
 					WriteLine($"Current Noun: {this.currentNoun}");
 				}
-				if (verb == "quit")
-				{
-					this.running = false;
-				}
+				return parsed;
 			}
 			else
 			{
