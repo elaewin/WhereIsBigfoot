@@ -20,13 +20,13 @@ namespace WhereIsBigfoot
             if (currentLocation.Exits.ContainsKey(direction))
             {
                 newLocation = currentLocation.Exits[direction];
-                //foreach (Location location in locations)
-                //{
-                //    if (location.Name == newLocation)
-                //    {
-                //        p.PlayerLocation = location;
-                //    }
-                //}
+                foreach (Location location in locations)
+                {
+                    if (location.Name == newLocation)
+                    {
+                        p.PlayerLocation = location;
+                    }
+                }
             }
             else
             {
@@ -79,11 +79,6 @@ namespace WhereIsBigfoot
         //        }
         //    }
         //}
-
-        private void ChangeLocation(Player p, Asset obj)
-        {
-            p.PlayerLocation = (Location)obj;
-        }
 
         //private void DanCheck(Player p, string item, List<Character> characters)
         //{
