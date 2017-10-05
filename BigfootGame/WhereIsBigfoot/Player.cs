@@ -4,18 +4,17 @@ using System.Text;
 
 namespace WhereIsBigfoot
 {
-    class Player
+    public class Player
     {
         string playerName, playerGender, playerHair;
         Location playerLocation;
         Dictionary<string, Item> inventory;
 
-        public Player(string playerName, string playerGender, string playerHair, Location playerLocation, Dictionary<string, Item> inventory)
+        public Player(string playerName, string playerGender, string playerHair)
         {
             this.playerName = playerName;
             this.playerGender = playerGender;
             this.playerHair = playerHair;
-            this.playerLocation = playerLocation;
             this.inventory = new Dictionary<string, Item>();
         }
 

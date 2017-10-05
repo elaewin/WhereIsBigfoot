@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace WhereIsBigfoot
 {
-    class Location : Asset
+    public class Location : Asset
     {
         string name, descriptionFirst, descriptionLong, descriptionShort;
         Dictionary<string, string> exits;

@@ -47,6 +47,18 @@ namespace WhereIsBigfoot
 			set => this.player = value;
 		}
 
+		public List<Location> Locations
+		{
+			get => this.locations;
+			set => this.locations = value;
+		}
+
+		public List<Item> Items
+		{
+			get => this.items;
+			set => this.items = value;
+		}
+
 		// Deserialize JSON from a file. 
 		public void LoadData(Game game)
 		{
@@ -204,7 +216,16 @@ namespace WhereIsBigfoot
 			string[] playerDetails = game.GetPlayerDetails();
 			Player newPlayer = new Player(playerDetails[0], playerDetails[1], playerDetails[2]);
 
-			newPlayer.PlayerLocation = // tent;
+			foreach (Location location in game.Locations)
+			{
+				if (location.Name == "tent")
+					newPlayer.PlayerLocation = location;
+			}
+			foreach (Item item in game.Items)
+			{
+				if (item.Name == "cellPhone")
+					newPlayer.Inventory.Add("cellPhone", item);
+			}
 
 			// Assign Player instance to game
 			game.Player = newPlayer;
