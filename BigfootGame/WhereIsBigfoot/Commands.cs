@@ -5,7 +5,7 @@ using System.Data;
 
 namespace WhereIsBigfoot
 {
-    class Commands
+    public class Commands
     {
         // talk to
         // put - two items interacting with each other
@@ -22,7 +22,7 @@ namespace WhereIsBigfoot
             }
             else
             {
-                Console.WriteLine($"You do not have {item} in your inventory. Please acquire {item}");
+                Console.WriteLine($"You do not have {item} in your inventory. You'll have to try something else. \n");
             }
         }
 
@@ -39,12 +39,13 @@ namespace WhereIsBigfoot
                     if (location.Name == newLocation)
                     {
                         p.PlayerLocation = location;
+						ShowLocation(location);
                     }
                 }
             }
             else
             {
-                Console.WriteLine("You run into an impenetrable barrier and must return.");
+                Console.WriteLine("You run into an impenetrable barrier and must return. \n");
             }
 
         }
@@ -58,7 +59,7 @@ namespace WhereIsBigfoot
             }
             else
             {
-                Console.WriteLine($"There is no {item}");
+                Console.WriteLine($"There is no {item} \n");
             }
         }
 
@@ -66,10 +67,10 @@ namespace WhereIsBigfoot
         {
             p.PlayerLocation.Items.Add(item, p.Inventory[item]);
             p.Inventory.Remove(item);
-            Console.WriteLine($"You dropped, {item}");
+            Console.WriteLine($"You dropped {item} \n");
         }
 
-        public void Give(Player p, string item, List<Character> characters)
+        public void Give(Player p, string item, Dictionary<string, Character> characters)
         {
             DanCheck(p, item, characters);
             p.Inventory.Remove(item);
@@ -83,14 +84,14 @@ namespace WhereIsBigfoot
             Console.WriteLine(itemToTransfer.Actions["get"]);
         }
 
-        private void DanCheck(Player p, string item, List<Character> characters)
+        private void DanCheck(Player p, string item, Dictionary<string, Character> characters)
         {
-            if (p.PlayerLocation.Name == "dan")
+            if (p.PlayerLocation.Name == "danCamp")
             {
                 if (item == "book" && p.PlayerLocation.Characters.ContainsKey("danCooking"))
                 {
                     TransferItem(p, item);
-                    foreach (Character c in characters)
+                    foreach (Character c in characters.Values)
                     {
                         if (c.Name == "danReading")
                         {
@@ -112,37 +113,76 @@ namespace WhereIsBigfoot
 
         public void Inventory(Player p)
         {
-            Console.Write("You have the following inventory: ");
+            Console.WriteLine("You have the following inventory: \n");
             foreach (var item in p.Inventory.Values)
             {
-                Console.Write($"{item.DescriptionShort} ");
+                Console.WriteLine($"{item.DescriptionShort} \n\n");
             }
+
         }
 
-        public void LookAt(Player p, string entry)
+        public void Look(Player p, string entry)
         {
             foreach (Item item in p.Inventory.Values)
             {
                 if (item.ParseValue.Contains(entry))
                 {
-                    Console.Write($"{item.DescriptionLong} ");
+                    Console.WriteLine($"{item.DescriptionLong} \n");
+					return;
                 }
             }
             foreach (Item item in p.PlayerLocation.Items.Values)
             {
                 if (item.ParseValue.Contains(entry))
                 {
-                    Console.Write($"{item.DescriptionLong} ");
+                    Console.WriteLine($"{item.DescriptionLong} \n");
+					return;
                 }
             }
             foreach (Character character in p.PlayerLocation.Characters.Values)
             {
                 if (character.ParseValue.Contains(entry))
                 {
-                    Console.Write($"{character.DescriptionLong} ");
+                    Console.WriteLine($"{character.DescriptionLong} \n");
+					return;
                 }
             }
+			if (entry == "none")
+			{
+				Console.WriteLine($"{p.PlayerLocation.DescriptionLong} \n");
+				return;
+			}
+			Console.WriteLine($"I don't see {entry} here. \n");
         }
+
+		public void ShowLocation(Location location)
+		{
+			if (location.Visited == false)
+			{
+				Console.WriteLine($"{location.DescriptionFirst}");
+
+				foreach (Character character in location.Characters.Values)
+					Console.WriteLine($"{character.DescriptionFirst}");
+
+				foreach (Item item in location.Items.Values)
+					Console.WriteLine($"{item.DescriptionFirst}");
+
+				location.Visited = true;
+			}
+			else
+			{
+				Console.WriteLine($"{location.DescriptionShort}");
+
+				foreach (Character character in location.Characters.Values)
+					Console.WriteLine($"{character.DescriptionShort}");
+
+				foreach (Item item in location.Items.Values)
+					Console.WriteLine($"{item.DescriptionShort}");
+			}
+
+
+		}
+		}
     }
 
 }

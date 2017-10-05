@@ -15,6 +15,7 @@ namespace WhereIsBigfoot
 		private List<Item> items;
 		private List<Character> characters;
 		List<string> allowedVerbs = new List<string>() { "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory" };
+		Commands commands = new Commands();
 
 		private Player player;
 
@@ -136,7 +137,7 @@ namespace WhereIsBigfoot
 
 		}
 
-		public string[] ParseInput(string prompt)
+		public void ParseInput(string prompt)
 		{
 			string input = GetInput(prompt).ToLower().Trim();
 
@@ -145,22 +146,47 @@ namespace WhereIsBigfoot
 				string[] parsed = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
 
 				string verb = parsed[0];
+				if (parsed.Length == 1)
+					parsed = new string[2] { parsed[0], "none" };
 
 				if (allowedVerbs.Contains(verb))
 				{
 					// Needs logic on how to use each verb.
 					switch (verb)
 					{
-						//case "get":
-							
-							// "go", //"give", //"look", //"use", //"talk", //"put", //"help", //"quit", //"inventory"
-					}
-
-					this.CurrentVerb = verb;
-					WriteLine($"Current Verb: {this.currentVerb}");
-					if (verb == "quit")
-					{
-						this.running = false;
+						case "go":
+							commands.Go(Player, parsed[1], this.Locations);
+							break;
+						case "get":
+							commands.Get(Player, parsed[1]);
+							break;
+						case "give":
+							commands.Give(Player, parsed[1], Player.PlayerLocation.Characters);
+							break;
+						case "look":
+							commands.Look(Player, parsed[1]);
+							break;
+						case "use":
+							commands.Use(Player, parsed[1]);
+							break;
+						//case "talk":
+						//	commands.Talk(Player, parsed[1]);
+						//	break;
+						//case "put":
+						//	commands.Put(Player, parsed[1]);
+						//	break;
+						case "help":
+							commands.Help(Player);
+							break;
+						case "inventory":
+							commands.Inventory(Player);
+							break;
+						case "quit":
+							this.running = false;
+							break;
+						default:
+							commands.Help(Player);
+							break;
 					}
 				}
 				else
@@ -173,12 +199,12 @@ namespace WhereIsBigfoot
 					this.CurrentNoun = parsed[1];
 					WriteLine($"Current Noun: {this.currentNoun}");
 				}
-				return parsed;
+				if (parsed[0] != "look")
+					WriteLine($"location from parse method: {this.Player.PlayerLocation.DescriptionShort}");
 			}
 			else
 			{
 				WriteLine("I'm afraid I didn't understand that.");
-				return null;
 			}
 		}
 
@@ -229,7 +255,7 @@ namespace WhereIsBigfoot
 			{
 				game.ParseInput("> ");
 
-			} while (game.running = true);
+			} while (game.running == true);
 		}
 
 		public static bool IsValidInput(string str)
