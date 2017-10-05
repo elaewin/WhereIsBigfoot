@@ -18,7 +18,7 @@ namespace WhereIsBigfoot
             if (p.Inventory.ContainsKey(item))
             {
                 Item itemToUse = p.Inventory[item];
-                if(itemToUse.Actions.ContainsKey("use"))
+                if (itemToUse.Actions.ContainsKey("use"))
                 {
                     Console.WriteLine(itemToUse.Actions["use"]);
                 }
@@ -56,12 +56,11 @@ namespace WhereIsBigfoot
 
         }
 
-        // fix Get to be able to take item and character 
         public void Get(Player p, string name)
         {
             if (p.PlayerLocation.Items.ContainsKey(name))
             {
-                if(p.PlayerLocation.Items[name].Actions.ContainsKey("get"))
+                if (p.PlayerLocation.Items[name].Actions.ContainsKey("get"))
                 {
                     TransferItem(p, name);
                     Console.WriteLine(p.PlayerLocation.Items[name].Actions["get"]);
@@ -71,7 +70,7 @@ namespace WhereIsBigfoot
                     CannotVerbNoun("get", name);
                 }
             }
-            else if(p.PlayerLocation.Characters.ContainsKey(name))
+            else if (p.PlayerLocation.Characters.ContainsKey(name))
             {
                 if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
                 {
@@ -99,22 +98,6 @@ namespace WhereIsBigfoot
         {
             DanCheck(p, item, characters);
             p.Inventory.Remove(item);
-        }
-
-        public void Help(Player p)
-        {
-            Console.WriteLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
-            Console.WriteLine($"ie. get item -or- go north");
-            Console.WriteLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
-        }
-
-        public void Inventory(Player p)
-        {
-            Console.Write("You have the following inventory: ");
-            foreach (var item in p.Inventory.Values)
-            {
-                Console.Write($"{item.DescriptionShort}");
-            }
         }
 
         private void TransferItem(Player p, string item)
@@ -174,48 +157,50 @@ namespace WhereIsBigfoot
             }
         }
 
-        
-          Console.WriteLine($"You can't {verb} {noun}");
+        public void Help(Player p)
+        {
+            Console.WriteLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
+            Console.WriteLine($"ie. get item -or- go north");
+            Console.WriteLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
         }
 
-    public void Help(Player p)
-    {
-        Console.WriteLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
-        Console.WriteLine($"ie. get item -or- go north");
-        Console.WriteLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
-    }
+        public void Inventory(Player p)
+        {
+            Console.Write("You have the following inventory: ");
+            foreach (var item in p.Inventory.Values)
+            {
+                Console.Write($"{item.DescriptionShort} ");
+            }
+        }
 
-    public void Inventory(Player p)
-    {
-        Console.Write("You have the following inventory: ");
-        foreach (var item in p.Inventory.Values)
+        public void LookAt(Player p, string entry)
         {
-            Console.Write($"{item.DescriptionShort} ");
+            foreach (Item item in p.Inventory.Values)
+            {
+                if (item.ParseValue.Contains(entry))
+                {
+                    Console.Write($"{item.DescriptionLong} ");
+                }
+            }
+            foreach (Item item in p.PlayerLocation.Items.Values)
+            {
+                if (item.ParseValue.Contains(entry))
+                {
+                    Console.Write($"{item.DescriptionLong} ");
+                }
+            }
+            foreach (Character character in p.PlayerLocation.Characters.Values)
+            {
+                if (character.ParseValue.Contains(entry))
+                {
+                    Console.Write($"{character.DescriptionLong} ");
+                }
+            }
         }
-    }
 
-    public void LookAt(Player p, string entry)
-    {
-        foreach (Item item in p.Inventory.Values)
+        private void CannotVerbNoun(string verb, string noun)
         {
-            if (item.ParseValue.Contains(entry))
-            {
-                Console.Write($"{item.DescriptionLong} ");
-            }
-        }
-        foreach (Item item in p.PlayerLocation.Items.Values)
-        {
-            if (item.ParseValue.Contains(entry))
-            {
-                Console.Write($"{item.DescriptionLong} ");
-            }
-        }
-        foreach (Character character in p.PlayerLocation.Characters.Values)
-        {
-            if (character.ParseValue.Contains(entry))
-            {
-                Console.Write($"{character.DescriptionLong} ");
-            }
+            Console.WriteLine($"You can't {verb} {noun}");
         }
     }
 }
