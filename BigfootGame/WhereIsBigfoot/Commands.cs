@@ -99,5 +99,12 @@ namespace WhereIsBigfoot
         //        }
         //    }
         //}
+
+        public void Help(Player p)
+        {
+            Console.WriteLine($"Hey {p.PlayerHair}ie, I dont freaking understand that! Use the following 2 word command format: ");
+            Console.WriteLine($"ie. grab item -or- head north");
+            Console.WriteLine($"Possible commands: get, go, give, use, talk, put, help, quit, inventory");
+        }
     }
 }
