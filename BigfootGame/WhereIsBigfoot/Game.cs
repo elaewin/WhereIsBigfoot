@@ -9,12 +9,15 @@ using static System.Console;
 
 namespace WhereIsBigfoot
 {
-	class Game
+	public class Game
 	{
-		public List<Location> locations;
-		public List<Item> items;
-		public List<Character> characters;
+		private List<Location> locations;
+		private List<Item> items;
+		private List<Character> characters;
 		List<string> allowedVerbs = new List<string>() { "get", "go", "give", "use", "talk", "put", "help", "quit", "inventory" };
+
+		private Player player;
+
 		private string currentVerb;
 		private string currentNoun;
 		private string currentSubject;
@@ -36,6 +39,24 @@ namespace WhereIsBigfoot
 		{
 			get => this.currentSubject;
 			set => this.currentSubject = value;
+		}
+
+		public Player Player
+		{
+			get => this.player;
+			set => this.player = value;
+		}
+
+		public List<Location> Locations
+		{
+			get => this.locations;
+			set => this.locations = value;
+		}
+
+		public List<Item> Items
+		{
+			get => this.items;
+			set => this.items = value;
 		}
 
 		// Deserialize JSON from a file. 
@@ -115,7 +136,7 @@ namespace WhereIsBigfoot
 
 		public void ParseInput(string prompt)
 		{
-			string input = GetInput(prompt);
+			string input = GetInput(prompt).ToLower().Trim();
 
 			if (IsValidInput(input))
 			{
@@ -125,6 +146,7 @@ namespace WhereIsBigfoot
 
 				if (allowedVerbs.Contains(verb))
 				{
+					// Needs logic on how to use each verb.
 					this.CurrentVerb = verb;
 					WriteLine($"Current Verb: {this.currentVerb}");
 				}
@@ -153,22 +175,6 @@ namespace WhereIsBigfoot
 
         // TODO: Execute Command Method 
 
-		//public void Parser(string input, Game game)
-		//{
-
-		//}
-
-		//        read input(to lower)
-		// splits on “”
-		// checks first word vs list(verbs)
-		// – if in list of verbs
-		// – if not throw help
-		// checks second word vs list(nouns)
-		// – if action-able then do
-		// takes method
-		// validates verb
-		// returns(verb, noun)
-
 		// Console formatting
 		public void FormatConsole()
 		{
@@ -176,14 +182,40 @@ namespace WhereIsBigfoot
 			Console.CursorVisible = true;
 		}
 
+		public string[] GetPlayerDetails()
+		{
+			string name = GetInput("What is your name? ");
+			string gender = GetInput("What gender are you? ");
+			string hair = GetInput("Okay, now just so we know, what color is your hair? ");
+			string[] deets = new string[3] { name, gender, hair};
+			return deets;
+		}
+
 		static void Main(string[] args)
 		{
 
 			Game game = new Game();
 			game.FormatConsole();
-
 			game.LoadData(game);
 
+			// create Player instance
+			string[] playerDetails = game.GetPlayerDetails();
+			Player newPlayer = new Player(playerDetails[0], playerDetails[1], playerDetails[2]);
+
+			foreach (Location location in game.Locations)
+			{
+				if (location.Name == "tent")
+					newPlayer.PlayerLocation = location;
+			}
+			foreach (Item item in game.Items)
+			{
+				if (item.Name == "cellPhone")
+					newPlayer.Inventory.Add("cellPhone", item);
+			}
+
+			// Assign Player instance to game
+			game.Player = newPlayer;
+			
 			game.ParseInput("> ");
 
 		}
@@ -198,7 +230,7 @@ namespace WhereIsBigfoot
 		{
 			Console.Write(prompt);
 			string input = ReadLine();
-			return input.ToLower().Trim();
+			return input;
 		}
 
 	}
