@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.Data;
 using System.Collections.Generic;
 using System.IO;
+using static System.Console;
 
 
 namespace WhereIsBigfoot
@@ -26,22 +27,28 @@ namespace WhereIsBigfoot
             game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonLocationFile));
 
             //Testing to make sure the objects are being de-serialized by writing them to the console.
+            WriteLine("Locations:");
             foreach (Location location in game.locations)
-                Console.WriteLine(location.Name);
+                WriteLine(location.Name);
+            WriteLine("\nItems:");
             foreach (Item item in game.items)
-                Console.WriteLine(item.Name);
+                WriteLine(item.Name);
+            WriteLine("\nCharacters:");
             foreach (Character character in game.characters)
-                Console.WriteLine(character.CharacterName);
+                WriteLine(character.CharacterName);
 
+            WriteLine("\nItems count per location:");
             foreach (Location location in game.locations)
             {
                 foreach (Item item in game.items)
                 {
-                        if (location.Items.ContainsKey(item.Name))
-                        {
-                            location.Items[item.Name] = item;
-                            Console.WriteLine("=======");
-                        }
+                    WriteLine($"Location:D {location.Name} - Items: {location.Items.Count}");
+                        
+                        //if (location.Items.ContainsKey(item.Name))
+                        //{
+                        //    location.Items[item.Name] = item;
+                        //    WriteLine("=======");
+                        //}
                 }
 
                 foreach (var value in location.Items.Values)

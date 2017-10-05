@@ -8,7 +8,7 @@ namespace WhereIsBigfoot
     {
         string name, descriptionFirst, descriptionLong, descriptionShort;
         Dictionary<string, string> exits;
-        List<Character> characters;
+        Dictionary<string, Character> characters;
         string[] objects;
         Dictionary<string, Item> items;
         //bool visited = false;
@@ -18,7 +18,7 @@ namespace WhereIsBigfoot
                         string descriptionLong, 
                         string descriptionShort, 
                         Dictionary<string, string> exits, 
-                        List<Character> characters, 
+                        Dictionary<string, Character> characters, 
                         string[] objects, Dictionary<string, Item> items) : base(name, 
                                                                                  descriptionFirst, 
                                                                                  descriptionShort, 
@@ -37,7 +37,7 @@ namespace WhereIsBigfoot
             set => this.exits = value;
         }
 
-        public List<Character> Characters
+        public Dictionary<string, Character> Characters
         {
             get => this.characters;
             set => this.characters = value;

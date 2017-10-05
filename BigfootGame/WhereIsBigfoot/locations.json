@@ -9,7 +9,9 @@
             "south": "woods3",
             "east": "woods1"
         },
-        "characters": "",
+        "characters": {
+            "empty": null
+        },
         "objects": [
             "clearing",
             "cedars",
@@ -18,7 +20,7 @@
             "forest"
         ],
         "items": {
-            "empty": ""
+            "empty": null
         }
     },
     {
@@ -30,7 +32,9 @@
             "north": "woods3",
             "south": "woods4"
         },
-        "characters": "Dan",
+        "characters": {
+            "danCooking": null
+        },
         "objects": [
 
             "stove",
@@ -38,8 +42,8 @@
             "shelter"
         ],
         "items": {
-            "bacon": "",
-            "grease": ""
+            "bacon": null,
+            "grease": null
         }
     },
     {
@@ -51,10 +55,12 @@
             "north": "woods5",
             "west": "woods2"
         },
-        "characters": "",
-        "objects": "",
+        "characters": {
+            "empty": null
+        },
+        "objects": null,
         "items": {
-            "empty": ""
+            "empty": null
         }
     },
     {
@@ -66,10 +72,12 @@
             "east": "tunnel1",
             "south": "woods5"
         },
-        "characters": "",
-        "objects": "",
+        "characters": {
+            "empty": null
+        },
+        "objects": null,
         "items": {
-            "empty": ""
+            "empty": null
         }
     },
     {
@@ -80,12 +88,14 @@
         "exits": {
             "south": "campsite"
         },
-        "characters": "",
-        "objects": "",
+        "characters": {
+            "empty": null
+        },
+        "objects": null,
         "items": {
-            "matches": "",
-            "book": "",
-            "phone": ""
+            "matches": null,
+            "book": null,
+            "phone": null
         }
     },
     {
@@ -96,10 +106,12 @@
         "exits": {
             "down": "woods4"
         },
-        "characters": "octopus",
-        "objects": "",
+        "characters": {
+            "octopus": null
+        },
+        "objects": null,
         "items": {
-            "lantern": ""
+            "lantern": null
         }
     },
     {
@@ -111,10 +123,12 @@
             "east": "tunnel2",
             "west": "mountain"
         },
-        "characters": "",
-        "objects": "",
+        "characters": {
+            "empty": null
+        },
+        "objects": null,
         "items": {
-            "empty": ""
+            "empty": null
         }
     },
     {
@@ -126,10 +140,12 @@
             "east": "tunnel3",
             "west": "tunnel1"
         },
-        "characters": "",
-        "objects": "",
+        "characters": {
+            "empty": null
+        },
+        "objects": null,
         "items": {
-            "empty": ""
+            "empty": null
         }
     },
     {
@@ -141,10 +157,12 @@
             "north": "tunnel4",
             "west": "tunnel2"
         },
-        "characters": "",
-        "objects": "",
+        "characters": {
+            "empty": null
+        },
+        "objects": null,
         "items": {
-            "empty": ""
+            "empty": null
         }
     },
     {
@@ -156,10 +174,12 @@
             "north": "tunnel5",
             "south": "tunnel3"
         },
-        "characters": "",
-        "objects": "",
+        "characters": {
+            "empty": null
+        },
+        "objects": null,
         "items": {
-            "empty": ""
+            "empty": null
         }
     },
     {
@@ -171,10 +191,12 @@
             "north": "valley",
             "south": "tunnel4"
         },
-        "characters": "",
-        "objects": "",
+        "characters": {
+            "empty": null
+        },
+        "objects": null,
         "items": {
-            "empty": ""
+            "empty": null
         }
     },
     {
@@ -185,10 +207,12 @@
         "exits": {
             "south": "tunnel5"
         },
-        "characters": "bigfoot",
-        "objects": "",
+        "characters": {
+            "bigfootHostile": null
+        },
+        "objects": null,
         "items": {
-            "empty": ""
+            "empty": null
         }
     },
     {
@@ -201,10 +225,12 @@
             "east": "woods2",
             "west": "campsite"
         },
-        "characters": "",
-        "objects": "",
+        "characters": {
+            "empty": null
+        },
+        "objects": null,
         "items": {
-            "empty": ""
+            "empty": null
         }
     },
     {
@@ -217,7 +243,9 @@
             "south": "woods3",
             "west": "woods1"
         },
-        "characters": "",
+        "characters": {
+            "empty": null
+        },
         "objects": [
 
             "brambles",
@@ -227,7 +255,7 @@
             "water"
         ],
         "items": {
-            "walking stick": ""
+            "walking stick": null
         }
     },
     {
@@ -241,10 +269,12 @@
             "south": "dan",
             "west": "campsite"
         },
-        "characters": "",
-        "objects": "",
+        "characters": {
+            "empty": null
+        },
+        "objects": null,
         "items": {
-            "empty": ""
+            "empty": null
         }
     },
     {
@@ -257,10 +287,12 @@
             "south": "dan",
             "west": "woods3"
         },
-        "characters": "",
-        "objects": "",
+        "characters": {
+            "empty": null
+        },
+        "objects": null,
         "items": {
-            "tree": ""
+            "tree": null
         }
     },
     {
@@ -273,10 +305,12 @@
             "east": "lakeshore",
             "south": "woods1"
         },
-        "characters": "",
-        "objects": "",
+        "characters": {
+            "empty": null
+        },
+        "objects": null,
         "items": {
-            "empty": ""
+            "empty": null
         }
     }
 
