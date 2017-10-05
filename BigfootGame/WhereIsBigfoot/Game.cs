@@ -171,13 +171,13 @@ namespace WhereIsBigfoot
 						case "use":
 							commands.Use(Player, parsed[1]);
 							break;
-						//case "talk":
-						//	commands.Talk(Player, parsed[1]);
-						//	break;
-						//case "put":
-						//	commands.Put(Player, parsed[1]);
-						//	break;
-						case "help":
+                        case "talk":
+                            commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters);
+                            break;
+                        case "put":
+                            commands.Put(Player, parsed[1], items);
+                            break;
+                        case "help":
 							commands.Help(Player);
 							break;
 						case "inventory":
@@ -200,7 +200,7 @@ namespace WhereIsBigfoot
 				{
 					this.CurrentNoun = parsed[1];
 				}
-				if (parsed[0] != "look")
+				if (parsed[0] != "look" && parsed[0] != "quit" && parsed[0] != "go")
 					WriteLine($"{this.Player.PlayerLocation.DescriptionShort} \n");
 			}
 			else

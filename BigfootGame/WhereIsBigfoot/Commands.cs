@@ -7,29 +7,19 @@ namespace WhereIsBigfoot
 {
     public class Commands
     {
-        // TODO: check if action is available 
-
-        // TODO: Write Go Method
-        // TODO: Use actions text 
-        // TODO: parse value
-
         public void Use(Player p, string item)
         {
-            if (p.Inventory.ContainsKey(item))
+            foreach(Item i in p.Inventory.Values)
             {
-                Item itemToUse = p.Inventory[item];
-                if (itemToUse.Actions.ContainsKey("use"))
+                if(i.ParseValue.Contains(item))
                 {
-                    Console.WriteLine(itemToUse.Actions["use"]);
+                    Console.WriteLine(i.Actions["use"]);
                 }
                 else
                 {
                     CannotVerbNoun("use", item);
+                    Console.WriteLine($"That {item} is not in your inventory");
                 }
-            }
-            else
-            {
-                CannotVerbNoun("use", item);
             }
         }
 
@@ -64,7 +54,6 @@ namespace WhereIsBigfoot
                 if (p.PlayerLocation.Items[name].Actions.ContainsKey("get"))
                 {
                     TransferItem(p, name);
-                    Console.WriteLine(p.PlayerLocation.Items[name].Actions["get"]);
                 }
                 else
                 {
@@ -129,19 +118,22 @@ namespace WhereIsBigfoot
                 }
             }
         }
-        public void TalkTo(Player p, Character c)
+        public void Talk(Player p, String name, Dictionary<string, Character> characters)
         {
-            if (p.PlayerLocation.Characters.ContainsKey(c.Name))
+            foreach(Character c in characters.Values)
             {
-                Console.WriteLine(c.Actions["talk"]);
-            }
-            else
-            {
-                Console.WriteLine("This character does not exist in this location.");
+                if (p.PlayerLocation.Characters.ContainsKey(name))
+                {
+                    Console.WriteLine(c.Actions["talk"]);
+                }
+                else
+                {
+                    Console.WriteLine("This character does not exist in this location.");
+                }
             }
         }
 
-        public void Put(Player p, List<Item> items)
+        public void Put(Player p, string name, List<Item> items)
         {
             if (p.Inventory.ContainsKey("lantern") && p.Inventory.ContainsKey("grease"))
             {
