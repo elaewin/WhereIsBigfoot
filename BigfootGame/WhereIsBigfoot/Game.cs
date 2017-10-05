@@ -173,22 +173,6 @@ namespace WhereIsBigfoot
 			}
 		}
 
-		//public void Parser(string input, Game game)
-		//{
-
-		//}
-
-		//        read input(to lower)
-		// splits on “”
-		// checks first word vs list(verbs)
-		// – if in list of verbs
-		// – if not throw help
-		// checks second word vs list(nouns)
-		// – if action-able then do
-		// takes method
-		// validates verb
-		// returns(verb, noun)
-
 		// Console formatting
 		public void FormatConsole()
 		{
@@ -230,7 +214,6 @@ namespace WhereIsBigfoot
 			// Assign Player instance to game
 			game.Player = newPlayer;
 			
-
 			game.ParseInput("> ");
 
 		}
