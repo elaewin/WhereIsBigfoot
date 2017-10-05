@@ -11,6 +11,10 @@ namespace WhereIsBigfoot
 {
     class Game
     {
+        // Console formatting
+        Title = "Where Is Bigfoot?";
+        CursorVisible = true;
+
         public List<Location> locations;
         public List<Item> items;
         public List<Character> characters;
@@ -171,7 +175,7 @@ namespace WhereIsBigfoot
 
             game.LoadData(game);
                 
-            GetInput("> ");
+            game.ParseInput("> ");
 
         }
 
@@ -183,9 +187,9 @@ namespace WhereIsBigfoot
 
         public static string GetInput(string prompt)
         {
-            string input = "placeholder";
             Console.Write(prompt);
-            input = ReadLine();
+            string input = ReadLine();
+            input = "fish sticks and custard";
             return input.ToLower().Trim();
         }
 
