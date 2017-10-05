@@ -20,7 +20,7 @@ namespace WhereIsBigfoot
 
         public void Use(Player p, string item)
         {
-            if(p.Inventory.ContainsKey(item))
+            if (p.Inventory.ContainsKey(item))
             {
                 Item itemToUse = p.Inventory[item];
                 Console.WriteLine(itemToUse.Actions["use"]);
@@ -128,5 +128,22 @@ namespace WhereIsBigfoot
         {
           Console.WriteLine($"You can't get {name}");
         }
+
+        public void Help(Player p)
+        {
+            Console.WriteLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
+            Console.WriteLine($"ie. get item -or- go north");
+            Console.WriteLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
+        }
+
+        public void Inventory(Player p)
+        {
+            Console.Write("You have the following inventory: ");
+            foreach (var item in p.Inventory.Values)
+            {
+                Console.Write($"{item.DescriptionShort} ");
+            }
+        }
     }
+
 }
