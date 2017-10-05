@@ -95,7 +95,7 @@ namespace WhereIsBigfoot
             Console.WriteLine($"You dropped, {item}");
         }
 
-        public void Give(Player p, string item, List<Character> characters)
+        public void Give(Player p, string item, Dictionary<string, Character> characters)
         {
             DanCheck(p, item, characters);
             p.Inventory.Remove(item);
@@ -125,14 +125,14 @@ namespace WhereIsBigfoot
             Console.WriteLine(itemToTransfer.Actions["get"]);
         }
 
-        private void DanCheck(Player p, string item, List<Character> characters)
+        private void DanCheck(Player p, string item, Dictionary<string, Character> characters)
         {
-            if (p.PlayerLocation.Name == "dan")
+            if (p.PlayerLocation.Name == "danCamp")
             {
                 if (item == "book" && p.PlayerLocation.Characters.ContainsKey("danCooking"))
                 {
                     TransferItem(p, item);
-                    foreach (Character c in characters)
+                    foreach (Character c in characters.Values)
                     {
                         if (c.Name == "danReading")
                         {
