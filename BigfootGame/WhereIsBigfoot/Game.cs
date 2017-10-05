@@ -148,20 +148,23 @@ namespace WhereIsBigfoot
 							commands.Get(Player, parsed[1]);
 							break;
 						case "give":
-							commands.Give(Player, parsed[1], Player.PlayerLocation.Characters);
+							string giveTarget = GetInput($"Who do you want to give {parsed[1]}?")
+							commands.Give(Player, parsed[1], Player.PlayerLocation.Characters, giveTarget);
 							break;
 						case "look":
 							commands.Look(Player, parsed[1]);
 							break;
 						case "use":
-							commands.Use(Player, parsed[1]);
+							string useTarget = GetInput($"What do you want to use {parsed[1]} on?")
+							commands.Use(Player, parsed[1], useTarget);
 							break;
-						//case "talk":
-						//	commands.Talk(Player, parsed[1]);
-						//	break;
-						//case "put":
-						//	commands.Put(Player, parsed[1]);
-						//	break;
+						case "talk":
+							string getTarget = GetInput($"Who do you want to talk to?");
+							commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters, getTarget);
+							break;
+						case "put":
+							commands.Put(Player, parsed[1], items);
+							break;
 						case "help":
 							commands.Help(Player);
 							break;
@@ -204,9 +207,24 @@ namespace WhereIsBigfoot
 
 		public string[] GetPlayerDetails()
 		{
-			string name = GetInput("What is your name? ");
-			string gender = GetInput("What gender are you? ");
-			string hair = GetInput("Okay, now just so we know, what color is your hair? ");
+			string name = "";
+			string gender = "";
+			string hair = "";
+
+			do
+			{
+				name = GetInput("What is your name? ");
+			} while (!IsValidInfo(name));
+
+			do {
+				gender = GetInput("\nWhat gender are you? ");
+			} while (!IsValidInfo(gender));
+
+			do
+			{
+			hair = GetInput("\nOkay, now just so we know, what color is your hair? ");
+			} while (!IsValidInfo(hair));
+
 			string[] deets = new string[3] { name, gender, hair };
 			return deets;
 		}
@@ -237,6 +255,7 @@ namespace WhereIsBigfoot
 			game.Player = newPlayer;
 
 			// Show starting room
+			Console.WriteLine();
 			game.commands.ShowLocation(game.Player.PlayerLocation);
 
 			do
@@ -249,6 +268,12 @@ namespace WhereIsBigfoot
 		public static bool IsValidInput(string str)
 		{
 			Regex regexString = new Regex(@"[a-z\s'\r]*$");
+			return regexString.IsMatch(str);
+		}
+
+		public static bool IsValidInfo(string str)
+		{
+			Regex regexString = new Regex(@"[a-zA-Z\s]*$");
 			return regexString.IsMatch(str);
 		}
 
