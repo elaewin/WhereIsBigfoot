@@ -7,11 +7,16 @@ namespace WhereIsBigfoot
 {
     class Commands
     {
-        // talk to
+        // talk to - Rami
         // put - two items interacting with each other
         // help 
+        // inventory
+        // look - returns long description
+
 
         // TODO: check if action is available 
+        // TODO: Write Go Method
+        // TODO: Use actions text 
 
         public void Use(Player p, string item)
         {
@@ -50,16 +55,32 @@ namespace WhereIsBigfoot
         }
 
         // fix Get to be able to take item and character 
-        public void Get(Player p, string item)
+        public void Get(Player p, string name)
         {
-            if (p.PlayerLocation.Items.ContainsKey(item))
+            if (p.PlayerLocation.Items.ContainsKey(name))
             {
-                TransferItem(p, item);
+                if(p.PlayerLocation.Items[name].Actions.ContainsKey("get"))
+                {
+                    TransferItem(p, name);
+                    Console.WriteLine(p.PlayerLocation.Items[name].Actions["get"]);
+                }
+                else
+                {
+                    CannotGet(name);
+                }
             }
-            else
+            else if(p.PlayerLocation.Characters.ContainsKey(name))
             {
-                Console.WriteLine($"There is no {item}");
+                if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
+                {
+                    Console.WriteLine(p.PlayerLocation.Items[name].Actions["get"]);
+                }
+                else
+                {
+                    CannotGet(name);
+                }
             }
+            
         }
 
         public void Drop(Player p, string item)
@@ -101,6 +122,11 @@ namespace WhereIsBigfoot
                     }
                 }
             }
+        }
+
+        private void CannotGet(string name)
+        {
+          Console.WriteLine($"You can't get {name}");
         }
     }
 }
