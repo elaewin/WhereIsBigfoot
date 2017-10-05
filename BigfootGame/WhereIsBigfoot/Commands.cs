@@ -269,6 +269,7 @@ namespace WhereIsBigfoot
                 System.Threading.Thread.Sleep(130); // Sleep for 150 milliseconds
             }
         }
+
     }
 }
 
