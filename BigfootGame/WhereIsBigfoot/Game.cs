@@ -173,6 +173,27 @@ namespace WhereIsBigfoot
 			}
 		}
 
+<<<<<<< HEAD
+=======
+        // TODO: Execute Command Method 
+
+		//public void Parser(string input, Game game)
+		//{
+
+		//}
+
+		//        read input(to lower)
+		// splits on “”
+		// checks first word vs list(verbs)
+		// – if in list of verbs
+		// – if not throw help
+		// checks second word vs list(nouns)
+		// – if action-able then do
+		// takes method
+		// validates verb
+		// returns(verb, noun)
+
+>>>>>>> 0977d2a48ce29eb5aeb9cb2880bd0cd3c88d169d
 		// Console formatting
 		public void FormatConsole()
 		{
