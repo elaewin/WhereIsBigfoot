@@ -222,7 +222,7 @@ namespace WhereIsBigfoot
            __/ |                           
           |___/                            
 ");
-			WriteLine(WrapText("Where is Bigfoot is a text-based adventure game where you take on the role of a camper who is trying to find that most elusive of cryptids: BIGFOOT!"));
+			WriteLine(commands.wrapText("Where is Bigfoot is a text-based adventure game where you take on the role of a camper who is trying to find that most elusive of cryptids: BIGFOOT!"));
 			WriteLine("");
 			WriteLine("First, you need to decide who you are... ");
 			//string startGame = GetInput("Would you like to start the game? (y/n): ");
@@ -290,11 +290,11 @@ namespace WhereIsBigfoot
 			// Assign Player instance to game
 			game.Player = newPlayer;
 
-			WriteLine();
-
-			game.commands.TypeLine(WrapText("Your old buddy, Dan, from college was always crazy about finding Bigfoot. You even went on a couple of Bigfoot hunting expeditions with him way back when. But you weren't expecting him to contact you out of the blue and invite you on another one, now that it's been years since you graduated. But the memory of how relaxing those previous trips were made you agree to do along.\n\nYou drove out from Seattle last night, and into the wilderness between Mount Rainier and Mount St. Helens. You set up your camp near the area where Dan said he'd been camping (you hope--the directions weren't exactly great), and crashed for the night. Now it's morning. Time to find your old buddy."));
-
 			// Show starting room
+			Console.WriteLine();
+
+			game.commands.TypeLine(game.commands.wrapText("Your old buddy, Dan, from college was always crazy about finding Bigfoot. You even went on a couple of Bigfoot hunting expeditions with him way back when. But you weren't expecting him to contact you out of the blue and invite you on another one, now that it's been years since you graduated. But the memory of how relaxing those previous trips were made you agree to do along.\n\nYou drove out from Seattle last night, and into the wilderness between Mount Rainier and Mount St. Helens. You set up your camp near the area where Dan said he'd been camping (you hope--the directions weren't exactly great), and crashed for the night. Now it's morning. Time to find your old buddy."));
+
 			game.commands.ShowLocation(game.Player.PlayerLocation);
 
 			do
@@ -325,38 +325,5 @@ namespace WhereIsBigfoot
 			return input;
 		}
 
-		public static string WrapText(string paragraph)
-		{
-			if (string.IsNullOrWhiteSpace(paragraph))
-			{
-				return string.Empty;
-			}
-
-			var approxLineCount = paragraph.Length / Console.WindowWidth;
-			var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
-
-			for (var i = 0; i < paragraph.Length;)
-			{
-				var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
-				var line = paragraph.Substring(i, grabLimit);
-
-				var isLastChunk = grabLimit + i == paragraph.Length;
-
-				if (isLastChunk)
-				{
-					i = i + grabLimit;
-					lines.Append(line);
-				}
-				else
-				{
-					var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
-					lines.AppendLine(line.Substring(0, lastSpace));
-
-					//Trailing spaces needn't be displayed as the first character on the new line
-					i = i + lastSpace + 1;
-				}
-			}
-			return lines.ToString();
-		}
 	}
 }
