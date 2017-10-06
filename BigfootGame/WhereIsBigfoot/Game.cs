@@ -15,7 +15,7 @@ namespace WhereIsBigfoot
 		private List<Location> locations;
 		private List<Item> items;
 		private List<Character> characters;
-		List<string> allowedVerbs = new List<string>() { "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory" };
+		List<string> allowedVerbs = new List<string>() { "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory", "drop" };
 
 		Commands commands = new Commands();
 

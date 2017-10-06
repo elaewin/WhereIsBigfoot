@@ -5,8 +5,14 @@ using System.Data;
 
 namespace WhereIsBigfoot
 {
+    // put commands in alpha order
+    // put helper methods at bottom 
     public class Commands
     {
+        // no checks needed 
+        
+        // player, item, asset 
+        // check if asset is target
         public void Use(Player p, string item, string target)
         {
             Location location = p.PlayerLocation;
@@ -29,7 +35,30 @@ namespace WhereIsBigfoot
             }
         }
 
+        // check Dan
+        // give dan book
+        // check Bigfoot 
+        // give bigfoot bacon 
+        // player, item as an item, character as a character
+        // check to see if character is target
+        public void Give(Player p, string item, Dictionary<string, Character> characters, string target)
+        {
+            DanCheck(p, item, characters);
+            p.Inventory.Remove(item);
+        }
 
+        // Handle tunnel = checking location 
+        // check inventory and check if lantern is lit 
+        // tunnel 1 or tunnel 4 (check against map) 
+        // - lantern is lit - different tunnel
+        // - tunnel1Lit (naming convention) 
+        // - lantern is dark - has three moves 
+        // - if leave counter reset 
+        // - special case, handle tunnel 
+        // - handle counter for player 
+        // Handle walking stick = checking inventory 
+        // If in mountain and try to go to the cave
+        // - without walking stick 
         public void Go(Player p, string direction, List<Location> locations)
         {
             Location currentLocation = p.PlayerLocation;
@@ -58,6 +87,15 @@ namespace WhereIsBigfoot
 
         }
 
+        // player, Asset
+        // special cases
+        // can't take tin can if dan is not reading 
+        // can't take blackberries unless they have the empty can 
+        // - hard code response to blackberries 
+        // - if have can, can add can full of blackberries to inventory
+        // - if not then eat blackberries 
+        // can get octopus 
+        // hardcode responses 
         public void Get(Player p, string name)
         {
             if (p.PlayerLocation.Items.ContainsKey(name))
@@ -88,6 +126,10 @@ namespace WhereIsBigfoot
             }
         }
 
+        // call value in drop dictionary 
+        // passing player, asset 
+        // check null 
+        // handle item doesn't exist will pass null 
         public void Drop(Player p, string item)
         {
             p.PlayerLocation.Items.Add(item, p.Inventory[item]);
@@ -95,56 +137,24 @@ namespace WhereIsBigfoot
             TypeLine($"You dropped {item} \n");
         }
 
-        // check from to 
-        public void Give(Player p, string item, Dictionary<string, Character> characters, string target)
+       
+        // character
+        public void Talk(Player p, String name, Dictionary<string, Character> characters, string target)
         {
-            DanCheck(p, item, characters);
-            p.Inventory.Remove(item);
+            foreach (Character c in characters.Values)
+            {
+                if (p.PlayerLocation.Characters.ContainsKey(name))
+                {
+                    TypeLine(c.Actions["talk"]);
+                }
+                else
+                {
+                    TypeLine("This character does not exist in this location.");
+                }
+            }
         }
 
-
-        private void TransferItem(Player p, string item)
-        {
-            Item itemToTransfer = p.PlayerLocation.Items[item];
-            p.Inventory.Add(item, itemToTransfer);
-            p.PlayerLocation.Items.Remove(item);
-            TypeLine(itemToTransfer.Actions["get"]);
-        }
-
-		private void DanCheck(Player p, string item, Dictionary<string, Character> characters)
-		{
-			if (p.PlayerLocation.Name == "danCamp")
-			{
-				if (item == "book" && p.PlayerLocation.Characters.ContainsKey("danCooking"))
-				{
-					p.Inventory.Remove(item);
-					foreach (Character c in characters.Values)
-					{
-						if (c.Name == "danReading")
-						{
-							p.PlayerLocation.Characters.Add(c.Name, c);
-							p.PlayerLocation.Characters["danReading"].Location = p.PlayerLocation.Name;
-							p.PlayerLocation.Characters.Remove("danCooking");
-						}
-					}
-				}
-			}
-		}
-		public void Talk(Player p, String name, Dictionary<string, Character> characters, string target)
-		{
-			foreach (Character c in characters.Values)
-			{
-				if (p.PlayerLocation.Characters.ContainsKey(name))
-				{
-					TypeLine(c.Actions["talk"]);
-				}
-				else
-				{
-					TypeLine("This character does not exist in this location.");
-				}
-			}
-		}
-
+        // write like use 
         public void Put(Player p, string name, List<Item> items)
         {
             TypeLine("What are you trying to put? you need 2 items.");
@@ -183,6 +193,8 @@ namespace WhereIsBigfoot
             }
         }
 
+        // write better help
+        // description 
         public void Help(Player p)
         {
             TypeLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
@@ -190,15 +202,17 @@ namespace WhereIsBigfoot
             TypeLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
         }
 
+        // write this nicely
         public void Inventory(Player p)
         {
             TypeLine("You have the following inventory: \n");
             foreach (var item in p.Inventory.Values)
             {
-                TypeLine($"{item.DescriptionShort} \n\n");
+                TypeLine($"{item.DescriptionShort} \n");
             }
 
         }
+
 
         public void Look(Player p, string entry)
         {
@@ -233,6 +247,35 @@ namespace WhereIsBigfoot
             }
             TypeLine($"I don't see {entry} here. \n");
         }
+
+        private void TransferItem(Player p, string item)
+        {
+            Item itemToTransfer = p.PlayerLocation.Items[item];
+            p.Inventory.Add(item, itemToTransfer);
+            p.PlayerLocation.Items.Remove(item);
+            TypeLine(itemToTransfer.Actions["get"]);
+        }
+
+		private void DanCheck(Player p, string item, Dictionary<string, Character> characters)
+		{
+			if (p.PlayerLocation.Name == "danCamp")
+			{
+				if (item == "book" && p.PlayerLocation.Characters.ContainsKey("danCooking"))
+				{
+					p.Inventory.Remove(item);
+					foreach (Character c in characters.Values)
+					{
+						if (c.Name == "danReading")
+						{
+							p.PlayerLocation.Characters.Add(c.Name, c);
+							p.PlayerLocation.Characters["danReading"].Location = p.PlayerLocation.Name;
+							p.PlayerLocation.Characters.Remove("danCooking");
+						}
+					}
+				}
+			}
+		}
+		
 
         public void ShowLocation(Location location)
         {
