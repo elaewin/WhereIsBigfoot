@@ -10,6 +10,7 @@ namespace WhereIsBigfoot
         List<string> parseValue;
         Dictionary<string, string> actions;
         string location;
+        string target;
 
         public Item(string name, 
                     string descriptionFirst, 
@@ -27,6 +28,7 @@ namespace WhereIsBigfoot
             this.descriptionShort = descriptionShort;
             this.descriptionLong = descriptionLong;
             this.parseValue = parseValue;
+            this.target = target;
             this.actions = actions;
             this.location = location;
         }
@@ -46,6 +48,12 @@ namespace WhereIsBigfoot
         public string Location {
             get => this.location;
             set => this.location = value;
+        }
+
+        public string Target
+        {
+            get => this.target;
+            set => this.target = value;
         }
     }
 }
