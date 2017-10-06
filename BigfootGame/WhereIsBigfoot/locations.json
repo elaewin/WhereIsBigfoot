@@ -6,7 +6,8 @@
         "descriptionShort": "You are at your campsite.",
         "exits": {
             "north": "tent",
-            "east": "woods1"
+            "east": "woods1",
+            "out": "woods1"
         },
         "characters": {
             "empty": null
@@ -25,7 +26,7 @@
     {
         "name": "danCamp",
         "descriptionFirst": "You've found Dan's campsite! Dan is the person who got you into hunting for Bigfoot, years ago when you were both in college. In fact, he hasn't changed much since college--he's still wearing ripped up jeans and a faded henley under an old red trail jacket. Dan is standing over a small gas camping stove, frying up what looks like about a pound of bacon. A large cooler stands open next to him, and you can see more packages of bacon inside. Next to the stove is a tin can.  A small tent is pitched along the west side of the campsite.  Trails lead north and south into the woods.",
-        "descriptionLong": "You are at Dan's campsite.  Trails lead north and south into the woods.\n\nAFTER GIVING HIM THE BOOK:\nYou are at Dan's campsite. Dan is sitting next to his camp stove, and is engrossed in reading the book you gave him. Trails lead north and south into the woods.",
+        "descriptionLong": "You are at Dan's campsite. Trails lead north and south into the woods.",
         "descriptionShort": "You are at Dan's campsite.",
         "exits": {
             "north": "woods3",
@@ -100,7 +101,7 @@
     {
         "name": "tree",
         "descriptionFirst": "You climb into the branches of the tall cedar tree. It's easier than when you were a kid. Your arms and legs are longer. You're stronger.\n\nYou're also bigger now. Heavier. So it's really kind of a wash. Speaking of a wash, all this sap on your hands makes you wish you'd packed some wet-naps.",
-        "descriptionLong": "You are in the branches of a tall cedar tree.",
+        "descriptionLong": "You are in the branches of a tall cedar tree. ",
         "descriptionShort": "You are in the branches of a tall cedar tree.",
         "exits": {
             "down": "woods4"

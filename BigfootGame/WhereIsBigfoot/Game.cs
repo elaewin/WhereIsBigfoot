@@ -158,8 +158,7 @@ namespace WhereIsBigfoot
 							commands.Use(Player, parsed[1], useTarget);
 							break;
 						//case "talk":
-						//	string getTarget = GetInput($"Who do you want to talk to?");
-						//	commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters, getTarget);
+						//	commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters);
 						//	break;
 						case "put":
 							commands.Put(Player, parsed[1], items);
@@ -214,12 +213,12 @@ namespace WhereIsBigfoot
 			} while (!IsValidInfo(name));
 
 			do {
-				gender = GetInput("\nWhat gender are you? ");
+				gender = GetInput("What gender are you? ");
 			} while (!IsValidInfo(gender));
 
 			do
 			{
-			hair = GetInput("\nOkay, now just so we know, what color is your hair? ");
+			hair = GetInput("Okay, now just so we know, what color is your hair? ");
 			} while (!IsValidInfo(hair));
 
 			string[] deets = new string[3] { name, gender, hair };

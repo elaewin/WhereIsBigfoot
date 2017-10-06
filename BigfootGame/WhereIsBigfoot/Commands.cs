@@ -57,6 +57,7 @@ namespace WhereIsBigfoot
 					{
 						p.PlayerLocation = location;
 						Console.Title += $" {location.DescriptionShort}";
+						Console.WriteLine();
 						ShowLocation(location);
 
 					}
@@ -128,7 +129,7 @@ namespace WhereIsBigfoot
 			{
 				if (item == "book" && p.PlayerLocation.Characters.ContainsKey("danCooking"))
 				{
-					TransferItem(p, item);
+					p.Inventory.Remove(item);
 					foreach (Character c in characters.Values)
 					{
 						if (c.Name == "danReading")
@@ -263,9 +264,8 @@ namespace WhereIsBigfoot
 			for (int i = 0; i < line.Length; i++)
 			{
 				Console.Write(line[i]);
-				System.Threading.Thread.Sleep(20); // Sleep for 50 milliseconds
+				System.Threading.Thread.Sleep(15); // Sleep for 15 milliseconds between characters.
 			}
-			Console.WriteLine();
 			Console.WriteLine();
 		}
 
