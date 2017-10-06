@@ -15,7 +15,7 @@ namespace WhereIsBigfoot
 		private List<Location> locations;
 		private List<Item> items;
 		private List<Character> characters;
-		List<string> allowedVerbs = new List<string>() { "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory" };
+		List<string> allowedVerbs = new List<string>() { "drop", "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory" };
 
 		Commands commands = new Commands();
 
@@ -52,23 +52,8 @@ namespace WhereIsBigfoot
 			game.characters = JsonConvert.DeserializeObject<List<Character>>(File.ReadAllText(jsonCharacterFile));
 			game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonLocationFile));
 
-			////Testing to make sure the objects are being de-serialized by writing them to the console.
-			//TypeLine("Locations:");
-			//foreach (Location location in game.locations)
-			//    TypeLine(location.Name);
-
-			//TypeLine("\nItems:");
-			//foreach (Item item in game.Items) { 
-			//    TypeLine($"Item {item.Name} is in location {item.Location}");
-			//    foreach (string word in item.ParseValue)
-			//        commands.TypeLine(word);
-			//}
-			//TypeLine("\nCharacters:");
-			//foreach (Character character in game.characters)
-			//TypeLine(character.CharacterName);
-
-			// Go through each item and assign the item to the items dict in each location, 
-			// based on the location property of the item.
+			
+			// Go through each item and assign the item to the items dict in each location based on the location property of the item.
 			foreach (Item item in game.items)
 			{
 				string name = item.Location;
@@ -84,13 +69,7 @@ namespace WhereIsBigfoot
 				}
 			}
 
-			//// Test assignment of items by count of the items dict on the location.
-			//TypeLine("\nLocation Items count:");
-			//foreach (Location location in game.locations)
-			//TypeLine($"Location: {location.Name}, # of items: {location.Items.Count}");
-
-			// Go through each character and assign the character to the character dict in each location, 
-			// based on the location property of the characger.
+			// Go through each character and assign the character to the character dict in each location, based on the location property of the character.
 			foreach (Character character in game.characters)
 			{
 				string name = character.Location;
@@ -105,17 +84,6 @@ namespace WhereIsBigfoot
 					}
 				}
 			}
-
-			//// Test assignment of characters by count of the characters dict on the location.
-			//TypeLine("\nLocation Characters count:");
-			//foreach (Location location in game.locations)
-			//TypeLine($"Location: {location.Name}, # of items: {location.Characters.Count}");
-
-			// Test existence of exits dict by count of the characters array on the location.
-			//TypeLine("\nLocation Exits count:");
-			//foreach (Location location in game.locations)
-			//TypeLine($"Location has {location.Exits.Count}");
-
 		}
 
 		public void ParseInput(string prompt)
@@ -141,35 +109,58 @@ namespace WhereIsBigfoot
 					// Needs logic on how to use each verb.
 					switch (verb)
 					{
+						case "drop":
+							//write method to check asset parsevalue in player inventory IsInInventory
+							//pass player and object or null
+
+						case "get":
+							//write method to check a string against the items.parseValues in current location. If doesn't exists, respond here.
+							commands.Get(Player, parsed[1]);
+							break;
+
+						case "give":
+							// check that item.parseValue is in inventory (write method to check inventory) IsInInventory
+							// check characters.parsevalue is in location (write method to check location) IsInLocation
+							// pass player item being gotten (Item), character(Character)
+							string giveTarget = GetInput($"Who do you want to give {parsed[1]}?");
+							commands.Give(Player, parsed[1], Player.PlayerLocation.Characters, giveTarget);
+							break;
+
 						case "go":
 							commands.Go(Player, parsed[1], this.Locations);
 							break;
-						case "get":
-							commands.Get(Player, parsed[1]);
-							break;
-						//case "give":
-						//	string giveTarget = GetInput($"Who do you want to give {parsed[1]}?");
-						//	commands.Give(Player, parsed[1], Player.PlayerLocation.Characters, giveTarget);
-						//	break;
-						case "look":
-							commands.Look(Player, parsed[1]);
-							break;
-						case "use":
-							string useTarget = GetInput($"What do you want to use {parsed[1]} on?");
-							commands.Use(Player, parsed[1], useTarget);
-							break;
-						//case "talk":
-						//	commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters);
-						//	break;
-						case "put":
-							commands.Put(Player, parsed[1], items);
-							break;
-						case "help":
-							commands.Help(Player);
-							break;
+
 						case "inventory":
 							commands.Inventory(Player);
 							break;
+
+						case "look":
+							commands.Look(Player, parsed[1]);
+							break;
+
+						case "put":
+							//handle like use
+							string giveTarget = GetInput($"Where do you want to put {parsed[1]}?");
+							commands.Put(Player, parsed[1], items);
+							break;
+
+						case "talk":
+							// check player.location.characters.parseValues for match, pass character.
+							commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters);
+							break;
+
+						case "use":
+							string useTarget = GetInput($"What do you want to use {parsed[1]} on?");
+							//check player inventory items.parseValue vs noun
+							//check player inventory items.parseValue for target AND current location characters for parsevalues
+							// pass player, item, asset
+							commands.Use(Player, parsed[1], useTarget);
+							break;
+
+						case "help":
+							commands.Help(Player);
+							break;
+						
 						case "quit":
 							string verify = GetInput("Are you sure you want to quit? y/n: ").ToLower();
 							if (verify == "y" || verify == "yes")
@@ -231,9 +222,9 @@ namespace WhereIsBigfoot
            __/ |                           
           |___/                            
 ");
-			WriteLine(GetWordWrappedParagraph("Where is Bigfoot is a text-based adventure game where you take on the role of a camper who is trying to find that most elusive of cryptids: BIGFOOT!"));
+			WriteLine(WrapText("Where is Bigfoot is a text-based adventure game where you take on the role of a camper who is trying to find that most elusive of cryptids: BIGFOOT!"));
 			WriteLine("");
-			WriteLine("First, you need to decide who you are... \n");
+			WriteLine("First, you need to decide who you are... ");
 			//string startGame = GetInput("Would you like to start the game? (y/n): ");
 			//if (startGame == "yes" || startGame == "y") {
 			//	return;
@@ -268,7 +259,7 @@ namespace WhereIsBigfoot
 
 			string[] deets = new string[3] { name, gender, hair };
 
-			commands.TypeLine("\nNow that that's done with...");
+			commands.TypeLine("Now that that's done with...");
 			return deets;
 		}
 
@@ -299,11 +290,11 @@ namespace WhereIsBigfoot
 			// Assign Player instance to game
 			game.Player = newPlayer;
 
-			// Show starting room
-			Console.WriteLine();
-
-			game.commands.TypeLine(GetWordWrappedParagraph("Your old buddy, Dan, from college was always crazy about finding Bigfoot. You even went on a couple of Bigfoot hunting expeditions with him way back when. But you weren't expecting him to contact you out of the blue and invite you on another one, now that it's been years since you graduated. But the memory of how relaxing those previous trips were made you agree to do along.\n\nYou drove out from Seattle last night, and into the wilderness between Mount Rainier and Mount St. Helens. You set up your camp near the area where Dan said he'd been camping (you hope--the directions weren't exactly great), and crashed for the night. Now it's morning. Time to find your old buddy."));
 			WriteLine();
+
+			game.commands.TypeLine(WrapText("Your old buddy, Dan, from college was always crazy about finding Bigfoot. You even went on a couple of Bigfoot hunting expeditions with him way back when. But you weren't expecting him to contact you out of the blue and invite you on another one, now that it's been years since you graduated. But the memory of how relaxing those previous trips were made you agree to do along.\n\nYou drove out from Seattle last night, and into the wilderness between Mount Rainier and Mount St. Helens. You set up your camp near the area where Dan said he'd been camping (you hope--the directions weren't exactly great), and crashed for the night. Now it's morning. Time to find your old buddy."));
+
+			// Show starting room
 			game.commands.ShowLocation(game.Player.PlayerLocation);
 
 			do
@@ -334,7 +325,7 @@ namespace WhereIsBigfoot
 			return input;
 		}
 
-		public static string GetWordWrappedParagraph(string paragraph)
+		public static string WrapText(string paragraph)
 		{
 			if (string.IsNullOrWhiteSpace(paragraph))
 			{
@@ -366,7 +357,6 @@ namespace WhereIsBigfoot
 				}
 			}
 			return lines.ToString();
-
 		}
 	}
 }

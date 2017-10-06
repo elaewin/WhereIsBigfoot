@@ -44,7 +44,7 @@ namespace WhereIsBigfoot
 					if (location.Name == newLocation)
 					{
 						p.PlayerLocation = location;
-						Console.Title += $" {location.DescriptionShort}";
+						Console.Title += $"? -- {location.DescriptionShort}";
 						Console.WriteLine();
 						ShowLocation(location);
 
@@ -92,7 +92,7 @@ namespace WhereIsBigfoot
         {
             p.PlayerLocation.Items.Add(item, p.Inventory[item]);
             p.Inventory.Remove(item);
-            TypeLine($"You dropped {item} \n");
+            TypeLine($"You dropped {item} ");
         }
 
         // check from to 
@@ -130,7 +130,7 @@ namespace WhereIsBigfoot
 				}
 			}
 		}
-		public void Talk(Player p, String name, Dictionary<string, Character> characters, string target)
+		public void Talk(Player p, String name, Dictionary<string, Character> characters)
 		{
 			foreach (Character c in characters.Values)
 			{
@@ -192,7 +192,7 @@ namespace WhereIsBigfoot
 
         public void Inventory(Player p)
         {
-            TypeLine("You have the following inventory: \n");
+            TypeLine("You have the following inventory: ");
             foreach (var item in p.Inventory.Values)
             {
                 TypeLine($"{item.DescriptionShort} \n\n");
@@ -206,7 +206,7 @@ namespace WhereIsBigfoot
             {
                 if (item.ParseValue.Contains(entry))
                 {
-                    TypeLine($"{item.DescriptionLong} \n");
+                    TypeLine($"{item.DescriptionLong} ");
                     return;
                 }
             }
@@ -214,7 +214,7 @@ namespace WhereIsBigfoot
             {
                 if (item.ParseValue.Contains(entry))
                 {
-                    TypeLine($"{item.DescriptionLong} \n");
+                    TypeLine($"{item.DescriptionLong} ");
                     return;
                 }
             }
@@ -222,16 +222,16 @@ namespace WhereIsBigfoot
             {
                 if (character.ParseValue.Contains(entry))
                 {
-                    TypeLine($"{character.DescriptionLong} \n");
+                    TypeLine($"{character.DescriptionLong} ");
                     return;
                 }
             }
             if (entry == "none")
             {
-                TypeLine($"{p.PlayerLocation.DescriptionLong} \n");
+                TypeLine($"{p.PlayerLocation.DescriptionLong} ");
                 return;
             }
-            TypeLine($"I don't see {entry} here. \n");
+            TypeLine($"I don't see {entry} here. ");
         }
 
         public void ShowLocation(Location location)
@@ -258,13 +258,11 @@ namespace WhereIsBigfoot
                 foreach (Item item in location.Items.Values)
                     TypeLine($"{item.DescriptionShort}");
             }
-
-
         }
 
         private void CannotVerbNoun(string verb, string noun)
         {
-            TypeLine($"You can't {verb} {noun} \n");
+            TypeLine($"You can't {verb} {noun} ");
         }
 
 		public void TypeLine(string line)
@@ -274,6 +272,7 @@ namespace WhereIsBigfoot
 				Console.Write(line[i]);
 				System.Threading.Thread.Sleep(15); // Sleep for 15 milliseconds between characters.
 			}
+			Console.WriteLine();
 			Console.WriteLine();
 		}
 
