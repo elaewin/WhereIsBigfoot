@@ -204,8 +204,6 @@ namespace WhereIsBigfoot
 			}
 		}
 
-		// TODO: Execute Command Method 
-
 		// Console formatting
 		public void FormatConsole()
 		{

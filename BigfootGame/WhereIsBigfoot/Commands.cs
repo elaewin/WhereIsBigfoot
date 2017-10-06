@@ -14,27 +14,15 @@ namespace WhereIsBigfoot
             {
                 if (itemToUse.ParseValue.Contains(item))
                 {
-
                     foreach (Item i in location.Items.Values)
                     {
-                        if (i.ParseValue.Contains(target))
-                        {
-                            TypeLine($"That {item} does not exist here");
-                        }
-                        else
+                        if (itemToUse.Name == "book" | i.Target == target)
                         {
                             TypeLine(itemToUse.Actions["use"]);
                         }
-                    }
-                    foreach (Character c in location.Characters.Values)
-                    {
-                        if (c.ParseValue.Contains(target))
-                        {
-                            Console.WriteLine(itemToUse.Actions["use"]);
-                        }
                         else
                         {
-                            TypeLine(itemToUse.Actions["use"]);
+                            CannotVerbNoun("use", item);
                         }
                     }
                 }
