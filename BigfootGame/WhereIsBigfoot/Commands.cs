@@ -16,7 +16,7 @@ namespace WhereIsBigfoot
                 {
                     foreach (Item i in location.Items.Values)
                     {
-                        if (i.Target == target)
+                        if (itemToUse.Name == "book" | i.Target == target)
                         {
                             TypeLine(itemToUse.Actions["use"]);
                         }
