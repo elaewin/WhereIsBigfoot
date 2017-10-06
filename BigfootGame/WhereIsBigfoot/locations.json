@@ -48,7 +48,7 @@
     },
     {
         "name": "lakeshore",
-        "descriptionFirst": "This lake is huge. It stretches out before you, maybe even too big for you to swim across unless you were being chased by an angry Bigfoot or that last date you picked up from Tindr. Let's face it, some things can motivate you to great feats of prowess. But as it stands, this lake is way too big to swim and you're not that motivated. Hills with trees rise up in the distance, but from here you can't see the opposite shore.\n\nTrails lead north along the lakeshore and west into the woods.\n",
+        "descriptionFirst": "This lake is huge. It stretches out before you, maybe even too big for you to swim across unless you were being chased by an angry Bigfoot or that last date you picked up from Tindr. Let's face it, some things can motivate you to great feats of prowess. But as it stands, this lake is way too big to swim and you're not that motivated. Hills with trees rise up in the distance, but from here you can't see the opposite shore.\n\nTrails lead north along the lakeshore and west into the woods.",
         "descriptionLong": "You are on the shore of a huge lake--far too big to swim across. Hills with trees rise up in the distance, but from here you can't see the opposite shore. Trails lead north along the lake and west into the woods.",
         "descriptionShort": "You stand on the shore of a large lake.",
         "exits": {
@@ -82,7 +82,7 @@
     },
     {
         "name": "tent",
-        "descriptionFirst": "It's so good to have your own tent rather than sharing one with anybody. Your tent contains your sleeping bag, a change of clothes, a small backpack, and the satisfaction of knowing you can rough it in the great outdoors. Oh, you should probably grab your backpack before you go. And charge your phone.\n...Darn. You forgot your phone charger!\n\nThe outdoors are a nightmare.",
+        "descriptionFirst": "It's so good to have your own tent rather than sharing one with anybody. Your tent contains your sleeping bag, a change of clothes, a small backpack, and the satisfaction of knowing you can rough it in the great outdoors. Oh, you should probably grab your backpack before you go. And charge your phone....Darn. You forgot your phone charger!\n\nThe outdoors are a nightmare.",
         "descriptionLong": "Home sweet camping home. Your tent contains a sleeping bag and a change of clothes. There's not much room for anything else.",
         "descriptionShort": "You are in your tent.",
         "exits": {
@@ -116,7 +116,7 @@
     },
     {
         "name": "tunnel1",
-        "descriptionFirst": "This doesn't look so bad. You can step inside without having to bend over. No glowing red eyes stare at you from the shadows. There don't seem to be any spiders. You don't even hear anything go 'squish!' with each step. You can totally handle this.\n\nWait, no. It gets dark in here fast. You're only a few steps in and it's already really, really dark. You may be eaten by a grue.  \n",
+        "descriptionFirst": "This doesn't look so bad. You can step inside without having to bend over. No glowing red eyes stare at you from the shadows. There don't seem to be any spiders. You don't even hear anything go 'squish!' with each step. You can totally handle this.\n\nWait, no. It gets dark in here fast. You're only a few steps in and it's already really, really dark. You may be eaten by a grue.  ",
         "descriptionLong": "You are in a cave. It is dark here, although a faint light is visible to the west. You may be eaten by a grue.",
         "descriptionShort": "You are in a dark cave.",
         "exits": {
@@ -133,7 +133,7 @@
     },
     {
         "name": "tunnel2",
-        "descriptionFirst": "Ah. Now you've found the spiders. Or at least you've found their webs. They're all over your face. You frantically brush the webs away, then think about how there might be spiders on your shoulders and brush those. Then you vigorously brush your hair. Oh no! What if you brushed a spider out of your hair and onto your shoulders? You brush your shoulders again just to be sure!\n\nNothing bites you. At least, nothing you've felt yet. Hopefully nothing bit you with a slow-acting poison, either. It's even darker in here. You're pretty sure that's because of physics and not because of poison.\n",
+        "descriptionFirst": "Ah. Now you've found the spiders. Or at least you've found their webs. They're all over your face. You frantically brush the webs away, then think about how there might be spiders on your shoulders and brush those. Then you vigorously brush your hair. Oh no! What if you brushed a spider out of your hair and onto your shoulders? You brush your shoulders again just to be sure!\n\nNothing bites you. At least, nothing you've felt yet. Hopefully nothing bit you with a slow-acting poison, either. It's even darker in here. You're pretty sure that's because of physics and not because of poison.",
         "descriptionLong": "You are in a cave. It is dark here. You may be eaten by a grue.",
         "descriptionShort": "You are in a dark cave.",
         "exits": {
@@ -167,7 +167,7 @@
     },
     {
         "name": "tunnel4",
-        "descriptionFirst": "You already feel better about this choice. Not because it's any brighter. It isn't. But at no point do you lose anything important like the floor or your sense of direction. Even in the darkness, you remember how far you've gone and you know you're facing north. There's probably a merit badge for this.\n\nThere's also light at the end of this tunnel! You're sure it's not an hallucination. Or a trap. Okay, pretty sure. Reasonably sure.\n",
+        "descriptionFirst": "You already feel better about this choice. Not because it's any brighter. It isn't. But at no point do you lose anything important like the floor or your sense of direction. Even in the darkness, you remember how far you've gone and you know you're facing north. There's probably a merit badge for this.\n\nThere's also light at the end of this tunnel! You're sure it's not an hallucination. Or a trap. Okay, pretty sure. Reasonably sure.",
         "descriptionLong": "You are in a cave. It is dark here. You may be eaten by a grue.",
         "descriptionShort": "You are in a dark cave.",
         "exits": {
@@ -184,7 +184,7 @@
     },
     {
         "name": "valley",
-        "descriptionFirst": "The light grows from dim to welcoming, and from welcoming to bright. It takes your eyes a moment to adjust. A valley comes into focus, filled with lush green trees and singing birds. Squirrels. Raccoons. Forest stuff. Bigfoot.\n\nHoly cow! THAT'S REALLY BIGFOOT!\n",
+        "descriptionFirst": "The light grows from dim to welcoming, and from welcoming to bright. It takes your eyes a moment to adjust. A valley comes into focus, filled with lush green trees and singing birds. Squirrels. Raccoons. Forest stuff. Bigfoot.\n\nHoly cow! THAT'S REALLY BIGFOOT!",
         "descriptionLong": "To the south is a dark cave.",
         "descriptionShort": "You are in a secluded mountain valley.",
         "exits": {

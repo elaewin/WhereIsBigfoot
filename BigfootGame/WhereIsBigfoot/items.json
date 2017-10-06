@@ -77,7 +77,7 @@
         "descriptionShort": "A beat-up, hardcover book",
         "descriptionLong": "The book is a rather beat up old hardcover book titled \"Bigfoot Legends of the Pacific Northwest\". Dan loaned it to you ages ago.",
         "location": "tent",
-        "target": "danCamp",
+        "target": "danCooking",
         "actions": {
             "get": "You pick up the bettered copy of 'Bigfoot Legends of the Pacific Northwest'.",
             "put": "",
@@ -228,7 +228,7 @@
         "location": "",
         "target": "",
         "actions": {
-            "get": "You casually reach out and snag the tin of bacon grease. It's, well, greasy. Dan is too engrossed in his book to notice.\n",
+            "get": "You casually reach out and snag the tin of bacon grease. It's, well, greasy. Dan is too engrossed in his book to notice.",
             "blocked": "\"Hey, man,\" says Dan, \"I need that.\" \n\nYou're not going to argue with a man who is holding a pan of hot grease.",
             "put": "(in lantern) You use a nearby twig to scrape off the congealed fat at the top of the tin, and pour the still-liquid grease underneath into the lantern’s oil reservoir. Clever you!",
             "drop": "You drop the tin can full of bacon grease.",
@@ -246,7 +246,7 @@
             "camp lamp",
             "unlit lamp"
         ],
-        "descriptionFirst": "\n\nThe tree octopus watches you climb. You're not sure if it's impressed. Now that you're closer, you see its arms wrapped around a lantern. How did it get the lantern up here? It has eight arms'maybe that should be a clue about how it does anything. You've only got two arms and you can barely get around at all.\n\nThe tree octopus seems kind of possessive of the lantern. You weren't even that possessive of your favorite teddy bear when you were four. Then again, you only had two arms to hold it.\n",
+        "descriptionFirst": "\n\nThe tree octopus watches you climb. You're not sure if it's impressed. Now that you're closer, you see its arms wrapped around a lantern. How did it get the lantern up here? It has eight arms'maybe that should be a clue about how it does anything. You've only got two arms and you can barely get around at all.\n\nThe tree octopus seems kind of possessive of the lantern. You weren't even that possessive of your favorite teddy bear when you were four. Then again, you only had two arms to hold it.",
         "descriptionShort": "Lantern",
         "descriptionLong": "The lantern is a small, oil burning lantern that you bought to take on camping trips a few years ago.",
         "location": "tree",
