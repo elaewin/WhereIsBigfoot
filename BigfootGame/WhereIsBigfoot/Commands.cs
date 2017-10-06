@@ -18,7 +18,7 @@ namespace WhereIsBigfoot
                     {
                         if (itemToUse.Name == "book" | i.Target == target)
                         {
-                            TypeLine(itemToUse.Actions["use"]);
+                            TypeLine(wrapText(itemToUse.Actions["use"]));
                         }
                         else
                         {
@@ -108,7 +108,7 @@ namespace WhereIsBigfoot
             Item itemToTransfer = p.PlayerLocation.Items[item];
             p.Inventory.Add(item, itemToTransfer);
             p.PlayerLocation.Items.Remove(item);
-            TypeLine(itemToTransfer.Actions["get"]);
+            TypeLine(wrapText(itemToTransfer.Actions["get"]));
         }
 
 		private void DanCheck(Player p, string item, Dictionary<string, Character> characters)
@@ -136,7 +136,7 @@ namespace WhereIsBigfoot
 			{
 				if (p.PlayerLocation.Characters.ContainsKey(name))
 				{
-					TypeLine(c.Actions["talk"]);
+					TypeLine(wrapText(c.Actions["talk"]));
 				}
 				else
 				{
@@ -206,7 +206,7 @@ namespace WhereIsBigfoot
             {
                 if (item.ParseValue.Contains(entry))
                 {
-                    TypeLine($"{item.DescriptionLong} \n");
+                    TypeLine(wrapText($"{item.DescriptionLong} \n"));
                     return;
                 }
             }
@@ -214,7 +214,7 @@ namespace WhereIsBigfoot
             {
                 if (item.ParseValue.Contains(entry))
                 {
-                    TypeLine($"{item.DescriptionLong} \n");
+                    TypeLine(wrapText($"{item.DescriptionLong} \n"));
                     return;
                 }
             }
@@ -222,13 +222,13 @@ namespace WhereIsBigfoot
             {
                 if (character.ParseValue.Contains(entry))
                 {
-                    TypeLine($"{character.DescriptionLong} \n");
+                    TypeLine(wrapText($"{character.DescriptionLong} \n"));
                     return;
                 }
             }
             if (entry == "none")
             {
-                TypeLine($"{p.PlayerLocation.DescriptionLong} \n");
+                TypeLine(wrapText($"{p.PlayerLocation.DescriptionLong} \n"));
                 return;
             }
             TypeLine($"I don't see {entry} here. \n");
@@ -238,25 +238,25 @@ namespace WhereIsBigfoot
         {
             if (location.Visited == false)
             {
-                TypeLine($"{location.DescriptionFirst}");
+                TypeLine(wrapText($"{location.DescriptionFirst}"));
 
                 foreach (Character character in location.Characters.Values)
-                    TypeLine($"{character.DescriptionFirst}");
+                    TypeLine(wrapText($"{character.DescriptionFirst}"));
 
                 foreach (Item item in location.Items.Values)
-                    TypeLine($"{item.DescriptionFirst}");
+                    TypeLine(wrapText($"{item.DescriptionFirst}"));
 
                 location.Visited = true;
             }
             else
             {
-                TypeLine($"{location.DescriptionShort}");
+                TypeLine(wrapText($"{location.DescriptionShort}"));
 
                 foreach (Character character in location.Characters.Values)
-                    Console.WriteLine($"{character.DescriptionShort}");
+                    Console.WriteLine(wrapText($"{character.DescriptionShort}"));
 
                 foreach (Item item in location.Items.Values)
-                    TypeLine($"{item.DescriptionShort}");
+                    TypeLine(wrapText($"{item.DescriptionShort}"));
             }
 
 
@@ -276,6 +276,69 @@ namespace WhereIsBigfoot
 			}
 			Console.WriteLine();
 		}
+
+        //public string wrapText(string paragraph)
+        //{
+        //    if (string.IsNullOrWhiteSpace(paragraph))
+        //    {
+        //        return string.Empty;
+        //    }
+
+        //    var approxLineCount = paragraph.Length / Console.WindowWidth;
+        //    var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
+
+        //    for (var i = 0; i < paragraph.Length;)
+        //    {
+        //        var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
+        //        var line = paragraph.Substring(i, grabLimit);
+
+        //        var isLastChunk = grabLimit + i == paragraph.Length;
+
+        //        if (isLastChunk)
+        //        {
+        //            i = i + grabLimit;
+        //            lines.Append(line);
+        //        }
+        //        else
+        //        {
+        //            var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
+        //            lines.AppendLine(line.Substring(0, lastSpace));
+
+        //            //Trailing spaces needn't be displayed as the first character on the new line
+        //            i = i + lastSpace + 1;
+        //        }
+        //    }
+        //    return lines.ToString();
+
+        //}
+
+
+        public string wrapText(String text)
+        {
+            String[] words = text.Split(' ');
+            StringBuilder buffer = new StringBuilder();
+
+            foreach (String word in words)
+            {
+                buffer.Append(word);
+                //see if you can make this dynamic.
+                if (buffer.Length >= 80)
+                {
+                    String line = buffer.ToString().Substring(0, buffer.Length - word.Length);
+                    Console.WriteLine(line);
+                    buffer.Clear();
+                    buffer.Append(word);
+                }
+
+                buffer.Append(" ");
+
+            }
+            //buffer.ToString().PadLeft(200);
+            //buffer.ToString().PadRight(200);
+            //Console.WriteLine(buffer.ToString());
+            return buffer.ToString();
+        }
+
 
     }
 }
