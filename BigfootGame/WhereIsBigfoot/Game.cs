@@ -190,8 +190,6 @@ namespace WhereIsBigfoot
 			}
 		}
 
-		// TODO: Execute Command Method 
-
 		// Console formatting
 		public void FormatConsole()
 		{
@@ -199,7 +197,6 @@ namespace WhereIsBigfoot
 			Console.CursorVisible = true;
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.BackgroundColor = ConsoleColor.Black;
-            Console.SetBufferSize(300, 200);
         }
 
 		public string[] GetPlayerDetails()
