@@ -199,7 +199,8 @@ namespace WhereIsBigfoot
 			Console.CursorVisible = true;
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.BackgroundColor = ConsoleColor.Black;
-		}
+            Console.SetBufferSize(300, 200);
+        }
 
 		public string[] GetPlayerDetails()
 		{

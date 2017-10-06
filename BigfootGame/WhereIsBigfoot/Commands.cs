@@ -5,47 +5,47 @@ using System.Data;
 
 namespace WhereIsBigfoot
 {
-	public class Commands
-	{
-		public void Use(Player p, string item, string target)
-		{
-			Location location = p.PlayerLocation;
-			foreach (Item itemToUse in p.Inventory.Values)
-			{
-				if (itemToUse.ParseValue.Contains(item))
-				{
+    public class Commands
+    {
+        public void Use(Player p, string item, string target)
+        {
+            Location location = p.PlayerLocation;
+            foreach (Item itemToUse in p.Inventory.Values)
+            {
+                if (itemToUse.ParseValue.Contains(item))
+                {
 
-					foreach (Item i in location.Items.Values)
-					{
-						if (i.ParseValue.Contains(target))
-						{
-							TypeLine($"That {item} does not exist here");
-						}
-						else
-						{
-							TypeLine(itemToUse.Actions["use"]);
-						}
-					}
-					foreach (Character c in location.Characters.Values)
-					{
-						if (c.ParseValue.Contains(target))
-						{
-							Console.WriteLine(itemToUse.Actions["use"]);
-						}
-						else
-						{
-							TypeLine(itemToUse.Actions["use"]);
-						}
-					}
-				}
-			}
-		}
+                    foreach (Item i in location.Items.Values)
+                    {
+                        if (i.ParseValue.Contains(target))
+                        {
+                            TypeLine($"That {item} does not exist here");
+                        }
+                        else
+                        {
+                            TypeLine(itemToUse.Actions["use"]);
+                        }
+                    }
+                    foreach (Character c in location.Characters.Values)
+                    {
+                        if (c.ParseValue.Contains(target))
+                        {
+                            Console.WriteLine(itemToUse.Actions["use"]);
+                        }
+                        else
+                        {
+                            TypeLine(itemToUse.Actions["use"]);
+                        }
+                    }
+                }
+            }
+        }
 
 
-		public void Go(Player p, string direction, List<Location> locations)
-		{
-			Location currentLocation = p.PlayerLocation;
-			string newLocation;
+        public void Go(Player p, string direction, List<Location> locations)
+        {
+            Location currentLocation = p.PlayerLocation;
+            string newLocation;
 
 			if (currentLocation.Exits.ContainsKey(direction))
 			{
@@ -68,60 +68,58 @@ namespace WhereIsBigfoot
 				CannotVerbNoun("go", direction);
 			}
 
-		}
+        }
 
-		public void Get(Player p, string name)
+        public void Get(Player p, string name)
         {
-            if (p.PlayerLocation.Items.ContainsKey(name))
+            foreach (Item i in p.PlayerLocation.Items.Values)
             {
-                if (p.PlayerLocation.Items[name].Actions.ContainsKey("get"))
+                if (i.ParseValue.Contains(name))
                 {
                     TransferItem(p, name);
+                    break;
+                }
+
+                else if (p.PlayerLocation.Characters.ContainsKey(name))
+                {
+                    if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
+                    {
+                        Console.WriteLine(p.PlayerLocation.Characters[name].Actions["get"]);
+                    }
+                    else
+                    {
+                        CannotVerbNoun("get", name);
+                    }
                 }
                 else
                 {
                     CannotVerbNoun("get", name);
                 }
-            }
-            else if (p.PlayerLocation.Characters.ContainsKey(name))
-            {
-                if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
-                {
-                    TypeLine(p.PlayerLocation.Characters[name].Actions["get"]);
-                }
-                else
-                {
-                    CannotVerbNoun("get", name);
-                }
-            }
-            else
-            {
-                CannotVerbNoun("get", name);
             }
         }
 
-		public void Drop(Player p, string item)
-		{
-			p.PlayerLocation.Items.Add(item, p.Inventory[item]);
-			p.Inventory.Remove(item);
-			TypeLine($"You dropped {item} \n");
-		}
+        public void Drop(Player p, string item)
+        {
+            p.PlayerLocation.Items.Add(item, p.Inventory[item]);
+            p.Inventory.Remove(item);
+            TypeLine($"You dropped {item} \n");
+        }
 
-		// check from to 
-		public void Give(Player p, string item, Dictionary<string, Character> characters, string target)
-		{
-			DanCheck(p, item, characters);
-			p.Inventory.Remove(item);
-		}
+        // check from to 
+        public void Give(Player p, string item, Dictionary<string, Character> characters, string target)
+        {
+            DanCheck(p, item, characters);
+            p.Inventory.Remove(item);
+        }
 
 
-		private void TransferItem(Player p, string item)
-		{
-			Item itemToTransfer = p.PlayerLocation.Items[item];
-			p.Inventory.Add(item, itemToTransfer);
-			p.PlayerLocation.Items.Remove(item);
-			TypeLine(itemToTransfer.Actions["get"]);
-		}
+        private void TransferItem(Player p, string item)
+        {
+            Item itemToTransfer = p.PlayerLocation.Items[item];
+            p.Inventory.Add(item, itemToTransfer);
+            p.PlayerLocation.Items.Remove(item);
+            TypeLine(itemToTransfer.Actions["get"]);
+        }
 
 		private void DanCheck(Player p, string item, Dictionary<string, Character> characters)
 		{
@@ -157,107 +155,127 @@ namespace WhereIsBigfoot
 			}
 		}
 
-		public void Put(Player p, string name, List<Item> items)
-		{
-			if (p.Inventory.ContainsKey("lantern") && p.Inventory.ContainsKey("grease"))
-			{
-				TypeLine("Now your lantern is full and you can use it to go in the cave.");
-				p.Inventory.Remove("lantern");
-				foreach (Item i in items)
-				{
-					if (i.Name == "filledLantern")
-						p.Inventory.Add("filledLantern", i);
-				}
-			}
-			else
-			{
-				TypeLine("You need to have the lantern and the grease in your inventory before you can use it.");
-			}
-		}
+        public void Put(Player p, string name, List<Item> items)
+        {
+            TypeLine("What are you trying to put? you need 2 items.");
 
-		public void Help(Player p)
-		{
-			TypeLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
-			TypeLine($"ie. get item -or- go north");
-			TypeLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
-		}
+            TypeLine("Type the first item:");
+            string item1 = Console.ReadLine();
+            Console.WriteLine();
+            TypeLine("Type the second item:");
+            string item2 = Console.ReadLine();
+            Console.WriteLine();
+            List<string> tools = new List<string>();
+            tools.Add(item1);
+            tools.Add(item2);
 
-		public void Inventory(Player p)
-		{
-			TypeLine("You have the following inventory: \n");
-			foreach (var item in p.Inventory.Values)
-			{
-				TypeLine($"{item.DescriptionShort}");
-			}
+            if (tools.Contains("lantern") && tools.Contains("grease"))
+            {
+                if (p.Inventory.ContainsKey("lantern") && p.Inventory.ContainsKey("grease"))
+                {
+                    TypeLine("Now your lantern is full and you can use it to go in the cave.");
+                    p.Inventory.Remove("lantern");
+                    foreach (Item i in items)
+                    {
+                        if (i.Name == "filledLantern")
+                            p.Inventory.Add("filledLantern", i);
+                    }
+                }
+                else
+                {
+                    TypeLine("You need to have the lantern and the grease in your inventory before you can use it.");
+                }
+            }
 
-		}
+            else
+            {
+                TypeLine("You can only use \"put\" to fill your lantern with the bacon grease.");
+            }
+        }
 
-		public void Look(Player p, string entry)
-		{
-			foreach (Item item in p.Inventory.Values)
-			{
-				if (item.ParseValue.Contains(entry))
-				{
-					TypeLine($"{item.DescriptionLong} \n");
-					return;
-				}
-			}
-			foreach (Item item in p.PlayerLocation.Items.Values)
-			{
-				if (item.ParseValue.Contains(entry))
-				{
-					TypeLine($"{item.DescriptionLong} \n");
-					return;
-				}
-			}
-			foreach (Character character in p.PlayerLocation.Characters.Values)
-			{
-				if (character.ParseValue.Contains(entry))
-				{
-					TypeLine($"{character.DescriptionLong} \n");
-					return;
-				}
-			}
-			if (entry == "none")
-			{
-				TypeLine($"{p.PlayerLocation.DescriptionLong} \n");
-				return;
-			}
-			TypeLine($"I don't see {entry} here. \n");
-		}
+        public void Help(Player p)
+        {
+            TypeLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
+            TypeLine($"ie. get item -or- go north");
+            TypeLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
+        }
 
-		public void ShowLocation(Location location)
-		{
-			if (location.Visited == false)
-			{
-				TypeLine($"{location.DescriptionFirst}");
+        public void Inventory(Player p)
+        {
+            TypeLine("You have the following inventory: \n");
+            foreach (var item in p.Inventory.Values)
+            {
+                TypeLine($"{item.DescriptionShort} \n\n");
+            }
 
-				foreach (Character character in location.Characters.Values)
-					TypeLine($"{character.DescriptionFirst}");
+        }
 
-				foreach (Item item in location.Items.Values)
-					TypeLine($"{item.DescriptionFirst}");
+        public void Look(Player p, string entry)
+        {
+            foreach (Item item in p.Inventory.Values)
+            {
+                if (item.ParseValue.Contains(entry))
+                {
+                    TypeLine($"{item.DescriptionLong} \n");
+                    return;
+                }
+            }
+            foreach (Item item in p.PlayerLocation.Items.Values)
+            {
+                if (item.ParseValue.Contains(entry))
+                {
+                    TypeLine($"{item.DescriptionLong} \n");
+                    return;
+                }
+            }
+            foreach (Character character in p.PlayerLocation.Characters.Values)
+            {
+                if (character.ParseValue.Contains(entry))
+                {
+                    TypeLine($"{character.DescriptionLong} \n");
+                    return;
+                }
+            }
+            if (entry == "none")
+            {
+                TypeLine($"{p.PlayerLocation.DescriptionLong} \n");
+                return;
+            }
+            TypeLine($"I don't see {entry} here. \n");
+        }
 
-				location.Visited = true;
-			}
-			else
-			{
-				TypeLine($"{location.DescriptionShort}");
+        public void ShowLocation(Location location)
+        {
+            if (location.Visited == false)
+            {
+                TypeLine($"{location.DescriptionFirst}");
 
-				foreach (Character character in location.Characters.Values)
-					Console.WriteLine($"{character.DescriptionShort}");
+                foreach (Character character in location.Characters.Values)
+                    TypeLine($"{character.DescriptionFirst}");
 
-				foreach (Item item in location.Items.Values)
-					TypeLine($"{item.DescriptionShort}");
-			}
+                foreach (Item item in location.Items.Values)
+                    TypeLine($"{item.DescriptionFirst}");
+
+                location.Visited = true;
+            }
+            else
+            {
+                TypeLine($"{location.DescriptionShort}");
+
+                foreach (Character character in location.Characters.Values)
+                    Console.WriteLine($"{character.DescriptionShort}");
+
+                foreach (Item item in location.Items.Values)
+                    TypeLine($"{item.DescriptionShort}");
+            }
 
 
-		}
+        }
 
-		private void CannotVerbNoun(string verb, string noun)
-		{
-			TypeLine($"You can't {verb} {noun} \n");
-		}
+        private void CannotVerbNoun(string verb, string noun)
+        {
+            TypeLine($"You can't {verb} {noun} \n");
+        }
 
 		public void TypeLine(string line)
 		{
@@ -269,7 +287,7 @@ namespace WhereIsBigfoot
 			Console.WriteLine();
 		}
 
-	}
+    }
 }
 
 
