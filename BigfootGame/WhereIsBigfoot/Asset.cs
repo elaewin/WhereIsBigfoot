@@ -10,7 +10,7 @@ namespace WhereIsBigfoot
     {
         string name, descriptionFirst, descriptionShort, descriptionLong;
 
-		public Asset() { }
+        public Asset() { }
 
         public Asset(string name, string descriptionFirst, string descriptionShort, string descriptionLong)
         {

@@ -35,26 +35,26 @@ namespace WhereIsBigfoot
             Location currentLocation = p.PlayerLocation;
             string newLocation;
 
-			if (currentLocation.Exits.ContainsKey(direction))
-			{
-				Console.Title = Console.Title.Remove(16);
-				newLocation = currentLocation.Exits[direction];
-				foreach (Location location in locations)
-				{
-					if (location.Name == newLocation)
-					{
-						p.PlayerLocation = location;
-						Console.Title += $"? -- {location.DescriptionShort}";
-						Console.WriteLine();
-						ShowLocation(location);
+            if (currentLocation.Exits.ContainsKey(direction))
+            {
+                Console.Title = Console.Title.Remove(16);
+                newLocation = currentLocation.Exits[direction];
+                foreach (Location location in locations)
+                {
+                    if (location.Name == newLocation)
+                    {
+                        p.PlayerLocation = location;
+                        Console.Title += $"? -- {location.DescriptionShort}";
+                        Console.WriteLine();
+                        ShowLocation(location);
 
-					}
-				}
-			}
-			else
-			{
-				CannotVerbNoun("go", direction);
-			}
+                    }
+                }
+            }
+            else
+            {
+                CannotVerbNoun("go", direction);
+            }
 
         }
 
@@ -111,39 +111,39 @@ namespace WhereIsBigfoot
             TypeLine(wrapText(itemToTransfer.Actions["get"]));
         }
 
-		private void DanCheck(Player p, string item, Dictionary<string, Character> characters)
-		{
-			if (p.PlayerLocation.Name == "danCamp")
-			{
-				if (item == "book" && p.PlayerLocation.Characters.ContainsKey("danCooking"))
-				{
-					p.Inventory.Remove(item);
-					foreach (Character c in characters.Values)
-					{
-						if (c.Name == "danReading")
-						{
-							p.PlayerLocation.Characters.Add(c.Name, c);
-							p.PlayerLocation.Characters["danReading"].Location = p.PlayerLocation.Name;
-							p.PlayerLocation.Characters.Remove("danCooking");
-						}
-					}
-				}
-			}
-		}
-		public void Talk(Player p, String name, Dictionary<string, Character> characters)
-		{
-			foreach (Character c in characters.Values)
-			{
-				if (p.PlayerLocation.Characters.ContainsKey(name))
-				{
-					TypeLine(wrapText(c.Actions["talk"]));
-				}
-				else
-				{
-					TypeLine("This character does not exist in this location.");
-				}
-			}
-		}
+        private void DanCheck(Player p, string item, Dictionary<string, Character> characters)
+        {
+            if (p.PlayerLocation.Name == "danCamp")
+            {
+                if (item == "book" && p.PlayerLocation.Characters.ContainsKey("danCooking"))
+                {
+                    p.Inventory.Remove(item);
+                    foreach (Character c in characters.Values)
+                    {
+                        if (c.Name == "danReading")
+                        {
+                            p.PlayerLocation.Characters.Add(c.Name, c);
+                            p.PlayerLocation.Characters["danReading"].Location = p.PlayerLocation.Name;
+                            p.PlayerLocation.Characters.Remove("danCooking");
+                        }
+                    }
+                }
+            }
+        }
+        public void Talk(Player p, String name, Dictionary<string, Character> characters)
+        {
+            foreach (Character c in characters.Values)
+            {
+                if (p.PlayerLocation.Characters.ContainsKey(name))
+                {
+                    TypeLine(wrapText(c.Actions["talk"]));
+                }
+                else
+                {
+                    TypeLine("This character does not exist in this location.");
+                }
+            }
+        }
 
         public void Put(Player p, string name, List<Item> items)
         {
@@ -267,16 +267,16 @@ namespace WhereIsBigfoot
             TypeLine($"You can't {verb} {noun} ");
         }
 
-		public void TypeLine(string line)
-		{
-			for (int i = 0; i < line.Length; i++)
-			{
-				Console.Write(line[i]);
-				System.Threading.Thread.Sleep(15); // Sleep for 15 milliseconds between characters.
-			}
-			Console.WriteLine();
-			Console.WriteLine();
-		}
+        public void TypeLine(string line)
+        {
+            for (int i = 0; i < line.Length; i++)
+            {
+                Console.Write(line[i]);
+                System.Threading.Thread.Sleep(15); // Sleep for 15 milliseconds between characters.
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+        }
 
         //public string wrapText(string paragraph)
         //{
