@@ -299,7 +299,7 @@ namespace WhereIsBigfoot
 
             do
             {
-                game.ParseInput("> ");
+                game.ParseInput("What would you like to do?\n> ");
 
             } while (game.running == true);
         }

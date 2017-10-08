@@ -9,8 +9,8 @@
             "haversack"
         ],
         "descriptionFirst": "Your backpack is lying near the entrance to the tent.",
-        "descriptionShort": "Backpack",
-        "descriptionLong": "A small camping backpack that you brought along to hold the various necessities of bigfoot hunting. Or, you know, other stuff.",
+        "descriptionShort": "Your backpack is here.",
+        "descriptionLong": "A small camping backpack that you brought along to hold the various necessities of bigfoot hunting. Or, you know, other stuff. It has useful pockets and straps and things on it.",
         "location": "tent",
         "target": "back",
         "actions": {
@@ -50,9 +50,9 @@
             "can of berries",
             "blackberries"
         ],
-        "descriptionFirst": "A huge mass of blackberries have grown up and around the stump on the west end of the clearing.",
-        "descriptionShort": "",
-        "descriptionLong": "The blackberry vines are covered with huge, purplish-black berries. They look delicious.",
+        "descriptionFirst": "",
+        "descriptionShort": "The blackberry vines are covered with huge, purplish-black berries.",
+        "descriptionLong": "A huge mass of blackberries have grown up and around the stump on the west end of the clearing. The blackberry vines are covered with huge, purplish-black berries. They look delicious.",
         "location": "",
         "target": "emptyCan",
         "actions": {
@@ -74,8 +74,8 @@
             "dan's book"
         ],
         "descriptionFirst": "There is a book lying next to your sleeping bag.",
-        "descriptionShort": "A beat-up, hardcover book",
-        "descriptionLong": "The book is a rather beat up old hardcover book titled \"Bigfoot Legends of the Pacific Northwest\". Dan loaned it to you ages ago.",
+        "descriptionShort": "You see a beat-up, hardcover book",
+        "descriptionLong": "The book is a rather beat up old hardcover book titled \"Bigfoot Legends of the Pacific Northwest\", by Professor E. Rafferty. Dan loaned it to you ages ago.",
         "location": "tent",
         "target": "danCooking",
         "actions": {
@@ -83,7 +83,7 @@
             "put": "",
             "drop": "You drop the book. Shame on you, treating a book that way.",
             "use": "You flip through the book. It's got a lot of good information about Bigfoot. For instance, did you know that many scientists believe that Bigfoot is a vegetarian? True fact.",
-            "give": "You pull the book out of your pack and hand it to Dan. \"Oh, wow! I'd forgotten that you had this,\" says Dan. \"I want to re-read Kowalczyk's chapters on ethnobotanical evidence before I do anything else. It might take a while, so go ahead and explore without me.\" He sits down next to the camp stove, and begins reading the book, pausing every so often to look up and tend to the cooking bacon."
+            "give": "You pull the book out of your pack and hand it to Dan. \"Oh, wow! I'd forgotten that you had this,\" says Dan. \"I want to re-read Rafferty's chapters on ethnobotanical evidence before I do anything else. It might take a while, so go ahead and explore without me.\" He sits down next to the camp stove, and begins reading the book, pausing every so often to look up and tend to the cooking bacon."
         }
     },
     {
@@ -294,15 +294,15 @@
             "wooden stick"
         ],
         "descriptionFirst": "A walking stick is tangled in the brambles.",
-        "descriptionShort": "walking stick",
+        "descriptionShort": "You see a walking stick here.",
         "descriptionLong": "The walking stick is sturdy and interestingly gnarled. It's made of some kind of wood. You don't know enough about different types of wood to identify it, though.",
         "location": "woods2",
         "target": "octopus",
         "actions": {
             "get": "You reach gingerly into the thick brambles and manage to grab the stick, at the cost of some nasty scratches from the blackberry thorns.",
             "put": "",
-            "drop": "You drop the walking stick",
-            "use": "What a great idea!\n\nYou tug your walking stick out of your belt. (How else were you gonna carry it up here? You’ve only got two arms, sucker. You’re not an octopus.) The job still requires you to stretch, but you think you can reach the octopus with your stick.\n\nThe octopus thinks you can do it, too. It also thinks this is a bad idea. The octopus suddenly sprays you in the face with ink! Everything goes black! You try to clear your eyes, but then you lose your grip. Gravity, as it turns out, doesn’t lose you. Gravity never loses you.\n\nThe ground hurts. It hurts a lot. Your vision is still black from ink. Then everything goes blacker. Your last thought is that poking an endangered species was actually a terrible idea.",
+            "drop": "Hey, you BLED to get that stick--those blackberries were vicious! You think about dropping it, but decide instead to stick it through the straps on your backpack. That way you can carry it but keep your hands free.",
+            "use": "What a great idea!\n\nYou tug your walking stick out of the straps on your backpack. (How else were you gonna carry it up here? You’ve only got two arms, sucker. You’re not an octopus.) The job still requires you to stretch, but you think you can reach the octopus with your stick.\n\nThe octopus thinks you can do it, too. It also thinks this is a bad idea. The octopus suddenly sprays you in the face with ink! Everything goes black! You try to clear your eyes, but then you lose your grip. Gravity, as it turns out, doesn’t lose you. Gravity never loses you.\n\nThe ground hurts. It hurts a lot. Your vision is still black from ink. Then everything goes blacker. Your last thought is that poking an endangered species was actually a terrible idea.",
             "give": "doesn't want that."
         }
     },

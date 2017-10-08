@@ -41,10 +41,9 @@
             "cephalopod",
             "octo"
         ],
-        "descriptionFirst": "",
-        "descriptionShort": "You see a Pacific Northwest tree octopus here, coiled around your missing camping lantern.",
-        "descriptionLong": "The Pacific Northwest tree octopus (Octopus paxarbolis) is a small cephalopod with brown skin that is mottled with green and white--perfect camouflage for hiding in a Pacific Northwest rainforest. They're an endangered species, and you've never heard of one living in this part of the state. Maybe this is a new species! The octopus' tentacles are coiled around your missing camping lantern.",
-        "target": "",
+        "descriptionFirst": "There is a Pacific Northwest tree octopus clinging to the branches above you. They're an endangered species, and you've never heard of one living in this part of the state. Maybe this is a new species!\n\nThe octopus' tentacles are coiled around your missing camping lantern. It must have stolen the lantern during the night!",
+        "descriptionShort": "You see a Pacific Northwest tree octopus here. Its tentacles are coiled around your missing camping lantern.",
+        "descriptionLong": "The Pacific Northwest tree octopus (Octopus paxarbolis) is a small cephalopod with brown skin that is mottled with green and white--perfect camouflage for hiding in a Pacific Northwest rainforest. Because of its location in this part of the state, you suspect this might be a new species. Its tentacles are coiled possessively around your camping lantern.",        "target": "",
         "actions": {
             "get": "You try to grab the octopus, but it tentaclates (is that the right word?) up higher in the tree. When you try to climb after it, the branches creak ominously, so you return to the lower, stronger branches.",
             "talk": "You think that talking to the octopus might do some good. You're not sure what to say. What is it they advise with scared animals? It's not what you say, but how you say it in a calming voice?\n\nYou recite the first twenty lines of Charge of the Light Brigade to the octopus.\n\nIt doesn't respond.\n\nEveryone's a critic."
