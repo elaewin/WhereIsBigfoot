@@ -7,7 +7,7 @@ namespace WhereIsBigfoot
 {
     public class Location : Asset
     {
-        string name, descriptionFirst, descriptionLong, descriptionShort;
+        string name, title, descriptionFirst, descriptionLong, descriptionShort;
         Dictionary<string, string> exits;
         Dictionary<string, Character> characters;
         string[] objects;
@@ -15,6 +15,7 @@ namespace WhereIsBigfoot
         bool visited = false;
 
         public Location(string name,
+                        string title,
                         string descriptionFirst,
                         string descriptionLong,
                         string descriptionShort,
@@ -22,11 +23,13 @@ namespace WhereIsBigfoot
                         Dictionary<string, Character> characters,
                         string[] objects,
                         Dictionary<string, Item> items) : base(name,
+                                                               title,
                                                                descriptionFirst,
                                                                descriptionShort,
                                                                descriptionLong)
         {
             this.name = name;
+            this.title = title;
             this.descriptionFirst = descriptionFirst;
             this.descriptionLong = descriptionLong;
             this.descriptionShort = descriptionShort;
@@ -68,5 +71,4 @@ namespace WhereIsBigfoot
         }
     }
 }
-
 
