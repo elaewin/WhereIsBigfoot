@@ -83,7 +83,7 @@
             "put": "",
             "drop": "You drop the book. Shame on you, treating a book that way.",
             "use": "You flip through the book. It's got a lot of good information about Bigfoot. For instance, did you know that many scientists believe that Bigfoot is a vegetarian? True fact.",
-            "give": "You pull the book out of your pack and hand it to Dan. \"Oh, wow! I'd forgotten that you had this,\" says Dan. He sits down next to the camp stove, and begins reading the book, pausing every so often to look up and tend to the cooking bacon."
+            "give": "You pull the book out of your pack and hand it to Dan. \"Oh, wow! I'd forgotten that you had this,\" says Dan. \"I want to re-read Kowalczyk's chapters on ethnobotanical evidence before I do anything else. It might take a while, so go ahead and explore without me.\" He sits down next to the camp stove, and begins reading the book, pausing every so often to look up and tend to the cooking bacon."
         }
     },
     {
@@ -222,7 +222,7 @@
             "fat can",
             "hot grease"
         ],
-        "descriptionFirst": "As you watch, Dan carefully pours hot grease out of the frying pan and into the can. Dan looks up at you and grins. \"Hey, <name>, there you are!\" he says. \"Grab some bacon.\" ",
+        "descriptionFirst": "Next to the stove is a tin can. As you watch, Dan carefully pours hot grease out of the frying pan and into the can. Dan looks up at you and grins. \"Hey, <name>, there you are!\" he says. \"Grab some bacon.\" ",
         "descriptionShort": "A tin can half full of bacon grease",
         "descriptionLong": "The tin can is full of bacon grease. At the top of the can, congealed fat has formed a solid mass, sealing it like a gross, bacon flecked cork.",
         "location": "",
