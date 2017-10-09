@@ -1,6 +1,7 @@
 [
     {
         "name": "backpack",
+        "title": "Your backpack",
         "parseValue": [
             "backpack",
             "pack",
@@ -23,37 +24,38 @@
     },
     {
         "name": "bacon",
+        "title": "Bacon",
         "parseValue": [
             "bacon",
             "delicious bacon",
             "cooked bacon"
         ],
         "descriptionFirst": "",
-        "descriptionShort": "bacon",
+        "descriptionShort": "You see some bacon here.",
         "descriptionLong": "The bacon looks chock-full of deliciousness. It's been fried to perfection.",
         "location": "danCamp",
         "target": "octopus",
         "actions": {
-            "get": "You grab a few pieces of bacon, wrap them in a handy paper towel, and stick them in your pocket.",
+            "get": "You grab a few pieces of bacon, wrap them in a handy paper towel, and stick them in a pocket of your backpack.",
             "put": "You drop the bacon on the ground.",
             "drop": "You drop the bacon on the ground.",
             "use": "You eat some of the bacon. Mmm...bacon.",
-            "give": "Who doesn't like bacon? Okay, that's an unfair generalization. For all you know, tree octopi are vegetarian. But it's worth a shot. You reach into your coat pocket, tugging a strip of bacon free from the paper towel.\n\nHolding the bacon out to the tree octopus, you see immediate interest. The octopus pulls a little closer on the branch, reaching out to take the bacon with one of its arms. It still has plenty to hold onto the branch and the lantern, though... but you've got plenty of bacon!\n\nYou give the octopus another strip. Then another. Soon, you're down to the last piece. It wants that last strip of bacon. It wants the bacon so much. But it needs at least two arms to hold onto the branch, and four for all the bacon it already has, and two for the lantern'and you've got one more strip.\n\n'Come on, buddy,' you say. 'You know you want it.'\n\nThe tree octopus relents. You're right. It wants the bacon. It wants all the bacon it can get. Even if it means giving up the lantern. It unwinds one of its last two arms to reach for the bacon, and, sure enough, loses its grip on the lantern. You manage to catch the lantern before it falls too far.  Go you!"
+            "give": "Who doesn't like bacon? Okay, that's an unfair generalization. For all you know, tree octopi are vegetarian. But it's worth a shot. You reach into your coat pocket, tugging a strip of bacon free from the paper towel.\n\nHolding the bacon out to the tree octopus, you see immediate interest. The octopus pulls a little closer on the branch, reaching out to take the bacon with one of its arms. It still has plenty to hold onto the branch and the lantern, though... but you've got plenty of bacon!\n\nYou give the octopus another strip. Then another. Soon, you're down to the last piece. It wants that last strip of bacon. It wants the bacon so much. But it needs at least two arms to hold onto the branch, and four for all the bacon it already has, and two for the lantern'and you've got one more strip.\n\n'Come on, buddy,' you say. 'You know you want it.'\n\nThe tree octopus relents. You're right. It wants the bacon. It wants all the bacon it can get. Even if it means giving up the lantern. It unwinds one of its last two arms to reach for the bacon, and, sure enough, loses its grip on the lantern. You manage to catch the lantern before it falls too far. Go you!"
         }
     },
     {
         "name": "blackberries",
+        "title": "Blackberries",
         "parseValue": [
             "berries",
             "delicious berries",
             "delicious blackberries",
-            "can of berries",
-            "blackberries"
+            "blackberries",
         ],
         "descriptionFirst": "",
-        "descriptionShort": "The blackberry vines are covered with huge, purplish-black berries.",
+        "descriptionShort": "The brambles are covered with huge, purplish-black berries.",
         "descriptionLong": "A huge mass of blackberries have grown up and around the stump on the west end of the clearing. The blackberry vines are covered with huge, purplish-black berries. They look delicious.",
-        "location": "",
+        "location": "woods2",
         "target": "emptyCan",
         "actions": {
             "get": "You pick a handful of ripe blackberries, but realize that if you put them in your pack, they'll just get squished and make a huge, sticky mess. So you decide to hold them in your stomach. \n\nGet it? You eat the blackberries. They're delicious!",
@@ -62,6 +64,7 @@
     },
     {
         "name": "book",
+        "title": "A copy of \"Bigfoot Legends of the Pacific Northwest\"",
         "parseValue": [
             "book",
             "hardcover",
@@ -74,7 +77,7 @@
             "dan's book"
         ],
         "descriptionFirst": "There is a book lying next to your sleeping bag.",
-        "descriptionShort": "You see a beat-up, hardcover book",
+        "descriptionShort": "You see a beat-up, hardcover book here.",
         "descriptionLong": "The book is a rather beat up old hardcover book titled \"Bigfoot Legends of the Pacific Northwest\", by Professor E. Rafferty. Dan loaned it to you ages ago.",
         "location": "tent",
         "target": "danCooking",
@@ -88,6 +91,7 @@
     },
     {
         "name": "canOfBerries",
+        "title": "Tin can full of blackberries",
         "parseValue": [
             "berries",
             "tin",
@@ -100,7 +104,7 @@
             "tin of blackberries"
         ],
         "descriptionFirst": "",
-        "descriptionShort": "A tin can full of blackberries",
+        "descriptionShort": "You see a tin can full of blackberries here.",
         "descriptionLong": "You look at the tin can full of blackberries and admire your cleverness all over again.",
         "location": "",
         "target": "bigfoot",
@@ -114,6 +118,7 @@
     },
     {
         "name": "cellPhone",
+        "title": "Your (dead) cell phone",
         "parseValue": [
             "phone",
             "cell phone",
@@ -121,7 +126,7 @@
             "dead phone"
         ],
         "descriptionFirst": "",
-        "descriptionShort": "A dead cell phone",
+        "descriptionShort": "You see your cell phone here.",
         "descriptionLong": "Yep, it's your cell phone. Its battery sure is dead.",
         "location": "",
         "target": "",
@@ -135,6 +140,7 @@
     },
     {
         "name": "emptyCan",
+        "title": "An empty tin can",
         "parseValue": [
             "tin",
             "can",
@@ -144,7 +150,7 @@
             "fat can"
         ],
         "descriptionFirst": "",
-        "descriptionShort": "An empty tin can",
+        "descriptionShort": "You see an empty tin can on the ground here.",
         "descriptionLong": "This tin can formerly held the grease that Dan poured off of his bacon. Now it's empty.",
         "location": "",
         "target": "",
@@ -158,6 +164,7 @@
     },
     {
         "name": "filledLantern",
+        "title": "Lantern (filled with oil)",
         "parseValue": [
             "lantern",
             "lamp",
@@ -168,7 +175,7 @@
             "filled lamp"
         ],
         "descriptionFirst": "",
-        "descriptionShort": "Lantern (filled with oil)",
+        "descriptionShort": "You see a lantern here.",
         "descriptionLong": "The lantern is a small, oil burning lantern that you bought to take on camping trips a few years ago. It smells vaguely of bacon grease, and sloshes gently when you move it.",
         "location": "",
         "target": "",
@@ -181,6 +188,7 @@
     },
     {
         "name": "glowingLantern",
+        "title": "Glowing lantern",
         "parseValue": [
             "glowing lantern",
             "glowing lamp",
@@ -196,7 +204,7 @@
             "camp lamp"
         ],
         "descriptionFirst": "",
-        "descriptionShort": "A lit lantern",
+        "descriptionShort": "You see a lit camping lantern here.",
         "descriptionLong": "Your camping lantern is lit and casting a bright glow all around you.",
         "location": "",
         "target": "",
@@ -210,6 +218,7 @@
     },
     {
         "name": "grease",
+        "title": "Tin of bacon grease",
         "parseValue": [
             "grease",
             "tin",
@@ -223,7 +232,7 @@
             "hot grease"
         ],
         "descriptionFirst": "Next to the stove is a tin can. As you watch, Dan carefully pours hot grease out of the frying pan and into the can. Dan looks up at you and grins. \"Hey, <name>, there you are!\" he says. \"Grab some bacon.\" ",
-        "descriptionShort": "A tin can half full of bacon grease",
+        "descriptionShort": "You see a tin can full of bacon grease here.",
         "descriptionLong": "The tin can is full of bacon grease. At the top of the can, congealed fat has formed a solid mass, sealing it like a gross, bacon flecked cork.",
         "location": "",
         "target": "",
@@ -238,6 +247,7 @@
     },
     {
         "name": "lantern",
+        "title": "Camping lantern",
         "parseValue": [
             "lantern",
             "lamp",
@@ -247,7 +257,7 @@
             "unlit lamp"
         ],
         "descriptionFirst": "\n\nThe tree octopus watches you climb. You're not sure if it's impressed. Now that you're closer, you see its arms wrapped around a lantern. How did it get the lantern up here? It has eight arms'maybe that should be a clue about how it does anything. You've only got two arms and you can barely get around at all.\n\nThe tree octopus seems kind of possessive of the lantern. You weren't even that possessive of your favorite teddy bear when you were four. Then again, you only had two arms to hold it.",
-        "descriptionShort": "Lantern",
+        "descriptionShort": "You see your camping lantern here.",
         "descriptionLong": "The lantern is a small, oil burning lantern that you bought to take on camping trips a few years ago.",
         "location": "tree",
         "target": "",
@@ -261,6 +271,7 @@
     },
     {
         "name": "matches",
+        "title": "Box of matches",
         "parseValue": [
             "matches",
             "box of matches",
@@ -269,9 +280,9 @@
             "match",
             "a match"
         ],
-        "descriptionFirst": "",
-        "descriptionShort": "box of matches",
-        "descriptionLong": "The box of matches is a small box of strike anywhere matches. You glance inside briefly and see plenty of matches.",
+        "descriptionFirst": "You see a box of matches lying on the rock where you left it last night, next to where you last saw your lantern.",
+        "descriptionShort": "You see a box of matches here.",
+        "descriptionLong": "It is a small box of strike anywhere matches. You know that there are plenty of matches inside.",
         "location": "campsite",
         "target": "lantern",
         "actions": {
@@ -284,6 +295,7 @@
     },
     {
         "name": "stick",
+        "title": "",
         "parseValue": [
             "stick",
             "walking stick",
@@ -304,25 +316,6 @@
             "drop": "Hey, you BLED to get that stick--those blackberries were vicious! You think about dropping it, but decide instead to stick it through the straps on your backpack. That way you can carry it but keep your hands free.",
             "use": "What a great idea!\n\nYou tug your walking stick out of the straps on your backpack. (How else were you gonna carry it up here? You’ve only got two arms, sucker. You’re not an octopus.) The job still requires you to stretch, but you think you can reach the octopus with your stick.\n\nThe octopus thinks you can do it, too. It also thinks this is a bad idea. The octopus suddenly sprays you in the face with ink! Everything goes black! You try to clear your eyes, but then you lose your grip. Gravity, as it turns out, doesn’t lose you. Gravity never loses you.\n\nThe ground hurts. It hurts a lot. Your vision is still black from ink. Then everything goes blacker. Your last thought is that poking an endangered species was actually a terrible idea.",
             "give": "doesn't want that."
-        }
-    },
-    {
-        "name": "tree",
-        "parseValue": [
-            "tree",
-            "cedar tree",
-            "huge tree",
-            "cedar",
-            "huge cedar"
-        ],
-        "descriptionFirst": "The cedar tree is tall and strong, with plenty of branches thick enough for climbing. It also has plenty of foliage. No going bare for winter on a tree like this. This tree is green forever. Ever…evergreen? Or is that a different kind of tree? Nature is so confusing. Anyway, you're pretty sure it's a cedar. That'll do for now. Oh, and there's something rustling around in the branches.",
-        "descriptionLong": "At first it's all just branches and leaves. Leaves? Are those called leaves? They're kind of needle-y. You could look up the proper term if your cell phone wasn't dead. You almost give up squinting through the branches before you see a NORTHWEST TREE OCTOPUS!\n\nYou pull out your cell phone to take a picture...only to remember you can't, because the battery is dead. Nature is the worst.\n\nThe tree octopus seems to have its arms wrapped around something. You can't tell what it is from here. You could probably climb up there and get a closer look.",
-        "descriptionShort": "An enormous cedar tree dominates the clearing.",
-        "location": "woods4",
-        "target": "",
-        "actions": {
-            "get": "You can't possibly expect to take this HUGE TREE.",
-            "give": "The tree isn't interested in anything you have."
         }
     }
 ]
