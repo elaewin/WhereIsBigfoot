@@ -125,19 +125,6 @@ namespace WhereIsBigfoot
 			return null;
 		}
 
-		// Check if an Asset has a given target
-		private Asset AssetIsTarget(Dictionary<string, Asset> targetDict, string target)
-		{
-			foreach (Asset asset in targetDict.Values)
-			{
-				if (asset.Name == target)
-				{
-					return asset;
-				}
-			}
-			return null;
-		}
-
 		// Handles the parsing of input from the user.
 		public void ParseInput(string prompt)
 		{
