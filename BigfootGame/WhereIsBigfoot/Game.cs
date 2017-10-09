@@ -20,7 +20,7 @@ namespace WhereIsBigfoot
         List<string> allowedVerbs = new List<string>() { "drop", "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory" };
 
         Commands commands = new Commands();
-        //GameSettings gameSettings = new GameSettings();
+        
 
         private Player player;
 
