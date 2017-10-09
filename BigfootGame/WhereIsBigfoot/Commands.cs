@@ -124,12 +124,20 @@ namespace WhereIsBigfoot
         // Handle walking stick = checking inventory 
         // If in mountain and try to go to the cave
         // - without walking stick 
+
+        private void Tunnel(Player p, List<Location> locations)
+        {
+
+        }
         public void Go(Player p, string direction, List<Location> locations)
         {
             Location currentLocation = p.PlayerLocation;
             string newLocation;
+            if (currentLocation.Name == "mountain")
+            {
 
-            if (currentLocation.Exits.ContainsKey(direction))
+            }
+            else if (currentLocation.Exits.ContainsKey(direction))
             {
                 Console.Title = Console.Title.Remove(16);
                 newLocation = currentLocation.Exits[direction];
@@ -148,6 +156,7 @@ namespace WhereIsBigfoot
             else
             {
                 CannotVerbNoun("go", direction);
+                TypeLine(WrapText("Try a different direction. Up is also an option."));
             }
         }
 
