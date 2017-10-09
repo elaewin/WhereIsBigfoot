@@ -42,6 +42,12 @@ namespace WhereIsBigfoot
 			set => this.items = value;
 		}
 
+		public List<Character> Character
+		{
+			get => this.characters;
+			set => this.characters = value;
+		}
+
 		public Dictionary<string, string> ParseDict
 		{
 			get => this.parseDict;
@@ -97,13 +103,13 @@ namespace WhereIsBigfoot
 		// HELPER METHODS
 
 		// Check if an item is in a given dictionary of items and return that item or null
-		private Item DoesItemExistIn(Dictionary<string, Item> itemsDict, string itemName)
+		private Item ItemExistsIn(Dictionary<string, Item> itemsDict, string itemName)
 		{
 			foreach (Item item in itemsDict.Values)
 			{
 				if (item.ParseValue.Contains(itemName))
 					return item;
-				
+
 			}
 			return null;
 		}
@@ -120,7 +126,17 @@ namespace WhereIsBigfoot
 		}
 
 		// Check if an Asset has a given target
-		private Asset AssetIsTarget
+		private Asset AssetIsTarget(Dictionary<string, Asset> targetDict, string target)
+		{
+			foreach (Asset asset in targetDict.Values)
+			{
+				if (asset.Name == target)
+				{
+					return asset;
+				}
+			}
+			return null;
+		}
 
 		// Handles the parsing of input from the user.
 		public void ParseInput(string prompt)
@@ -136,7 +152,7 @@ namespace WhereIsBigfoot
 				string[] parsed = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
 				if (this.parseDict.ContainsKey(parsed[0]))
 					verb = this.parseDict[parsed[0]];
-				
+
 				if (parsed.Length == 0)
 				{
 					commands.TypeLine($"Sorry, {this.Player.PlayerName} I didn't catch that.");
@@ -157,27 +173,27 @@ namespace WhereIsBigfoot
 					switch (verb)
 					{
 						case "drop":
-							Item itemToDrop = DoesItemExistIn(this.Player.Inventory, noun);
+							Item itemToDrop = ItemExistsIn(this.Player.Inventory, noun);
 							this.commands.Drop(this.Player, itemToDrop);
 							break;
 
 						case "get":
 							//Checks against the parseValues of items in current location.
-							Item itemToGet = DoesItemExistIn(this.Player.PlayerLocation.Items, noun);
+							Item itemToGet = ItemExistsIn(this.Player.PlayerLocation.Items, noun);
 							if (itemToGet == null)
 							{
 								WriteLine($"You're not able to get {noun}.");
 								break;
 							}
-							this.commands.Get(this.Player, itemToGet);
+							this.commands.Get(this.Player, itemToGet, this.Items);
 							break;
 
 						case "give":
 							// Get the target character for it item being given.
-							string giveResponse= GetInput($"Who do you want to give {noun}?");
+							string giveResponse = GetInput($"Who do you want to give {noun}?");
 
 							// check that item is in player inventory
-							Item itemToGive = DoesItemExistIn(this.Player.Inventory, noun);
+							Item itemToGive = ItemExistsIn(this.Player.Inventory, noun);
 
 							// check characters.parsevalue is in location (write method to check location) IsInLocation
 							Character targetCharacter = CharacterExistsIn(this.Player.PlayerLocation, giveResponse);
@@ -210,20 +226,48 @@ namespace WhereIsBigfoot
 							break;
 
 						case "use":
-							// Get the target for the use command
-							string useTarget = GetInput($"What do you want to use {noun} on?");
+							Item itemToUse = ItemExistsIn(this.Player.Inventory, noun);
+							if (itemToUse == null)
+							{
+								WriteLine($"You don't have {noun} in your inventory.");
+								break;
+							}
+							else
+							{
+								// Get the target for the use command
+								string useTarget = GetInput($"What do you want to use the {noun} on?");
 
-							//check player inventory items parseValue vs noun
-							Item itemToUse = DoesItemExistIn(this.Player.Inventory, noun);
-							string itemTarget = itemToUse.Target;
+								//check player inventory items & list of character in location vs. target on each asset.
+								string itemTarget = itemToUse.Target;
 
-							//check player inventory items.parseValue for target AND current location characters for parsevalues
-							// pass player, item, asset
-							commands.Use(Player, parsed[1], useTarget);
+								if (itemTarget != null)
+								{
+									foreach (Item item in this.Items)
+									{
+										if (item.Name == itemTarget)
+										{
+											this.commands.Use(this.Player, itemToUse, item);
+											break;
+										}
+									}
+									foreach (Character character in this.characters)
+									{
+										if (character.Name == itemTarget)
+										{
+											this.commands.Use(this.Player, itemToUse, character);
+											break;
+										}
+									}
+								}
+								else
+								{
+									WriteLine($"You can't use the {noun} that way.");
+								}
+							}
 							break;
 
 						case "help":
-							commands.Help(Player);
+							commands.Help(Player, this.allowedVerbs);
 							break;
 
 						case "quit":
