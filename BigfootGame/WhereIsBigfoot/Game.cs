@@ -17,8 +17,7 @@ namespace WhereIsBigfoot
 		private List<Character> characters;
 		private Dictionary<string, string> parseDict;
 		List<string> allowedVerbs = new List<string>() { "drop", "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory" };
-		private List<string> blueWords = new List<string>() { "shit", "fuck", "bitch", "asshole", "ass", "fag", "pussy", "dick", "cock", "damn", "bugger", "bollocks", "arsehole", "cunt" };
-
+		
 		Commands commands = new Commands();
 
 		private Player player;
@@ -131,6 +130,7 @@ namespace WhereIsBigfoot
 		{
 			string input = GetInput(prompt).ToLower().Trim();
 
+
 			if (IsValidInput(input) && (input != "") && input != null)
 			{
 				string verb = "";
@@ -139,11 +139,13 @@ namespace WhereIsBigfoot
 				// split the incoming string and check it against the possible verbs in the parseDict.
 				string[] parsed = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
 
-				foreach (string word in this.blueWords)
+				List<string> blueWords = new List<string>() { "shit", "fuck", "bitch", "asshole", "ass", "fag", "pussy", "dick", "cock", "damn", "bugger", "bollocks", "arsehole", "cunt" };
+
+				foreach (string word in blueWords)
 				{
 					if (parsed[0] == word || parsed[1] == word)
 					{
-						WriteLine($"Way to stay classy there, {this.Player.PlayerName}. I'm sure the trees are very impressed by your command of the English language.");
+						WriteLine($"Way to stay classy there, {this.Player.PlayerName}. I'm sure the trees are very impressed by your masterful command of the English language.");
 						return;
 					}
 				}
