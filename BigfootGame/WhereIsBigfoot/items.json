@@ -285,7 +285,7 @@
         "descriptionShort": "You see a box of matches here. ",
         "descriptionLong": "It is a small box of strike anywhere matches. You know that there are plenty of matches inside. ",
         "location": "campsite",
-        "target": "lantern",
+        "target": "filledLantern",
         "actions": {
             "get": "You pick up the box of matches. ",
             "put": "",
