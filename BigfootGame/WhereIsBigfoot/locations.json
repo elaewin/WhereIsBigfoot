@@ -476,59 +476,92 @@
     },
     {
         "name": "valley",
-        "title": ,\n"descriptionFirst": "The light grows from dim to welcoming, and from welcoming to bright. It takes your eyes a moment to adjust. A valley comes into focus, filled with lush green trees and singing birds. Squirrels. Raccoons. Forest stuff. Bigfoot.\n\nHoly cow! THAT'S REALLY BIGFOOT!",
-        "descriptionLong": "To the south is a dark cave.",
+        "title": "A Remote Mountain Valley",
+        "descriptionFirst": "The light grows from dim to welcoming, and from welcoming to bright. It takes your eyes a moment to adjust. A valley comes into focus, filled with lush green trees and singing birds. Squirrels. Raccoons. Forest stuff. Bigfoot.",
+        "descriptionLong": "You are in a secluded mountain valley, filled with lush green trees and singing birds. Animals rustle in the underbrush.",
         "descriptionShort": "You are in a secluded mountain valley.",
         "exits": {
-            "south": "tunnel4"
+            "south": "tunnel5",
+            "text": "To the south is a dark cave."
         },
         "characters": {
             "bigfootHostile": null
         },
-        "objects": null,
+        "objects": [
+            "birds",
+            "raccoon",
+            "raccoons",
+            "squirrel",
+            "squirrels",
+            "stuff",
+            "trees"
+        ],
         "items": {
             "empty": null
         }
     },
     {
         "name": "woods1",
-        "title": ,\n"descriptionFirst": "Dan said you'd be camping out in the woods, and here they are. Yup. Woods. It's very woodsy. You see trees everywhere, and where you don't see trees, you see bushes. Tall trees, short bushes, vice versa, all of it. The birds are singing, too, but it's a little distant. What really makes an impact is the silence. You don't hear cars or music or the sound of a ventilation system. You only hear the soft breeze through the trees. Apparently, this is what people had to work with to get away from it all before they invented noise-canceling headphones.\n\nTrails lead north, south, east, and west.",
-        "descriptionLong": "You are in the woods. You are pretty sure that you could get back to your campsite by following the trail to the west. Other trails lead north, south, east.",
+        "title": "A Trail in the Woods",
+        "descriptionFirst": "Dan said you'd be camping out in the woods, and here they are. Yup. Woods. It's very woodsy. You see trees everywhere, and where you don't see trees, you see bushes. Tall trees, short bushes, vice versa, all of it. The birds are singing, too, but it's a little distant. What really makes an impact is the silence. You don't hear cars or music or the sound of a ventilation system. You only hear the soft breeze through the trees. Apparently, this is what people had to work with to get away from it all before they invented noise-canceling headphones.",
+        "descriptionLong": "You are in the woods. It's very quiet and peaceful here. Lots of trees, bushes, and other woodsy things.",
         "descriptionShort": "You are in the woods.",
         "exits": {
             "north": "woods5",
             "east": "woods2",
             "south": "woods3",
-            "west": "campsite"
+            "west": "campsite",
+            "text": "You are pretty sure that you could get back to your campsite by following the trail to the west. Other trails lead north, south, and east."
         },
         "characters": {
             "empty": null
         },
-        "objects": null,
+        "objects": [
+            "birds",
+            "branches",
+            "breeze",
+            "bush",
+            "bushes",
+            "silence",
+            "things",
+            "trails",
+            "tree",
+            "trees",
+            "woods"
+        ],
         "items": {
             "empty": null
         }
     },
     {
         "name": "woods2",
-        "title": ,\n"descriptionFirst": "At some point, a tree fell, leaving something of a clearing in the forest. A huge mass of blackberries have grown up and around the stump on the west end of the clearing. You hear the buzzing of bees as they bumble around in the warm sunlight streaming through the broken canopy. A walking stick is tangled in the brambles. A glint of water can be seen through the trees to the north. Trails lead south and west.",
-        "descriptionLong": "At some point, a tree fell, leaving something of a clearing in the forest. You hear the buzzing of bees as they bumble around on the blackberries growing here. A glint of water can be seen through the trees to the north. Trails lead south and west.",
-        "descriptionShort": "You are in the woods.",
+        "title": "A Forest Clearing",
+        "descriptionFirst": "At some point, a tree fell, leaving something of an open space in the forest. A huge mass of blackberry bushes has grown up and around the stump on the west end of the clearing. You hear the buzzing of bees as they bumble around in the warm sunlight streaming through the broken canopy. A glint of water can be seen through the trees to the north.",
+        "descriptionLong": "At some point, a tree fell, leaving something of an open space in the forest. You hear the buzzing of bees as they bumble around. A glint of water can be seen through the trees to the north.",
+        "descriptionShort": "You are in a bramble-filled clearing in the woods.",
         "exits": {
             "north": "lakeshore",
             "south": "woods3",
-            "west": "woods1"
+            "west": "woods1",
+            "text": "Trails lead north, south, and west."
         },
         "characters": {
             "empty": null
         },
         "objects": [
-
-            "brambles",
             "bees",
-            "sunlight",
+            "brambles",
+            "branches",
+            "canopy",
             "stump",
-            "water"
+            "sunlight",
+            "trail",
+            "trails",
+            "tree",
+            "trees",
+            "vines",
+            "water",
+            "woods"
         ],
         "items": {
             "walking stick": null,
@@ -537,55 +570,104 @@
     },
     {
         "name": "woods3",
-        "title": ,\n"descriptionFirst": "It's a good thing that you like trees, because these woods are full of them! It's also a rainforest, which calls for a certain amount of dampness everywhere, but you're from Seattle--you're used to that. Something is different here, though.\n\nYou look around. Trees: check. Birds singing in the trees: Check. Scent of bacon on the wind--Wait, what?\n\nYou take a deep breath. Yep. The scent of bacon is definitely wafting up along the trail from the south. Other trails lead north, east, and west.",
-        "descriptionLong": "The scent of bacon is wafting from the south. Trails lead north, east, and west through the woods.",
-        "descriptionShort": "You are in the woods.",
+        "title": "A Trail in the Woods",
+        "descriptionFirst": "It's a good thing that you like trees, because these woods are full of them! It's also a rainforest, which calls for a certain amount of dampness everywhere, but you're from Seattle--you're used to that. Something is different here, though.\n\nYou look around. Trees: check. Birds singing in the trees: Check. Scent of bacon on the breeze--Wait, what?\n\nYou take a deep breath. Yep. The scent of bacon is wafting from the south.",
+        "descriptionLong": "You are on a trail in the woods. Very little sunlight is penetrating the trees here, so the whole area is a bit damp. The scent of bacon is wafting from the south.",
+        "descriptionShort": "You are on a trail in the woods.",
         "exits": {
             "north": "woods2",
             "east": "woods4",
             "south": "danCamp",
-            "west": "campsite"
+            "west": "woods1",
+            "text": "Trails lead north, south, east, and west through the woods."
         },
         "characters": {
             "empty": null
         },
-        "objects": null,
+        "objects": [
+            "bird",
+            "birds",
+            "branches",
+            "breeze",
+            "dampness",
+            "silence",
+            "things",
+            "trail",
+            "trails",
+            "tree",
+            "trees",
+            "woods"
+        ],
         "items": {
             "empty": null
         }
     },
     {
         "name": "woods4",
-        "title": ,\n"descriptionFirst": "Most of the woods around here are pretty similar. Trees, undergrowth, birds singing, that sort of thing. This place is a little different, because a HUGE tree dominates the puny, normal-sized trees around it.",
-        "descriptionLong": "Something is rustling in the tree above you. Trails lead south and west.",
-        "descriptionShort": "You are in the woods.",
+        "title": "Below a Huge Cedar",
+        "descriptionFirst": "Most of the woods around here are pretty similar. Trees, undergrowth, birds singing, that sort of thing. This place is a little different, because a HUGE cedar tree dominates the puny, normal-sized trees around it.\n\nThe cedar tree is tall and strong, with plenty of branches thick enough for climbing. It also has plenty of foliage. No going bare for winter on a tree like this. This tree is green forever. Ever…evergreen? Or is that a different kind of tree? Nature is so confusing. Anyway, you're pretty sure it's a cedar. That'll do for now. Oh, and there's something rustling around in the branches.",
+        "descriptionLong": "A massive, old-growth cedar tree dominates this part of the woods. You've seen old pictures of lumberjacks dwarfed by the trunks of old-growth timber, but you've never seen a tree this big before with your own eyes. It's enormous!",
+        "descriptionShort": " A massive, old-growth cedar tree dominates this part of the woods.",
         "exits": {
             "up": "tree",
             "south": "danCamp",
-            "west": "woods3"
+            "west": "woods3",
+            "text": "Trails lead south and west"
         },
         "characters": {
             "empty": null
         },
-        "objects": null,
+        "objects": [
+            "branches",
+            "cedar tree",
+            "cedar",
+            "foliage",
+            "huge cedar",
+            "huge tree",
+            "rustling",
+            "trail",
+            "trails",
+            "tree",
+            "trees",
+            "trunk",
+            "woods"
+        ],
         "items": {
-            "tree": null
+            "empty": null
         }
     },
     {
         "name": "woods5",
-        "title": ,\n"descriptionFirst": "The woods seem to thin out a bit around here. A glint of water can be seen through the trees to the east. There seems to be a clearing to the north. A trail leads south.",
-        "descriptionLong": "A glint of water can be seen through the trees to the east. There seems to be a clearing to the north. A trail leads south.",
-        "descriptionShort": "You are in the woods.",
+        "title": "An Uphill Trail",
+        "descriptionFirst": "The trail starts to go uphill a bit, and the woods are thinning out to the north as the trail climbs up into the mountains. The merrily singing birds seem to mock the  ache in your legs from the increasing incline. A glint of water can be seen through the trees to the east.",
+        "descriptionLong": " The trail  starts to go uphill a bit, and the woods are thinning out to the north as the trail climbs up into the mountains A glint of water can be seen through the trees to the east",
+        "descriptionShort": "You are on an uphill trail in the woods.",
         "exits": {
             "north": "mountain",
+            "south": "woods1",
             "east": "lakeshore",
-            "south": "woods1"
+            "up": "mountain",
+            "down": "woods1",
+            "text": " Trails go north, east, and south."
         },
         "characters": {
             "empty": null
         },
-        "objects": null,
+        "objects": [
+            "bird",
+            "birds",
+            "dampness",
+            "glint",
+            "incline",
+            "silence",
+            "things",
+            "trail",
+            "trails",
+            "tree",
+            "trees",
+            "water",
+            "woods"
+        ],
         "items": {
             "empty": null
         }
