@@ -94,13 +94,13 @@
     "talk": "talk",
     "tell": "talk",
     "apply": "use",
+    "eat": "use",
     "fill": "use",
     "handle": "use",
+    "light": "use",
     "manipulate": "use",
     "operate": "use",
-    "use": "use",
-    "light": "use",
-    "utilize": "use",
     "swing": "use",
-    "eat": "use"
+    "use": "use",
+    "utilize": "use"
 }

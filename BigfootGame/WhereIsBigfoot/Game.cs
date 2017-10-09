@@ -15,6 +15,7 @@ namespace WhereIsBigfoot
         private List<Location> locations;
         private List<Item> items;
         private List<Character> characters;
+        private Dictionary<string, string> parseDict;
         List<string> allowedVerbs = new List<string>() { "drop", "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory" };
 
         Commands commands = new Commands();
@@ -41,17 +42,23 @@ namespace WhereIsBigfoot
             set => this.items = value;
         }
 
+        public Dictionary<string, string> ParseDict {
+            get => this.parseDict;
+            set => this.parseDict = value;
+        }
+
         // Deserialize JSON from a file. 
         public void LoadData(Game game)
         {
             string jsonLocationFile = @"../../locations.json";
             string jsonItemFile = @"../../items.json";
             string jsonCharacterFile = @"../../characters.json";
+            string parseDictFile = @"../../parseDictionary.json";
 
             game.items = JsonConvert.DeserializeObject<List<Item>>(File.ReadAllText(jsonItemFile));
             game.characters = JsonConvert.DeserializeObject<List<Character>>(File.ReadAllText(jsonCharacterFile));
             game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonLocationFile));
-
+            game.parseDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(parseDictionaryFile));
             
             // Go through each item and assign the item to the items dict in each location based on the location property of the item.
             foreach (Item item in game.items)
@@ -86,14 +93,18 @@ namespace WhereIsBigfoot
             }
         }
 
-        public void ParseInput(string prompt)
+        public void ParseInput(string prompt, Game game)
         {
             string input = GetInput(prompt).ToLower().Trim();
 
             if (IsValidInput(input) && (input != "") && input != null)
             {
+                string verb = "";
+
+                // split the incoming string and check it against the possible verbs in the parseDict.
                 string[] parsed = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
-                string verb = parsed[0];
+                if (this.parseDict.ContainsKey(parsed[0]))
+                    verb = this.parseDict[parsed[0]];
 
                 if (parsed.Length == 0)
                 {
@@ -304,18 +315,22 @@ namespace WhereIsBigfoot
             } while (game.running == true);
         }
 
+        // Check against a regex string that allows all letters, spaces, apostrophes, dashes.
         public static bool IsValidInput(string str)
         {
-            Regex regexString = new Regex(@"[a-z\s'\r]*$");
+            Regex regexString = new Regex(@"^[a-zA-Z\s-']+\z");
             return regexString.IsMatch(str);
         }
 
+        // check against a regex string that takes one word of just letters, or two words separated by a space.
+        // Format is beginning of line, one or more letters of any length, one or no spaces, zero or more letters of any length, end of line.
         public static bool IsValidInfo(string str)
         {
-            Regex regexString = new Regex(@"[a-zA-Z\s]*$");
+            Regex regexString = new Regex(@"^[a-zA-Z]+\s?[a-zA-Z]*\z");
             return regexString.IsMatch(str);
         }
 
+        // Take in string input from the user. Corrects null input.
         public static string GetInput(string prompt)
         {
             Console.Write(prompt);
