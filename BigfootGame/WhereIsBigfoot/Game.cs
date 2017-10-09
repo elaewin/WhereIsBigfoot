@@ -286,23 +286,23 @@ namespace WhereIsBigfoot
 								break;
 							}
 
-						default:
-							commands.Help(Player);
-							break;
-					}
-				}
-				else
-				{
-					WriteLine("I'm sorry, I didn't understand that. For information about what kinds of commands are available, type \"help\".");
-				}
-				if (parsed[0] != "look" && parsed[0] != "quit" && parsed[0] != "go")
-					WriteLine($"{this.Player.PlayerLocation.DescriptionShort}");
-			}
-			else
-			{
-				WriteLine("I'm sorry, I didn't understand that. For information about what kinds of commands are available, type \"help\".");
-			}
-		}
+                        default:
+                            commands.Help(Player, this.allowedVerbs);
+                            break;
+                    }
+                }
+                else
+                {
+                    WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\".");
+                }
+                if (parsed[0] != "look" && parsed[0] != "quit" && parsed[0] != "go")
+                    WriteLine($"{this.Player.PlayerLocation.DescriptionShort}");
+            }
+            else
+            {
+                WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\".");
+            }
+        }
 
 		// Console formatting
 		public void FormatConsole()
