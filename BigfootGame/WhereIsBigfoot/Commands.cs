@@ -402,19 +402,10 @@ namespace WhereIsBigfoot
 
         private void CannotVerbNoun(string verb, string noun)
         {
-            TypeLine($"You can't {verb} {noun} ");
+           TypeLine($"You can't {verb} {noun} ");
         }
 
-        public void TypeLine(string line)
-        {
-            for (int i = 0; i < line.Length; i++)
-            {
-                Console.Write(line[i]);
-                System.Threading.Thread.Sleep(25); // Sleep for 15 milliseconds between characters.
-            }
-            Console.WriteLine();
-            Console.WriteLine();
-        }
+       
 
         //public string wrapText(string paragraph)
         //{

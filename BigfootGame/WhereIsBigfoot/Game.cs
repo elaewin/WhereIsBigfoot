@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using static System.Console;
 
 
+
 namespace WhereIsBigfoot
 {
     public class Game
@@ -19,10 +20,12 @@ namespace WhereIsBigfoot
         List<string> allowedVerbs = new List<string>() { "drop", "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory" };
 
         Commands commands = new Commands();
+        //GameSettings gameSettings = new GameSettings();
 
         private Player player;
 
         bool running = true;
+        private object typSpeed;
 
         public Player Player
         {
@@ -108,7 +111,7 @@ namespace WhereIsBigfoot
 
                 if (parsed.Length == 0)
                 {
-                    commands.TypeLine($"Sorry, {this.Player.PlayerName} I didn't catch that.");
+                    gameSettings.TypeLine($"Sorry, {this.Player.PlayerName} I didn't catch that.");
                     return;
                 }
 
@@ -273,6 +276,34 @@ namespace WhereIsBigfoot
             return deets;
         }
 
+        public int[] GetGameSettings()
+        {
+            int typeSpeed;
+            int foreground;
+            int background;
+
+            do
+            {
+                typeSpeed = Convert.ToInt16(GetInput("Choose a gamespeed from 1-10: "));
+            } while (typeSpeed < 1 || typeSpeed > 10);
+
+            do
+            {
+                foreground = Convert.ToInt16(GetInput("Choose a foreground color by entering the corresponding number: \n Black = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9"));
+            } while (foreground < 1 || foreground > 9);
+
+            do
+            {
+                background = Convert.ToInt16(GetInput("Choose a background color by entering the corresponding number: \n Black = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9"));
+            } while (background < 1 || background > 9);
+
+            int[] settings = { typeSpeed, foreground, background };
+
+            commands.TypeLine("Boom! your settings are implemented");
+            return settings;
+        }
+
+
         static void Main(string[] args)
         {
 
@@ -285,6 +316,9 @@ namespace WhereIsBigfoot
             // create Player instance
             string[] playerDetails = game.GetPlayerDetails();
             Player newPlayer = new Player(playerDetails[0], playerDetails[1], playerDetails[2]);
+
+            int[] settings = game.GetGameSettings();
+            GameSettings gameSettings = new GameSettings(settings[0], settings[1], settings[2]);
 
             foreach (Location location in game.Locations)
             {
