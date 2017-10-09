@@ -232,6 +232,13 @@ namespace WhereIsBigfoot
             if (entry == "none")
             {
                 TypeLine(wrapText($"{p.PlayerLocation.DescriptionLong} \n"));
+                string descriptions = "";
+                foreach (Character character in p.PlayerLocation.Characters.Values)
+                    descriptions += character.DescriptionShort;
+                foreach (Item item in p.PlayerLocation.Items.Values)
+                    descriptions += item.DescriptionShort;
+                if (descriptions != "")
+                    TypeLine(wrapText($"{descriptions}"));
                 return;
             }
             TypeLine($"I don't see {entry} here. ");
