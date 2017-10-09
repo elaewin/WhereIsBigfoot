@@ -26,6 +26,7 @@ namespace WhereIsBigfoot
         {
             this.name = name;
             this.title = title;
+            this.descriptionFirst = descriptionFirst;
             this.descriptionShort = descriptionShort;
             this.descriptionLong = descriptionLong;
             this.actions = actions;
