@@ -13,6 +13,7 @@ namespace WhereIsBigfoot
         // no checks needed 
 
         // passing player, asset 
+        // TESTME: takes new player, takes an asset, test "RESULT"
         public void Drop(Player p, Asset a)
         {
             // check if passed null 
@@ -21,11 +22,13 @@ namespace WhereIsBigfoot
                 Item item = (Item)a;
                 p.PlayerLocation.Items.Add(item.Name, item);
                 p.Inventory.Remove(item.Name);
+                // RESULT
                 TypeLine(item.Actions["drop"]);
             }
             else
             {
                 // handle item doesn't exist
+                // RESULT
                 TypeLine($"You do not have {a.Name} in your inventory.");
             }
         }
@@ -44,9 +47,14 @@ namespace WhereIsBigfoot
             if (p.PlayerLocation.Items.ContainsKey(a.Name))
             {
                 Item item = (Item)a;
+                
                 if (p.PlayerLocation.Items[item.Name].Actions.ContainsKey("get"))
                 {
-                    TransferItem(p, item);
+                    if(item.Target == "danReading")
+                    { }
+                    else if(item.Target == "emptyCan")
+                    { }
+                    TransferItem(p, item); 
                 }
                 else
                 {
@@ -64,7 +72,7 @@ namespace WhereIsBigfoot
                 else
                 {
                     CannotVerbNoun("get", a.Name);
-                    TypeLine($"Grabbing {a.Name} would be rude and they do not fit in your backpack.");
+                    TypeLine($"Getting {a.Name} would be rude and they do not fit in your backpack.");
                 }
             }
             else
@@ -74,7 +82,11 @@ namespace WhereIsBigfoot
             }
         }
 
+        // : takes player, item, two characters
+        // see RESULT in SwitchChar 
+
         // player, item as an item, character as a character
+        // character dictionary passed 
         public void Give(Player p, Item item, Character char1, Character char2)
         {
             // check to see if character is target
@@ -83,6 +95,8 @@ namespace WhereIsBigfoot
                 // give Dan book or Bigfoot bacon
                 SwitchChar(p, item, char1, char2);
             }
+            // RESULT
+            // handle mismatch
             else
             {
                 CannotVerbNoun("give", item.Name);
@@ -220,6 +234,7 @@ namespace WhereIsBigfoot
         }
 
         // write this nicely
+        // use "title"
         public void Inventory(Player p)
         {
             TypeLine("You have the following inventory: ");
@@ -230,6 +245,7 @@ namespace WhereIsBigfoot
 
         }
 
+        // done
         public void Look(Player p, string entry)
         {
             foreach (Item item in p.Inventory.Values)
@@ -285,15 +301,19 @@ namespace WhereIsBigfoot
             }
         }
 
-        // TODO have game pass both characters
+        // TODO tell game engineer to have game pass both characters
         private void SwitchChar(Player p, Item item, Character char1, Character char2)
         {
+            // RESULT check if danCooking is removed from characters dict in player location
+            // RESULT check if danReading is in characters dict in player location
             if (item.Name == "book" && char1.Name == "danCooking")
             {
                 p.Inventory.Remove(item.Name);
                 p.PlayerLocation.Characters.Remove("danCooking");
                 p.PlayerLocation.Characters.Add("danReading", char2);
             }
+            // RESULT check if bigfootHostile is removed from characters dict in player location
+            // RESULT check if bigfootFriendly is in characters dict in player location
             else if (item.Name == "bacon" && char1.Name == "bigfootHostile")
             {
                 p.Inventory.Remove(item.Name);
@@ -301,7 +321,6 @@ namespace WhereIsBigfoot
                 p.PlayerLocation.Characters.Add("bigfootFriendly", char2);
             }
         }
-
 
         public void ShowLocation(Location location)
         {
