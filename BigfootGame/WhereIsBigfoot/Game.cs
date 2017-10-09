@@ -10,6 +10,7 @@ using static System.Console;
 
 namespace WhereIsBigfoot
 {
+<<<<<<< HEAD
 	public class Game
 	{
 		private List<Location> locations;
@@ -106,8 +107,6 @@ namespace WhereIsBigfoot
 				
 			}
 			return null;
-
-
 		}
 
 		public void ParseInput(string prompt)
@@ -145,14 +144,8 @@ namespace WhereIsBigfoot
 					switch (verb)
 					{
 						case "drop":
-							// Check asset parseValue in player inventory IsInInventory
-							foreach (Item item in this.Player.Inventory.Values)
-							{
-								if (item.ParseValue.Contains(noun))
-									this.commands.Drop(this.Player, item);
-								break;
-							}
-							this.commands.Drop(this.Player, null);
+							Item item = IsInInventory(this.Player, noun);
+							this.commands.Drop(this.Player, item);
 							break;
 						// pass player and object or null
 
