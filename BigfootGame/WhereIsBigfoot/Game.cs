@@ -168,7 +168,7 @@ namespace WhereIsBigfoot
                             break;
 
                         case "help":
-                            commands.Help(Player);
+                            commands.Help(Player, allowedVerbs);
                             break;
                         
                         case "quit":
@@ -188,7 +188,7 @@ namespace WhereIsBigfoot
                             }
 
                         default:
-                            commands.Help(Player);
+                            commands.Help(Player, allowedVerbs);
                             break;
                     }
                 }
