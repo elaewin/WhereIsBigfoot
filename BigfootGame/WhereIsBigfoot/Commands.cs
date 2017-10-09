@@ -8,6 +8,8 @@ namespace WhereIsBigfoot
     // commands are in alpha order
     // helper functions at bottom 
 
+    // TODO: null check for all 
+
     public class Commands
     {
         // no checks needed 
@@ -110,40 +112,42 @@ namespace WhereIsBigfoot
             }
         }
 
-
-        // More or less DONE
+        // Handle tunnel = checking location 
+        // check inventory and check if lantern is lit 
+        // tunnel 1 or tunnel 4 (check against map) 
+        // - lantern is lit - different tunnel
+        // - tunnel1Lit (naming convention) 
+        // - lantern is dark - has three moves 
+        // - if leave counter reset 
+        // - special case, handle tunnel 
+        // - handle counter for player 
+        // Handle walking stick = checking inventory 
+        // If in mountain and try to go to the cave
+        // - without walking stick 
         public void Go(Player p, string direction, List<Location> locations)
         {
             Location currentLocation = p.PlayerLocation;
             string newLocation;
+
             if (currentLocation.Exits.ContainsKey(direction))
             {
                 Console.Title = Console.Title.Remove(16);
                 newLocation = currentLocation.Exits[direction];
-                if (currentLocation.Name == "woods5")
+                foreach (Location location in locations)
                 {
-                    Mountain(p, locations);
-                }
-                else if (currentLocation.Name == "mountain")
-                {
-                    Tunnel(p, locations);
-                }
-                else
-                {
-                    foreach (Location location in locations)
+                    if (location.Name == newLocation)
                     {
-                        if (location.Name == newLocation)
-                        {
-                            GoToLocation(p, location);
+                        p.PlayerLocation = location;
+                        Console.Title += $"? -- {location.Title}";
+                        Console.WriteLine();
+                        ShowLocation(location);
 
-                        }
                     }
                 }
             }
             else
             {
                 CannotVerbNoun("go", direction);
-                WrapText("Try a different direction. Up is also an option.");
             }
         }
 
@@ -214,18 +218,11 @@ namespace WhereIsBigfoot
             }
         }
 
-        // DONE        
-        public void Put(Player p, Item item, Asset asset, List<Item> items)
+        // DONE
+        // write like use 
+        public void Put(Player p, Item item, Asset asset)
         {
-            if (item.Name == "lantern" & asset.Name == "grease")
-            {
-                Lantern(p, item, asset, items, "filledLantern");
-            }
-            else if(item.Name == "filledLantern" & asset.Name == "matches")
-            {
-                Lantern(p, item, asset, items, "glowingLantern");
-            }
-            else if (item.Target == asset.Name)
+            if (item.Target == asset.Name)
             {
                 WrapText(item.Actions["put"]);
             }
@@ -504,6 +501,11 @@ namespace WhereIsBigfoot
             }
             Console.WriteLine();
         }
+
+		private void GameOverMan()
+		{
+
+		}
 
 		public void WrapText(string paragraph)
 		{

@@ -7,7 +7,6 @@ using System.Text;
 using Newtonsoft.Json;
 using static System.Console;
 
-
 namespace WhereIsBigfoot
 {
 	public class Game
@@ -21,8 +20,6 @@ namespace WhereIsBigfoot
 		Commands commands = new Commands();
 
 		private Player player;
-
-		bool running = true;
 
 		public Player Player
 		{
@@ -320,7 +317,7 @@ namespace WhereIsBigfoot
 							string verify = GetInput("Are you sure you want to quit? y/n: ").ToLower();
 							if (verify == "y" || verify == "yes")
 							{
-								this.running = false;
+								this.Player. = false;
 								WriteLine();
 								commands.WrapText("Thank you for playing Where is Bigfoot!");
 								WriteLine();
@@ -469,7 +466,7 @@ namespace WhereIsBigfoot
 			{
 				game.ParseInput("\nWhat would you like to do?\n> ");
 
-			} while (game.running == true);
+			} while (game.Player.GameIsRunning == true);
 		}
 
 		// Check against a regex string that allows all letters, spaces, apostrophes, dashes.
