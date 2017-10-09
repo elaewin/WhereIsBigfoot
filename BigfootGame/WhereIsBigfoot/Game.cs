@@ -15,6 +15,7 @@ namespace WhereIsBigfoot
         private List<Location> locations;
         private List<Item> items;
         private List<Character> characters;
+        private Dictionary<string, string> parseDict;
         List<string> allowedVerbs = new List<string>() { "drop", "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory" };
 
         Commands commands = new Commands();
@@ -41,17 +42,23 @@ namespace WhereIsBigfoot
             set => this.items = value;
         }
 
+        public Dictionary<string, string> ParseDict {
+            get => this.parseDict;
+            set => this.parseDict = value;
+        }
+
         // Deserialize JSON from a file. 
         public void LoadData(Game game)
         {
             string jsonLocationFile = @"../../locations.json";
             string jsonItemFile = @"../../items.json";
             string jsonCharacterFile = @"../../characters.json";
+            string parseDictFile = @"../../parseDictionary.json";
 
             game.items = JsonConvert.DeserializeObject<List<Item>>(File.ReadAllText(jsonItemFile));
             game.characters = JsonConvert.DeserializeObject<List<Character>>(File.ReadAllText(jsonCharacterFile));
             game.locations = JsonConvert.DeserializeObject<List<Location>>(File.ReadAllText(jsonLocationFile));
-
+            game.parseDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(parseDictionaryFile));
             
             // Go through each item and assign the item to the items dict in each location based on the location property of the item.
             foreach (Item item in game.items)
@@ -92,8 +99,12 @@ namespace WhereIsBigfoot
 
             if (IsValidInput(input) && (input != "") && input != null)
             {
+                string verb = "";
+
+                // split the incoming string and check it against the possible verbs in the parseDict.
                 string[] parsed = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
-                string verb = parsed[0];
+                if (this.parseDict.ContainsKey(parsed[0]))
+                    verb = this.parseDict[parsed[0]];
 
                 if (parsed.Length == 0)
                 {
@@ -102,7 +113,7 @@ namespace WhereIsBigfoot
                 }
 
                 if (parsed.Length == 1)
-                    parsed = new string[2] { parsed[0], "none" };
+                    parsed = new string[2] { verb, "none" };
 
                 if (allowedVerbs.Contains(verb))
                 {
@@ -222,7 +233,7 @@ namespace WhereIsBigfoot
            __/ |                           
           |___/                            
 ");
-            WriteLine(commands.wrapText("Where is Bigfoot is a text-based adventure game where you take on the role of a camper who is trying to find that most elusive of cryptids: BIGFOOT!"));
+            WriteLine(commands.WrapText("Where is Bigfoot is a text-based adventure game where you take on the role of a camper who is trying to find that most elusive of cryptids: BIGFOOT!"));
             WriteLine("");
             WriteLine("First, you need to decide who you are... ");
             //string startGame = GetInput("Would you like to start the game? (y/n): ");
@@ -245,19 +256,19 @@ namespace WhereIsBigfoot
             do
             {
                 name = GetInput("What is your name? ");
-            } while (!IsValidInfo(name));
+            } while (!IsValidInfo(name) && name != "");
 
             do
             {
                 gender = GetInput("What gender are you? ");
-            } while (!IsValidInfo(gender));
+            } while (!IsValidInfo(gender) && gender != "");
 
             do
             {
-                hair = GetInput("Okay, now just so we know, what color is your hair? ");
-            } while (!IsValidInfo(hair));
+                hair = GetInput("What color is your hair? ");
+            } while (!IsValidInfo(hair) && hair != "");
 
-            string[] deets = new string[3] { name, gender, hair };
+            string[] deets = { name, gender, hair };
 
             commands.TypeLine("Now that that's done with...");
             return deets;
@@ -293,7 +304,7 @@ namespace WhereIsBigfoot
             // Show starting room
             Console.WriteLine();
 
-            game.commands.TypeLine(game.commands.wrapText("Your old buddy, Dan, from college was always crazy about finding Bigfoot. You even went on a couple of Bigfoot hunting expeditions with him way back when. But you weren't expecting him to contact you out of the blue and invite you on another one, now that it's been years since you graduated. But the memory of how relaxing those previous trips were made you agree to do along.\n\nYou drove out from Seattle last night, and into the wilderness between Mount Rainier and Mount St. Helens. You set up your camp near the area where Dan said he'd been camping (you hope--the directions weren't exactly great), and crashed for the night. Now it's morning. Time to find your old buddy."));
+            game.commands.TypeLine(game.commands.WrapText("Your old buddy, Dan, from college was always crazy about finding Bigfoot. You even went on a couple of Bigfoot hunting expeditions with him way back when. But you weren't expecting him to contact you out of the blue and invite you on another one, now that it's been years since you graduated. But the memory of how relaxing those previous trips were made you agree to do along.\n\nYou drove out from Seattle last night, and into the wilderness between Mount Rainier and Mount St. Helens. You set up your camp near the area where Dan said he'd been camping (you hope--the directions weren't exactly great), and crashed for the night. Now it's morning. Time to find your old buddy."));
 
             game.commands.ShowLocation(game.Player.PlayerLocation);
 
@@ -304,18 +315,22 @@ namespace WhereIsBigfoot
             } while (game.running == true);
         }
 
+        // Check against a regex string that allows all letters, spaces, apostrophes, dashes.
         public static bool IsValidInput(string str)
         {
-            Regex regexString = new Regex(@"[a-z\s'\r]*$");
+            Regex regexString = new Regex(@"^[a-zA-Z\s-']+\z");
             return regexString.IsMatch(str);
         }
 
+        // check against a regex string that takes one word of just letters, or two words separated by a space.
+        // Format is beginning of line, one or more letters of any length, one or no spaces, zero or more letters of any length, end of line.
         public static bool IsValidInfo(string str)
         {
-            Regex regexString = new Regex(@"[a-zA-Z\s]*$");
+            Regex regexString = new Regex(@"^[a-zA-Z]+\s?[a-zA-Z]*\z");
             return regexString.IsMatch(str);
         }
 
+        // Take in string input from the user. Corrects null input.
         public static string GetInput(string prompt)
         {
             Console.Write(prompt);

@@ -18,7 +18,7 @@ namespace WhereIsBigfoot
                     {
                         if (itemToUse.Name == "book" | i.Target == target)
                         {
-                            TypeLine(wrapText(itemToUse.Actions["use"]));
+                            TypeLine(WrapText(itemToUse.Actions["use"]));
                         }
                         else
                         {
@@ -108,7 +108,7 @@ namespace WhereIsBigfoot
             Item itemToTransfer = p.PlayerLocation.Items[item];
             p.Inventory.Add(item, itemToTransfer);
             p.PlayerLocation.Items.Remove(item);
-            TypeLine(wrapText(itemToTransfer.Actions["get"]));
+            TypeLine(WrapText(itemToTransfer.Actions["get"]));
         }
 
         private void DanCheck(Player p, string item, Dictionary<string, Character> characters)
@@ -136,7 +136,7 @@ namespace WhereIsBigfoot
             {
                 if (p.PlayerLocation.Characters.ContainsKey(name))
                 {
-                    TypeLine(wrapText(c.Actions["talk"]));
+                    TypeLine(WrapText(c.Actions["talk"]));
                 }
                 else
                 {
@@ -196,7 +196,7 @@ namespace WhereIsBigfoot
             TypeLine("You have the following inventory: ");
             foreach (var item in p.Inventory.Values)
             {
-                TypeLine($"{item.DescriptionShort} \n\n");
+                TypeLine($"{item.Title}");
             }
 
         }
@@ -207,7 +207,7 @@ namespace WhereIsBigfoot
             {
                 if (item.ParseValue.Contains(entry))
                 {
-                    TypeLine(wrapText($"{item.DescriptionLong} \n"));
+                    TypeLine(WrapText($"{item.DescriptionLong} \n"));
                     return;
                 }
             }
@@ -216,7 +216,7 @@ namespace WhereIsBigfoot
                 if (item.ParseValue.Contains(entry))
                 {
 
-                    TypeLine(wrapText($"{item.DescriptionLong} \n"));
+                    TypeLine(WrapText($"{item.DescriptionLong} \n"));
                     return;
                 }
             }
@@ -225,20 +225,20 @@ namespace WhereIsBigfoot
                 if (character.ParseValue.Contains(entry))
                 {
 
-                    TypeLine(wrapText($"{character.DescriptionLong} \n"));
+                    TypeLine(WrapText($"{character.DescriptionLong} \n"));
                     return;
                 }
             }
             if (entry == "none")
             {
-                TypeLine(wrapText($"{p.PlayerLocation.DescriptionLong} \n"));
+                TypeLine(WrapText($"{p.PlayerLocation.DescriptionLong} \n"));
                 string descriptions = "";
                 foreach (Character character in p.PlayerLocation.Characters.Values)
                     descriptions += character.DescriptionShort;
                 foreach (Item item in p.PlayerLocation.Items.Values)
                     descriptions += item.DescriptionShort;
                 if (descriptions != "")
-                    TypeLine(wrapText($"{descriptions}"));
+                    TypeLine(WrapText($"{descriptions}"));
                 return;
             }
             TypeLine($"I don't see {entry} here. ");
@@ -248,25 +248,25 @@ namespace WhereIsBigfoot
         {
             if (location.Visited == false)
             {
-                TypeLine(wrapText($"{location.DescriptionFirst}"));
+                TypeLine(WrapText($"{location.DescriptionFirst}"));
 
                 foreach (Character character in location.Characters.Values)
-                    TypeLine(wrapText($"{character.DescriptionFirst}"));
+                    TypeLine(WrapText($"{character.DescriptionFirst}"));
 
                 foreach (Item item in location.Items.Values)
-                    TypeLine(wrapText($"{item.DescriptionFirst}"));
+                    TypeLine(WrapText($"{item.DescriptionFirst}"));
 
                 location.Visited = true;
             }
             else
             {
-                TypeLine(wrapText($"{location.DescriptionShort}"));
+                TypeLine(WrapText($"{location.DescriptionShort}"));
 
                 foreach (Character character in location.Characters.Values)
-                    Console.WriteLine(wrapText($"{character.DescriptionShort}"));
+                    Console.WriteLine(WrapText($"{character.DescriptionShort}"));
 
                 foreach (Item item in location.Items.Values)
-                    TypeLine(wrapText($"{item.DescriptionShort}"));
+                    TypeLine(WrapText($"{item.DescriptionShort}"));
             }
         }
 
@@ -322,7 +322,7 @@ namespace WhereIsBigfoot
         //}
 
 
-        public string wrapText(String text)
+        public string WrapText(String text)
         {
             String[] words = text.Split(' ');
             StringBuilder buffer = new StringBuilder();

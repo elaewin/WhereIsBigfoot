@@ -109,7 +109,7 @@
         "exits": {
             "east": "tunnel1",
             "south": "woods5",
-            "text": "A trail leads south into the woods. To the east through the thinning trees, you see a dark cave.",
+            "text": "A trail leads south into the woods. To the east through the thinning trees, you see a dark cave."
         },
         "characters": {
             "empty": null
@@ -318,7 +318,7 @@
         "name": "tunnel1Lit",
         "title": "Cave Passageway",
         "descriptionFirst": "This doesn't look so bad. No glowing red eyes stare at you from the shadows. There don't seem to be any spiders. You don't even hear anything go 'squish!' with each step. The floor is covered with sandy dirt, and the rock walls curve inward to form a kind of arch just above your head. You can totally handle this.\n\nIt's dark in here, though. You're only a little way from the entrance, but the only light comes from your lantern. Wow are you ever glad you have one!",
-        "descriptionLong": "You are in a tunnel-like cave. The floor is covered with sandy dirt, and the rock walls curve in to meet just above your head. Your lantern illuminates the area around you in a soft yellow glow."
+        "descriptionLong": "You are in a tunnel-like cave. The floor is covered with sandy dirt, and the rock walls curve in to meet just above your head. Your lantern illuminates the area around you in a soft yellow glow.",
         "descriptionShort": "You are in a tunnel-like cave.",
         "exits": {
             "east": "tunnel2Lit",
@@ -357,7 +357,7 @@
             "forward": "tunnel3Lit",
             "back": "tunnel1Lit",
             "on": "tunnel3Lit",
-            "text": "The path through the cave goes east and west.",
+            "text": "The path through the cave goes east and west."
         },
         "characters": {
             "empty": null
@@ -370,13 +370,13 @@
             "floor",
             "path",
             "rock",
-            "sand"
+            "sand",
             "spider webs",
             "webs",
             "web",
             "spiders",
             "spiderwebs",
-            "walls",
+            "walls"
         ],
         "items": {
             "empty": null
@@ -452,7 +452,7 @@
         "descriptionShort": "You are in a tunnel-like cave.",
         "exits": {
             "north": "valley",
-            "south": "tunnel4Lit"
+            "south": "tunnel4Lit",
             "text": "The path leads north and south."
         },
         "characters": {
