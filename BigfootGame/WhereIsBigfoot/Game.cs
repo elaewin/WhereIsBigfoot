@@ -17,6 +17,7 @@ namespace WhereIsBigfoot
 		private List<Character> characters;
 		private Dictionary<string, string> parseDict;
 		List<string> allowedVerbs = new List<string>() { "drop", "get", "go", "give", "look", "use", "talk", "put", "help", "quit", "inventory" };
+		private List<string> blueWords = new List<string>() { "shit", "fuck", "bitch", "asshole", "ass", "fag", "pussy", "dick", "cock", "damn", "bugger", "bollocks", "arsehole", "cunt" };
 
 		Commands commands = new Commands();
 
@@ -125,19 +126,6 @@ namespace WhereIsBigfoot
 			return null;
 		}
 
-		// Check if an Asset has a given target
-		private Asset AssetIsTarget(Dictionary<string, Asset> targetDict, string target)
-		{
-			foreach (Asset asset in targetDict.Values)
-			{
-				if (asset.Name == target)
-				{
-					return asset;
-				}
-			}
-			return null;
-		}
-
 		// Handles the parsing of input from the user.
 		public void ParseInput(string prompt)
 		{
@@ -150,6 +138,16 @@ namespace WhereIsBigfoot
 
 				// split the incoming string and check it against the possible verbs in the parseDict.
 				string[] parsed = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
+
+				foreach (string word in this.blueWords)
+				{
+					if (parsed[0] == word || parsed[1] == word)
+					{
+						WriteLine($"Way to stay classy there, {this.Player.PlayerName}. I'm sure the trees are very impressed by your command of the English language.");
+						return;
+					}
+				}
+
 				if (this.parseDict.ContainsKey(parsed[0]))
 					verb = this.parseDict[parsed[0]];
 
@@ -215,15 +213,60 @@ namespace WhereIsBigfoot
 							break;
 
 						case "put":
-							//handle like use
-							string putResponse = GetInput($"Where do you want to put {noun}?");
-							commands.Put(Player, noun, items);
+							Item itemToPut = ItemExistsIn(this.Player.Inventory, noun);
+							if (itemToPut == null)
+							{
+								WriteLine($"You don't have {noun} in your inventory.");
+								break;
+							}
+							else
+							{
+								// Get the target for the use command
+								string putTarget = GetInput($"What do you want to put the {noun} on?");
+
+								//check player inventory items & list of character in location vs. target on each asset.
+								string itemTarget = itemToPut.Target;
+
+								if (itemTarget != null)
+								{
+									foreach (Item item in this.Items)
+									{
+										if (item.Name == itemTarget)
+										{
+											this.commands.Put(this.Player, itemToPut, item);
+											break;
+										}
+									}
+									foreach (Character character in this.characters)
+									{
+										if (character.Name == itemTarget)
+										{
+											this.commands.Put(this.Player, itemToPut, character);
+											break;
+										}
+									}
+								}
+								else
+								{
+									WriteLine($"You can't put the {noun} there.");
+								}
+							}
 							break;
 
 						case "talk":
 							// check player.location.characters.parseValues for match, pass character.
-							//commands.Talk(Player, characters);
-							break;
+							Character talkTarget = CharacterExistsIn(this.Player.PlayerLocation, noun);
+
+							if (talkTarget != null)
+							{
+								commands.Talk(Player, talkTarget);
+								break;
+							}
+							else
+							{
+								WriteLine($"Fond of your own voice, are you? {UppercaseFirst(noun)} isn't here to talk with you.");
+								break;
+							}
 
 						case "use":
 							Item itemToUse = ItemExistsIn(this.Player.Inventory, noun);
@@ -286,23 +329,23 @@ namespace WhereIsBigfoot
 								break;
 							}
 
-                        default:
-                            commands.Help(Player, this.allowedVerbs);
-                            break;
-                    }
-                }
-                else
-                {
-                    WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\".");
-                }
-                if (parsed[0] != "look" && parsed[0] != "quit" && parsed[0] != "go")
-                    WriteLine($"{this.Player.PlayerLocation.DescriptionShort}");
-            }
-            else
-            {
-                WriteLine("I'm sorry, I didn't understand that. For a list of usable verbs, type \"help\".");
-            }
-        }
+						default:
+							commands.Help(Player, this.allowedVerbs);
+							break;
+					}
+				}
+				else
+				{
+					WriteLine("I'm sorry, I didn't understand that. For information about what kinds of commands are available, type \"help\".");
+				}
+				if (parsed[0] != "look" && parsed[0] != "quit" && parsed[0] != "go")
+					WriteLine($"{this.Player.PlayerLocation.DescriptionShort}");
+			}
+			else
+			{
+				WriteLine("I'm sorry, I didn't understand that. For information about what kinds of commands are available, type \"help\".");
+			}
+		}
 
 		// Console formatting
 		public void FormatConsole()
@@ -438,6 +481,17 @@ namespace WhereIsBigfoot
 			return input;
 		}
 
+		// Capitalize first letter of a string. From https://www.dotnetperls.com/uppercase-first-letter;
+		static string UppercaseFirst(string s)
+		{
+			// Check for empty string.
+			if (string.IsNullOrEmpty(s))
+			{
+				return string.Empty;
+			}
+			// Return char and concat substring.
+			return char.ToUpper(s[0]) + s.Substring(1);
+		}
 	}
 
 }
