@@ -37,6 +37,7 @@ namespace WhereIsBigfoot
         }
 
         //TODO special cases
+        // null check
         // special cases
         // can't take tin can if dan is not reading 
         // can't take blackberries unless they have the empty can 
@@ -45,19 +46,51 @@ namespace WhereIsBigfoot
         // - if not then eat blackberries 
         // can get octopus 
         // hardcode responses 
+        private void DanCheck(Player p, Item item)
+        {
+            if (p.PlayerLocation.Characters.ContainsKey("danReading"))
+            {
+                TransferItem(p, item);
+            }
+            else
+            {
+                TypeLine(WrapText(p.PlayerLocation.Items["grease"].Actions["blocked"]));
+            }
+        }
+
+        private void BlackberryCheck(Player p, Item item)
+        {
+            if (p.Inventory.ContainsKey("emptyCan"))
+            {
+                TransferItem(p, item);
+            }
+            else
+            {
+                TypeLine(WrapText(p.PlayerLocation.Items["blackberries"].Actions["blocked"]));
+            }
+        }
+
+
         public void Get(Player p, Asset a)
         {
             if (p.PlayerLocation.Items.ContainsKey(a.Name))
             {
                 Item item = (Item)a;
-
+                
                 if (p.PlayerLocation.Items[item.Name].Actions.ContainsKey("get"))
                 {
-                    if (item.Target == "danReading")
-                    { }
-                    else if (item.Target == "emptyCan")
-                    { }
-                    TransferItem(p, item);
+                    if (item.Name == "book")
+                    {
+                        DanCheck(p, item);
+                    }
+                    else if (item.Name == "blackberries")
+                    {
+                        BlackberryCheck(p, item);
+                    }
+                    else
+                    {
+                        TransferItem(p, item);
+                    }
                 }
                 else
                 {
@@ -97,7 +130,7 @@ namespace WhereIsBigfoot
                 // give Dan book
                 if (item.Name == "book" && character.Name == "danCooking")
                 {
-                    SwitchChar(p, item, character, characters, "danCooking");
+                    SwitchChar(p, item, character, characters, "danReading");
                 }
                 // RESULT check if bigfootHostile is removed from characters dict in player location
                 // RESULT check if bigfootFriendly is in characters dict in player location
@@ -354,7 +387,7 @@ namespace WhereIsBigfoot
         {
             foreach (Character c in characters.Values)
             {
-                if(c.Name == switchTo)
+                if (c.Name == switchTo)
                 {
                     p.Inventory.Remove(item.Name);
                     p.PlayerLocation.Characters.Remove(character.Name);
