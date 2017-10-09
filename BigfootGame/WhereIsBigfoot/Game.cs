@@ -222,7 +222,7 @@ namespace WhereIsBigfoot
 
 						case "talk":
 							// check player.location.characters.parseValues for match, pass character.
-							commands.Talk(Player, parsed[1], Player.PlayerLocation.Characters);
+							//commands.Talk(Player, characters);
 							break;
 
 						case "use":
