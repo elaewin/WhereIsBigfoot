@@ -138,7 +138,7 @@ namespace WhereIsBigfoot
                     if (location.Name == newLocation)
                     {
                         p.PlayerLocation = location;
-                        Console.Title += $"? -- {location.DescriptionShort}";
+                        Console.Title += $"? -- {location.Title}";
                         Console.WriteLine();
                         ShowLocation(location);
 
@@ -188,8 +188,7 @@ namespace WhereIsBigfoot
             {
                 if (item.ParseValue.Contains(entry))
                 {
-
-                    TypeLine(WrapText($"{item.DescriptionLong} \n"));
+					TypeLine(WrapText($"{item.DescriptionLong} \n"));
                     return;
                 }
             }
@@ -197,13 +196,10 @@ namespace WhereIsBigfoot
             {
                 if (character.ParseValue.Contains(entry))
                 {
-
                     TypeLine(WrapText($"{character.DescriptionLong} \n"));
                     return;
                 }
             }
-
-            TypeLine(WrapText($"{p.PlayerLocation.Exits["text"]}"));
 
             if (entry == "none")
             {
@@ -213,13 +209,13 @@ namespace WhereIsBigfoot
                     descriptions += character.DescriptionShort;
                 foreach (Item item in p.PlayerLocation.Items.Values)
                     descriptions += item.DescriptionShort;
-                TypeLine(WrapText($"{p.PlayerLocation.Exits["text"]}"));
 
                 if (descriptions != "")
                     TypeLine(WrapText($"{descriptions}"));
+
+                TypeLine(WrapText($"{p.PlayerLocation.Exits["text"]}"));
                 return;
             }
-            TypeLine($"I don't see {entry} here {p.PlayerHair}ie. ");
         }
 
         // DONE
@@ -317,33 +313,33 @@ namespace WhereIsBigfoot
 
         public void ShowLocation(Location location)
         {
-            if (location.Visited == false)
+			string descriptions = "";
+
+			if (location.Visited == false)
             {
-                TypeLine(WrapText($"{location.DescriptionFirst}"));
+				TypeLine(WrapText($"{location.DescriptionFirst}"));
+				foreach (Character character in location.Characters.Values)
+					descriptions += character.DescriptionFirst;
+				foreach (Item item in location.Items.Values)
+					descriptions += item.DescriptionFirst;
 
-                foreach (Character character in location.Characters.Values)
-                    TypeLine(WrapText($"{character.DescriptionFirst}"));
-
-                foreach (Item item in location.Items.Values)
-                    TypeLine(WrapText($"{item.DescriptionFirst}"));
-
-                TypeLine(WrapText($"{location.Exits["text"]}"));
-
-
-                location.Visited = true;
+				if (descriptions != "")
+					TypeLine(WrapText($"{descriptions}"));
+				
+				location.Visited = true;
             }
             else
             {
                 TypeLine(WrapText($"{location.DescriptionShort}"));
+				foreach (Character character in location.Characters.Values)
+					descriptions += character.DescriptionShort;
+				foreach (Item item in location.Items.Values)
+					descriptions += item.DescriptionShort;
 
-                foreach (Character character in location.Characters.Values)
-                    Console.WriteLine(WrapText($"{character.DescriptionShort}"));
-
-                foreach (Item item in location.Items.Values)
-                    TypeLine(WrapText($"{item.DescriptionShort}"));
-
-                TypeLine(WrapText($"{location.Exits["text"]}"));
-            }
+				if (descriptions != "")
+					TypeLine(WrapText($"{descriptions}"));
+			}
+				TypeLine(WrapText($"{location.Exits["text"]}"));
         }
 
         private void CannotVerbNoun(string verb, string noun)
@@ -356,13 +352,12 @@ namespace WhereIsBigfoot
             for (int i = 0; i < line.Length; i++)
             {
                 Console.Write(line[i]);
-                System.Threading.Thread.Sleep(25); // Sleep for 15 milliseconds between characters.
+                System.Threading.Thread.Sleep(15); // Sleep for 15 milliseconds between characters.
             }
-            Console.WriteLine();
             Console.WriteLine();
         }
 
-        //public string wrapText(string paragraph)
+        //public string WrapText(string paragraph)
         //{
         //    if (string.IsNullOrWhiteSpace(paragraph))
         //    {
@@ -398,7 +393,7 @@ namespace WhereIsBigfoot
         //}
 
 
-        public string WrapText(String text)
+        public void WrapText(String text)
         {
             String[] words = text.Split(' ');
             StringBuilder buffer = new StringBuilder();
@@ -407,7 +402,7 @@ namespace WhereIsBigfoot
             {
                 buffer.Append(word);
                 //see if you can make this dynamic.
-                if (buffer.Length >= 80)
+                if (buffer.Length >= Console.WindowWidth - 2)
                 {
                     String line = buffer.ToString().Substring(0, buffer.Length - word.Length);
                     Console.WriteLine(line);
@@ -421,7 +416,7 @@ namespace WhereIsBigfoot
             //buffer.ToString().PadLeft(200);
             //buffer.ToString().PadRight(200);
             //Console.WriteLine(buffer.ToString());
-            return buffer.ToString();
+            TypeLine(buffer.ToString());
         }
     }
 
