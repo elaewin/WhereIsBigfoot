@@ -138,7 +138,7 @@ namespace WhereIsBigfoot
                     if (location.Name == newLocation)
                     {
                         p.PlayerLocation = location;
-                        Console.Title += $"? -- {location.DescriptionShort}";
+                        Console.Title += $"? -- {location.Title}";
                         Console.WriteLine();
                         ShowLocation(location);
 
@@ -154,7 +154,7 @@ namespace WhereIsBigfoot
         // DONE
         public void Help(Player p, List<string> allowedVerbs)
         {
-            TypeLine(WrapText("You pull out your Bigfoot Sighting assistance manual and it reads:"));
+            WrapText("You pull out your Bigfoot Sighting assistance manual and it reads:");
             TypeLine($"The possible commands for {p.PlayerName} are as follows: ");
             foreach (string verb in allowedVerbs)
             {
@@ -180,7 +180,7 @@ namespace WhereIsBigfoot
             {
                 if (item.ParseValue.Contains(entry))
                 {
-                    TypeLine(WrapText($"{item.DescriptionLong} \n"));
+                    WrapText($"{item.DescriptionLong} \n");
                     return;
                 }
             }
@@ -188,8 +188,7 @@ namespace WhereIsBigfoot
             {
                 if (item.ParseValue.Contains(entry))
                 {
-
-                    TypeLine(WrapText($"{item.DescriptionLong} \n"));
+					WrapText($"{item.DescriptionLong} \n");
                     return;
                 }
             }
@@ -197,29 +196,26 @@ namespace WhereIsBigfoot
             {
                 if (character.ParseValue.Contains(entry))
                 {
-
-                    TypeLine(WrapText($"{character.DescriptionLong} \n"));
+                    WrapText($"{character.DescriptionLong} \n");
                     return;
                 }
             }
 
-            TypeLine(WrapText($"{p.PlayerLocation.Exits["text"]}"));
-
             if (entry == "none")
             {
-                TypeLine(WrapText($"{p.PlayerLocation.DescriptionLong} \n"));
+                WrapText($"{p.PlayerLocation.DescriptionLong} \n");
                 string descriptions = "";
                 foreach (Character character in p.PlayerLocation.Characters.Values)
                     descriptions += character.DescriptionShort;
                 foreach (Item item in p.PlayerLocation.Items.Values)
                     descriptions += item.DescriptionShort;
-                TypeLine(WrapText($"{p.PlayerLocation.Exits["text"]}"));
 
                 if (descriptions != "")
-                    TypeLine(WrapText($"{descriptions}"));
+                    WrapText($"{descriptions}");
+
+                WrapText($"{p.PlayerLocation.Exits["text"]}");
                 return;
             }
-            TypeLine($"I don't see {entry} here {p.PlayerHair}ie. ");
         }
 
         // DONE
@@ -228,19 +224,19 @@ namespace WhereIsBigfoot
         {
             if (item.Target == asset.Name)
             {
-                TypeLine(WrapText(item.Actions["put"]));
+                WrapText(item.Actions["put"]);
             }
             else
             {
-                TypeLine(WrapText($"You can't put {item.Name} in {asset.Name}"));
-                TypeLine(WrapText($"Are you using {item.Name} correctly?"));
+                WrapText($"You can't put {item.Name} in {asset.Name}");
+                WrapText($"Are you using {item.Name} correctly?");
             }
         }
 
         // DONE
         public void Talk(Player p, Character c)
         {
-            TypeLine(WrapText(c.Actions["talk"]));
+            WrapText(c.Actions["talk"]);
         }
 
         // DONE
@@ -250,12 +246,12 @@ namespace WhereIsBigfoot
         {
             if (item.Name == "book" | item.Target == asset.Name)
             {
-                TypeLine(WrapText(item.Actions["use"]));
+                WrapText(item.Actions["use"]);
             }
             else
             {
-                TypeLine(WrapText($"You can't use {item.Name} on {asset.Name}"));
-                TypeLine(WrapText($"Are you using {item.Name} correctly?"));
+                WrapText($"You can't use {item.Name} on {asset.Name}");
+                WrapText($"Are you using {item.Name} correctly?");
             }
         }
 
@@ -269,7 +265,7 @@ namespace WhereIsBigfoot
             }
             else
             {
-                TypeLine(WrapText(p.PlayerLocation.Items["grease"].Actions["blocked"]));
+                WrapText(p.PlayerLocation.Items["grease"].Actions["blocked"]);
             }
         }
 
@@ -283,13 +279,13 @@ namespace WhereIsBigfoot
                     {
                         p.Inventory.Add(i.Name, i);
                         p.Inventory.Remove(item.Name);
-                        TypeLine(WrapText(i.Actions["blocked"]));
+                        WrapText(i.Actions["blocked"]);
                     }
                 }
             }
             else
             {
-                TypeLine(WrapText(p.PlayerLocation.Items["blackberries"].Actions["blocked"]));
+                WrapText(p.PlayerLocation.Items["blackberries"].Actions["blocked"]);
             }
 
         }
@@ -317,33 +313,33 @@ namespace WhereIsBigfoot
 
         public void ShowLocation(Location location)
         {
-            if (location.Visited == false)
+			string descriptions = "";
+
+			if (location.Visited == false)
             {
-                TypeLine(WrapText($"{location.DescriptionFirst}"));
+				WrapText($"{location.DescriptionFirst}");
+				foreach (Character character in location.Characters.Values)
+					descriptions += character.DescriptionFirst;
+				foreach (Item item in location.Items.Values)
+					descriptions += item.DescriptionFirst;
 
-                foreach (Character character in location.Characters.Values)
-                    TypeLine(WrapText($"{character.DescriptionFirst}"));
-
-                foreach (Item item in location.Items.Values)
-                    TypeLine(WrapText($"{item.DescriptionFirst}"));
-
-                TypeLine(WrapText($"{location.Exits["text"]}"));
-
-
-                location.Visited = true;
+				if (descriptions != "")
+					WrapText($"{descriptions}");
+				
+				location.Visited = true;
             }
             else
             {
-                TypeLine(WrapText($"{location.DescriptionShort}"));
+                WrapText($"{location.DescriptionShort}");
+				foreach (Character character in location.Characters.Values)
+					descriptions += character.DescriptionShort;
+				foreach (Item item in location.Items.Values)
+					descriptions += item.DescriptionShort;
 
-                foreach (Character character in location.Characters.Values)
-                    Console.WriteLine(WrapText($"{character.DescriptionShort}"));
-
-                foreach (Item item in location.Items.Values)
-                    TypeLine(WrapText($"{item.DescriptionShort}"));
-
-                TypeLine(WrapText($"{location.Exits["text"]}"));
-            }
+				if (descriptions != "")
+					WrapText($"{descriptions}");
+			}
+				WrapText($"{location.Exits["text"]}");
         }
 
         private void CannotVerbNoun(string verb, string noun)
@@ -356,74 +352,72 @@ namespace WhereIsBigfoot
             for (int i = 0; i < line.Length; i++)
             {
                 Console.Write(line[i]);
-                System.Threading.Thread.Sleep(25); // Sleep for 15 milliseconds between characters.
+                System.Threading.Thread.Sleep(15); // Sleep for 15 milliseconds between characters.
             }
-            Console.WriteLine();
             Console.WriteLine();
         }
 
-        //public string wrapText(string paragraph)
-        //{
-        //    if (string.IsNullOrWhiteSpace(paragraph))
-        //    {
-        //        return string.Empty;
-        //    }
+		public void WrapText(string paragraph)
+		{
+			if (string.IsNullOrWhiteSpace(paragraph))
+			{
+				return;
+			}
 
-        //    var approxLineCount = paragraph.Length / Console.WindowWidth;
-        //    var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
+			var approxLineCount = paragraph.Length / Console.WindowWidth;
+			var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
 
-        //    for (var i = 0; i < paragraph.Length;)
-        //    {
-        //        var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
-        //        var line = paragraph.Substring(i, grabLimit);
+			for (var i = 0; i < paragraph.Length;)
+			{
+				var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
+				var line = paragraph.Substring(i, grabLimit);
 
-        //        var isLastChunk = grabLimit + i == paragraph.Length;
+				var isLastChunk = grabLimit + i == paragraph.Length;
 
-        //        if (isLastChunk)
-        //        {
-        //            i = i + grabLimit;
-        //            lines.Append(line);
-        //        }
-        //        else
-        //        {
-        //            var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
-        //            lines.AppendLine(line.Substring(0, lastSpace));
+				if (isLastChunk)
+				{
+					i = i + grabLimit;
+					lines.Append(line);
+				}
+				else
+				{
+					var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
+					lines.AppendLine(line.Substring(0, lastSpace));
 
-        //            //Trailing spaces needn't be displayed as the first character on the new line
-        //            i = i + lastSpace + 1;
-        //        }
-        //    }
-        //    return lines.ToString();
+					//Trailing spaces needn't be displayed as the first character on the new line
+					i = i + lastSpace + 1;
+				}
+			}
+			TypeLine(lines.ToString());
+		}
 
-        //}
 
+		//public void WrapText(String text)
+		//{
+		//    String[] words = text.Split(' ');
+		//    StringBuilder buffer = new StringBuilder();
 
-        public string WrapText(String text)
-        {
-            String[] words = text.Split(' ');
-            StringBuilder buffer = new StringBuilder();
+		//    foreach (String word in words)
+		//    {
+		//        buffer.Append(word);
+		//        //see if you can make this dynamic.
+		//        if (buffer.Length >= Console.WindowWidth - 2)
+		//        {
+		//            String line = buffer.ToString().Substring(0, buffer.Length - word.Length);
+		//            Console.WriteLine(line);
+		//            buffer.Clear();
+		//            buffer.Append(word);
+		//        }
 
-            foreach (String word in words)
-            {
-                buffer.Append(word);
-                //see if you can make this dynamic.
-                if (buffer.Length >= 80)
-                {
-                    String line = buffer.ToString().Substring(0, buffer.Length - word.Length);
-                    Console.WriteLine(line);
-                    buffer.Clear();
-                    buffer.Append(word);
-                }
+		//        buffer.Append(" ");
 
-                buffer.Append(" ");
-
-            }
-            //buffer.ToString().PadLeft(200);
-            //buffer.ToString().PadRight(200);
-            //Console.WriteLine(buffer.ToString());
-            return buffer.ToString();
-        }
-    }
+		//    }
+		//    //buffer.ToString().PadLeft(200);
+		//    //buffer.ToString().PadRight(200);
+		//    //Console.WriteLine(buffer.ToString());
+		//    TypeLine(buffer.ToString());
+		//}
+	}
 
 }
 

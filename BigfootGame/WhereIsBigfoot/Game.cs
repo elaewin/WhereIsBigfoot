@@ -78,7 +78,7 @@ namespace WhereIsBigfoot
 					if (location.Name == name)
 					{
 						location.Items.Add(key, item);
-						//TypeLine($"Assigned item key {key} on location {location.Name}");
+						//commands.WrapText($"Assigned item key {key} on location {location.Name}");
 					}
 				}
 			}
@@ -94,7 +94,7 @@ namespace WhereIsBigfoot
 					if (location.Name == name)
 					{
 						location.Characters.Add(key, character);
-						//TypeLine($"Assigned character with key {key} on location {location.Name}");
+						//commands.WrapText($"Assigned character with key {key} on location {location.Name}");
 					}
 				}
 			}
@@ -144,12 +144,13 @@ namespace WhereIsBigfoot
 
 				if (parsed.Length == 0)
 				{
-					commands.TypeLine($"Sorry, {this.Player.PlayerName} I didn't catch that.");
+					commands.WrapText($"Sorry, {this.Player.PlayerName} I didn't catch that.");
 					return;
 				}
 				else if (parsed.Length == 1)
 				{
 					parsed = new string[2] { verb, "none" };
+					noun = parsed[1];
 				}
 				else
 				{
@@ -163,7 +164,7 @@ namespace WhereIsBigfoot
 				{
 					if (verb == word || noun == word)
 					{
-						WriteLine($"Way to stay classy there, {this.Player.PlayerName}. I'm sure the trees are very impressed by your masterful command of the English language.");
+						commands.WrapText($"Way to stay classy there, {this.Player.PlayerName}. I'm sure the trees are very impressed by your masterful command of the English language.");
 						return;
 					}
 				}
@@ -174,7 +175,7 @@ namespace WhereIsBigfoot
 					{
 						case "drop":
 							Item itemToDrop = ItemExistsIn(this.Player.Inventory, noun);
-							this.commands.Drop(this.Player, itemToDrop);
+							commands.Drop(this.Player, itemToDrop);
 							break;
 
 						case "get":
@@ -182,10 +183,10 @@ namespace WhereIsBigfoot
 							Item itemToGet = ItemExistsIn(this.Player.PlayerLocation.Items, noun);
 							if (itemToGet == null)
 							{
-								WriteLine($"You're not able to get {noun}.");
+								commands.WrapText($"You're not able to get {noun}.");
 								break;
 							}
-							this.commands.Get(this.Player, itemToGet, this.Items);
+							commands.Get(this.Player, itemToGet, this.Items);
 							break;
 
 						case "give":
@@ -218,7 +219,7 @@ namespace WhereIsBigfoot
 							Item itemToPut = ItemExistsIn(this.Player.Inventory, noun);
 							if (itemToPut == null)
 							{
-								WriteLine($"You don't have {noun} in your inventory.");
+								commands.WrapText($"You don't have {noun} in your inventory.");
 								break;
 							}
 							else
@@ -235,7 +236,7 @@ namespace WhereIsBigfoot
 									{
 										if (item.Name == itemTarget)
 										{
-											this.commands.Put(this.Player, itemToPut, item);
+											commands.Put(this.Player, itemToPut, item);
 											break;
 										}
 									}
@@ -243,14 +244,14 @@ namespace WhereIsBigfoot
 									{
 										if (character.Name == itemTarget)
 										{
-											this.commands.Put(this.Player, itemToPut, character);
+											commands.Put(this.Player, itemToPut, character);
 											break;
 										}
 									}
 								}
 								else
 								{
-									WriteLine($"You can't put the {noun} there.");
+									commands.WrapText($"You can't put the {noun} there.");
 								}
 							}
 							break;
@@ -266,7 +267,7 @@ namespace WhereIsBigfoot
 							}
 							else
 							{
-								WriteLine($"Fond of your own voice, are you? {UppercaseFirst(noun)} isn't here to talk with you.");
+								commands.WrapText($"Fond of your own voice, are you? {UppercaseFirst(noun)} isn't here to talk with you.");
 								break;
 							}
 
@@ -274,12 +275,12 @@ namespace WhereIsBigfoot
 							Item itemToUse = ItemExistsIn(this.Player.Inventory, noun);
 							if (itemToUse == null)
 							{
-								WriteLine($"You don't have {noun} in your inventory.");
+								commands.WrapText($"You don't have {noun} in your inventory.");
 								break;
 							}
 							else
 							{
-								// Get the target for the use command
+								// Get the target for the use commandcommands.WrapText(commands.WrapText
 								string useTarget = GetInput($"What do you want to use the {noun} on?");
 
 								//check player inventory items & list of character in location vs. target on each asset.
@@ -291,7 +292,7 @@ namespace WhereIsBigfoot
 									{
 										if (item.Name == itemTarget)
 										{
-											this.commands.Use(this.Player, itemToUse, item);
+											commands.Use(this.Player, itemToUse, item);
 											break;
 										}
 									}
@@ -299,14 +300,14 @@ namespace WhereIsBigfoot
 									{
 										if (character.Name == itemTarget)
 										{
-											this.commands.Use(this.Player, itemToUse, character);
+											commands.Use(this.Player, itemToUse, character);
 											break;
 										}
 									}
 								}
 								else
 								{
-									WriteLine($"You can't use the {noun} that way.");
+									commands.WrapText($"You can't use the {noun} that way.");
 								}
 							}
 							break;
@@ -321,7 +322,7 @@ namespace WhereIsBigfoot
 							{
 								this.running = false;
 								WriteLine();
-								commands.TypeLine("Thank you for playing Where is Bigfoot!");
+								commands.WrapText("Thank you for playing Where is Bigfoot!");
 								WriteLine();
 								break;
 							}
@@ -338,14 +339,14 @@ namespace WhereIsBigfoot
 				}
 				else
 				{
-					WriteLine("I'm sorry, I didn't understand that. For information about what kinds of commands are available, type \"help\".");
+					commands.WrapText("I'm sorry, I didn't understand that. For information about what kinds of commands are available, type \"help\".");
 				}
-				if (parsed[0] != "look" && parsed[0] != "quit" && parsed[0] != "go")
-					WriteLine($"{this.Player.PlayerLocation.DescriptionShort}");
+				//if (parsed[0] != "look" && parsed[0] != "quit" && parsed[0] != "go")
+				//	WriteLine($"{this.Player.PlayerLocation.DescriptionShort}");
 			}
 			else
 			{
-				WriteLine("I'm sorry, I didn't understand that. For information about what kinds of commands are available, type \"help\".");
+				commands.WrapText("I'm sorry, I didn't understand that. For information about what kinds of commands are available, type \"help\".");
 			}
 		}
 
@@ -376,9 +377,9 @@ namespace WhereIsBigfoot
            __/ |                           
           |___/                            
 ");
-			WriteLine(commands.WrapText("Where is Bigfoot is a text-based adventure game where you take on the role of a camper who is trying to find that most elusive of cryptids: BIGFOOT!"));
+			commands.WrapText("Where is Bigfoot is a text-based adventure game where you take on the role of a camper who is trying to find that most elusive of cryptids: BIGFOOT!");
 			WriteLine("");
-			WriteLine("First, you need to decide who you are... ");
+			commands.WrapText("First, you need to decide who you are... ");
 			//string startGame = GetInput("Would you like to start the game? (y/n): ");
 			//if (startGame == "yes" || startGame == "y") {
 			//    return;
@@ -399,21 +400,33 @@ namespace WhereIsBigfoot
 			do
 			{
 				name = GetInput("What is your name? ");
+				if (!IsValidInfo (name))
+				{
+					commands.WrapText($"\nHm...I didn't quite get that. Names usually contain just letters (and maybe the occasional hyphen).");
+				}
 			} while (!IsValidInfo(name) && name != "");
 
 			do
 			{
 				gender = GetInput("What gender are you? ");
+				if (!IsValidInfo(gender))
+				{
+					commands.WrapText($"\nHm...I didn't quite get that. A gender is usually described by words. Made of letters.");
+				}
 			} while (!IsValidInfo(gender) && gender != "");
 
 			do
 			{
 				hair = GetInput("What color is your hair? ");
+				if (!IsValidInfo(gender))
+				{
+					commands.WrapText($"\nHm...I didn't quite get that. Maybe your hair is some crazy, magical color, but you'll have to pick a word to describe it that's just letters.");
+				}
 			} while (!IsValidInfo(hair) && hair != "");
 
 			string[] deets = { name, gender, hair };
 
-			commands.TypeLine("Now that that's done with...");
+			commands.WrapText("\nNow that that's done with...");
 			return deets;
 		}
 
@@ -447,13 +460,14 @@ namespace WhereIsBigfoot
 			// Show starting room
 			Console.WriteLine();
 
-			game.commands.TypeLine(game.commands.WrapText("Your old buddy, Dan, from college was always crazy about finding Bigfoot. You even went on a couple of Bigfoot hunting expeditions with him way back when. But you weren't expecting him to contact you out of the blue and invite you on another one, now that it's been years since you graduated. But the memory of how relaxing those previous trips were made you agree to go along.\n\nYou drove out from Seattle last night, and into the wilderness between Mount Rainier and Mount St. Helens. You set up your camp near the area where Dan said he'd been camping (you hope--the directions weren't exactly great), and crashed for the night. Now it's morning. Time to find your old buddy."));
+			game.commands.WrapText("Dan, your old buddy from college, was always crazy about finding Bigfoot. You even went on a couple of Bigfoot hunting expeditions with him way back when. But you weren't expecting him to contact you out of the blue and invite you on another one, now that it's been years since you graduated. But the memory of how relaxing those previous trips were made you agree to go along.\n\nYou drove out from Seattle last night, and into the wilderness between Mounts Rainier and St. Helens. You set up your camp near the area where Dan said he'd been camping (you hope--the directions weren't exactly great), and crashed for the night. Now it's morning. Time to find your old buddy.\n");
 
 			game.commands.ShowLocation(game.Player.PlayerLocation);
+			Console.Title += $" -- {game.Player.PlayerLocation.Title}";
 
 			do
 			{
-				game.ParseInput("What would you like to do?\n> ");
+				game.ParseInput("\nWhat would you like to do?\n> ");
 
 			} while (game.running == true);
 		}
