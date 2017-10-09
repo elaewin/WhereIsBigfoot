@@ -115,14 +115,13 @@ namespace WhereIsBigfoot
 
                         case "get":
                             //write method to check a string against the items.parseValues in current location. If doesn't exists, respond here.
-                            commands.Get(Player, parsed[1]);
                             break;
 
                         case "give":
                             // check that item.parseValue is in inventory (write method to check inventory) IsInInventory
                             // check characters.parsevalue is in location (write method to check location) IsInLocation
                             // pass player item being gotten (Item), character(Character)
-                            string giveTarget = GetInput($"Who do you want to give {parsed[1]}?");
+                            string giveTarget = GetInput($"Who do you want to give {parsed[1]}? \n");
                             commands.Give(Player, parsed[1], Player.PlayerLocation.Characters, giveTarget);
                             break;
 
@@ -140,7 +139,7 @@ namespace WhereIsBigfoot
 
                         //case "put":
                             ////handle like use
-                            //string giveTarget = GetInput($"Where do you want to put {parsed[1]}?");
+                            //string giveTarget = GetInput($"Where do you want to put {parsed[1]}? \n");
                             //commands.Put(Player, parsed[1], items);
                             //break;
 
@@ -150,7 +149,7 @@ namespace WhereIsBigfoot
                             break;
 
                         case "use":
-                            string useTarget = GetInput($"What do you want to use {parsed[1]} on?");
+                            string useTarget = GetInput($"What do you want to use {parsed[1]} on? \n");
                             //check player inventory items.parseValue vs noun
                             //check player inventory items.parseValue for target AND current location characters for parsevalues
                             // pass player, item, asset
