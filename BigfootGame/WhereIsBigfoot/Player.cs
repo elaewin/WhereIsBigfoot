@@ -9,7 +9,7 @@ namespace WhereIsBigfoot
         string playerName, playerGender, playerHair;
         Location playerLocation;
         Dictionary<string, Item> inventory;
-        // add counter 
+        int counter; 
 
         public Player(string playerName, string playerGender, string playerHair)
         {
@@ -44,6 +44,12 @@ namespace WhereIsBigfoot
         { 
             get { return this.inventory; }
             set { this.inventory = value; }
+        }
+
+        public int Counter
+        {
+            get => this.counter;
+            set => this.counter = value;
         }
     }
 }

@@ -112,44 +112,33 @@ namespace WhereIsBigfoot
             }
         }
 
-        // Handle tunnel = checking location 
-        // check inventory and check if lantern is lit 
-        // tunnel 1 or tunnel 4 (check against map) 
-        // - lantern is lit - different tunnel
-        // - tunnel1Lit (naming convention) 
-        // - lantern is dark - has three moves 
-        // - if leave counter reset 
-        // - special case, handle tunnel 
-        // - handle counter for player 
-        // Handle walking stick = checking inventory 
-        // If in mountain and try to go to the cave
-        // - without walking stick 
 
-        private void Tunnel(Player p, List<Location> locations)
-        {
-
-        }
+        // More or less DONE
         public void Go(Player p, string direction, List<Location> locations)
         {
             Location currentLocation = p.PlayerLocation;
             string newLocation;
-            if (currentLocation.Name == "mountain")
-            {
-
-            }
-            else if (currentLocation.Exits.ContainsKey(direction))
+            if (currentLocation.Exits.ContainsKey(direction))
             {
                 Console.Title = Console.Title.Remove(16);
                 newLocation = currentLocation.Exits[direction];
-                foreach (Location location in locations)
+                if (currentLocation.Name == "woods5")
                 {
-                    if (location.Name == newLocation)
+                    Mountain(p, locations);
+                }
+                else if (currentLocation.Name == "mountain")
+                {
+                    Tunnel(p, locations);
+                }
+                else
+                {
+                    foreach (Location location in locations)
                     {
-                        p.PlayerLocation = location;
-                        Console.Title += $"? -- {location.DescriptionShort}";
-                        Console.WriteLine();
-                        ShowLocation(location);
+                        if (location.Name == newLocation)
+                        {
+                            GoToLocation(p, location);
 
+                        }
                     }
                 }
             }
@@ -233,6 +222,7 @@ namespace WhereIsBigfoot
 
         // DONE
         // write like use 
+        // make lanterns happen
         public void Put(Player p, Item item, Asset asset)
         {
             if (item.Target == asset.Name)
@@ -269,6 +259,118 @@ namespace WhereIsBigfoot
         }
 
         // >>> AUXILIARY METHODS <<< 
+
+        private void GoToLocation(Player p, Location location)
+        {
+            p.PlayerLocation = location;
+            Console.Title += $"? -- {location.Title}";
+            Console.WriteLine();
+            ShowLocation(location);
+        }
+
+        // tunnel 1 or tunnel 4 (check against map) 
+        // - lantern is dark - has three moves 
+        // - if leave counter reset 
+        // - special case, handle tunnel 
+        // - handle counter for player 
+        private void Tunnel(Player p, List<Location> locations)
+        {
+            if (p.Inventory.ContainsKey("glowingLantern"))
+            {
+                foreach (Location location in locations)
+                {
+                    switch (location.Name)
+                    {
+                        case "tunnel1Lit":
+                            if (p.PlayerLocation.Name == "mountain")
+                            {
+                                GoToLocation(p, location);
+                            }
+                            break;
+                        case "tunnel2Lit":
+                            if (p.PlayerLocation.Name == "tunnel1Lit")
+                            {
+                                GoToLocation(p, location);
+                            }
+                            break;
+                        case "tunnel3Lit":
+                            if (p.PlayerLocation.Name == "tunnel2Lit")
+                            {
+                                GoToLocation(p, location);
+                            }
+                            break;
+                        case "tunnel4Lit":
+                            if (p.PlayerLocation.Name == "tunnel3Lit")
+                            {
+                                GoToLocation(p, location);
+                            }
+                            break;
+                        case "tunnel5Lit":
+                            if (p.PlayerLocation.Name == "tunnel4Lit")
+                            {
+                                GoToLocation(p, location);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                foreach (Location location in locations)
+                {
+                    switch (location.Name)
+                    {
+                        case "tunnel1":
+                            if (p.PlayerLocation.Name == "mountain")
+                            {
+                                GoToLocation(p, location);
+                            }
+                            break;
+                        case "tunnel2":
+                            if (p.PlayerLocation.Name == "tunnel1")
+                            {
+                                GoToLocation(p, location);
+                            }
+                            break;
+                        case "tunnel3":
+                            if (p.PlayerLocation.Name == "tunnel2")
+                            {
+                                GoToLocation(p, location);
+                            }
+                            break;
+                        case "tunnel4":
+                            if (p.PlayerLocation.Name == "tunnel3")
+                            {
+                                GoToLocation(p, location);
+                                // you die.
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void Mountain(Player p, List<Location> locations)
+        {
+            if (p.Inventory.ContainsKey("stick"))
+            {
+                foreach (Location location in locations)
+                {
+                    if (location.Name == "mountain")
+                    {
+                        GoToLocation(p, location);
+                    }
+                }
+            }
+            else
+            {
+                TypeLine(WrapText($"That path is way too steep to climb without something to help you keep your balance."));
+            }
+        }
 
         private void DanCheck(Player p, Item item)
         {
