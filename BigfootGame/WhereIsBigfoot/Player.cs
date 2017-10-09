@@ -9,6 +9,7 @@ namespace WhereIsBigfoot
         string playerName, playerGender, playerHair;
         Location playerLocation;
         Dictionary<string, Item> inventory;
+        // add counter 
 
         public Player(string playerName, string playerGender, string playerHair)
         {
