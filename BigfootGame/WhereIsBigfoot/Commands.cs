@@ -98,7 +98,7 @@ namespace WhereIsBigfoot
                 }
                 // RESULT check if bigfootHostile is removed from characters dict in player location
                 // RESULT check if bigfootFriendly is in characters dict in player location
-                else if (item.Name == "bacon" && character.Name == "bigfootHostile")
+                else if (item.Name == "canOfBerries" && character.Name == "bigfootHostile")
                 {
                     SwitchChar(p, item, character, characters, "bigfootFriendly");
                 }
