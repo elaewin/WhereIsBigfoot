@@ -93,7 +93,7 @@ namespace WhereIsBigfoot
             }
         }
 
-        public void ParseInput(string prompt, Game game)
+        public void ParseInput(string prompt)
         {
             string input = GetInput(prompt).ToLower().Trim();
 
@@ -113,7 +113,7 @@ namespace WhereIsBigfoot
                 }
 
                 if (parsed.Length == 1)
-                    parsed = new string[2] { parsed[0], "none" };
+                    parsed = new string[2] { verb, "none" };
 
                 if (allowedVerbs.Contains(verb))
                 {
@@ -256,19 +256,19 @@ namespace WhereIsBigfoot
             do
             {
                 name = GetInput("What is your name? ");
-            } while (!IsValidInfo(name));
+            } while (!IsValidInfo(name) && name != "");
 
             do
             {
                 gender = GetInput("What gender are you? ");
-            } while (!IsValidInfo(gender));
+            } while (!IsValidInfo(gender) && gender != "");
 
             do
             {
-                hair = GetInput("Okay, now just so we know, what color is your hair? ");
-            } while (!IsValidInfo(hair));
+                hair = GetInput("What color is your hair? ");
+            } while (!IsValidInfo(hair) && hair != "");
 
-            string[] deets = new string[3] { name, gender, hair };
+            string[] deets = { name, gender, hair };
 
             commands.TypeLine("Now that that's done with...");
             return deets;
