@@ -8,13 +8,14 @@ namespace WhereIsBigfoot
 {
     public class Asset
     {
-        string name, descriptionFirst, descriptionShort, descriptionLong;
+        string name, title, descriptionFirst, descriptionShort, descriptionLong;
 
-		public Asset() { }
+        public Asset() { }
 
-        public Asset(string name, string descriptionFirst, string descriptionShort, string descriptionLong)
+        public Asset(string name, string title, string descriptionFirst, string descriptionShort, string descriptionLong)
         {
             this.name = name;
+            this.title = title;
             this.descriptionFirst = descriptionFirst;
             this.descriptionShort = descriptionShort;
             this.descriptionLong = descriptionLong;
@@ -24,6 +25,11 @@ namespace WhereIsBigfoot
         {
             get => this.name;
             set => this.name = value;
+        }
+
+        public string Title {
+            get => this.title;
+            set => this.title = value;
         }
 
         public string DescriptionFirst
