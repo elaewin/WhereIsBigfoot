@@ -36,52 +36,49 @@ namespace WhereIsBigfoot
             }
         }
 
-        //TODO special cases
-        // special cases
-        // can't take tin can if dan is not reading 
-        // can't take blackberries unless they have the empty can 
-        // - hard code response to blackberries 
-        // - if have can, can add can full of blackberries to inventory
-        // - if not then eat blackberries 
-        // can get octopus 
-        // hardcode responses 
-        public void Get(Player p, Asset a)
+        // DONE
+        // TESTME: accepts player, item, dictionary
+        public void Get(Player p, Item item, List<Item> items)
         {
-            if (p.PlayerLocation.Items.ContainsKey(a.Name))
+            // if asset is an item
+            if (p.PlayerLocation.Items.ContainsKey(item.Name))
             {
-                Item item = (Item)a;
-
                 if (p.PlayerLocation.Items[item.Name].Actions.ContainsKey("get"))
                 {
-                    if (item.Target == "danReading")
-                    { }
-                    else if (item.Target == "emptyCan")
-                    { }
-                    TransferItem(p, item);
-                }
-                else
-                {
-                    CannotVerbNoun("get", item.Name);
-                    TypeLine($"That {item.Name} is not in this location.");
-                }
-            }
-            else if (p.PlayerLocation.Characters.ContainsKey(a.Name))
-            {
-                Character character = (Character)a;
-                if (p.PlayerLocation.Characters[character.Name].Actions.ContainsKey("get"))
-                {
-                    TypeLine(p.PlayerLocation.Characters[character.Name].Actions["get"]);
-                }
-                else
-                {
-                    CannotVerbNoun("get", a.Name);
-                    TypeLine($"Getting {a.Name} would be rude and they do not fit in your backpack.");
+                    if (item.Name == "grease")
+                    {
+                        DanCheck(p, item);
+                    }
+                    else if (item.Name == "blackberries")
+                    {
+                        BlackberryCheck(p, item, items);
+                    }
+                    else
+                    {
+                        TransferItem(p, item);
+                    }
                 }
             }
+            // if asset is a character
+            // go back to later
+            //else if (p.PlayerLocation.Characters.ContainsKey(a.Name))
+            //{
+            //    Character character = (Character)a;
+            //    if (p.PlayerLocation.Characters[character.Name].Actions.ContainsKey("get"))
+            //    {
+            //        TypeLine(p.PlayerLocation.Characters[character.Name].Actions["get"]);
+            //    }
+            //    else
+            //    {
+            //        CannotVerbNoun("get", a.Name);
+            //        TypeLine($"Getting {a.Name} would be rude and they do not fit in your backpack.");
+            //    }
+            //}
+            // 
             else
             {
-                CannotVerbNoun("get", a.Name);
-                TypeLine($"Let's face it, you just have to let go and move on.");
+                CannotVerbNoun("get", item.Name);
+                TypeLine("Let's face it, you just have to let go and move on.");
             }
         }
 
@@ -97,11 +94,11 @@ namespace WhereIsBigfoot
                 // give Dan book
                 if (item.Name == "book" && character.Name == "danCooking")
                 {
-                    SwitchChar(p, item, character, characters, "danCooking");
+                    SwitchChar(p, item, character, characters, "danReading");
                 }
                 // RESULT check if bigfootHostile is removed from characters dict in player location
                 // RESULT check if bigfootFriendly is in characters dict in player location
-                else if (item.Name == "bacon" && character.Name == "bigfootHostile")
+                else if (item.Name == "canOfBerries" && character.Name == "bigfootHostile")
                 {
                     SwitchChar(p, item, character, characters, "bigfootFriendly");
                 }
@@ -141,7 +138,7 @@ namespace WhereIsBigfoot
                     if (location.Name == newLocation)
                     {
                         p.PlayerLocation = location;
-                        Console.Title += $"? -- {location.DescriptionShort}";
+                        Console.Title += $"? -- {location.Title}";
                         Console.WriteLine();
                         ShowLocation(location);
 
@@ -152,83 +149,38 @@ namespace WhereIsBigfoot
             {
                 CannotVerbNoun("go", direction);
             }
-
         }
 
-        // player, item, asset 
-        // check if asset is target
-        public void Use(Player p, Item item, Asset asset)
+        // DONE
+        public void Help(Player p, List<string> allowedVerbs)
         {
-            Location location = p.PlayerLocation;
-            foreach (Item itemToUse in p.Inventory.Values)
+            WrapText("You pull out your Bigfoot Sighting assistance manual and it reads:");
+            TypeLine($"The possible commands for {p.PlayerName} are as follows: ");
+            foreach (string verb in allowedVerbs)
             {
-                if (itemToUse.ParseValue.Contains(item.Name))
-                {
-                    foreach (Item i in location.Items.Values)
-                    {
-                        if (itemToUse.Name == "book" | i.Target == asset.Name)
-                        {
-                            TypeLine(WrapText(itemToUse.Actions["use"]));
-                        }
-                        else
-                        {
-                            CannotVerbNoun("use", item.Name);
-                        }
-                    }
-                }
+                TypeLine(verb);
             }
+            TypeLine($"Trying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command \"look\" in any location will give you a description of that location.");
         }
 
-        public void Get(Player p, string name)
-        {
-            if (p.PlayerLocation.Items.ContainsKey(name))
-            {
-                if (p.PlayerLocation.Items[name].Actions.ContainsKey("get"))
-                {
-                    TransferItem(p, name);
-                }
-                else
-                {
-                    CannotVerbNoun("get", name);
-                }
-            }
-            else if (p.PlayerLocation.Characters.ContainsKey(name))
-            {
-                if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
-                {
-                    TypeLine(p.PlayerLocation.Characters[name].Actions["get"]);
-                }
-                else
-                {
-                    CannotVerbNoun("get", name);
-                }
-            }
-            else
-            {
-                CannotVerbNoun("get", name);
-            }
-        }
-
-        // write this nicely
-        // use "title"
+        // DONE
         public void Inventory(Player p)
         {
-            TypeLine("You have the following inventory: ");
+            TypeLine("You have the following items in your inventory: ");
             foreach (var item in p.Inventory.Values)
             {
                 TypeLine($"{item.Title}");
             }
-
         }
 
-        // done
+        // DONE
         public void Look(Player p, string entry)
         {
             foreach (Item item in p.Inventory.Values)
             {
                 if (item.ParseValue.Contains(entry))
                 {
-                    TypeLine(WrapText($"{item.DescriptionLong} \n"));
+                    WrapText($"{item.DescriptionLong} \n");
                     return;
                 }
             }
@@ -236,8 +188,7 @@ namespace WhereIsBigfoot
             {
                 if (item.ParseValue.Contains(entry))
                 {
-
-                    TypeLine(WrapText($"{item.DescriptionLong} \n"));
+					WrapText($"{item.DescriptionLong} \n");
                     return;
                 }
             }
@@ -245,121 +196,112 @@ namespace WhereIsBigfoot
             {
                 if (character.ParseValue.Contains(entry))
                 {
-
-                    TypeLine(WrapText($"{character.DescriptionLong} \n"));
+                    WrapText($"{character.DescriptionLong} \n");
                     return;
                 }
             }
 
-            TypeLine(WrapText($"{p.PlayerLocation.Exits["text"]}"));
-
             if (entry == "none")
             {
-                TypeLine(WrapText($"{p.PlayerLocation.DescriptionLong} \n"));
+                WrapText($"{p.PlayerLocation.DescriptionLong} \n");
                 string descriptions = "";
                 foreach (Character character in p.PlayerLocation.Characters.Values)
                     descriptions += character.DescriptionShort;
                 foreach (Item item in p.PlayerLocation.Items.Values)
                     descriptions += item.DescriptionShort;
-                TypeLine(WrapText($"{p.PlayerLocation.Exits["text"]}"));
 
                 if (descriptions != "")
-                    TypeLine(WrapText($"{descriptions}"));
+                    WrapText($"{descriptions}");
+
+                WrapText($"{p.PlayerLocation.Exits["text"]}");
                 return;
             }
-            TypeLine($"I don't see {entry} here {p.PlayerHair}ie. ");
         }
 
+        // DONE
         // write like use 
-        public void Put(Player p, string name, List<Item> items)
+        public void Put(Player p, Item item, Asset asset)
         {
-            TypeLine("What are you trying to put? you need 2 items.");
-
-            TypeLine("Type the first item:");
-            string item1 = Console.ReadLine();
-            Console.WriteLine();
-            TypeLine("Type the second item:");
-            string item2 = Console.ReadLine();
-            Console.WriteLine();
-            List<string> tools = new List<string>();
-            tools.Add(item1);
-            tools.Add(item2);
-
-            if (tools.Contains("lantern") && tools.Contains("grease"))
+            if (item.Target == asset.Name)
             {
-                if (p.Inventory.ContainsKey("lantern") && p.Inventory.ContainsKey("grease"))
-                {
-                    TypeLine("Now your lantern is full and you can use it to go in the cave.");
-                    p.Inventory.Remove("lantern");
-                    foreach (Item i in items)
-                    {
-                        if (i.Name == "filledLantern")
-                            p.Inventory.Add("filledLantern", i);
-                    }
-                }
-                else
-                {
-                    TypeLine("You need to have the lantern and the grease in your inventory before you can use it.");
-                }
+                WrapText(item.Actions["put"]);
             }
-
             else
             {
-                TypeLine("You can only use \"put\" to fill your lantern with the bacon grease.");
+                WrapText($"You can't put {item.Name} in {asset.Name}");
+                WrapText($"Are you using {item.Name} correctly?");
             }
         }
 
-        // character
-        public void Talk(Player p, String name, Dictionary<string, Character> characters)
+        // DONE
+        public void Talk(Player p, Character c)
         {
-            foreach (Character c in characters.Values)
+            WrapText(c.Actions["talk"]);
+        }
+
+        // DONE
+        // player, item, asset 
+        // check if asset is target
+        public void Use(Player p, Item item, Asset asset)
+        {
+            if (item.Name == "book" | item.Target == asset.Name)
             {
-                if (p.PlayerLocation.Characters.ContainsKey(name))
-                {
-                    TypeLine(WrapText(c.Actions["talk"]));
-                }
-                else
-                {
-                    TypeLine("This character does not exist in this location.");
-                }
+                WrapText(item.Actions["use"]);
+            }
+            else
+            {
+                WrapText($"You can't use {item.Name} on {asset.Name}");
+                WrapText($"Are you using {item.Name} correctly?");
             }
         }
 
-        // write better help
-        // description 
-        public void Help(Player p)
+        // >>> AUXILIARY METHODS <<< 
+
+        private void DanCheck(Player p, Item item)
         {
-            TypeLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
-            TypeLine($"ie. get item -or- go north");
-            TypeLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
-            TypeLine($"Trying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command \"look\" in any location will give you a description of that location.");
+            if (p.PlayerLocation.Characters.ContainsKey("danReading"))
+            {
+                TransferItem(p, item);
+            }
+            else
+            {
+                WrapText(p.PlayerLocation.Items["grease"].Actions["blocked"]);
+            }
         }
 
-        private void TransferItem(Player p, string item)
+        private void BlackberryCheck(Player p, Item item, List<Item> items)
         {
-            Item itemToTransfer = p.PlayerLocation.Items[item];
-            p.Inventory.Add(item, itemToTransfer);
-            p.PlayerLocation.Items.Remove(item);
-            TypeLine(WrapText(itemToTransfer.Actions["get"]));
+            if (p.Inventory.ContainsKey("emptyCan"))
+            {
+                foreach (Item i in items)
+                {
+                    if (i.Name == "canOfBerries")
+                    {
+                        p.Inventory.Add(i.Name, i);
+                        p.Inventory.Remove(item.Name);
+                        WrapText(i.Actions["blocked"]);
+                    }
+                }
+            }
+            else
+            {
+                WrapText(p.PlayerLocation.Items["blackberries"].Actions["blocked"]);
+            }
+
         }
 
-        // helper method which transfer item from location to inventory
-        // then prints "get" text 
         private void TransferItem(Player p, Item item)
         {
-            if (p.PlayerLocation.Items.ContainsValue(item))
-            {
-                p.Inventory.Add(item.Name, item);
-                p.PlayerLocation.Items.Remove(item.Name);
-                TypeLine(item.Actions["get"]);
-            }
+            p.Inventory.Add(item.Name, item);
+            p.PlayerLocation.Items.Remove(item.Name);
+            TypeLine(item.Actions["get"]);
         }
 
         private void SwitchChar(Player p, Item item, Character character, Dictionary<string, Character> characters, string switchTo)
         {
             foreach (Character c in characters.Values)
             {
-                if(c.Name == switchTo)
+                if (c.Name == switchTo)
                 {
                     p.Inventory.Remove(item.Name);
                     p.PlayerLocation.Characters.Remove(character.Name);
@@ -371,104 +313,111 @@ namespace WhereIsBigfoot
 
         public void ShowLocation(Location location)
         {
-            if (location.Visited == false)
+			string descriptions = "";
+
+			if (location.Visited == false)
             {
-                TypeLine(WrapText($"{location.DescriptionFirst}"));
+				WrapText($"{location.DescriptionFirst}");
+				foreach (Character character in location.Characters.Values)
+					descriptions += character.DescriptionFirst;
+				foreach (Item item in location.Items.Values)
+					descriptions += item.DescriptionFirst;
 
-                foreach (Character character in location.Characters.Values)
-                    TypeLine(WrapText($"{character.DescriptionFirst}"));
-
-                foreach (Item item in location.Items.Values)
-                    TypeLine(WrapText($"{item.DescriptionFirst}"));
-
-                TypeLine(WrapText($"{location.Exits["text"]}"));
-
-
-                location.Visited = true;
+				if (descriptions != "")
+					WrapText($"{descriptions}");
+				
+				location.Visited = true;
             }
             else
             {
-                TypeLine(WrapText($"{location.DescriptionShort}"));
+                WrapText($"{location.DescriptionShort}");
+				foreach (Character character in location.Characters.Values)
+					descriptions += character.DescriptionShort;
+				foreach (Item item in location.Items.Values)
+					descriptions += item.DescriptionShort;
 
-                foreach (Character character in location.Characters.Values)
-                    Console.WriteLine(WrapText($"{character.DescriptionShort}"));
-
-                foreach (Item item in location.Items.Values)
-                    TypeLine(WrapText($"{item.DescriptionShort}"));
-
-                TypeLine(WrapText($"{location.Exits["text"]}"));
-            }
+				if (descriptions != "")
+					WrapText($"{descriptions}");
+			}
+				WrapText($"{location.Exits["text"]}");
         }
 
         private void CannotVerbNoun(string verb, string noun)
         {
-           TypeLine($"You can't {verb} {noun} ");
+            TypeLine($"You can't {verb} {noun} ");
         }
 
-       
-
-        //public string wrapText(string paragraph)
-        //{
-        //    if (string.IsNullOrWhiteSpace(paragraph))
-        //    {
-        //        return string.Empty;
-        //    }
-
-        //    var approxLineCount = paragraph.Length / Console.WindowWidth;
-        //    var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
-
-        //    for (var i = 0; i < paragraph.Length;)
-        //    {
-        //        var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
-        //        var line = paragraph.Substring(i, grabLimit);
-
-        //        var isLastChunk = grabLimit + i == paragraph.Length;
-
-        //        if (isLastChunk)
-        //        {
-        //            i = i + grabLimit;
-        //            lines.Append(line);
-        //        }
-        //        else
-        //        {
-        //            var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
-        //            lines.AppendLine(line.Substring(0, lastSpace));
-
-        //            //Trailing spaces needn't be displayed as the first character on the new line
-        //            i = i + lastSpace + 1;
-        //        }
-        //    }
-        //    return lines.ToString();
-
-        //}
-
-
-        public string WrapText(String text)
+        public void TypeLine(string line)
         {
-            String[] words = text.Split(' ');
-            StringBuilder buffer = new StringBuilder();
-
-            foreach (String word in words)
+            for (int i = 0; i < line.Length; i++)
             {
-                buffer.Append(word);
-                //see if you can make this dynamic.
-                if (buffer.Length >= 80)
-                {
-                    String line = buffer.ToString().Substring(0, buffer.Length - word.Length);
-                    Console.WriteLine(line);
-                    buffer.Clear();
-                    buffer.Append(word);
-                }
-
-                buffer.Append(" ");
-
+                Console.Write(line[i]);
+                System.Threading.Thread.Sleep(15); // Sleep for 15 milliseconds between characters.
             }
-            //buffer.ToString().PadLeft(200);
-            //buffer.ToString().PadRight(200);
-            //Console.WriteLine(buffer.ToString());
-            return buffer.ToString();
+            Console.WriteLine();
         }
-    }
+
+		public void WrapText(string paragraph)
+		{
+			if (string.IsNullOrWhiteSpace(paragraph))
+			{
+				return;
+			}
+
+			var approxLineCount = paragraph.Length / Console.WindowWidth;
+			var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
+
+			for (var i = 0; i < paragraph.Length;)
+			{
+				var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
+				var line = paragraph.Substring(i, grabLimit);
+
+				var isLastChunk = grabLimit + i == paragraph.Length;
+
+				if (isLastChunk)
+				{
+					i = i + grabLimit;
+					lines.Append(line);
+				}
+				else
+				{
+					var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
+					lines.AppendLine(line.Substring(0, lastSpace));
+
+					//Trailing spaces needn't be displayed as the first character on the new line
+					i = i + lastSpace + 1;
+				}
+			}
+			TypeLine(lines.ToString());
+		}
+
+
+		//public void WrapText(String text)
+		//{
+		//    String[] words = text.Split(' ');
+		//    StringBuilder buffer = new StringBuilder();
+
+		//    foreach (String word in words)
+		//    {
+		//        buffer.Append(word);
+		//        //see if you can make this dynamic.
+		//        if (buffer.Length >= Console.WindowWidth - 2)
+		//        {
+		//            String line = buffer.ToString().Substring(0, buffer.Length - word.Length);
+		//            Console.WriteLine(line);
+		//            buffer.Clear();
+		//            buffer.Append(word);
+		//        }
+
+		//        buffer.Append(" ");
+
+		//    }
+		//    //buffer.ToString().PadLeft(200);
+		//    //buffer.ToString().PadRight(200);
+		//    //Console.WriteLine(buffer.ToString());
+		//    TypeLine(buffer.ToString());
+		//}
+	}
 
 }
 

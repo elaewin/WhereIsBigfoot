@@ -58,8 +58,8 @@
         "location": "woods2",
         "target": "emptyCan",
         "actions": {
-            "get": "You pick a handful of ripe blackberries, but realize that if you put them in your pack, they'll just get squished and make a huge, sticky mess. So you decide to hold them in your stomach. \n\nGet it? You eat the blackberries. They're delicious!",
-            "put": "You pick a handful of ripe berries, but realize that if you put them in your pack, they'll just get squished and make a huge mess. \n\nWait a minute! \n\nYou dig the empty grease can out of your backpack, and drop the berries into it. Then you fill it the rest of the way with berries.  You put the can into the side pocket of your backpack. "
+            "blocked": "You pick a handful of ripe blackberries, but realize that if you put them in your pack, they'll just get squished and make a huge, sticky mess. So you decide to hold them in your stomach. \n\nGet it? You eat the blackberries. They're delicious!",
+            "get": "You pick a handful of ripe berries, but realize that if you put them in your pack, they'll just get squished and make a huge mess. \n\nWait a minute! \n\nYou dig the empty grease can out of your backpack, and drop the berries into it. Then you fill it the rest of the way with berries.  You put the can into the side pocket of your backpack. "
         }
     },
     {
@@ -273,6 +273,7 @@
         "name": "matches",
         "title": "Box of matches",
         "parseValue": [
+            "box",
             "matches",
             "box of matches",
             "matchbox",
