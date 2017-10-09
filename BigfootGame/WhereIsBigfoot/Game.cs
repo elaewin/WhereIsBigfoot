@@ -25,7 +25,7 @@ namespace WhereIsBigfoot
         private Player player;
 
         bool running = true;
-        private object typSpeed;
+        
 
         public Player Player
         {
@@ -111,7 +111,7 @@ namespace WhereIsBigfoot
 
                 if (parsed.Length == 0)
                 {
-                    gameSettings.TypeLine($"Sorry, {this.Player.PlayerName} I didn't catch that.");
+                    commands.TypeLine($"Sorry, {this.Player.PlayerName} I didn't catch that.");
                     return;
                 }
 
