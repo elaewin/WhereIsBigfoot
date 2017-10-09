@@ -9,7 +9,8 @@ namespace WhereIsBigfoot
         string playerName, playerGender, playerHair;
         Location playerLocation;
         Dictionary<string, Item> inventory;
-        int counter; 
+        int counter;
+		bool gameIsRunning = true;
 
         public Player(string playerName, string playerGender, string playerHair)
         {
@@ -51,5 +52,11 @@ namespace WhereIsBigfoot
             get => this.counter;
             set => this.counter = value;
         }
+
+		public bool GameIsRunning
+		{
+			get => this.gameIsRunning;
+			set => this.gameIsRunning = value;
+		}
     }
 }
