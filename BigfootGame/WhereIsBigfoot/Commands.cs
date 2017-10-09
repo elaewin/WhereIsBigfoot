@@ -143,7 +143,7 @@ namespace WhereIsBigfoot
             else
             {
                 CannotVerbNoun("go", direction);
-                TypeLine(WrapText("Try a different direction. Up is also an option."));
+                WrapText("Try a different direction. Up is also an option.");
             }
         }
 
@@ -267,7 +267,7 @@ namespace WhereIsBigfoot
             {
                 if (lantern.Name == newState)
                 {
-                    TypeLine(WrapText(target.Actions["put"]));
+                    WrapText(target.Actions["put"]);
                     p.Inventory.Add(newState, lantern);
                     p.Inventory.Remove(item.Name);
                     p.Inventory.Remove(target.Name);
@@ -383,7 +383,7 @@ namespace WhereIsBigfoot
             }
             else
             {
-                TypeLine(WrapText($"That path is way too steep to climb without something to help you keep your balance."));
+                WrapText($"That path is way too steep to climb without something to help you keep your balance.");
             }
         }
 
