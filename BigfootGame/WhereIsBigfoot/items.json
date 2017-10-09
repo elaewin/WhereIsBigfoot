@@ -1,6 +1,7 @@
 [
     {
         "name": "backpack",
+        "title": "Your backpack",
         "parseValue": [
             "backpack",
             "pack",
@@ -8,60 +9,62 @@
             "knapsack",
             "haversack"
         ],
-        "descriptionFirst": "Your backpack is lying near the entrance to the tent.",
-        "descriptionShort": "Backpack",
-        "descriptionLong": "A small camping backpack that you brought along to hold the various necessities of bigfoot hunting. Or, you know, other stuff.",
+        "descriptionFirst": "Your backpack is lying near the entrance to the tent. ",
+        "descriptionShort": "Your backpack is here. ",
+        "descriptionLong": "A small camping backpack that you brought along to hold the various necessities of bigfoot hunting. Or, you know, other stuff. It has useful pockets and straps and things on it. ",
         "location": "tent",
         "target": "back",
         "actions": {
             "get": "You grab your backpack and sling it over your shoulders. ",
             "drop": "You drop your backpack",
-            "put": "You put on the backpack.",
-            "use": "You're already using your backpack to hold the rest of your stuff.",
-            "give": "Why would you give away your backpack? It has all of your stuff in it."
+            "put": "You put on the backpack. ",
+            "use": "You're already using your backpack to hold the rest of your stuff. ",
+            "give": "Why would you give away your backpack? It has all of your stuff in it. "
         }
     },
     {
         "name": "bacon",
+        "title": "Bacon",
         "parseValue": [
             "bacon",
             "delicious bacon",
             "cooked bacon"
         ],
         "descriptionFirst": "",
-        "descriptionShort": "bacon",
-        "descriptionLong": "The bacon looks chock-full of deliciousness. It's been fried to perfection.",
+        "descriptionShort": "You see some bacon here. ",
+        "descriptionLong": "The bacon looks chock-full of deliciousness. It's been fried to perfection. ",
         "location": "danCamp",
         "target": "octopus",
         "actions": {
-            "get": "You grab a few pieces of bacon, wrap them in a handy paper towel, and stick them in your pocket.",
-            "put": "You drop the bacon on the ground.",
-            "drop": "You drop the bacon on the ground.",
-            "use": "You eat some of the bacon. Mmm...bacon.",
-            "give": "Who doesn't like bacon? Okay, that's an unfair generalization. For all you know, tree octopi are vegetarian. But it's worth a shot. You reach into your coat pocket, tugging a strip of bacon free from the paper towel.\n\nHolding the bacon out to the tree octopus, you see immediate interest. The octopus pulls a little closer on the branch, reaching out to take the bacon with one of its arms. It still has plenty to hold onto the branch and the lantern, though... but you've got plenty of bacon!\n\nYou give the octopus another strip. Then another. Soon, you're down to the last piece. It wants that last strip of bacon. It wants the bacon so much. But it needs at least two arms to hold onto the branch, and four for all the bacon it already has, and two for the lantern'and you've got one more strip.\n\n'Come on, buddy,' you say. 'You know you want it.'\n\nThe tree octopus relents. You're right. It wants the bacon. It wants all the bacon it can get. Even if it means giving up the lantern. It unwinds one of its last two arms to reach for the bacon, and, sure enough, loses its grip on the lantern. You manage to catch the lantern before it falls too far.  Go you!"
+            "get": "You grab a few pieces of bacon, wrap them in a handy paper towel, and stick them in a pocket of your backpack. ",
+            "put": "You drop the bacon on the ground. ",
+            "drop": "You drop the bacon on the ground. ",
+            "use": "You eat some of the bacon. Mmm...bacon. ",
+            "give": "Who doesn't like bacon? Okay, that's an unfair generalization. For all you know, tree octopi are vegetarian. But it's worth a shot. You reach into your coat pocket, tugging a strip of bacon free from the paper towel.\n\nHolding the bacon out to the tree octopus, you see immediate interest. The octopus pulls a little closer on the branch, reaching out to take the bacon with one of its arms. It still has plenty to hold onto the branch and the lantern, though... but you've got plenty of bacon!\n\nYou give the octopus another strip. Then another. Soon, you're down to the last piece. It wants that last strip of bacon. It wants the bacon so much. But it needs at least two arms to hold onto the branch, and four for all the bacon it already has, and two for the lantern'and you've got one more strip.\n\n'Come on, buddy,' you say. 'You know you want it.'\n\nThe tree octopus relents. You're right. It wants the bacon. It wants all the bacon it can get. Even if it means giving up the lantern. It unwinds one of its last two arms to reach for the bacon, and, sure enough, loses its grip on the lantern. You manage to catch the lantern before it falls too far. Go you!"
         }
     },
     {
         "name": "blackberries",
+        "title": "Blackberries",
         "parseValue": [
             "berries",
             "delicious berries",
             "delicious blackberries",
-            "can of berries",
-            "blackberries"
+            "blackberries",
         ],
-        "descriptionFirst": "A huge mass of blackberries have grown up and around the stump on the west end of the clearing.",
-        "descriptionShort": "",
-        "descriptionLong": "The blackberry vines are covered with huge, purplish-black berries. They look delicious.",
-        "location": "",
+        "descriptionFirst": "",
+        "descriptionShort": "The brambles are covered with huge, purplish-black berries. ",
+        "descriptionLong": "A huge mass of blackberries have grown up and around the stump on the west end of the clearing. The blackberry vines are covered with huge, purplish-black berries. They look delicious. ",
+        "location": "woods2",
         "target": "emptyCan",
         "actions": {
             "get": "You pick a handful of ripe blackberries, but realize that if you put them in your pack, they'll just get squished and make a huge, sticky mess. So you decide to hold them in your stomach. \n\nGet it? You eat the blackberries. They're delicious!",
-            "put": "You pick a handful of ripe berries, but realize that if you put them in your pack, they'll just get squished and make a huge mess. \n\nWait a minute! \n\nYou dig the empty grease can out of your backpack, and drop the berries into it. Then you fill it the rest of the way with berries.  You put the can into the side pocket of your backpack."
+            "put": "You pick a handful of ripe berries, but realize that if you put them in your pack, they'll just get squished and make a huge mess. \n\nWait a minute! \n\nYou dig the empty grease can out of your backpack, and drop the berries into it. Then you fill it the rest of the way with berries.  You put the can into the side pocket of your backpack. "
         }
     },
     {
         "name": "book",
+        "title": "A copy of \"Bigfoot Legends of the Pacific Northwest\"",
         "parseValue": [
             "book",
             "hardcover",
@@ -73,21 +76,22 @@
             "his book",
             "dan's book"
         ],
-        "descriptionFirst": "There is a book lying next to your sleeping bag.",
-        "descriptionShort": "A beat-up, hardcover book",
-        "descriptionLong": "The book is a rather beat up old hardcover book titled \"Bigfoot Legends of the Pacific Northwest\". Dan loaned it to you ages ago.",
+        "descriptionFirst": "There is a book lying next to your sleeping bag. ",
+        "descriptionShort": "You see a beat-up, hardcover book here. ",
+        "descriptionLong": "The book is a rather beat up old hardcover book titled \"Bigfoot Legends of the Pacific Northwest\", by Professor E. Rafferty. Dan loaned it to you ages ago. ",
         "location": "tent",
         "target": "danCooking",
         "actions": {
-            "get": "You pick up the bettered copy of 'Bigfoot Legends of the Pacific Northwest'.",
+            "get": "You pick up the bettered copy of 'Bigfoot Legends of the Pacific Northwest'. ",
             "put": "",
-            "drop": "You drop the book. Shame on you, treating a book that way.",
-            "use": "You flip through the book. It's got a lot of good information about Bigfoot. For instance, did you know that many scientists believe that Bigfoot is a vegetarian? True fact.",
-            "give": "You pull the book out of your pack and hand it to Dan. \"Oh, wow! I'd forgotten that you had this,\" says Dan. He sits down next to the camp stove, and begins reading the book, pausing every so often to look up and tend to the cooking bacon."
+            "drop": "You drop the book. Shame on you, treating a book that way. ",
+            "use": "You flip through the book. It's got a lot of good information about Bigfoot. For instance, did you know that many scientists believe that Bigfoot is a vegetarian? True fact. ",
+            "give": "You pull the book out of your pack and hand it to Dan. \"Oh, wow! I'd forgotten that you had this,\" says Dan. \"I want to re-read Rafferty's chapters on ethnobotanical evidence before I do anything else. It might take a while, so go ahead and explore without me.\" He sits down next to the camp stove, and begins reading the book, pausing every so often to look up and tend to the cooking bacon. "
         }
     },
     {
         "name": "canOfBerries",
+        "title": "Tin can full of blackberries",
         "parseValue": [
             "berries",
             "tin",
@@ -100,20 +104,21 @@
             "tin of blackberries"
         ],
         "descriptionFirst": "",
-        "descriptionShort": "A tin can full of blackberries",
-        "descriptionLong": "You look at the tin can full of blackberries and admire your cleverness all over again.",
+        "descriptionShort": "You see a tin can full of blackberries here. ",
+        "descriptionLong": "You look at the tin can full of blackberries and admire your cleverness all over again. ",
         "location": "",
         "target": "bigfoot",
         "actions": {
-            "get": "You pick up the tin can full of blackberries.",
-            "put": "You put down the tin can full of blackberries.",
-            "drop": "You drop the tin can full of blackberries.",
-            "use": "You eat a few blackberries. They're delicious.",
-            "give": "(to Bigfoot) You give the tin can full of blackberries to Bigfoot."
+            "get": "You pick up the tin can full of blackberries. ",
+            "put": "You put down the tin can full of blackberries. ",
+            "drop": "You drop the tin can full of blackberries. ",
+            "use": "You eat a few blackberries. They're delicious. ",
+            "give": "(to Bigfoot) You give the tin can full of blackberries to Bigfoot. "
         }
     },
     {
         "name": "cellPhone",
+        "title": "Your (dead) cell phone",
         "parseValue": [
             "phone",
             "cell phone",
@@ -121,20 +126,21 @@
             "dead phone"
         ],
         "descriptionFirst": "",
-        "descriptionShort": "A dead cell phone",
-        "descriptionLong": "Yep, it's your cell phone. Its battery sure is dead.",
+        "descriptionShort": "You see your cell phone here. ",
+        "descriptionLong": "Yep, it's your cell phone. Its battery sure is dead. ",
         "location": "",
         "target": "",
         "actions": {
-            "get": "You already have your cell phone.",
+            "get": "You already have your cell phone. ",
             "put": "You don't want to do that! You might lose it, and this phone was expensive!",
             "drop": "You don't want to do that! You might lose it, and this phone was expensive!!",
-            "use": "You can't use your cell phone. The battery is completely dead. You could charge it, if you hadn't left your phone charger at home.",
-            "give": "has no interest in your cell phone."
+            "use": "You can't use your cell phone. The battery is completely dead. You could charge it, if you hadn't left your phone charger at home. ",
+            "give": "has no interest in your cell phone. "
         }
     },
     {
         "name": "emptyCan",
+        "title": "An empty tin can",
         "parseValue": [
             "tin",
             "can",
@@ -144,20 +150,21 @@
             "fat can"
         ],
         "descriptionFirst": "",
-        "descriptionShort": "An empty tin can",
-        "descriptionLong": "This tin can formerly held the grease that Dan poured off of his bacon. Now it's empty.",
+        "descriptionShort": "You see an empty tin can on the ground here. ",
+        "descriptionLong": "This tin can formerly held the grease that Dan poured off of his bacon. Now it's empty. ",
         "location": "",
         "target": "",
         "actions": {
-            "get": "You pick up the tin can.",
-            "put": "You put the tin can on the ground.",
-            "drop": "You drop the tin can.",
+            "get": "You pick up the tin can. ",
+            "put": "You put the tin can on the ground. ",
+            "drop": "You drop the tin can. ",
             "use": "",
-            "give": "isn't interested in the tin can."
+            "give": "isn't interested in the tin can. "
         }
     },
     {
         "name": "filledLantern",
+        "title": "Lantern (filled with oil)",
         "parseValue": [
             "lantern",
             "lamp",
@@ -168,19 +175,20 @@
             "filled lamp"
         ],
         "descriptionFirst": "",
-        "descriptionShort": "Lantern (filled with oil)",
-        "descriptionLong": "The lantern is a small, oil burning lantern that you bought to take on camping trips a few years ago. It smells vaguely of bacon grease, and sloshes gently when you move it.",
+        "descriptionShort": "You see a lantern here. ",
+        "descriptionLong": "The lantern is a small, oil burning lantern that you bought to take on camping trips a few years ago. It smells vaguely of bacon grease, and sloshes gently when you move it. ",
         "location": "",
         "target": "",
         "actions": {
-            "get": "You pick up your lantern.",
-            "drop": "You drop your lantern.",
-            "use": "Are you trying to light the lantern? You'll need to light it with something.",
-            "give": "doesn't want that."
+            "get": "You pick up your lantern. ",
+            "drop": "You drop your lantern. ",
+            "use": "Are you trying to light the lantern? You'll need to light it with something. ",
+            "give": "doesn't want that. "
         }
     },
     {
         "name": "glowingLantern",
+        "title": "Glowing lantern",
         "parseValue": [
             "glowing lantern",
             "glowing lamp",
@@ -196,20 +204,21 @@
             "camp lamp"
         ],
         "descriptionFirst": "",
-        "descriptionShort": "A lit lantern",
-        "descriptionLong": "Your camping lantern is lit and casting a bright glow all around you.",
+        "descriptionShort": "You see a lit camping lantern here. ",
+        "descriptionLong": "Your camping lantern is lit and casting a bright glow all around you. ",
         "location": "",
         "target": "",
         "actions": {
-            "get": "You pick up the brightly glowing lantern.",
-            "put": "You put down the brightly glowing lantern.",
-            "drop": "You drop the brightly glowing lantern.",
+            "get": "You pick up the brightly glowing lantern. ",
+            "put": "You put down the brightly glowing lantern. ",
+            "drop": "You drop the brightly glowing lantern. ",
             "use": "The lantern is lit. You're already using it!",
-            "give": "isn't interested in the lantern."
+            "give": "isn't interested in the lantern. "
         }
     },
     {
         "name": "grease",
+        "title": "Tin of bacon grease",
         "parseValue": [
             "grease",
             "tin",
@@ -222,22 +231,23 @@
             "fat can",
             "hot grease"
         ],
-        "descriptionFirst": "As you watch, Dan carefully pours hot grease out of the frying pan and into the can. Dan looks up at you and grins. \"Hey, <name>, there you are!\" he says. \"Grab some bacon.\" ",
-        "descriptionShort": "A tin can half full of bacon grease",
-        "descriptionLong": "The tin can is full of bacon grease. At the top of the can, congealed fat has formed a solid mass, sealing it like a gross, bacon flecked cork.",
+        "descriptionFirst": "Next to the stove is a tin can. As you watch, Dan carefully pours hot grease out of the frying pan and into the can. Dan looks up at you and grins. \"Hey, <name>, there you are!\" he says. \"Grab some bacon.\" ",
+        "descriptionShort": "You see a tin can full of bacon grease here. ",
+        "descriptionLong": "The tin can is full of bacon grease. At the top of the can, congealed fat has formed a solid mass, sealing it like a gross, bacon flecked cork. ",
         "location": "",
         "target": "",
         "actions": {
-            "get": "You casually reach out and snag the tin of bacon grease. It's, well, greasy. Dan is too engrossed in his book to notice.",
-            "blocked": "\"Hey, man,\" says Dan, \"I need that.\" \n\nYou're not going to argue with a man who is holding a pan of hot grease.",
+            "get": "You casually reach out and snag the tin of bacon grease. It's, well, greasy. Dan is too engrossed in his book to notice. ",
+            "blocked": "\"Hey, man,\" says Dan, \"I need that.\" \n\nYou're not going to argue with a man who is holding a pan of hot grease. ",
             "put": "(in lantern) You use a nearby twig to scrape off the congealed fat at the top of the tin, and pour the still-liquid grease underneath into the lantern’s oil reservoir. Clever you!",
-            "drop": "You drop the tin can full of bacon grease.",
+            "drop": "You drop the tin can full of bacon grease. ",
             "use": "(in lantern) You use a nearby twig to scrape off the congealed fat at the top of the tin, and pour the still-liquid grease underneath into the lantern’s oil reservoir. Clever you!",
-            "give": "isn't interested in the can of grease."
+            "give": "isn't interested in the can of grease. "
         }
     },
     {
         "name": "lantern",
+        "title": "Camping lantern",
         "parseValue": [
             "lantern",
             "lamp",
@@ -246,21 +256,22 @@
             "camp lamp",
             "unlit lamp"
         ],
-        "descriptionFirst": "\n\nThe tree octopus watches you climb. You're not sure if it's impressed. Now that you're closer, you see its arms wrapped around a lantern. How did it get the lantern up here? It has eight arms'maybe that should be a clue about how it does anything. You've only got two arms and you can barely get around at all.\n\nThe tree octopus seems kind of possessive of the lantern. You weren't even that possessive of your favorite teddy bear when you were four. Then again, you only had two arms to hold it.",
-        "descriptionShort": "Lantern",
-        "descriptionLong": "The lantern is a small, oil burning lantern that you bought to take on camping trips a few years ago.",
+        "descriptionFirst": "\n\nThe tree octopus watches you climb. You're not sure if it's impressed. Now that you're closer, you see its arms wrapped around a lantern. How did it get the lantern up here? It has eight arms'maybe that should be a clue about how it does anything. You've only got two arms and you can barely get around at all.\n\nThe tree octopus seems kind of possessive of the lantern. You weren't even that possessive of your favorite teddy bear when you were four. Then again, you only had two arms to hold it. ",
+        "descriptionShort": "You see your camping lantern here. ",
+        "descriptionLong": "The lantern is a small, oil burning lantern that you bought to take on camping trips a few years ago. ",
         "location": "tree",
         "target": "",
         "actions": {
-            "get": "You pick up your lantern.",
+            "get": "You pick up your lantern. ",
             "put": "",
-            "drop": "You drop your lantern.",
+            "drop": "You drop your lantern. ",
             "use": "Are you trying to light the lantern?",
-            "give": "doesn't want that."
+            "give": "doesn't want that. "
         }
     },
     {
         "name": "matches",
+        "title": "Box of matches",
         "parseValue": [
             "matches",
             "box of matches",
@@ -269,21 +280,22 @@
             "match",
             "a match"
         ],
-        "descriptionFirst": "",
-        "descriptionShort": "box of matches",
-        "descriptionLong": "The box of matches is a small box of strike anywhere matches. You glance inside briefly and see plenty of matches.",
+        "descriptionFirst": "You see a box of matches lying on the rock where you left it last night, next to where you last saw your lantern. ",
+        "descriptionShort": "You see a box of matches here. ",
+        "descriptionLong": "It is a small box of strike anywhere matches. You know that there are plenty of matches inside. ",
         "location": "campsite",
         "target": "lantern",
         "actions": {
-            "get": "You pick up the box of matches.",
+            "get": "You pick up the box of matches. ",
             "put": "",
-            "drop": "You drop the box of matches",
-            "use": "(has no lantern) You strike a match, but you're in a rain forest, and can't see anything to burn.\n\n(has lantern, does not have oil) You strike a match and try to light the lantern, but with no fuel, you can't get it to light.\n\n(has lantern, has oil) You strike a match and light the lantern, which glows brightly. The bacon grease makes the lantern smell a bit more delicious than usual, but you don't mind.",
-            "give": "doesn't want that."
+            "drop": "You drop the box of matches. ",
+            "use": "(has no lantern) You strike a match, but you're in a rain forest, and can't see anything to burn.\n\n(has lantern, does not have oil) You strike a match and try to light the lantern, but with no fuel, you can't get it to light.\n\n(has lantern, has oil) You strike a match and light the lantern, which glows brightly. The bacon grease makes the lantern smell a bit more delicious than usual, but you don't mind. ",
+            "give": "doesn't want that. "
         }
     },
     {
         "name": "stick",
+        "title": "",
         "parseValue": [
             "stick",
             "walking stick",
@@ -293,36 +305,17 @@
             "wood stick",
             "wooden stick"
         ],
-        "descriptionFirst": "A walking stick is tangled in the brambles.",
-        "descriptionShort": "walking stick",
-        "descriptionLong": "The walking stick is sturdy and interestingly gnarled. It's made of some kind of wood. You don't know enough about different types of wood to identify it, though.",
+        "descriptionFirst": "A walking stick is tangled in the brambles. ",
+        "descriptionShort": "You see a walking stick here. ",
+        "descriptionLong": "The walking stick is sturdy and interestingly gnarled. It's made of some kind of wood. You don't know enough about different types of wood to identify it, though. ",
         "location": "woods2",
         "target": "octopus",
         "actions": {
-            "get": "You reach gingerly into the thick brambles and manage to grab the stick, at the cost of some nasty scratches from the blackberry thorns.",
+            "get": "You reach gingerly into the thick brambles and manage to grab the stick, at the cost of some nasty scratches from the blackberry thorns. ",
             "put": "",
-            "drop": "You drop the walking stick",
-            "use": "What a great idea!\n\nYou tug your walking stick out of your belt. (How else were you gonna carry it up here? You’ve only got two arms, sucker. You’re not an octopus.) The job still requires you to stretch, but you think you can reach the octopus with your stick.\n\nThe octopus thinks you can do it, too. It also thinks this is a bad idea. The octopus suddenly sprays you in the face with ink! Everything goes black! You try to clear your eyes, but then you lose your grip. Gravity, as it turns out, doesn’t lose you. Gravity never loses you.\n\nThe ground hurts. It hurts a lot. Your vision is still black from ink. Then everything goes blacker. Your last thought is that poking an endangered species was actually a terrible idea.",
-            "give": "doesn't want that."
-        }
-    },
-    {
-        "name": "tree",
-        "descriptionShort": "An enormous cedar tree.",
-        "parseValue": [
-            "tree",
-            "cedar tree",
-            "huge tree",
-            "cedar",
-            "huge cedar"
-        ],
-        "descriptionFirst": "The cedar tree is tall and strong, with plenty of branches thick enough for climbing. It also has plenty of foliage. No going bare for winter on a tree like this. This tree is green forever. Ever…evergreen? Or is that a different kind of tree? Nature is so confusing. Anyway, you're pretty sure it's a cedar. That'll do for now. Oh, and there's something rustling around in the branches.",
-        "descriptionLong": "At first it's all just branches and leaves. Leaves? Are those called leaves? They're kind of needle-y. You could look up the proper term if your cell phone wasn't dead. You almost give up squinting through the branches before you see a NORTHWEST TREE OCTOPUS!\n\nYou pull out your cell phone to take a picture...only to remember you can't, because the battery is dead. Nature is the worst.\n\nThe tree octopus seems to have its arms wrapped around something. You can't tell what it is from here. You could probably climb up there and get a closer look.",
-        "location": "woods4",
-        "target": "",
-        "actions": {
-            "get": "You can't possibly expect to take this HUGE TREE.",
-            "give": "The tree isn't interested in anything you have."
+            "drop": "Hey, you BLED to get that stick--those blackberries were vicious! You think about dropping it, but decide instead to stick it through the straps on your backpack. That way you can carry it but keep your hands free. ",
+            "use": "What a great idea!\n\nYou tug your walking stick out of the straps on your backpack. (How else were you gonna carry it up here? You’ve only got two arms, sucker. You’re not an octopus.) The job still requires you to stretch, but you think you can reach the octopus with your stick.\n\nThe octopus thinks you can do it, too. It also thinks this is a bad idea. The octopus suddenly sprays you in the face with ink! Everything goes black! You try to clear your eyes, but then you lose your grip. Gravity, as it turns out, doesn’t lose you. Gravity never loses you.\n\nThe ground hurts. It hurts a lot. Your vision is still black from ink. Then everything goes blacker. Your last thought is that poking an endangered species was actually a terrible idea. ",
+            "give": "doesn't want that. "
         }
     }
 ]

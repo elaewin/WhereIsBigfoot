@@ -1,40 +1,42 @@
 [
     {
         "name": "danCooking",
+        "title": "Dan",
         "location": "danCamp",
         "parseValue": [
             "dan",
             "friend",
             "dude"
         ],
-        "descriptionFirst": "Dan is a tall white dude with shaggy brownish hair. He is wearing ripped up jeans and a faded henley under and old red trail jacket. Dan is humming to himself while he cooks bacon over his camp stove.",
-        "descriptionShort": "Dan is cooking bacon at a small camp stove and humming to himself.",
+        "descriptionFirst": "Dan is a tall white dude with shaggy brownish hair. As far as you can tell, he hasn't changed much since college--he's still wearing ripped up jeans and a faded henley under an old red trail jacket. Dan is humming to himself while he cooks bacon over his camp stove.",
         "descriptionLong": "Dan is a tall white dude with shaggy brownish hair. He is wearing ripped up jeans and a faded henley under and old red trail jacket. Dan is humming to himself while he cooks bacon over his camp stove.",
+        "descriptionShort": "Dan is cooking bacon at a small camp stove and humming to himself. ",
         "actions": {
             "get": "",
-            "talk": "Dan smiles at you, but is busy with what he's doing.",
-            "give": ""
+            "talk": "Dan smiles at you, but is busy with what he's doing."
         }
     },
     {
         "name": "danReading",
+        "title": "Dan",
         "location": "",
         "parseValue": [
             "dan",
             "friend",
             "dude"
         ],
-        "descriptionFirst": "Dan is a tall white dude with shaggy brownish hair. He is wearing ripped up jeans and a faded henley under and old red trail jacket. Dan is muttering to himself while he reads and cooks bacon over his camp stove.",
-        "descriptionShort": "You see Dan here, reading and cooking bacon.",
+        "descriptionFirst": "FIRST DESCRIPTION: None.",
         "descriptionLong": "Dan is a tall white dude with shaggy brownish hair. He is wearing ripped up jeans and a faded henley under and old red trail jacket. Dan is muttering to himself while he reads and cooks bacon over his camp stove.",
+        "descriptionShort": "You see Dan here, reading and cooking bacon. ",
         "actions": {
             "get": "",
-            "talk": "Dan smiles at you, but is busy with what he's doing.",
-            "give": ""
+            "talk": "Dan looks up from the book and smiles at you. \"Thanks again, man!\" he says. \"I'm not done reading; You can go on without me.\""
+                
         }
     },
     {
         "name": "octopus",
+        "title": "Pacific Northwest tree octopus",
         "location": "tree",
         "parseValue": [
             "octopus",
@@ -42,26 +44,26 @@
             "cephalopod",
             "octo"
         ],
-        "descriptionFirst": "",
-        "descriptionShort": "You see a Pacific Northwest tree octopus here, coiled around your missing camping lantern.",
-        "descriptionLong": "The Pacific Northwest tree octopus (Octopus paxarbolis) is a small cephalopod with brown skin that is mottled with green and white--perfect camouflage for hiding in a Pacific Northwest rainforest. They're an endangered species, and you've never heard of one living in this part of the state. Maybe this is a new species! The octopus' tentacles are coiled around your missing camping lantern.",
+        "descriptionFirst": "There is a Pacific Northwest tree octopus clinging to the branches above you. They're an endangered species, and you've never heard of one living in this part of the state. Maybe this is a new species!\n\nThe octopus' tentacles are coiled possessively around your missing camping lantern. It must have stolen the lantern during the night!",
+        "descriptionShort": "You see a Pacific Northwest tree octopus here. Its tentacles are coiled around your missing camping lantern. ",
+        "descriptionLong": "The Pacific Northwest tree octopus (Octopus paxarbolis) is a small cephalopod with brown skin that is mottled with green and white--perfect camouflage for hiding in a Pacific Northwest rainforest. Because of its location in this part of the state, you suspect this might be a new species. Its tentacles are coiled possessively around your camping lantern.",
         "target": "",
         "actions": {
             "get": "You try to grab the octopus, but it tentaclates (is that the right word?) up higher in the tree. When you try to climb after it, the branches creak ominously, so you return to the lower, stronger branches.",
-            "talk": "You think that talking to the octopus might do some good. You're not sure what to say. What is it they advise with scared animals? It's not what you say, but how you say it in a calming voice?\n\nYou recite the first twenty lines of Charge of the Light Brigade to the octopus.\n\nIt doesn't respond.\n\nEveryone's a critic.",
-            "give": ""
+            "talk": "You think that talking to the octopus might do some good. You're not sure what to say. What is it they advise with scared animals? It's not what you say, but how you say it in a calming voice?\n\nYou recite the first twenty lines of Charge of the Light Brigade to the octopus.\n\nIt doesn't respond.\n\nEveryone's a critic."
         }
     },
     {
         "name": "bigfootHostile",
+        "title": "Bigfoot",
         "location": "valley",
         "parseValue": [
             "bigfoot",
             "sasquatch"
         ],
-        "descriptionFirst": "Wow. That's Bigfoot. ThatdanCamps really Bigfoot for real. Really. Also really hairy, or maybe that's fur, but it's brown and straight and covers from head to feet. And Bigfoot is…really big. Maybe eight feet tall sort big. Or nine? It's hard to tell from here. You can't tell if Bigfoot is male or female from here, either. You start walking closer.\n\nBigfoot doesn't notice you at first, seeming to be absorbed in picking something out of a bush. You get a little closer to the edge of the clearing. Then, as you're still taking in the sight of someone so tall and so animal-like but also so human, you step on a fallen twig. It's the kind that snaps loudly, because of course it is.\n\nYou stop cold as Bigfoot turns to look. Big eyes stand out on a face with dark features, maybe the only parts of the creature not covered in fur besides those huge hands. Then that dark brow grows darker. Bigfoot grunts. Snarls. And then starts moving closer. Stomping, really, in long, angry strides.\n\nOh, hey. It's true. It's totally true. Bigfoot has REALLY BIG FEET. And is also angry. Really angry.\n\nWait, what are you supposed to do about an angry Bigfoot? Can you talk your way out of this? Does Bigfoot even understand English? Probably not. Either way, you'd better do something pretty quickly!",
-        "descriptionShort": "",
-        "descriptionLong": "",
+        "descriptionFirst": "Holy cow! THAT'S BIGFOOT! That's really Bigfoot for real! Really!\n\nAlso really hairy, or maybe that's fur, but it's brown and straight and covers from head to feet. And Bigfoot is…really big. Maybe eight feet tall sort big. Or nine? It's hard to tell from here. You can't tell if Bigfoot is male or female from here, either. You start walking closer.\n\nBigfoot doesn't notice you at first, seeming to be absorbed in picking something out of a bush. You get a little closer to the edge of the clearing. Then, as you're still taking in the sight of someone so tall and so animal-like but also so human, you step on a fallen twig. It's the kind that snaps loudly--because of course it is.\n\nYou stop cold as Bigfoot turns to look. Big eyes stand out on a face with dark features, maybe the only parts of the creature not covered in fur besides those huge hands. Then that dark brow grows darker. Bigfoot grunts. Snarls. And then starts moving closer. Stomping, really, in long, angry strides.\n\nOh, hey. It's true. It's totally true. Bigfoot has REALLY BIG FEET. And is also angry. Really angry.\n\nWait, what are you supposed to do about an angry Bigfoot? Can you talk your way out of this? Does Bigfoot even understand English? Probably not. Either way, you'd better do something pretty quickly!",
+        "descriptionShort": "Bigfoot is here, and he looks really, really angry. You'd better do something, fast! ",
+        "descriptionLong": "Bigfoot is here, and he looks really, really angry. You'd better do something, fast! ",
         "actions": {
             "get": "",
             "talk": "",
@@ -70,6 +72,7 @@
     },
     {
         "name": "bigfootFriendly",
+        "title": "Bigfoot",
         "location": "",
         "parseValue": [
             "bigfoot",

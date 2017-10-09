@@ -6,24 +6,27 @@ namespace WhereIsBigfoot
 {
     public class Item : Asset
     {
-        string name, descriptionFirst, descriptionShort, descriptionLong;
+        string name, title, descriptionFirst, descriptionShort, descriptionLong;
         List<string> parseValue;
         Dictionary<string, string> actions;
         string location;
         string target;
 
         public Item(string name, 
+                    string title,
                     string descriptionFirst, 
                     string descriptionShort, 
                     string descriptionLong,
                     List<string> parseValue, 
                     string target, Dictionary<string, string> actions,
-                    string location) : base(name, 
+                    string location) : base(name,
+                                            title,
                                             descriptionFirst, 
                                             descriptionShort, 
                                             descriptionLong)
         {
             this.name = name;
+            this.title = title;
             this.descriptionFirst = descriptionFirst;
             this.descriptionShort = descriptionShort;
             this.descriptionLong = descriptionLong;

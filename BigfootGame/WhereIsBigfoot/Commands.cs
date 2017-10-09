@@ -35,26 +35,26 @@ namespace WhereIsBigfoot
             Location currentLocation = p.PlayerLocation;
             string newLocation;
 
-			if (currentLocation.Exits.ContainsKey(direction))
-			{
-				Console.Title = Console.Title.Remove(16);
-				newLocation = currentLocation.Exits[direction];
-				foreach (Location location in locations)
-				{
-					if (location.Name == newLocation)
-					{
-						p.PlayerLocation = location;
-						Console.Title += $"? -- {location.DescriptionShort}";
-						Console.WriteLine();
-						ShowLocation(location);
+            if (currentLocation.Exits.ContainsKey(direction))
+            {
+                Console.Title = Console.Title.Remove(16);
+                newLocation = currentLocation.Exits[direction];
+                foreach (Location location in locations)
+                {
+                    if (location.Name == newLocation)
+                    {
+                        p.PlayerLocation = location;
+                        Console.Title += $"? -- {location.DescriptionShort}";
+                        Console.WriteLine();
+                        ShowLocation(location);
 
-					}
-				}
-			}
-			else
-			{
-				CannotVerbNoun("go", direction);
-			}
+                    }
+                }
+            }
+            else
+            {
+                CannotVerbNoun("go", direction);
+            }
 
         }
 
@@ -111,39 +111,39 @@ namespace WhereIsBigfoot
             TypeLine(wrapText(itemToTransfer.Actions["get"]));
         }
 
-		private void DanCheck(Player p, string item, Dictionary<string, Character> characters)
-		{
-			if (p.PlayerLocation.Name == "danCamp")
-			{
-				if (item == "book" && p.PlayerLocation.Characters.ContainsKey("danCooking"))
-				{
-					p.Inventory.Remove(item);
-					foreach (Character c in characters.Values)
-					{
-						if (c.Name == "danReading")
-						{
-							p.PlayerLocation.Characters.Add(c.Name, c);
-							p.PlayerLocation.Characters["danReading"].Location = p.PlayerLocation.Name;
-							p.PlayerLocation.Characters.Remove("danCooking");
-						}
-					}
-				}
-			}
-		}
-		public void Talk(Player p, String name, Dictionary<string, Character> characters)
-		{
-			foreach (Character c in characters.Values)
-			{
-				if (p.PlayerLocation.Characters.ContainsKey(name))
-				{
-					TypeLine(wrapText(c.Actions["talk"]));
-				}
-				else
-				{
-					TypeLine("This character does not exist in this location.");
-				}
-			}
-		}
+        private void DanCheck(Player p, string item, Dictionary<string, Character> characters)
+        {
+            if (p.PlayerLocation.Name == "danCamp")
+            {
+                if (item == "book" && p.PlayerLocation.Characters.ContainsKey("danCooking"))
+                {
+                    p.Inventory.Remove(item);
+                    foreach (Character c in characters.Values)
+                    {
+                        if (c.Name == "danReading")
+                        {
+                            p.PlayerLocation.Characters.Add(c.Name, c);
+                            p.PlayerLocation.Characters["danReading"].Location = p.PlayerLocation.Name;
+                            p.PlayerLocation.Characters.Remove("danCooking");
+                        }
+                    }
+                }
+            }
+        }
+        public void Talk(Player p, String name, Dictionary<string, Character> characters)
+        {
+            foreach (Character c in characters.Values)
+            {
+                if (p.PlayerLocation.Characters.ContainsKey(name))
+                {
+                    TypeLine(wrapText(c.Actions["talk"]));
+                }
+                else
+                {
+                    TypeLine("This character does not exist in this location.");
+                }
+            }
+        }
 
         public void Put(Player p, string name, List<Item> items)
         {
@@ -188,6 +188,7 @@ namespace WhereIsBigfoot
             TypeLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
             TypeLine($"ie. get item -or- go north");
             TypeLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
+            TypeLine($"Trying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command \"look\" in any location will give you a description of that location.");
         }
 
         public void Inventory(Player p)
@@ -231,6 +232,13 @@ namespace WhereIsBigfoot
             if (entry == "none")
             {
                 TypeLine(wrapText($"{p.PlayerLocation.DescriptionLong} \n"));
+                string descriptions = "";
+                foreach (Character character in p.PlayerLocation.Characters.Values)
+                    descriptions += character.DescriptionShort;
+                foreach (Item item in p.PlayerLocation.Items.Values)
+                    descriptions += item.DescriptionShort;
+                if (descriptions != "")
+                    TypeLine(wrapText($"{descriptions}"));
                 return;
             }
             TypeLine($"I don't see {entry} here. ");
@@ -267,16 +275,16 @@ namespace WhereIsBigfoot
             TypeLine($"You can't {verb} {noun} ");
         }
 
-		public void TypeLine(string line)
-		{
-			for (int i = 0; i < line.Length; i++)
-			{
-				Console.Write(line[i]);
-				System.Threading.Thread.Sleep(15); // Sleep for 15 milliseconds between characters.
-			}
-			Console.WriteLine();
-			Console.WriteLine();
-		}
+        public void TypeLine(string line)
+        {
+            for (int i = 0; i < line.Length; i++)
+            {
+                Console.Write(line[i]);
+                System.Threading.Thread.Sleep(15); // Sleep for 15 milliseconds between characters.
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+        }
 
         //public string wrapText(string paragraph)
         //{
