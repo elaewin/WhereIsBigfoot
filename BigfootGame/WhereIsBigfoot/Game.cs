@@ -119,6 +119,10 @@ namespace WhereIsBigfoot
 			return null;
 		}
 
+		// Check if an Asset has a given target
+		private Asset AssetIsTarget
+
+		// Handles the parsing of input from the user.
 		public void ParseInput(string prompt)
 		{
 			string input = GetInput(prompt).ToLower().Trim();
@@ -132,8 +136,7 @@ namespace WhereIsBigfoot
 				string[] parsed = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
 				if (this.parseDict.ContainsKey(parsed[0]))
 					verb = this.parseDict[parsed[0]];
-
-
+				
 				if (parsed.Length == 0)
 				{
 					commands.TypeLine($"Sorry, {this.Player.PlayerName} I didn't catch that.");
@@ -171,20 +174,20 @@ namespace WhereIsBigfoot
 
 						case "give":
 							// Get the target character for it item being given.
-							string response = GetInput($"Who do you want to give {parsed[1]}?");
+							string giveResponse= GetInput($"Who do you want to give {noun}?");
 
 							// check that item is in player inventory
 							Item itemToGive = DoesItemExistIn(this.Player.Inventory, noun);
 
 							// check characters.parsevalue is in location (write method to check location) IsInLocation
-							Character targetCharacter = CharacterExistsIn(this.Player.PlayerLocation, response);
+							Character targetCharacter = CharacterExistsIn(this.Player.PlayerLocation, giveResponse);
 
 							// pass player item being gotten (Item), character(Character), character dictionary
 							commands.Give(this.Player, itemToGive, targetCharacter, this.Player.PlayerLocation.Characters);
 							break;
 
 						case "go":
-							commands.Go(Player, parsed[1], this.Locations);
+							commands.Go(Player, noun, this.Locations);
 							break;
 
 						case "inventory":
@@ -192,14 +195,14 @@ namespace WhereIsBigfoot
 							break;
 
 						case "look":
-							commands.Look(Player, parsed[1]);
+							commands.Look(Player, noun);
 							break;
 
-						//case "put":
-						////handle like use
-						//string giveTarget = GetInput($"Where do you want to put {parsed[1]}?");
-						//commands.Put(Player, parsed[1], items);
-						//break;
+						case "put":
+							//handle like use
+							string putResponse = GetInput($"Where do you want to put {noun}?");
+							commands.Put(Player, noun, items);
+							break;
 
 						case "talk":
 							// check player.location.characters.parseValues for match, pass character.
@@ -207,8 +210,13 @@ namespace WhereIsBigfoot
 							break;
 
 						case "use":
-							string useTarget = GetInput($"What do you want to use {parsed[1]} on?");
-							//check player inventory items.parseValue vs noun
+							// Get the target for the use command
+							string useTarget = GetInput($"What do you want to use {noun} on?");
+
+							//check player inventory items parseValue vs noun
+							Item itemToUse = DoesItemExistIn(this.Player.Inventory, noun);
+							string itemTarget = itemToUse.Target;
+
 							//check player inventory items.parseValue for target AND current location characters for parsevalues
 							// pass player, item, asset
 							commands.Use(Player, parsed[1], useTarget);
