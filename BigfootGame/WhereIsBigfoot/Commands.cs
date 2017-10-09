@@ -344,7 +344,7 @@ namespace WhereIsBigfoot
 
         private void CannotVerbNoun(string verb, string noun)
         {
-            TypeLine($"You can't {verb} {noun} ");
+            WrapText($"You can't {verb} {noun} ");
         }
 
         public void TypeLine(string line)
@@ -357,6 +357,13 @@ namespace WhereIsBigfoot
             Console.WriteLine();
         }
 
+		private void GameOverMan(Player player, string description)
+		{
+			WrapText(description);
+			WrapText($"\nGAME OVER.");
+			player.GameIsRunning = false;
+		}
+		
 		public void WrapText(string paragraph)
 		{
 			if (string.IsNullOrWhiteSpace(paragraph))
