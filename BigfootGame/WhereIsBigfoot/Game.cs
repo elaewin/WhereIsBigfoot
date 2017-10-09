@@ -97,14 +97,25 @@ namespace WhereIsBigfoot
 
 		// HELPER METHODS
 
-		// Check if an item is in player inventory and return that item or null
-		private Item IsInInventory(Player p, string itemName)
+		// Check if an item is in a given dictionary of items and return that item or null
+		private Item DoesItemExistIn(Dictionary<string, Item> itemsDict, string itemName)
 		{
-			foreach (Item item in p.Inventory.Values)
+			foreach (Item item in itemsDict.Values)
 			{
 				if (item.ParseValue.Contains(itemName))
 					return item;
 				
+			}
+			return null;
+		}
+
+		// Check if a character is in a location and return that character or null
+		private Character CharacterExistsIn(Location location, string characterName)
+		{
+			foreach (Character character in location.Characters.Values)
+			{
+				if (character.ParseValue.Contains(characterName))
+					return character;
 			}
 			return null;
 		}
@@ -144,22 +155,33 @@ namespace WhereIsBigfoot
 					switch (verb)
 					{
 						case "drop":
-							Item item = IsInInventory(this.Player, noun);
-							this.commands.Drop(this.Player, item);
+							Item itemToDrop = DoesItemExistIn(this.Player.Inventory, noun);
+							this.commands.Drop(this.Player, itemToDrop);
 							break;
-						// pass player and object or null
 
 						case "get":
-							//write method to check a string against the items.parseValues in current location. If doesn't exists, respond here.
-							commands.Get(Player, parsed[1]);
+							//Checks against the parseValues of items in current location.
+							Item itemToGet = DoesItemExistIn(this.Player.PlayerLocation.Items, noun);
+							if (itemToGet == null)
+							{
+								WriteLine($"You're not able to get {noun}.");
+								break;
+							}
+							this.commands.Get(this.Player, itemToGet);
 							break;
 
 						case "give":
-							// check that item.parseValue is in inventory (write method to check inventory) IsInInventory
+							// Get the target character for it item being given.
+							string response = GetInput($"Who do you want to give {parsed[1]}?");
+
+							// check that item is in player inventory
+							Item itemToGive = DoesItemExistIn(this.Player.Inventory, noun);
+
 							// check characters.parsevalue is in location (write method to check location) IsInLocation
+							Character targetCharacter = CharacterExistsIn(this.Player.PlayerLocation, response);
+
 							// pass player item being gotten (Item), character(Character), character dictionary
-							string giveTarget = GetInput($"Who do you want to give {parsed[1]}?");
-							commands.Give(Player, parsed[1], Player.PlayerLocation.Characters, giveTarget);
+							commands.Give(this.Player, itemToGive, targetCharacter, this.Player.PlayerLocation.Characters);
 							break;
 
 						case "go":
