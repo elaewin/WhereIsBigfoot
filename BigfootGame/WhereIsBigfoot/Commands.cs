@@ -338,28 +338,46 @@ namespace WhereIsBigfoot
                     switch (location.Name)
                     {
                         case "tunnel1":
-                            if (p.PlayerLocation.Name == "mountain")
+                            if (p.Counter < 3 && p.PlayerLocation.Name == "mountain")
                             {
                                 GoToLocation(p, location);
+                            }
+                            else
+                            {
+
                             }
                             break;
                         case "tunnel2":
-                            if (p.PlayerLocation.Name == "tunnel1")
+                            if (p.Counter < 3 && p.PlayerLocation.Name == "tunnel1")
                             {
                                 GoToLocation(p, location);
+                                p.Counter++;
+                            }
+                            else
+                            {
+                                
                             }
                             break;
                         case "tunnel3":
-                            if (p.PlayerLocation.Name == "tunnel2")
+                            if (p.Counter < 3 && p.PlayerLocation.Name == "tunnel2")
                             {
                                 GoToLocation(p, location);
+                                p.Counter++;
+                            }
+                            else
+                            {
+
                             }
                             break;
                         case "tunnel4":
-                            if (p.PlayerLocation.Name == "tunnel3")
+                            if (p.Counter < 3 && p.PlayerLocation.Name == "tunnel3")
                             {
                                 GoToLocation(p, location);
-                                // you die.
+                                p.Counter++;
+                            }
+                            else
+                            {
+
                             }
                             break;
                         default:
