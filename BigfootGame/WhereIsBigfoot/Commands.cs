@@ -246,7 +246,7 @@ namespace WhereIsBigfoot
                     TypeLine(WrapText($"{descriptions}"));
                 return;
             }
-            TypeLine($"I don't see {entry} here. ");
+            TypeLine($"I don't see {entry} here {p.PlayerHair}ie. ");
         }
 
         public void ShowLocation(Location location)
