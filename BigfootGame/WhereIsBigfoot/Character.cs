@@ -20,17 +20,18 @@ namespace WhereIsBigfoot
                          List<string> parseValue,
                          string location) : base(name,
                                                  title,
+												 parseValue,
                                                  descriptionFirst, 
                                                  descriptionShort, 
                                                  descriptionLong)
         {
             this.name = name;
             this.title = title;
+            this.parseValue = parseValue;
             this.descriptionFirst = descriptionFirst;
             this.descriptionShort = descriptionShort;
             this.descriptionLong = descriptionLong;
             this.actions = actions;
-            this.parseValue = parseValue;
             this.location = location;
         }
 
@@ -38,11 +39,6 @@ namespace WhereIsBigfoot
         {
             get { return this.actions; }
             set { this.actions = value; }
-        }
-
-        public List<string> ParseValue
-        {
-            get { return this.parseValue; }
         }
 
         public string CharacterName

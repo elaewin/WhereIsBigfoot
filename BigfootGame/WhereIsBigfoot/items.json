@@ -273,6 +273,7 @@
         "name": "matches",
         "title": "Box of matches",
         "parseValue": [
+            "box",
             "matches",
             "box of matches",
             "matchbox",
