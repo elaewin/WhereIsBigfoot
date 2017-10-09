@@ -24,6 +24,7 @@ namespace WhereIsBigfoot
                         string[] objects,
                         Dictionary<string, Item> items) : base(name,
                                                                title,
+                                                               null,
                                                                descriptionFirst,
                                                                descriptionShort,
                                                                descriptionLong)

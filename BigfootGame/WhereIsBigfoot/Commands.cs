@@ -38,7 +38,7 @@ namespace WhereIsBigfoot
 
         // DONE
         // TESTME: accepts player, item, dictionary
-        public void Get(Player p, Item item, Dictionary<string, Item> items)
+        public void Get(Player p, Item item, List<Item> items)
         {
             // if asset is an item
             if (p.PlayerLocation.Items.ContainsKey(item.Name))
@@ -151,29 +151,29 @@ namespace WhereIsBigfoot
             }
         }
 
-        // write better help
-        // description 
+        // DONE
         public void Help(Player p, List<string> allowedVerbs)
         {
-            TypeLine(WrapText("You pull out your Bigfoot Hunting assistance manual and it reads:"));
-
+            TypeLine(WrapText("You pull out your Bigfoot Sighting assistance manual and it reads:"));
             TypeLine($"The possible commands for {p.PlayerName} are as follows: ");
+            foreach (string verb in allowedVerbs)
+            {
+                TypeLine(verb);
+            }
             TypeLine($"Trying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command \"look\" in any location will give you a description of that location.");
         }
 
-        // write this nicely
-        // use "title"
+        // DONE
         public void Inventory(Player p)
         {
-            TypeLine("You have the following inventory: ");
+            TypeLine("You have the following items in your inventory: ");
             foreach (var item in p.Inventory.Values)
             {
                 TypeLine($"{item.Title}");
             }
-
         }
 
-        // done
+        // DONE
         public void Look(Player p, string entry)
         {
             foreach (Item item in p.Inventory.Values)
@@ -222,82 +222,40 @@ namespace WhereIsBigfoot
             TypeLine($"I don't see {entry} here {p.PlayerHair}ie. ");
         }
 
+        // DONE
         // write like use 
-        public void Put(Player p, string name, List<Item> items)
+        public void Put(Player p, Item item, Asset asset)
         {
-            TypeLine("What are you trying to put? you need 2 items.");
-
-            TypeLine("Type the first item:");
-            string item1 = Console.ReadLine();
-            Console.WriteLine();
-            TypeLine("Type the second item:");
-            string item2 = Console.ReadLine();
-            Console.WriteLine();
-            List<string> tools = new List<string>();
-            tools.Add(item1);
-            tools.Add(item2);
-
-            if (tools.Contains("lantern") && tools.Contains("grease"))
+            if (item.Target == asset.Name)
             {
-                if (p.Inventory.ContainsKey("lantern") && p.Inventory.ContainsKey("grease"))
-                {
-                    TypeLine("Now your lantern is full and you can use it to go in the cave.");
-                    p.Inventory.Remove("lantern");
-                    foreach (Item i in items)
-                    {
-                        if (i.Name == "filledLantern")
-                            p.Inventory.Add("filledLantern", i);
-                    }
-                }
-                else
-                {
-                    TypeLine("You need to have the lantern and the grease in your inventory before you can use it.");
-                }
+                TypeLine(WrapText(item.Actions["put"]));
             }
-
             else
             {
-                TypeLine("You can only use \"put\" to fill your lantern with the bacon grease.");
+                TypeLine(WrapText($"You can't put {item.Name} in {asset.Name}"));
+                TypeLine(WrapText($"Are you using {item.Name} correctly?"));
             }
         }
 
+        // DONE
+        public void Talk(Player p, Character c)
+        {
+            TypeLine(WrapText(c.Actions["talk"]));
+        }
+
+        // DONE
         // player, item, asset 
         // check if asset is target
         public void Use(Player p, Item item, Asset asset)
         {
-            Location location = p.PlayerLocation;
-            foreach (Item itemToUse in p.Inventory.Values)
+            if (item.Name == "book" | item.Target == asset.Name)
             {
-                if (itemToUse.ParseValue.Contains(item.Name))
-                {
-                    foreach (Item i in location.Items.Values)
-                    {
-                        if (itemToUse.Name == "book" | i.Target == asset.Name)
-                        {
-                            TypeLine(WrapText(itemToUse.Actions["use"]));
-                        }
-                        else
-                        {
-                            CannotVerbNoun("use", item.Name);
-                        }
-                    }
-                }
+                TypeLine(WrapText(item.Actions["use"]));
             }
-        }
-
-        // character
-        public void Talk(Player p, Character character)
-        {
-            foreach (Character c in characters.Values)
+            else
             {
-                if (p.PlayerLocation.Characters.ContainsKey(name))
-                {
-                    TypeLine(WrapText(c.Actions["talk"]));
-                }
-                else
-                {
-                    TypeLine("This character does not exist in this location.");
-                }
+                TypeLine(WrapText($"You can't use {item.Name} on {asset.Name}"));
+                TypeLine(WrapText($"Are you using {item.Name} correctly?"));
             }
         }
 
@@ -315,11 +273,11 @@ namespace WhereIsBigfoot
             }
         }
 
-        private void BlackberryCheck(Player p, Item item, Dictionary<string, Item> items)
+        private void BlackberryCheck(Player p, Item item, List<Item> items)
         {
             if (p.Inventory.ContainsKey("emptyCan"))
             {
-                foreach (Item i in items.Values)
+                foreach (Item i in items)
                 {
                     if (i.Name == "canOfBerries")
                     {
@@ -333,7 +291,7 @@ namespace WhereIsBigfoot
             {
                 TypeLine(WrapText(p.PlayerLocation.Items["blackberries"].Actions["blocked"]));
             }
-            
+
         }
 
         private void TransferItem(Player p, Item item)
