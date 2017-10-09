@@ -8,8 +8,6 @@ namespace WhereIsBigfoot
     // commands are in alpha order
     // helper functions at bottom 
 
-    // TODO: null check for all 
-
     public class Commands
     {
         // no checks needed 
@@ -220,12 +218,18 @@ namespace WhereIsBigfoot
             TypeLine($"I don't see {entry} here {p.PlayerHair}ie. ");
         }
 
-        // DONE
-        // write like use 
-        // make lanterns happen
-        public void Put(Player p, Item item, Asset asset)
+        // DONE        
+        public void Put(Player p, Item item, Asset asset, List<Item> items)
         {
-            if (item.Target == asset.Name)
+            if (item.Name == "lantern" & asset.Name == "grease")
+            {
+                Lantern(p, item, asset, items, "filledLantern");
+            }
+            else if(item.Name == "filledLantern" & asset.Name == "matches")
+            {
+                Lantern(p, item, asset, items, "glowingLantern");
+            }
+            else if (item.Target == asset.Name)
             {
                 TypeLine(WrapText(item.Actions["put"]));
             }
@@ -259,6 +263,21 @@ namespace WhereIsBigfoot
         }
 
         // >>> AUXILIARY METHODS <<< 
+
+        private void Lantern(Player p, Item item, Asset asset, List<Item> items, string newState)
+        {
+            Item target = (Item)asset;
+            foreach (Item lantern in items)
+            {
+                if (lantern.Name == newState)
+                {
+                    TypeLine(WrapText(target.Actions["put"]));
+                    p.Inventory.Add(newState, lantern);
+                    p.Inventory.Remove(item.Name);
+                    p.Inventory.Remove(target.Name);
+                }
+            }
+        }
 
         private void GoToLocation(Player p, Location location)
         {
