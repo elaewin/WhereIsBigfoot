@@ -229,6 +229,9 @@ namespace WhereIsBigfoot
                     return;
                 }
             }
+
+            TypeLine(WrapText($"{p.PlayerLocation.Exits["text"]}"));
+
             if (entry == "none")
             {
                 TypeLine(WrapText($"{p.PlayerLocation.DescriptionLong} \n"));
@@ -237,6 +240,8 @@ namespace WhereIsBigfoot
                     descriptions += character.DescriptionShort;
                 foreach (Item item in p.PlayerLocation.Items.Values)
                     descriptions += item.DescriptionShort;
+                TypeLine(WrapText($"{p.PlayerLocation.Exits["text"]}"));
+
                 if (descriptions != "")
                     TypeLine(WrapText($"{descriptions}"));
                 return;
@@ -256,6 +261,9 @@ namespace WhereIsBigfoot
                 foreach (Item item in location.Items.Values)
                     TypeLine(WrapText($"{item.DescriptionFirst}"));
 
+                TypeLine(WrapText($"{location.Exits["text"]}"));
+
+
                 location.Visited = true;
             }
             else
@@ -267,6 +275,8 @@ namespace WhereIsBigfoot
 
                 foreach (Item item in location.Items.Values)
                     TypeLine(WrapText($"{item.DescriptionShort}"));
+
+                TypeLine(WrapText($"{location.Exits["text"]}"));
             }
         }
 
@@ -280,7 +290,7 @@ namespace WhereIsBigfoot
             for (int i = 0; i < line.Length; i++)
             {
                 Console.Write(line[i]);
-                System.Threading.Thread.Sleep(15); // Sleep for 15 milliseconds between characters.
+                System.Threading.Thread.Sleep(25); // Sleep for 15 milliseconds between characters.
             }
             Console.WriteLine();
             Console.WriteLine();
