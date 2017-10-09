@@ -286,7 +286,7 @@ namespace WhereIsBigfoot
         }
 
         // character
-        public void Talk(Player p, String name, Dictionary<string, Character> characters)
+        public void Talk(Player p, Character character)
         {
             foreach (Character c in characters.Values)
             {
