@@ -8,10 +8,13 @@ namespace WhereIsBigfoot
     // commands are in alpha order
     // helper functions at bottom 
 
+    // TODO: null check for all 
+
     public class Commands
     {
         // no checks needed 
 
+        // DONE
         // passing player, asset 
         // TESTME: takes new player, takes an asset, test "RESULT"
         public void Drop(Player p, Asset a)
@@ -33,7 +36,7 @@ namespace WhereIsBigfoot
             }
         }
 
-        //TODO special cases and null 
+        //TODO special cases
         // special cases
         // can't take tin can if dan is not reading 
         // can't take blackberries unless they have the empty can 
@@ -47,14 +50,14 @@ namespace WhereIsBigfoot
             if (p.PlayerLocation.Items.ContainsKey(a.Name))
             {
                 Item item = (Item)a;
-                
+
                 if (p.PlayerLocation.Items[item.Name].Actions.ContainsKey("get"))
                 {
-                    if(item.Target == "danReading")
+                    if (item.Target == "danReading")
                     { }
-                    else if(item.Target == "emptyCan")
+                    else if (item.Target == "emptyCan")
                     { }
-                    TransferItem(p, item); 
+                    TransferItem(p, item);
                 }
                 else
                 {
@@ -82,25 +85,33 @@ namespace WhereIsBigfoot
             }
         }
 
-        // : takes player, item, two characters
+        // DONE takes player, item, two characters
         // see RESULT in SwitchChar 
-
         // player, item as an item, character as a character
         // character dictionary passed 
-        public void Give(Player p, Item item, Character char1, Character char2)
+        public void Give(Player p, Item item, Character character, Dictionary<string, Character> characters)
         {
             // check to see if character is target
             if (item.Target == "danCooking" | item.Target == "bigfootHostile")
             {
-                // give Dan book or Bigfoot bacon
-                SwitchChar(p, item, char1, char2);
+                // give Dan book
+                if (item.Name == "book" && character.Name == "danCooking")
+                {
+                    SwitchChar(p, item, character, characters, "danCooking");
+                }
+                // RESULT check if bigfootHostile is removed from characters dict in player location
+                // RESULT check if bigfootFriendly is in characters dict in player location
+                else if (item.Name == "bacon" && character.Name == "bigfootHostile")
+                {
+                    SwitchChar(p, item, character, characters, "bigfootFriendly");
+                }
             }
             // RESULT
             // handle mismatch
             else
             {
                 CannotVerbNoun("give", item.Name);
-                TypeLine($"Maybe {char1} doesn't want the {item.Name}.");
+                TypeLine($"Maybe {character} doesn't want the {item.Name}.");
             }
         }
 
@@ -151,137 +162,51 @@ namespace WhereIsBigfoot
             Location location = p.PlayerLocation;
             foreach (Item itemToUse in p.Inventory.Values)
             {
-                if (itemToUse.ParseValue.Contains(item))
+                if (itemToUse.ParseValue.Contains(item.Name))
                 {
                     foreach (Item i in location.Items.Values)
                     {
-                        if (itemToUse.Name == "book" | i.Target == target)
+                        if (itemToUse.Name == "book" | i.Target == asset.Name)
                         {
-                            TypeLine(wrapText(itemToUse.Actions["use"]));
+                            TypeLine(WrapText(itemToUse.Actions["use"]));
                         }
                         else
                         {
-                            CannotVerbNoun("use", item);
+                            CannotVerbNoun("use", item.Name);
                         }
                     }
                 }
             }
+        }
+
         public void Get(Player p, string name)
-        {
-            if (p.PlayerLocation.Items.ContainsKey(name))
-            {
-                if (p.PlayerLocation.Items[name].Actions.ContainsKey("get"))
-                {
-                    TransferItem(p, name);
-                }
-                else
-                {
-                    CannotVerbNoun("get", name);
-                }
-            }
-            else if (p.PlayerLocation.Characters.ContainsKey(name))
-            {
-                if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
-                {
-                    TypeLine(p.PlayerLocation.Characters[name].Actions["get"]);
-                }
-                else
-                {
-                    CannotVerbNoun("get", name);
-                }
-            }
-            else
-            {
-                CannotVerbNoun("get", name);
-            }
-        }
-
-        public void Drop(Player p, string item)
         {
-            p.PlayerLocation.Items.Add(item, p.Inventory[item]);
-            p.Inventory.Remove(item);
-            TypeLine($"You dropped {item} ");
-        }
-
-        // check from to 
-        public void Give(Player p, string item, Dictionary<string, Character> characters, string target)
-        {
-            DanCheck(p, item, characters);
-            p.Inventory.Remove(item);
-        }
-
-
-        private void TransferItem(Player p, string item)
-        {
-            Item itemToTransfer = p.PlayerLocation.Items[item];
-            p.Inventory.Add(item, itemToTransfer);
-            p.PlayerLocation.Items.Remove(item);
-            TypeLine(WrapText(itemToTransfer.Actions["get"]));
-        }
-
-        // character
-        public void Talk(Player p, String name, Dictionary<string, Character> characters)
-        {
-            foreach (Character c in characters.Values)
+            if (p.PlayerLocation.Items.ContainsKey(name))
             {
-                if (p.PlayerLocation.Characters.ContainsKey(name))
+                if (p.PlayerLocation.Items[name].Actions.ContainsKey("get"))
                 {
-                    TypeLine(WrapText(c.Actions["talk"]));
+                    TransferItem(p, name);
                 }
                 else
                 {
-                    TypeLine("This character does not exist in this location.");
+                    CannotVerbNoun("get", name);
                 }
             }
-        }
-
-        // write like use 
-        public void Put(Player p, string name, List<Item> items)
-        {
-            TypeLine("What are you trying to put? you need 2 items.");
-
-            TypeLine("Type the first item:");
-            string item1 = Console.ReadLine();
-            Console.WriteLine();
-            TypeLine("Type the second item:");
-            string item2 = Console.ReadLine();
-            Console.WriteLine();
-            List<string> tools = new List<string>();
-            tools.Add(item1);
-            tools.Add(item2);
-
-            if (tools.Contains("lantern") && tools.Contains("grease"))
+            else if (p.PlayerLocation.Characters.ContainsKey(name))
             {
-                if (p.Inventory.ContainsKey("lantern") && p.Inventory.ContainsKey("grease"))
+                if (p.PlayerLocation.Characters[name].Actions.ContainsKey("get"))
                 {
-                    TypeLine("Now your lantern is full and you can use it to go in the cave.");
-                    p.Inventory.Remove("lantern");
-                    foreach (Item i in items)
-                    {
-                        if (i.Name == "filledLantern")
-                            p.Inventory.Add("filledLantern", i);
-                    }
+                    TypeLine(p.PlayerLocation.Characters[name].Actions["get"]);
                 }
                 else
                 {
-                    TypeLine("You need to have the lantern and the grease in your inventory before you can use it.");
+                    CannotVerbNoun("get", name);
                 }
             }
-
             else
             {
-                TypeLine("You can only use \"put\" to fill your lantern with the bacon grease.");
+                CannotVerbNoun("get", name);
             }
-        }
-
-        // write better help
-        // description 
-        public void Help(Player p)
-        {
-            TypeLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
-            TypeLine($"ie. get item -or- go north");
-            TypeLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
-            TypeLine($"Trying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command \"look\" in any location will give you a description of that location.");
         }
 
         // write this nicely
@@ -340,6 +265,79 @@ namespace WhereIsBigfoot
             TypeLine($"I don't see {entry} here. ");
         }
 
+        // write like use 
+        public void Put(Player p, string name, List<Item> items)
+        {
+            TypeLine("What are you trying to put? you need 2 items.");
+
+            TypeLine("Type the first item:");
+            string item1 = Console.ReadLine();
+            Console.WriteLine();
+            TypeLine("Type the second item:");
+            string item2 = Console.ReadLine();
+            Console.WriteLine();
+            List<string> tools = new List<string>();
+            tools.Add(item1);
+            tools.Add(item2);
+
+            if (tools.Contains("lantern") && tools.Contains("grease"))
+            {
+                if (p.Inventory.ContainsKey("lantern") && p.Inventory.ContainsKey("grease"))
+                {
+                    TypeLine("Now your lantern is full and you can use it to go in the cave.");
+                    p.Inventory.Remove("lantern");
+                    foreach (Item i in items)
+                    {
+                        if (i.Name == "filledLantern")
+                            p.Inventory.Add("filledLantern", i);
+                    }
+                }
+                else
+                {
+                    TypeLine("You need to have the lantern and the grease in your inventory before you can use it.");
+                }
+            }
+
+            else
+            {
+                TypeLine("You can only use \"put\" to fill your lantern with the bacon grease.");
+            }
+        }
+
+        // character
+        public void Talk(Player p, String name, Dictionary<string, Character> characters)
+        {
+            foreach (Character c in characters.Values)
+            {
+                if (p.PlayerLocation.Characters.ContainsKey(name))
+                {
+                    TypeLine(WrapText(c.Actions["talk"]));
+                }
+                else
+                {
+                    TypeLine("This character does not exist in this location.");
+                }
+            }
+        }
+
+        // write better help
+        // description 
+        public void Help(Player p)
+        {
+            TypeLine($"Hey {p.PlayerHair} hair, I dont freaking understand that! Use a 2 word command format: ");
+            TypeLine($"ie. get item -or- go north");
+            TypeLine($"Possible commands for {p.PlayerName}: get, go, give, use, talk, put, help, quit, inventory");
+            TypeLine($"Trying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command \"look\" in any location will give you a description of that location.");
+        }
+
+        private void TransferItem(Player p, string item)
+        {
+            Item itemToTransfer = p.PlayerLocation.Items[item];
+            p.Inventory.Add(item, itemToTransfer);
+            p.PlayerLocation.Items.Remove(item);
+            TypeLine(WrapText(itemToTransfer.Actions["get"]));
+        }
+
         // helper method which transfer item from location to inventory
         // then prints "get" text 
         private void TransferItem(Player p, Item item)
@@ -352,25 +350,18 @@ namespace WhereIsBigfoot
             }
         }
 
-        // TODO tell game engineer to have game pass both characters
-        private void SwitchChar(Player p, Item item, Character char1, Character char2)
+        private void SwitchChar(Player p, Item item, Character character, Dictionary<string, Character> characters, string switchTo)
         {
-            // RESULT check if danCooking is removed from characters dict in player location
-            // RESULT check if danReading is in characters dict in player location
-            if (item.Name == "book" && char1.Name == "danCooking")
+            foreach (Character c in characters.Values)
             {
-                p.Inventory.Remove(item.Name);
-                p.PlayerLocation.Characters.Remove("danCooking");
-                p.PlayerLocation.Characters.Add("danReading", char2);
+                if(c.Name == switchTo)
+                {
+                    p.Inventory.Remove(item.Name);
+                    p.PlayerLocation.Characters.Remove(character.Name);
+                    p.PlayerLocation.Characters.Add(c.Name, c);
+                }
             }
-            // RESULT check if bigfootHostile is removed from characters dict in player location
-            // RESULT check if bigfootFriendly is in characters dict in player location
-            else if (item.Name == "bacon" && char1.Name == "bigfootHostile")
-            {
-                p.Inventory.Remove(item.Name);
-                p.PlayerLocation.Characters.Remove("bigfootHostile");
-                p.PlayerLocation.Characters.Add("bigfootFriendly", char2);
-            }
+
         }
 
         public void ShowLocation(Location location)
@@ -476,9 +467,10 @@ namespace WhereIsBigfoot
             //Console.WriteLine(buffer.ToString());
             return buffer.ToString();
         }
-
-
     }
+
 }
+}
+
 
 
