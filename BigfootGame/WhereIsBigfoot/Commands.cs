@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Data;
 
 namespace WhereIsBigfoot
@@ -12,6 +13,7 @@ namespace WhereIsBigfoot
 
     public class Commands
     {
+        private int textLoadSpeed = 15; // Used in TypeLine. Sleep for 15 milliseconds between characters.
         // no checks needed 
 
         // DONE
@@ -89,7 +91,7 @@ namespace WhereIsBigfoot
         public void Give(Player p, Item item, Character character, Dictionary<string, Character> characters)
         {
             // check to see if character is target
-            if (item.Target == "danCooking" | item.Target == "bigfootHostile")
+            if (item.Target == "danCooking" || item.Target == "bigfootHostile")
             {
                 // give Dan book
                 if (item.Name == "book" && character.Name == "danCooking")
@@ -133,6 +135,11 @@ namespace WhereIsBigfoot
             {
                 Console.Title = Console.Title.Remove(16);
                 newLocation = currentLocation.Exits[direction];
+
+                // Clear Grue Counter if player enters location outside the tunnel
+                if (newLocation == "mountain" || newLocation == "valley")
+                    p.GrueCounter = 0;
+
                 foreach (Location location in locations)
                 {
                     if (location.Name == newLocation)
@@ -141,7 +148,6 @@ namespace WhereIsBigfoot
                         Console.Title += $"? -- {location.Title}";
                         Console.WriteLine();
                         ShowLocation(location);
-
                     }
                 }
             }
@@ -203,7 +209,7 @@ namespace WhereIsBigfoot
 
             if (entry == "none")
             {
-                WrapText($"{p.PlayerLocation.DescriptionLong} \n");
+                WrapText($"{p.PlayerLocation.DescriptionLong}\n");
                 string descriptions = "";
                 foreach (Character character in p.PlayerLocation.Characters.Values)
                     descriptions += character.DescriptionShort;
@@ -228,9 +234,17 @@ namespace WhereIsBigfoot
             }
             else
             {
-                WrapText($"You can't put {item.Name} in {asset.Name}");
-                WrapText($"Are you using {item.Name} correctly?");
+                WrapText($"You can't put {item.Name} in {asset.Name}.");
+                WrapText($"Are you sure you're using {item.Name} correctly?");
             }
+        }
+
+        // DONE
+        public void Quit(Player p){
+            p.GameIsRunning = false;
+            Console.WriteLine();
+            WrapText("Thank you for playing Where is Bigfoot!");
+            Console.WriteLine();
         }
 
         // DONE
@@ -250,9 +264,41 @@ namespace WhereIsBigfoot
             }
             else
             {
-                WrapText($"You can't use {item.Name} on {asset.Name}");
+                WrapText($"You can't use {item.Name} on {asset.Name}.");
                 WrapText($"Are you using {item.Name} correctly?");
             }
+        }
+
+
+        public void ShowLocation(Location location)
+        {
+            string descriptions = "";
+
+            if (location.Visited == false)
+            {
+                WrapText($"{location.DescriptionFirst}\n");
+                foreach (Character character in location.Characters.Values)
+                    descriptions += character.DescriptionFirst;
+                foreach (Item item in location.Items.Values)
+                    descriptions += item.DescriptionFirst;
+
+                if (descriptions != "")
+                    WrapText($"{descriptions}");
+
+                location.Visited = true;
+            }
+            else
+            {
+                WrapText($"{location.DescriptionShort}\n");
+                foreach (Character character in location.Characters.Values)
+                    descriptions += character.DescriptionShort;
+                foreach (Item item in location.Items.Values)
+                    descriptions += item.DescriptionShort;
+
+                if (descriptions != "")
+                    WrapText($"{descriptions}");
+            }
+            WrapText($"{location.Exits["text"]}");
         }
 
         // >>> AUXILIARY METHODS <<< 
@@ -272,6 +318,40 @@ namespace WhereIsBigfoot
             }
         }
 
+        public void WrapText(string paragraph)
+        {
+            if (string.IsNullOrWhiteSpace(paragraph))
+            {
+                return;
+            }
+
+            var approxLineCount = paragraph.Length / Console.WindowWidth;
+            var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
+
+            for (var i = 0; i < paragraph.Length;)
+            {
+                var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
+                var line = paragraph.Substring(i, grabLimit);
+
+                var isLastChunk = grabLimit + i == paragraph.Length;
+
+                if (isLastChunk)
+                {
+                    i = i + grabLimit;
+                    lines.Append(line);
+                }
+                else
+                {
+                    var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
+                    lines.AppendLine(line.Substring(0, lastSpace));
+
+                    //Trailing spaces needn't be displayed as the first character on the new line
+                    i = i + lastSpace + 1;
+                }
+            }
+            TypeLine(lines.ToString());
+        }
+
         private void GoToLocation(Player p, Location location)
         {
             p.PlayerLocation = location;
@@ -280,7 +360,7 @@ namespace WhereIsBigfoot
             ShowLocation(location);
         }
 
-        // tunnel 1 or tunnel 4 (check against map) 
+        // tunnel 1 or tunnel 5 (check against map) 
         // - lantern is dark - has three moves 
         // - if leave counter reset 
         // - special case, handle tunnel 
@@ -335,20 +415,22 @@ namespace WhereIsBigfoot
                     switch (location.Name)
                     {
                         case "tunnel1":
-                            if (p.Counter < 3 && p.PlayerLocation.Name == "mountain")
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "mountain")
                             {
                                 GoToLocation(p, location);
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
                             }
                             else
                             {
-
+                                
                             }
                             break;
                         case "tunnel2":
-                            if (p.Counter < 3 && p.PlayerLocation.Name == "tunnel1")
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel1")
                             {
                                 GoToLocation(p, location);
-                                p.Counter++;
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                                p.GrueCounter++;
                             }
                             else
                             {
@@ -356,21 +438,35 @@ namespace WhereIsBigfoot
                             }
                             break;
                         case "tunnel3":
-                            if (p.Counter < 3 && p.PlayerLocation.Name == "tunnel2")
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel2")
                             {
                                 GoToLocation(p, location);
-                                p.Counter++;
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                                p.GrueCounter++;
                             }
                             else
                             {
-
+                                
                             }
                             break;
                         case "tunnel4":
-                            if (p.Counter < 3 && p.PlayerLocation.Name == "tunnel3")
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel3")
                             {
                                 GoToLocation(p, location);
-                                p.Counter++;
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                                p.GrueCounter++;
+                            }
+                            else
+                            {
+                                
+                            }
+                            break;
+                        case "tunnel5":
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel3")
+                            {
+                                GoToLocation(p, location);
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                                p.GrueCounter++;
                             }
                             else
                             {
@@ -398,7 +494,7 @@ namespace WhereIsBigfoot
             }
             else
             {
-                WrapText($"That path is way too steep to climb without something to help you keep your balance.");
+                WrapText($"That path is WAY too steep to climb without something to help you keep your balance.");
             }
         }
 
@@ -456,94 +552,32 @@ namespace WhereIsBigfoot
 
         }
 
-        public void ShowLocation(Location location)
-        {
-			string descriptions = "";
-
-			if (location.Visited == false)
-            {
-				WrapText($"{location.DescriptionFirst}");
-				foreach (Character character in location.Characters.Values)
-					descriptions += character.DescriptionFirst;
-				foreach (Item item in location.Items.Values)
-					descriptions += item.DescriptionFirst;
-
-				if (descriptions != "")
-					WrapText($"{descriptions}");
-				
-				location.Visited = true;
-            }
-            else
-            {
-                WrapText($"{location.DescriptionShort}");
-				foreach (Character character in location.Characters.Values)
-					descriptions += character.DescriptionShort;
-				foreach (Item item in location.Items.Values)
-					descriptions += item.DescriptionShort;
-
-				if (descriptions != "")
-					WrapText($"{descriptions}");
-			}
-				WrapText($"{location.Exits["text"]}");
-        }
-
         private void CannotVerbNoun(string verb, string noun)
         {
             WrapText($"You can't {verb} {noun} ");
         }
 
-        public void TypeLine(string line)
+        private void TypeLine(string line)
         {
             for (int i = 0; i < line.Length; i++)
             {
                 Console.Write(line[i]);
-                System.Threading.Thread.Sleep(15); // Sleep for 15 milliseconds between characters.
+                Thread.Sleep(textLoadSpeed); 
+                if (Console.KeyAvailable)
+                {
+                    textLoadSpeed = 0;
+                }
             }
+            textLoadSpeed = 15;
             Console.WriteLine();
         }
 
 		private void GameOverMan(Player player, string description)
 		{
 			WrapText(description);
-			WrapText($"\nGAME OVER.");
 			player.GameIsRunning = false;
 		}
 		
-		public void WrapText(string paragraph)
-		{
-			if (string.IsNullOrWhiteSpace(paragraph))
-			{
-				return;
-			}
-
-			var approxLineCount = paragraph.Length / Console.WindowWidth;
-			var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
-
-			for (var i = 0; i < paragraph.Length;)
-			{
-				var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
-				var line = paragraph.Substring(i, grabLimit);
-
-				var isLastChunk = grabLimit + i == paragraph.Length;
-
-				if (isLastChunk)
-				{
-					i = i + grabLimit;
-					lines.Append(line);
-				}
-				else
-				{
-					var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
-					lines.AppendLine(line.Substring(0, lastSpace));
-
-					//Trailing spaces needn't be displayed as the first character on the new line
-					i = i + lastSpace + 1;
-				}
-			}
-			TypeLine(lines.ToString());
-		}
-
-
 		//public void WrapText(String text)
 		//{
 		//    String[] words = text.Split(' ');
