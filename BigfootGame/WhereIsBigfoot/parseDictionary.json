@@ -1,4 +1,9 @@
 ﻿{
+    "discard": "drop",
+    "ditch": "drop",
+    "drop": "drop",
+    "dump": "drop",
+    "leave": "drop",
     "acquire": "get",
     "bring": "get",
     "capture": "get",
@@ -43,7 +48,6 @@
     "go": "go",
     "head": "go",
     "hurry": "go",
-    "leave": "go",
     "locomote": "go",
     "march": "go",
     "proceed": "go",

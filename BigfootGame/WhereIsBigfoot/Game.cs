@@ -125,8 +125,7 @@ namespace WhereIsBigfoot
 		// Handles the parsing of input from the user.
 		public void ParseInput(string prompt)
 		{
-			WriteLine();
-			string input = GetInput(prompt).ToLower().Trim();
+			string input = GetInput(prompt).ToLower();
 			
             if (IsValidCommandInput(input) && (input != "") && input != null)
 			{
@@ -161,7 +160,7 @@ namespace WhereIsBigfoot
 				{
 					if (verb == word || noun == word)
 					{
-						commands.WrapText($"Way to stay classy there, {this.Player.PlayerName}. I'm sure the trees are very impressed by your masterful command of the English language.");
+						commands.WrapText($"\nWay to stay classy there, {this.Player.PlayerName}. I'm sure the trees are very impressed by your masterful command of the English language.");
 						return;
 					}
 				}
@@ -222,7 +221,7 @@ namespace WhereIsBigfoot
 							else
 							{
 								// Get the target for the use command
-                                string putTarget = GetInput($"What do you want to put the {noun} on?").ToLower();
+                                string putTarget = GetInput($"What do you want to put the {noun} on? ").ToLower();
 
 								//check player inventory items & list of character in location vs. target on each asset.
 								string itemTarget = itemToPut.Target;
@@ -448,9 +447,7 @@ namespace WhereIsBigfoot
         {
             Console.Write(prompt);
             string input = ReadLine();
-            if (input == null)
-                return null;
-            return input;
+            return input.Trim();
         }
 
         // Capitalize first letter of a string. From https://www.dotnetperls.com/uppercase-first-letter;
