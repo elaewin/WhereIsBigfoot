@@ -134,9 +134,9 @@ namespace WhereIsBigfoot
             {
                 Console.Title = Console.Title.Remove(16);
                 newLocation = currentLocation.Exits[direction];
-                if (currentLocation.Name == "woods5")
+                if (currentLocation.Name == "woods5" && direction == "north")
                 {
-                    Mountain(p, locations);
+                    Mountain(p, locations, currentLocation);
                 }
                 else if (currentLocation.Name == "mountain")
                 {
@@ -159,9 +159,9 @@ namespace WhereIsBigfoot
                 WrapText("Try a different direction. Up is also an option.");
             }
         }
-    
-    // DONE
-    public void Help(Player p, List<string> allowedVerbs)
+
+        // DONE
+        public void Help(Player p, List<string> allowedVerbs)
         {
 			WrapText("\nYou pull out your Bigfoot Sighting Assistance Manual! It reads:\n\nTrying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command 'Look' in any location will give you a description of that location.\n\nNavigation through the forest of Where Is Bigfoot uses two word commands in the format VERB NOUN. For instance, 'Get Book', or 'Climb Tree'.\n\nTo navigate between different locations in the game, use the verb 'Go', followed by the direction you wish to travel. Many other verbs that describe travel may also be used. We'll let you figure out which ones...\n\n");
 
@@ -197,7 +197,7 @@ namespace WhereIsBigfoot
             {
                 if (item.ParseValue.Contains(entry))
                 {
-					WrapText($"{item.DescriptionLong} \n");
+                    WrapText($"{item.DescriptionLong} \n");
                     return;
                 }
             }
@@ -252,7 +252,8 @@ namespace WhereIsBigfoot
         }
 
         // DONE
-        public void Quit(Player p){
+        public void Quit(Player p)
+        {
             p.GameIsRunning = false;
             Console.WriteLine();
             WrapText("Thank you for playing Where is Bigfoot!");
@@ -434,7 +435,7 @@ namespace WhereIsBigfoot
                             }
                             else
                             {
-                                
+
                             }
                             break;
                         case "tunnel2":
@@ -446,7 +447,7 @@ namespace WhereIsBigfoot
                             }
                             else
                             {
-                                
+
                             }
                             break;
                         case "tunnel3":
@@ -458,7 +459,7 @@ namespace WhereIsBigfoot
                             }
                             else
                             {
-                                
+
                             }
                             break;
                         case "tunnel4":
@@ -470,7 +471,7 @@ namespace WhereIsBigfoot
                             }
                             else
                             {
-                                
+
                             }
                             break;
                         case "tunnel5":
@@ -492,8 +493,7 @@ namespace WhereIsBigfoot
             }
         }
 
-
-        private void Mountain(Player p, List<Location> locations)
+        private void Mountain(Player p, List<Location> locations, Location currentLocation)
         {
             if (p.Inventory.ContainsKey("stick"))
             {
@@ -502,12 +502,14 @@ namespace WhereIsBigfoot
                     if (location.Name == "mountain")
                     {
                         GoToLocation(p, location);
+                        break;
                     }
                 }
             }
             else
             {
                 WrapText($"That path is way too steep to climb without something to help you keep your balance.");
+                GoToLocation(p, currentLocation);
             }
         }
 
@@ -574,7 +576,7 @@ namespace WhereIsBigfoot
             for (int i = 0; i < line.Length; i++)
             {
                 Console.Write(line[i]);
-                Thread.Sleep(textLoadSpeed); 
+                Thread.Sleep(textLoadSpeed);
                 if (Console.KeyAvailable)
                 {
                     textLoadSpeed = 0;
