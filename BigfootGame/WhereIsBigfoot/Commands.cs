@@ -136,7 +136,7 @@ namespace WhereIsBigfoot
                 newLocation = currentLocation.Exits[direction];
                 if (currentLocation.Name == "woods5")
                 {
-                    Mountain(p, locations);
+                    Mountain(p, locations, currentLocation);
                 }
                 else if (currentLocation.Name == "mountain")
                 {
@@ -493,7 +493,7 @@ namespace WhereIsBigfoot
         }
 
 
-        private void Mountain(Player p, List<Location> locations)
+        private void Mountain(Player p, List<Location> locations, Location currentLocation)
         {
             if (p.Inventory.ContainsKey("stick"))
             {
@@ -507,6 +507,7 @@ namespace WhereIsBigfoot
             }
             else
             {
+                GoToLocation(p, currentLocation);
                 WrapText($"That path is way too steep to climb without something to help you keep your balance.");
             }
         }
