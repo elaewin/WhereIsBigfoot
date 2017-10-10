@@ -165,7 +165,7 @@ namespace WhereIsBigfoot
         // DONE
         public void Help(Player p, List<string> allowedVerbs)
         {
-			WrapText("\nYou pull out your Bigfoot Sighting Assistance Manual! It reads:\n\nTrying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command 'Look' in any location will give you a description of that location.\n\nNavigation through the forest of Where Is Bigfoot uses two word commands in the format VERB NOUN. For instance, 'Get Book', or 'Climb Tree'.\n\nTo navigate between different locations in the game, use the verb 'Go', followed by the direction you wish to travel. Many other verbs that describe travel may also be used. We'll let you figure out which ones...\n\n");
+            WrapText("\nYou pull out your Bigfoot Sighting Assistance Manual! It reads:\n\nTrying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command 'Look' in any location will give you a description of that location.\n\nNavigation through the forest of Where Is Bigfoot uses two word commands in the format VERB NOUN. For instance, 'Get Book', or 'Climb Tree'.\n\nTo navigate between different locations in the game, use the verb 'Go', followed by the direction you wish to travel. Many other verbs that describe travel may also be used. We'll let you figure out which ones...\n\n");
 
             WrapText($"Some possible verbs for {p.PlayerName} are: \n");
             foreach (string verb in allowedVerbs)
@@ -173,7 +173,7 @@ namespace WhereIsBigfoot
                 Console.WriteLine($"    {verb}");
             }
 
-			WrapText($"To load scrolling text instantly, press the spacebar.");
+            WrapText($"To load scrolling text instantly, press the spacebar.");
         }
 
         // DONE
@@ -334,8 +334,8 @@ namespace WhereIsBigfoot
             }
         }
 
-		// Method adapted from https://rianjs.net/2016/03/line-wrapping-at-word-boundaries-for-console-applications-in-csharp
-		public void WrapText(string paragraph)
+        // Method adapted from https://rianjs.net/2016/03/line-wrapping-at-word-boundaries-for-console-applications-in-csharp
+        public void WrapText(string paragraph)
         {
 
             if (string.IsNullOrWhiteSpace(paragraph))
@@ -589,9 +589,13 @@ namespace WhereIsBigfoot
             {
                 Console.Write(line[i]);
                 Thread.Sleep(textLoadSpeed);
+
                 if (Console.KeyAvailable)
                 {
-                    textLoadSpeed = 0;
+                    if (Console.ReadKey(true).Key == ConsoleKey.Spacebar)
+                    {
+                        textLoadSpeed = 0;
+                    }
                 }
             }
             textLoadSpeed = userSpeed;
@@ -599,13 +603,13 @@ namespace WhereIsBigfoot
         }
 
 
-		private void GameOverMan(Player player, string description)
-		{
-			WrapText(description);
-			player.GameIsRunning = false;
-		}
-		
-	}
+        private void GameOverMan(Player player, string description)
+        {
+            WrapText(description);
+            player.GameIsRunning = false;
+        }
+
+    }
 
 }
 
