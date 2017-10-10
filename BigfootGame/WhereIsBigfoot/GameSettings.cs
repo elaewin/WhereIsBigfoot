@@ -35,15 +35,31 @@ namespace WhereIsBigfoot
             get { return this.background; }
         }
 
-        public void TypeLine(string line)
+        public static int[] GetGameSettings()
         {
-            for (int i = 0; i < line.Length; i++)
+            int typeSpeed;
+            int foreground;
+            int background;
+
+            do
             {
-                Console.Write(line[i]);
-                System.Threading.Thread.Sleep(TypeSpeedConverter()); // Sleep for 15 milliseconds between characters.
-            }
-            Console.WriteLine();
-            Console.WriteLine();
+                typeSpeed = Convert.ToInt16(Game.GetInput("Choose a gamespeed from 1-10: "));
+            } while (typeSpeed < 1 || typeSpeed > 10);
+
+            do
+            {
+                foreground = Convert.ToInt16(Game.GetInput("Choose a foreground color by entering the corresponding number: \n Black = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n"));
+            } while (foreground < 1 || foreground > 9);
+
+            do
+            {
+                background = Convert.ToInt16(Game.GetInput("Choose a background color by entering the corresponding number: \n Black = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n"));
+            } while (background < 1 || background > 9);
+
+            int[] settings = { typeSpeed, foreground, background };
+
+            Console.WriteLine("\n Boom! your settings are implemented");
+            return settings;
         }
 
         public int TypeSpeedConverter()
@@ -172,31 +188,5 @@ namespace WhereIsBigfoot
 
         
 
-        public static int[] GetGameSettings()
-        {
-            int typeSpeed;
-            int foreground;
-            int background;
-
-            do
-            {
-                typeSpeed = Convert.ToInt16(Game.GetInput("Choose a gamespeed from 1-10: "));
-            } while (typeSpeed < 1 || typeSpeed > 10);
-
-            do
-            {
-                foreground = Convert.ToInt16(Game.GetInput("Choose a foreground color by entering the corresponding number: \n Black = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9"));
-            } while (foreground < 1 || foreground > 9);
-
-            do
-            {
-                background = Convert.ToInt16(Game.GetInput("Choose a background color by entering the corresponding number: \n Black = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9"));
-            } while (background < 1 || background > 9);
-
-            int[] settings = { typeSpeed, foreground, background };
-
-            Console.WriteLine("Boom! your settings are implemented");
-            return settings;
-        }
     }
 }
