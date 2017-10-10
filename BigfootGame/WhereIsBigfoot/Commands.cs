@@ -335,36 +335,44 @@ namespace WhereIsBigfoot
 		// Method adapted from https://rianjs.net/2016/03/line-wrapping-at-word-boundaries-for-console-applications-in-csharp
 		public void WrapText(string paragraph)
         {
+
             if (string.IsNullOrWhiteSpace(paragraph))
             {
                 return;
             }
 
-            var approxLineCount = paragraph.Length / Console.WindowWidth;
-            var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
+            string[] splitOn = { $"\n\n" };
+            string[] splitParagraph = paragraph.Split(splitOn, StringSplitOptions.RemoveEmptyEntries);
 
-            for (var i = 0; i < paragraph.Length;)
+            foreach (string para in splitParagraph)
             {
-                var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
-                var line = paragraph.Substring(i, grabLimit);
+                int approxLineCount = para.Length / Console.WindowWidth;
+                StringBuilder lines = new StringBuilder(para.Length + (approxLineCount * 4));
 
-                var isLastChunk = grabLimit + i == paragraph.Length;
-
-                if (isLastChunk)
+                for (var i = 0; i < para.Length;)
                 {
-                    i = i + grabLimit;
-                    lines.Append(line);
-                }
-                else
-                {
-                    var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
-                    lines.AppendLine(line.Substring(0, lastSpace));
+                    int grabLimit = Math.Min(Console.WindowWidth, para.Length - i);
+                    string line = para.Substring(i, grabLimit);
 
-                    //Trailing spaces needn't be displayed as the first character on the new line
-                    i = i + lastSpace + 1;
+                    var isLastChunk = grabLimit + i == para.Length;
+
+                    if (isLastChunk)
+                    {
+                        i = i + grabLimit;
+                        lines.Append(line);
+                    }
+                    else
+                    {
+                        var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
+                        lines.AppendLine(line.Substring(0, lastSpace));
+
+                        //Trailing spaces needn't be displayed as the first character on the new line
+                        i = i + lastSpace + 1;
+                    }
                 }
+                TypeLine(lines.ToString());
+                Console.WriteLine();
             }
-            TypeLine(lines.ToString());
         }
 
         private void GoToLocation(Player p, Location location)
@@ -587,6 +595,7 @@ namespace WhereIsBigfoot
             textLoadSpeed = userSpeed;
             Console.WriteLine();
         }
+
 
 		private void GameOverMan(Player player, string description)
 		{
