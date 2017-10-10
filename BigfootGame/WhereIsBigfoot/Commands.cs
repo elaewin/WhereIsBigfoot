@@ -140,8 +140,12 @@ namespace WhereIsBigfoot
                 {
                     Mountain(p, locations, currentLocation);
                 }
-                else if (currentLocation.Exits[direction].StartsWith("tunnel") || currentLocation.Name == "mountain")
+                else if (currentLocation.Exits[direction].StartsWith("tunnel") || currentLocation.Name == "mountain" || currentLocation.Name == "valley")
                 {
+                    if (newLocation == "mountain" || newLocation == "valley")
+                    {
+                        p.GrueCounter = 0;
+                    }
                     Tunnel(p, locations, currentLocation, direction);
                 }
                 else
@@ -400,11 +404,6 @@ namespace WhereIsBigfoot
 
         private void GoToGrueDeath(Player p, Location location, Location currentLocation)
         {
-            if(currentLocation.Name == "mountain" || currentLocation.Name == "valley")
-            {
-                p.GrueCounter = 0;
-            }
-
             if (p.GrueCounter < 4)
             {
                 if (currentLocation.Exits.ContainsValue(location.Name))
