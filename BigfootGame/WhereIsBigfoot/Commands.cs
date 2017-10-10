@@ -177,7 +177,7 @@ namespace WhereIsBigfoot
                 Console.WriteLine($"    {verb}");
             }
 
-			WrapText($"To load scrolling text instantly, press the spacebar.");
+            WrapText($"To load scrolling text instantly, press the spacebar.");
         }
 
         // DONE
@@ -560,14 +560,19 @@ namespace WhereIsBigfoot
             {
                 Console.Write(line[i]);
                 Thread.Sleep(textLoadSpeed);
+
                 if (Console.KeyAvailable)
                 {
-                    textLoadSpeed = 0;
+                    if (Console.ReadKey(true).Key == ConsoleKey.Spacebar)
+                    {
+                        textLoadSpeed = 0;
+                    }
                 }
             }
             textLoadSpeed = userSpeed;
             Console.WriteLine();
         }
+
 
         private void GameOverMan(Player player, string description)
         {
