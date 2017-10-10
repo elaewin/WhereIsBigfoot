@@ -443,7 +443,7 @@ namespace WhereIsBigfoot
         }
 
         // Take in string input from the user. Corrects null input.
-        private static string GetInput(string prompt)
+        public static string GetInput(string prompt)
         {
             Console.Write(prompt);
             string input = ReadLine();
@@ -475,6 +475,13 @@ namespace WhereIsBigfoot
             string[] playerDetails = game.GetPlayerDetails();
             Player newPlayer = new Player(playerDetails[0], playerDetails[1], playerDetails[2]);
             
+            //set the game settings
+            int[] settings = GameSettings.GetGameSettings();
+            GameSettings gameSettings = new GameSettings(settings[0], settings[1], settings[2]);
+            Console.ForegroundColor = gameSettings.ForegroundConverter();
+            Console.BackgroundColor = gameSettings.BackgroundConverter();
+            game.commands.userSpeed = gameSettings.TypeSpeedConverter();
+
             foreach (Location location in game.Locations)
             {
                 if (location.Name == "tent")

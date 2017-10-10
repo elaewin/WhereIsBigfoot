@@ -13,7 +13,9 @@ namespace WhereIsBigfoot
 
     public class Commands
     {
-        private int textLoadSpeed = 15; // Used in TypeLine. Sleep for 15 milliseconds between characters.
+        private int textLoadSpeed;
+        public int userSpeed;
+        // Used in TypeLine. Sleep for 15 milliseconds between characters.
         // no checks needed 
 
         // DONE
@@ -134,9 +136,9 @@ namespace WhereIsBigfoot
             {
                 Console.Title = Console.Title.Remove(16);
                 newLocation = currentLocation.Exits[direction];
-                if (currentLocation.Name == "woods5")
+                if (currentLocation.Name == "woods5" && direction == "north")
                 {
-                    Mountain(p, locations);
+                    Mountain(p, locations, currentLocation);
                 }
                 else if (currentLocation.Name == "mountain")
                 {
@@ -501,8 +503,7 @@ namespace WhereIsBigfoot
             }
         }
 
-
-        private void Mountain(Player p, List<Location> locations)
+        private void Mountain(Player p, List<Location> locations, Location currentLocation)
         {
             if (p.Inventory.ContainsKey("stick"))
             {
@@ -511,12 +512,14 @@ namespace WhereIsBigfoot
                     if (location.Name == "mountain")
                     {
                         GoToLocation(p, location);
+                        break;
                     }
                 }
             }
             else
             {
                 WrapText($"That path is way too steep to climb without something to help you keep your balance.");
+                GoToLocation(p, currentLocation);
             }
         }
 
@@ -589,7 +592,7 @@ namespace WhereIsBigfoot
                     textLoadSpeed = 0;
                 }
             }
-            textLoadSpeed = 15;
+            textLoadSpeed = userSpeed;
             Console.WriteLine();
         }
 
