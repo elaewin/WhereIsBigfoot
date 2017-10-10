@@ -124,17 +124,17 @@ namespace WhereIsBigfoot
                     consoleColor = ConsoleColor.White;
                     break;
                 default:
-                    consoleColor = ConsoleColor.White;
+                    consoleColor = ConsoleColor.Green;
                     break;
             }
-            return Console.ForegroundColor = consoleColor;
+            return consoleColor;
         }
 
         public ConsoleColor BackgroundConverter()
         {
             var consoleColor = new ConsoleColor();
 
-            switch (foreground)
+            switch (background)
             {
                 case 1:
                     consoleColor = ConsoleColor.Black;
@@ -167,7 +167,7 @@ namespace WhereIsBigfoot
                     consoleColor = ConsoleColor.White;
                     break;
             }
-            return Console.BackgroundColor = consoleColor;
+            return consoleColor;
         }
 
         
