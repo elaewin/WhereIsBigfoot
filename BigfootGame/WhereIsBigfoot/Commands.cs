@@ -133,6 +133,11 @@ namespace WhereIsBigfoot
             {
                 Console.Title = Console.Title.Remove(16);
                 newLocation = currentLocation.Exits[direction];
+
+                // Clear Grue Counter if player enters location outside the tunnel
+                if (newLocation == "mountain" || newLocation == "valley")
+                    p.GrueCounter = 0;
+
                 foreach (Location location in locations)
                 {
                     if (location.Name == newLocation)
@@ -141,7 +146,6 @@ namespace WhereIsBigfoot
                         Console.Title += $"? -- {location.Title}";
                         Console.WriteLine();
                         ShowLocation(location);
-
                     }
                 }
             }
@@ -280,7 +284,7 @@ namespace WhereIsBigfoot
             ShowLocation(location);
         }
 
-        // tunnel 1 or tunnel 4 (check against map) 
+        // tunnel 1 or tunnel 5 (check against map) 
         // - lantern is dark - has three moves 
         // - if leave counter reset 
         // - special case, handle tunnel 
@@ -335,20 +339,22 @@ namespace WhereIsBigfoot
                     switch (location.Name)
                     {
                         case "tunnel1":
-                            if (p.Counter < 3 && p.PlayerLocation.Name == "mountain")
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "mountain")
                             {
                                 GoToLocation(p, location);
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
                             }
                             else
                             {
-
+                                
                             }
                             break;
                         case "tunnel2":
-                            if (p.Counter < 3 && p.PlayerLocation.Name == "tunnel1")
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel1")
                             {
                                 GoToLocation(p, location);
-                                p.Counter++;
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                                p.GrueCounter++;
                             }
                             else
                             {
@@ -356,25 +362,27 @@ namespace WhereIsBigfoot
                             }
                             break;
                         case "tunnel3":
-                            if (p.Counter < 3 && p.PlayerLocation.Name == "tunnel2")
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel2")
                             {
                                 GoToLocation(p, location);
-                                p.Counter++;
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                                p.GrueCounter++;
                             }
                             else
                             {
-
+                                
                             }
                             break;
                         case "tunnel4":
-                            if (p.Counter < 3 && p.PlayerLocation.Name == "tunnel3")
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel3")
                             {
                                 GoToLocation(p, location);
-                                p.Counter++;
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                                p.GrueCounter++;
                             }
                             else
                             {
-
+                                
                             }
                             break;
                         default:
@@ -492,7 +500,7 @@ namespace WhereIsBigfoot
             WrapText($"You can't {verb} {noun} ");
         }
 
-        public void TypeLine(string line)
+        private void TypeLine(string line)
         {
             for (int i = 0; i < line.Length; i++)
             {
@@ -505,7 +513,6 @@ namespace WhereIsBigfoot
 		private void GameOverMan(Player player, string description)
 		{
 			WrapText(description);
-			WrapText($"\nGAME OVER.");
 			player.GameIsRunning = false;
 		}
 		
