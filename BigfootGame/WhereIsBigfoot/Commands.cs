@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Data;
 
 namespace WhereIsBigfoot
@@ -12,6 +13,7 @@ namespace WhereIsBigfoot
 
     public class Commands
     {
+        private int textLoadSpeed = 15; // Used in TypeLine. Sleep for 15 milliseconds between characters.
         // no checks needed 
 
         // DONE
@@ -89,7 +91,7 @@ namespace WhereIsBigfoot
         public void Give(Player p, Item item, Character character, Dictionary<string, Character> characters)
         {
             // check to see if character is target
-            if (item.Target == "danCooking" | item.Target == "bigfootHostile")
+            if (item.Target == "danCooking" || item.Target == "bigfootHostile")
             {
                 // give Dan book
                 if (item.Name == "book" && character.Name == "danCooking")
@@ -128,31 +130,38 @@ namespace WhereIsBigfoot
         {
             Location currentLocation = p.PlayerLocation;
             string newLocation;
-
             if (currentLocation.Exits.ContainsKey(direction))
             {
                 Console.Title = Console.Title.Remove(16);
                 newLocation = currentLocation.Exits[direction];
-                foreach (Location location in locations)
+                if (currentLocation.Name == "woods5")
                 {
-                    if (location.Name == newLocation)
+                    Mountain(p, locations);
+                }
+                else if (currentLocation.Name == "mountain")
+                {
+                    Tunnel(p, locations);
+                }
+                else
+                {
+                    foreach (Location location in locations)
                     {
-                        p.PlayerLocation = location;
-                        Console.Title += $"? -- {location.Title}";
-                        Console.WriteLine();
-                        ShowLocation(location);
-
+                        if (location.Name == newLocation)
+                        {
+                            GoToLocation(p, location);
+                        }
                     }
                 }
             }
             else
             {
                 CannotVerbNoun("go", direction);
+                WrapText("Try a different direction. Up is also an option.");
             }
         }
-
-        // DONE
-        public void Help(Player p, List<string> allowedVerbs)
+    
+    // DONE
+    public void Help(Player p, List<string> allowedVerbs)
         {
             WrapText("You pull out your Bigfoot Sighting assistance manual and it reads:");
             TypeLine($"The possible commands for {p.PlayerName} are as follows: ");
@@ -203,7 +212,7 @@ namespace WhereIsBigfoot
 
             if (entry == "none")
             {
-                WrapText($"{p.PlayerLocation.DescriptionLong} \n");
+                WrapText($"{p.PlayerLocation.DescriptionLong}\n");
                 string descriptions = "";
                 foreach (Character character in p.PlayerLocation.Characters.Values)
                     descriptions += character.DescriptionShort;
@@ -220,17 +229,34 @@ namespace WhereIsBigfoot
 
         // DONE
         // write like use 
-        public void Put(Player p, Item item, Asset asset)
+        // DONE        
+        public void Put(Player p, Item item, Asset asset, List<Item> items)
         {
-            if (item.Target == asset.Name)
+            if (item.Name == "lantern" & asset.Name == "grease")
+            {
+                Lantern(p, item, asset, items, "filledLantern");
+            }
+            else if (item.Name == "filledLantern" & asset.Name == "matches")
+            {
+                Lantern(p, item, asset, items, "glowingLantern");
+            }
+            else if (item.Target == asset.Name)
             {
                 WrapText(item.Actions["put"]);
             }
             else
             {
-                WrapText($"You can't put {item.Name} in {asset.Name}");
-                WrapText($"Are you using {item.Name} correctly?");
+                WrapText($"You can't put {item.Name} in {asset.Name}.");
+                WrapText($"Are you sure you're using {item.Name} correctly?");
             }
+        }
+
+        // DONE
+        public void Quit(Player p){
+            p.GameIsRunning = false;
+            Console.WriteLine();
+            WrapText("Thank you for playing Where is Bigfoot!");
+            Console.WriteLine();
         }
 
         // DONE
@@ -250,12 +276,240 @@ namespace WhereIsBigfoot
             }
             else
             {
-                WrapText($"You can't use {item.Name} on {asset.Name}");
+                WrapText($"You can't use {item.Name} on {asset.Name}.");
                 WrapText($"Are you using {item.Name} correctly?");
             }
         }
 
+
+        public void ShowLocation(Location location)
+        {
+            string descriptions = "";
+
+            if (location.Visited == false)
+            {
+                WrapText($"{location.DescriptionFirst}\n");
+                foreach (Character character in location.Characters.Values)
+                    descriptions += character.DescriptionFirst;
+                foreach (Item item in location.Items.Values)
+                    descriptions += item.DescriptionFirst;
+
+                if (descriptions != "")
+                    WrapText($"{descriptions}");
+
+                location.Visited = true;
+            }
+            else
+            {
+                WrapText($"{location.DescriptionShort}\n");
+                foreach (Character character in location.Characters.Values)
+                    descriptions += character.DescriptionShort;
+                foreach (Item item in location.Items.Values)
+                    descriptions += item.DescriptionShort;
+
+                if (descriptions != "")
+                    WrapText($"{descriptions}");
+            }
+            WrapText($"{location.Exits["text"]}");
+        }
+
         // >>> AUXILIARY METHODS <<< 
+
+        private void Lantern(Player p, Item item, Asset asset, List<Item> items, string newState)
+        {
+            Item target = (Item)asset;
+            foreach (Item lantern in items)
+            {
+                if (lantern.Name == newState)
+                {
+                    WrapText(target.Actions["put"]);
+                    p.Inventory.Add(newState, lantern);
+                    p.Inventory.Remove(item.Name);
+                    p.Inventory.Remove(target.Name);
+                }
+            }
+        }
+
+        public void WrapText(string paragraph)
+        {
+            if (string.IsNullOrWhiteSpace(paragraph))
+            {
+                return;
+            }
+
+            var approxLineCount = paragraph.Length / Console.WindowWidth;
+            var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
+
+            for (var i = 0; i < paragraph.Length;)
+            {
+                var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
+                var line = paragraph.Substring(i, grabLimit);
+
+                var isLastChunk = grabLimit + i == paragraph.Length;
+
+                if (isLastChunk)
+                {
+                    i = i + grabLimit;
+                    lines.Append(line);
+                }
+                else
+                {
+                    var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
+                    lines.AppendLine(line.Substring(0, lastSpace));
+
+                    //Trailing spaces needn't be displayed as the first character on the new line
+                    i = i + lastSpace + 1;
+                }
+            }
+            TypeLine(lines.ToString());
+        }
+
+        private void GoToLocation(Player p, Location location)
+        {
+            p.PlayerLocation = location;
+            Console.Title += $"? -- {location.Title}";
+            Console.WriteLine();
+            ShowLocation(location);
+        }
+
+        // tunnel 1 or tunnel 5 (check against map) 
+        // - lantern is dark - has three moves 
+        // - if leave counter reset 
+        // - special case, handle tunnel 
+        // - handle counter for player 
+        private void Tunnel(Player p, List<Location> locations)
+        {
+            if (p.Inventory.ContainsKey("glowingLantern"))
+            {
+                foreach (Location location in locations)
+                {
+                    switch (location.Name)
+                    {
+                        case "tunnel1Lit":
+                            if (p.PlayerLocation.Name == "mountain")
+                            {
+                                GoToLocation(p, location);
+                            }
+                            break;
+                        case "tunnel2Lit":
+                            if (p.PlayerLocation.Name == "tunnel1Lit")
+                            {
+                                GoToLocation(p, location);
+                            }
+                            break;
+                        case "tunnel3Lit":
+                            if (p.PlayerLocation.Name == "tunnel2Lit")
+                            {
+                                GoToLocation(p, location);
+                            }
+                            break;
+                        case "tunnel4Lit":
+                            if (p.PlayerLocation.Name == "tunnel3Lit")
+                            {
+                                GoToLocation(p, location);
+                            }
+                            break;
+                        case "tunnel5Lit":
+                            if (p.PlayerLocation.Name == "tunnel4Lit")
+                            {
+                                GoToLocation(p, location);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                foreach (Location location in locations)
+                {
+                    switch (location.Name)
+                    {
+                        case "tunnel1":
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "mountain")
+                            {
+                                GoToLocation(p, location);
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                            }
+                            else
+                            {
+                                
+                            }
+                            break;
+                        case "tunnel2":
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel1")
+                            {
+                                GoToLocation(p, location);
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                                p.GrueCounter++;
+                            }
+                            else
+                            {
+                                
+                            }
+                            break;
+                        case "tunnel3":
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel2")
+                            {
+                                GoToLocation(p, location);
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                                p.GrueCounter++;
+                            }
+                            else
+                            {
+                                
+                            }
+                            break;
+                        case "tunnel4":
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel3")
+                            {
+                                GoToLocation(p, location);
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                                p.GrueCounter++;
+                            }
+                            else
+                            {
+                                
+                            }
+                            break;
+                        case "tunnel5":
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel3")
+                            {
+                                GoToLocation(p, location);
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                                p.GrueCounter++;
+                            }
+                            else
+                            {
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+
+        private void Mountain(Player p, List<Location> locations)
+        {
+            if (p.Inventory.ContainsKey("stick"))
+            {
+                foreach (Location location in locations)
+                {
+                    if (location.Name == "mountain")
+                    {
+                        GoToLocation(p, location);
+                    }
+                }
+            }
+            else
+            {
+                WrapText($"That path is way too steep to climb without something to help you keep your balance.");
+            }
+        }
 
         private void DanCheck(Player p, Item item)
         {
@@ -311,94 +565,32 @@ namespace WhereIsBigfoot
 
         }
 
-        public void ShowLocation(Location location)
-        {
-			string descriptions = "";
-
-			if (location.Visited == false)
-            {
-				WrapText($"{location.DescriptionFirst}");
-				foreach (Character character in location.Characters.Values)
-					descriptions += character.DescriptionFirst;
-				foreach (Item item in location.Items.Values)
-					descriptions += item.DescriptionFirst;
-
-				if (descriptions != "")
-					WrapText($"{descriptions}");
-				
-				location.Visited = true;
-            }
-            else
-            {
-                WrapText($"{location.DescriptionShort}");
-				foreach (Character character in location.Characters.Values)
-					descriptions += character.DescriptionShort;
-				foreach (Item item in location.Items.Values)
-					descriptions += item.DescriptionShort;
-
-				if (descriptions != "")
-					WrapText($"{descriptions}");
-			}
-				WrapText($"{location.Exits["text"]}");
-        }
-
         private void CannotVerbNoun(string verb, string noun)
         {
             WrapText($"You can't {verb} {noun} ");
         }
 
-        public void TypeLine(string line)
+        private void TypeLine(string line)
         {
             for (int i = 0; i < line.Length; i++)
             {
                 Console.Write(line[i]);
-                System.Threading.Thread.Sleep(15); // Sleep for 15 milliseconds between characters.
+                Thread.Sleep(textLoadSpeed); 
+                if (Console.KeyAvailable)
+                {
+                    textLoadSpeed = 0;
+                }
             }
+            textLoadSpeed = 15;
             Console.WriteLine();
         }
 
 		private void GameOverMan(Player player, string description)
 		{
 			WrapText(description);
-			WrapText($"\nGAME OVER.");
 			player.GameIsRunning = false;
 		}
 		
-		public void WrapText(string paragraph)
-		{
-			if (string.IsNullOrWhiteSpace(paragraph))
-			{
-				return;
-			}
-
-			var approxLineCount = paragraph.Length / Console.WindowWidth;
-			var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
-
-			for (var i = 0; i < paragraph.Length;)
-			{
-				var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
-				var line = paragraph.Substring(i, grabLimit);
-
-				var isLastChunk = grabLimit + i == paragraph.Length;
-
-				if (isLastChunk)
-				{
-					i = i + grabLimit;
-					lines.Append(line);
-				}
-				else
-				{
-					var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
-					lines.AppendLine(line.Substring(0, lastSpace));
-
-					//Trailing spaces needn't be displayed as the first character on the new line
-					i = i + lastSpace + 1;
-				}
-			}
-			TypeLine(lines.ToString());
-		}
-
-
 		//public void WrapText(String text)
 		//{
 		//    String[] words = text.Split(' ');
