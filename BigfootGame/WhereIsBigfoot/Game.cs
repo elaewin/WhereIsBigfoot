@@ -233,7 +233,7 @@ namespace WhereIsBigfoot
 									{
 										if (item.Name == itemTarget)
 										{
-											commands.Put(this.Player, itemToPut, item);
+											commands.Put(this.Player, itemToPut, item, items);
 											break;
 										}
 									}
@@ -241,7 +241,7 @@ namespace WhereIsBigfoot
 									{
 										if (character.Name == itemTarget)
 										{
-											commands.Put(this.Player, itemToPut, character);
+											commands.Put(this.Player, itemToPut, character, items);
 											break;
 										}
 									}
