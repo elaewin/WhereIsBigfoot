@@ -125,9 +125,8 @@ namespace WhereIsBigfoot
 		// Handles the parsing of input from the user.
 		public void ParseInput(string prompt)
 		{
-			string input = GetInput(prompt).ToLower().Trim();
-
-
+			string input = GetInput(prompt).ToLower();
+			
             if (IsValidCommandInput(input) && (input != "") && input != null)
 			{
 				string verb = "";
@@ -161,7 +160,7 @@ namespace WhereIsBigfoot
 				{
 					if (verb == word || noun == word)
 					{
-						commands.WrapText($"Way to stay classy there, {this.Player.PlayerName}. I'm sure the trees are very impressed by your masterful command of the English language.");
+						commands.WrapText($"\nWay to stay classy there, {this.Player.PlayerName}. I'm sure the trees are very impressed by your masterful command of the English language.");
 						return;
 					}
 				}
@@ -222,7 +221,7 @@ namespace WhereIsBigfoot
 							else
 							{
 								// Get the target for the use command
-                                string putTarget = GetInput($"What do you want to put the {noun} on?").ToLower();
+                                string putTarget = GetInput($"What do you want to put the {noun} on? ").ToLower();
 
 								//check player inventory items & list of character in location vs. target on each asset.
 								string itemTarget = itemToPut.Target;
@@ -395,29 +394,29 @@ namespace WhereIsBigfoot
 			do
 			{
 				name = GetInput("What is your name? ");
-				if (!IsValidStartingInput(name) && name != "")
+				if (!IsValidStartingInput(name) && name != null)
 				{
 					commands.WrapText($"\nHm...I didn't quite get that. Names usually contain just letters (and maybe the occasional hyphen).");
 				}
-			} while (!IsValidStartingInput(name) && name != "");
+			} while (!IsValidStartingInput(name) || name == null);
 
 			do
 			{
 				gender = GetInput("What gender are you? ");
-				if (!IsValidStartingInput(gender) && gender != "")
+				if (!IsValidStartingInput(gender) && gender != null)
 				{
 					commands.WrapText($"\nHm...I didn't quite get that. A gender is usually described by words. Made of letters.");
 				}
-			} while (!IsValidStartingInput(gender) && gender != "");
+			} while (!IsValidStartingInput(gender) || gender == null);
 
 			do
 			{
 				hair = GetInput("What color is your hair? ");
-				if (!IsValidStartingInput(hair) && hair != "")
+				if (!IsValidStartingInput(hair) && hair != null)
 				{
 					commands.WrapText($"\nHm...I didn't quite get that. Maybe your hair is some crazy, magical color, but you'll have to pick a word to describe it that's just letters.");
 				}
-			} while (!IsValidStartingInput(hair) && hair != "");
+			} while (!IsValidStartingInput(hair) || hair == null);
 
 			string[] deets = { name, gender, hair };
 
@@ -448,9 +447,7 @@ namespace WhereIsBigfoot
         {
             Console.Write(prompt);
             string input = ReadLine();
-            if (input == null)
-                return "";
-            return input;
+            return input.Trim();
         }
 
         // Capitalize first letter of a string. From https://www.dotnetperls.com/uppercase-first-letter;

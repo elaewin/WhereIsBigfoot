@@ -163,13 +163,13 @@ namespace WhereIsBigfoot
         // DONE
         public void Help(Player p, List<string> allowedVerbs)
         {
-            WrapText("You pull out your Bigfoot Sighting assistance manual and it reads:");
-            TypeLine($"The possible commands for {p.PlayerName} are as follows: ");
+			WrapText("\nYou pull out your Bigfoot Sighting Assistance Manual! It reads:\n\nTrying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command 'Look' in any location will give you a description of that location.\n\nNavigation through the forest of Where Is Bigfoot uses two word commands in the format VERB NOUN. For instance, 'Get Book', or 'Climb Tree'.\n\nTo navigate between different locations in the game, use the verb 'Go', followed by the direction you wish to travel. Many other verbs that describe travel may also be used. We'll let you figure out which ones...\n\n");
+
+            WrapText($"Some possible verbs for {p.PlayerName} are: \n");
             foreach (string verb in allowedVerbs)
             {
-                TypeLine(verb);
+                Console.WriteLine($"    {verb}");
             }
-            TypeLine($"Trying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command \"look\" in any location will give you a description of that location.");
         }
 
         // DONE
@@ -282,7 +282,6 @@ namespace WhereIsBigfoot
             }
         }
 
-
         public void ShowLocation(Location location)
         {
             string descriptions = "";
@@ -331,7 +330,8 @@ namespace WhereIsBigfoot
             }
         }
 
-        public void WrapText(string paragraph)
+		// Method adapted from https://rianjs.net/2016/03/line-wrapping-at-word-boundaries-for-console-applications-in-csharp
+		public void WrapText(string paragraph)
         {
             if (string.IsNullOrWhiteSpace(paragraph))
             {
@@ -543,7 +543,6 @@ namespace WhereIsBigfoot
             {
                 WrapText(p.PlayerLocation.Items["blackberries"].Actions["blocked"]);
             }
-
         }
 
         private void TransferItem(Player p, Item item)
@@ -587,38 +586,13 @@ namespace WhereIsBigfoot
             Console.WriteLine();
         }
 
-        private void GameOverMan(Player player, string description)
-        {
-            WrapText(description);
-            player.GameIsRunning = false;
-        }
-
-        //public void WrapText(String text)
-        //{
-        //    String[] words = text.Split(' ');
-        //    StringBuilder buffer = new StringBuilder();
-
-        //    foreach (String word in words)
-        //    {
-        //        buffer.Append(word);
-        //        //see if you can make this dynamic.
-        //        if (buffer.Length >= Console.WindowWidth - 2)
-        //        {
-        //            String line = buffer.ToString().Substring(0, buffer.Length - word.Length);
-        //            Console.WriteLine(line);
-        //            buffer.Clear();
-        //            buffer.Append(word);
-        //        }
-
-        //        buffer.Append(" ");
-
-        //    }
-        //    //buffer.ToString().PadLeft(200);
-        //    //buffer.ToString().PadRight(200);
-        //    //Console.WriteLine(buffer.ToString());
-        //    TypeLine(buffer.ToString());
-        //}
-    }
+		private void GameOverMan(Player player, string description)
+		{
+			WrapText(description);
+			player.GameIsRunning = false;
+		}
+		
+	}
 
 }
 
