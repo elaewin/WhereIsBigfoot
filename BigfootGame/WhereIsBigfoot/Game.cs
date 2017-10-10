@@ -507,10 +507,12 @@ namespace WhereIsBigfoot
             string restart = GetInput($"Would you like to start a new game? y/n: ");
             if (restart == "y" || restart == "yes")
             {
+                var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "WhereIsBigfoot.exe");
+
                 //System.Windows.Forms.Application.Restart();
 
                 // Start a new game proces
-                Process.Start("/WhereIsBigfoot.exe");
+                Process.Start(filePath);
 
                 // Close current process
                 Environment.Exit(0);
