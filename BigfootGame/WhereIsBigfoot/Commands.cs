@@ -492,7 +492,6 @@ namespace WhereIsBigfoot
             }
         }
 
-
         private void Mountain(Player p, List<Location> locations, Location currentLocation)
         {
             if (p.Inventory.ContainsKey("stick"))
@@ -502,6 +501,7 @@ namespace WhereIsBigfoot
                     if (location.Name == "mountain")
                     {
                         GoToLocation(p, location);
+                        break;
                     }
                 }
             }
