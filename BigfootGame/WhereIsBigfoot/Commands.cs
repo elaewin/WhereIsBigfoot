@@ -331,7 +331,8 @@ namespace WhereIsBigfoot
             }
         }
 
-        public void WrapText(string paragraph)
+		// Method adapted from https://rianjs.net/2016/03/line-wrapping-at-word-boundaries-for-console-applications-in-csharp
+		public void WrapText(string paragraph)
         {
             if (string.IsNullOrWhiteSpace(paragraph))
             {
