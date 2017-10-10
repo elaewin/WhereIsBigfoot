@@ -542,7 +542,6 @@ namespace WhereIsBigfoot
             {
                 WrapText(p.PlayerLocation.Items["blackberries"].Actions["blocked"]);
             }
-
         }
 
         private void TransferItem(Player p, Item item)
@@ -592,31 +591,6 @@ namespace WhereIsBigfoot
 			player.GameIsRunning = false;
 		}
 		
-		//public void WrapText(String text)
-		//{
-		//    String[] words = text.Split(' ');
-		//    StringBuilder buffer = new StringBuilder();
-
-		//    foreach (String word in words)
-		//    {
-		//        buffer.Append(word);
-		//        //see if you can make this dynamic.
-		//        if (buffer.Length >= Console.WindowWidth - 2)
-		//        {
-		//            String line = buffer.ToString().Substring(0, buffer.Length - word.Length);
-		//            Console.WriteLine(line);
-		//            buffer.Clear();
-		//            buffer.Append(word);
-		//        }
-
-		//        buffer.Append(" ");
-
-		//    }
-		//    //buffer.ToString().PadLeft(200);
-		//    //buffer.ToString().PadRight(200);
-		//    //Console.WriteLine(buffer.ToString());
-		//    TypeLine(buffer.ToString());
-		//}
 	}
 
 }
