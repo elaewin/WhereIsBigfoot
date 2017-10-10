@@ -82,7 +82,7 @@
         "location": "tent",
         "target": "danCooking",
         "actions": {
-            "get": "\nYou pick up the bettered copy of 'Bigfoot Legends of the Pacific Northwest'. ",
+            "get": "\nYou pick up the battered copy of 'Bigfoot Legends of the Pacific Northwest'. ",
             "put": "",
             "drop": "\nYou drop the book. Shame on you, treating a book that way. ",
             "use": "\nYou flip through the book. It's got a lot of good information about Bigfoot. For instance, did you know that many scientists believe that Bigfoot is a vegetarian? True fact. ",
@@ -256,14 +256,14 @@
             "camp lamp",
             "unlit lamp"
         ],
-        "descriptionFirst": "The tree octopus watches you climb. You're not sure if it's impressed. Now that you're closer, you see its arms wrapped around a lantern. How did it get the lantern up here? It has eight arms'maybe that should be a clue about how it does anything. You've only got two arms and you can barely get around at all.\n\nThe tree octopus seems kind of possessive of the lantern. You weren't even that possessive of your favorite teddy bear when you were four. Then again, you only had two arms to hold it. ",
+        "descriptionFirst": "\nThe tree octopus watches you climb. You're not sure if it's impressed. How did it get the lantern up here? It has eight arms'maybe that should be a clue about how it does anything. You've only got two arms and you can barely get around at all.\n\nThe tree octopus seems kind of possessive of the lantern. You weren't even that possessive of your favorite teddy bear when you were four. Then again, you only had two arms to hold it. ",
         "descriptionShort": "You see your camping lantern here. ",
         "descriptionLong": "\nThe lantern is a small, oil burning lantern that you bought to take on camping trips a few years ago. ",
         "location": "tree",
         "target": "",
         "actions": {
             "get": "\nYou pick up your lantern. ",
-            "put": "",
+            "blocked": "\n You reach for the lantern, but you can't quite reach it from here. The octopus' tentacles tighten possessively around it.",
             "drop": "\nYou drop your lantern. ",
             "use": "\nAre you trying to light the lantern?",
             "give": "doesn't want that. "
