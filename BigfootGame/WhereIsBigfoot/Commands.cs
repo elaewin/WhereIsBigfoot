@@ -207,7 +207,7 @@ namespace WhereIsBigfoot
 
             if (entry == "none")
             {
-                WrapText($"{p.PlayerLocation.DescriptionLong} \n");
+                WrapText($"{p.PlayerLocation.DescriptionLong}\n");
                 string descriptions = "";
                 foreach (Character character in p.PlayerLocation.Characters.Values)
                     descriptions += character.DescriptionShort;
@@ -232,9 +232,17 @@ namespace WhereIsBigfoot
             }
             else
             {
-                WrapText($"You can't put {item.Name} in {asset.Name}");
-                WrapText($"Are you using {item.Name} correctly?");
+                WrapText($"You can't put {item.Name} in {asset.Name}.");
+                WrapText($"Are you sure you're using {item.Name} correctly?");
             }
+        }
+
+        // DONE
+        public void Quit(Player p){
+            p.GameIsRunning = false;
+            Console.WriteLine();
+            WrapText("Thank you for playing Where is Bigfoot!");
+            Console.WriteLine();
         }
 
         // DONE
@@ -254,9 +262,41 @@ namespace WhereIsBigfoot
             }
             else
             {
-                WrapText($"You can't use {item.Name} on {asset.Name}");
+                WrapText($"You can't use {item.Name} on {asset.Name}.");
                 WrapText($"Are you using {item.Name} correctly?");
             }
+        }
+
+
+        public void ShowLocation(Location location)
+        {
+            string descriptions = "";
+
+            if (location.Visited == false)
+            {
+                WrapText($"{location.DescriptionFirst}\n");
+                foreach (Character character in location.Characters.Values)
+                    descriptions += character.DescriptionFirst;
+                foreach (Item item in location.Items.Values)
+                    descriptions += item.DescriptionFirst;
+
+                if (descriptions != "")
+                    WrapText($"{descriptions}");
+
+                location.Visited = true;
+            }
+            else
+            {
+                WrapText($"{location.DescriptionShort}\n");
+                foreach (Character character in location.Characters.Values)
+                    descriptions += character.DescriptionShort;
+                foreach (Item item in location.Items.Values)
+                    descriptions += item.DescriptionShort;
+
+                if (descriptions != "")
+                    WrapText($"{descriptions}");
+            }
+            WrapText($"{location.Exits["text"]}");
         }
 
         // >>> AUXILIARY METHODS <<< 
@@ -274,6 +314,40 @@ namespace WhereIsBigfoot
                     p.Inventory.Remove(target.Name);
                 }
             }
+        }
+
+        public void WrapText(string paragraph)
+        {
+            if (string.IsNullOrWhiteSpace(paragraph))
+            {
+                return;
+            }
+
+            var approxLineCount = paragraph.Length / Console.WindowWidth;
+            var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
+
+            for (var i = 0; i < paragraph.Length;)
+            {
+                var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
+                var line = paragraph.Substring(i, grabLimit);
+
+                var isLastChunk = grabLimit + i == paragraph.Length;
+
+                if (isLastChunk)
+                {
+                    i = i + grabLimit;
+                    lines.Append(line);
+                }
+                else
+                {
+                    var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
+                    lines.AppendLine(line.Substring(0, lastSpace));
+
+                    //Trailing spaces needn't be displayed as the first character on the new line
+                    i = i + lastSpace + 1;
+                }
+            }
+            TypeLine(lines.ToString());
         }
 
         private void GoToLocation(Player p, Location location)
@@ -385,6 +459,18 @@ namespace WhereIsBigfoot
                                 
                             }
                             break;
+                        case "tunnel5":
+                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel3")
+                            {
+                                GoToLocation(p, location);
+                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                                p.GrueCounter++;
+                            }
+                            else
+                            {
+
+                            }
+                            break;
                         default:
                             break;
                     }
@@ -406,7 +492,7 @@ namespace WhereIsBigfoot
             }
             else
             {
-                WrapText($"That path is way too steep to climb without something to help you keep your balance.");
+                WrapText($"That path is WAY too steep to climb without something to help you keep your balance.");
             }
         }
 
@@ -464,37 +550,6 @@ namespace WhereIsBigfoot
 
         }
 
-        public void ShowLocation(Location location)
-        {
-			string descriptions = "";
-
-			if (location.Visited == false)
-            {
-				WrapText($"{location.DescriptionFirst}");
-				foreach (Character character in location.Characters.Values)
-					descriptions += character.DescriptionFirst;
-				foreach (Item item in location.Items.Values)
-					descriptions += item.DescriptionFirst;
-
-				if (descriptions != "")
-					WrapText($"{descriptions}");
-				
-				location.Visited = true;
-            }
-            else
-            {
-                WrapText($"{location.DescriptionShort}");
-				foreach (Character character in location.Characters.Values)
-					descriptions += character.DescriptionShort;
-				foreach (Item item in location.Items.Values)
-					descriptions += item.DescriptionShort;
-
-				if (descriptions != "")
-					WrapText($"{descriptions}");
-			}
-				WrapText($"{location.Exits["text"]}");
-        }
-
         private void CannotVerbNoun(string verb, string noun)
         {
             WrapText($"You can't {verb} {noun} ");
@@ -516,41 +571,6 @@ namespace WhereIsBigfoot
 			player.GameIsRunning = false;
 		}
 		
-		public void WrapText(string paragraph)
-		{
-			if (string.IsNullOrWhiteSpace(paragraph))
-			{
-				return;
-			}
-
-			var approxLineCount = paragraph.Length / Console.WindowWidth;
-			var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
-
-			for (var i = 0; i < paragraph.Length;)
-			{
-				var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
-				var line = paragraph.Substring(i, grabLimit);
-
-				var isLastChunk = grabLimit + i == paragraph.Length;
-
-				if (isLastChunk)
-				{
-					i = i + grabLimit;
-					lines.Append(line);
-				}
-				else
-				{
-					var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
-					lines.AppendLine(line.Substring(0, lastSpace));
-
-					//Trailing spaces needn't be displayed as the first character on the new line
-					i = i + lastSpace + 1;
-				}
-			}
-			TypeLine(lines.ToString());
-		}
-
-
 		//public void WrapText(String text)
 		//{
 		//    String[] words = text.Split(' ');

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Windows;
 using Newtonsoft.Json;
 using static System.Console;
 
@@ -233,7 +235,7 @@ namespace WhereIsBigfoot
 									{
 										if (item.Name == itemTarget)
 										{
-											commands.Put(this.Player, itemToPut, item, this.items);
+											commands.Put(this.Player, itemToPut, item);
 											break;
 										}
 									}
@@ -241,7 +243,7 @@ namespace WhereIsBigfoot
 									{
 										if (character.Name == itemTarget)
 										{
-											commands.Put(this.Player, itemToPut, character, this.items);
+											commands.Put(this.Player, itemToPut, character);
 											break;
 										}
 									}
@@ -317,10 +319,7 @@ namespace WhereIsBigfoot
 							string verify = GetInput("Are you sure you want to quit? y/n: ").ToLower();
 							if (verify == "y" || verify == "yes")
 							{
-                                this.Player.GameIsRunning = false;
-								WriteLine();
-								commands.WrapText("Thank you for playing Where is Bigfoot!");
-								WriteLine();
+                                commands.Quit(this.Player);
 								break;
 							}
 							else
@@ -338,8 +337,6 @@ namespace WhereIsBigfoot
 				{
 					commands.WrapText("I'm sorry, I didn't understand that. For information about what kinds of commands are available, type \"help\".");
 				}
-				//if (parsed[0] != "look" && parsed[0] != "quit" && parsed[0] != "go")
-				//	WriteLine($"{this.Player.PlayerLocation.DescriptionShort}");
 			}
 			else
 			{
@@ -350,6 +347,7 @@ namespace WhereIsBigfoot
 		// Console formatting
 		public void FormatConsole()
 		{
+            
 			Console.Title = "Where Is Bigfoot?";
 			Console.CursorVisible = true;
 			Console.ForegroundColor = ConsoleColor.Green;
@@ -388,7 +386,7 @@ namespace WhereIsBigfoot
 			//}
 		}
 
-		public string[] GetPlayerDetails()
+		private string[] GetPlayerDetails()
 		{
 			string name = "";
 			string gender = "";
@@ -427,84 +425,96 @@ namespace WhereIsBigfoot
 			return deets;
 		}
 
-		static void Main(string[] args)
-		{
 
-			Game game = new Game();
-			game.FormatConsole();
-			game.LoadData(game);
+        // Check against a regex string that allows all letters, spaces, apostrophes, dashes.
+        private static bool IsValidInput(string str)
+        {
+            Regex regexString = new Regex(@"^[a-zA-Z\s-']+\z");
+            return regexString.IsMatch(str);
+        }
 
-			game.StartGame();
+        // check against a regex string that takes one word of just letters, or two words separated by a space.
+        // Format is beginning of line, one or more letters of any length, one or no spaces, zero or more letters of any length, end of line.
+        private static bool IsValidInfo(string str)
+        {
+            Regex regexString = new Regex(@"^[a-zA-Z]+\s?[a-zA-Z]*\z");
+            return regexString.IsMatch(str);
+        }
 
-			// create Player instance
-			string[] playerDetails = game.GetPlayerDetails();
-			Player newPlayer = new Player(playerDetails[0], playerDetails[1], playerDetails[2]);
+        // Take in string input from the user. Corrects null input.
+        private static string GetInput(string prompt)
+        {
+            Console.Write(prompt);
+            string input = ReadLine();
+            if (input == null)
+                return "";
+            return input;
+        }
 
-			foreach (Location location in game.Locations)
-			{
-				if (location.Name == "tent")
-					newPlayer.PlayerLocation = location;
-			}
-			foreach (Item item in game.Items)
-			{
-				if (item.Name == "cellPhone")
-					newPlayer.Inventory.Add("cellPhone", item);
-			}
+        // Capitalize first letter of a string. From https://www.dotnetperls.com/uppercase-first-letter;
+        private static string UppercaseFirst(string s)
+        {
+            // Check for empty string.
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.Empty;
+            }
+            // Return char and concat substring.
+            return char.ToUpper(s[0]) + s.Substring(1);
+        }
 
-			// Assign Player instance to game
-			game.Player = newPlayer;
+        static void Main(string[] args)
+        {
+            
+            Game game = new Game();
+            game.FormatConsole();
+            game.LoadData(game);
+            
+            game.StartGame();
+            
+            // create Player instance
+            string[] playerDetails = game.GetPlayerDetails();
+            Player newPlayer = new Player(playerDetails[0], playerDetails[1], playerDetails[2]);
+            
+            foreach (Location location in game.Locations)
+            {
+                if (location.Name == "tent")
+                    newPlayer.PlayerLocation = location;
+            }
+            foreach (Item item in game.Items)
+            {
+                if (item.Name == "cellPhone")
+                    newPlayer.Inventory.Add("cellPhone", item);
+            }
+            
+            // Assign Player instance to game
+            game.Player = newPlayer;
+            
+            // Show starting room
+            Console.WriteLine();
+            
+            game.commands.WrapText("Dan, your old buddy from college, was always crazy about finding Bigfoot. You even went on a couple of Bigfoot hunting expeditions with him way back when. But you weren't expecting him to contact you out of the blue and invite you on another one, now that it's been years since you graduated. But the memory of how relaxing those previous trips were made you agree to go along.\n\nYou drove out from Seattle last night, and into the wilderness between Mounts Rainier and St. Helens. You set up your camp near the area where Dan said he'd been camping (you hope--the directions weren't exactly great), and crashed for the night. Now it's morning. Time to find your old buddy.\n");
+            
+            game.commands.ShowLocation(game.Player.PlayerLocation);
+            Console.Title += $" -- {game.Player.PlayerLocation.Title}";
+            
+            do
+            {
+                game.ParseInput("\nWhat would you like to do?\n> ");
+                
+            } while (game.Player.GameIsRunning == true);
 
-			// Show starting room
-			Console.WriteLine();
+            string restart = GetInput($"Would you like to start a new game? y/n: ");
+            if (restart == "y" || restart == "yes")
+            {
+                //System.Windows.Forms.Application.Restart();
 
-			game.commands.WrapText("Dan, your old buddy from college, was always crazy about finding Bigfoot. You even went on a couple of Bigfoot hunting expeditions with him way back when. But you weren't expecting him to contact you out of the blue and invite you on another one, now that it's been years since you graduated. But the memory of how relaxing those previous trips were made you agree to go along.\n\nYou drove out from Seattle last night, and into the wilderness between Mounts Rainier and St. Helens. You set up your camp near the area where Dan said he'd been camping (you hope--the directions weren't exactly great), and crashed for the night. Now it's morning. Time to find your old buddy.\n");
+                // Start a new game proces
+                Process.Start("/WhereIsBigfoot.exe");
 
-			game.commands.ShowLocation(game.Player.PlayerLocation);
-			Console.Title += $" -- {game.Player.PlayerLocation.Title}";
-
-			do
-			{
-				game.ParseInput("\nWhat would you like to do?\n> ");
-
-			} while (game.Player.GameIsRunning == true);
-		}
-
-		// Check against a regex string that allows all letters, spaces, apostrophes, dashes.
-		public static bool IsValidInput(string str)
-		{
-			Regex regexString = new Regex(@"^[a-zA-Z\s-']+\z");
-			return regexString.IsMatch(str);
-		}
-
-		// check against a regex string that takes one word of just letters, or two words separated by a space.
-		// Format is beginning of line, one or more letters of any length, one or no spaces, zero or more letters of any length, end of line.
-		public static bool IsValidInfo(string str)
-		{
-			Regex regexString = new Regex(@"^[a-zA-Z]+\s?[a-zA-Z]*\z");
-			return regexString.IsMatch(str);
-		}
-
-		// Take in string input from the user. Corrects null input.
-		public static string GetInput(string prompt)
-		{
-			Console.Write(prompt);
-			string input = ReadLine();
-			if (input == null)
-				return "";
-			return input;
-		}
-
-		// Capitalize first letter of a string. From https://www.dotnetperls.com/uppercase-first-letter;
-		static string UppercaseFirst(string s)
-		{
-			// Check for empty string.
-			if (string.IsNullOrEmpty(s))
-			{
-				return string.Empty;
-			}
-			// Return char and concat substring.
-			return char.ToUpper(s[0]) + s.Substring(1);
-		}
-	}
-
+                // Close current process
+                Environment.Exit(0);
+            }
+        }
+    }
 }
