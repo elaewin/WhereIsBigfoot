@@ -341,18 +341,18 @@ namespace WhereIsBigfoot
                 return;
             }
 
-            string[] splitOn = { @"\n\n" };
+            string[] splitOn = { $"\n\n" };
             string[] splitParagraph = paragraph.Split(splitOn, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string para in splitParagraph)
             {
-                var approxLineCount = para.Length / Console.WindowWidth;
-                var lines = new StringBuilder(para.Length + (approxLineCount * 4));
+                int approxLineCount = para.Length / Console.WindowWidth;
+                StringBuilder lines = new StringBuilder(para.Length + (approxLineCount * 4));
 
                 for (var i = 0; i < para.Length;)
                 {
-                    var grabLimit = Math.Min(Console.WindowWidth, para.Length - i);
-                    var line = paragraph.Substring(i, grabLimit);
+                    int grabLimit = Math.Min(Console.WindowWidth, para.Length - i);
+                    string line = para.Substring(i, grabLimit);
 
                     var isLastChunk = grabLimit + i == para.Length;
 
