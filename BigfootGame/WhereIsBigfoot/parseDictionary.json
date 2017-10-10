@@ -3,7 +3,7 @@
     "ditch": "drop",
     "drop": "drop",
     "dump": "drop",
-    "leave": "drop",
+    "leave": "go",
     "acquire": "get",
     "bring": "get",
     "capture": "get",

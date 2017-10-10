@@ -172,6 +172,8 @@ namespace WhereIsBigfoot
             {
                 Console.WriteLine($"    {verb}");
             }
+
+			WrapText($"To load scrolling text instantly, press the spacebar.");
         }
 
         // DONE
