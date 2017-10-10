@@ -42,11 +42,11 @@ namespace WhereIsBigfoot
             string foreChosen;
             int foreground;
             string backChosen;
-            int background;
+			int background;
 
             do
             {
-                speedChosen = Game.GetInput("Choose a gamespeed from 1-10: ");
+                speedChosen = Game.GetInput("Choose a gamespeed from 1 (slow) to 10 (fast).\n (Default speed is 10.)\n> ");
                 if (speedChosen == "")
                     speedChosen = "8";
                 typeSpeed = Convert.ToInt16(speedChosen);
@@ -54,15 +54,15 @@ namespace WhereIsBigfoot
 
             do
             {
-                foreChosen = Game.GetInput("Choose a text color by entering the corresponding number: \nBlack = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n");
+                foreChosen = Game.GetInput("\nChoose a text color by entering the corresponding number. Default background color is black. \nBlack = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n> ");
                 if (foreChosen == "")
-                    foreChosen = "9";
+                    foreChosen = "4";
                 foreground = Convert.ToInt16(foreChosen);
             } while (foreground < 1 || foreground > 9);
 
             do
             {
-                backChosen = Game.GetInput("Choose a background color by entering the corresponding number, cannot be the same as text color: \nBlack = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n");
+                backChosen = Game.GetInput("\nChoose a background color by entering the corresponding number, cannot be the same as text color. Default text color is green.\nBlack = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n> ");
                 if (backChosen == "")
                     backChosen = "1";
                 background = Convert.ToInt16(backChosen);
@@ -70,7 +70,7 @@ namespace WhereIsBigfoot
 
             int[] settings = { typeSpeed, foreground, background };
 
-            Console.WriteLine("\nBoom! your settings are implemented");
+            Console.WriteLine("\nYour settings have been implemented. Boom!");
             return settings;
         }
 
@@ -111,7 +111,7 @@ namespace WhereIsBigfoot
                     milliseconds = 15;
                     break;
                 default:
-                    milliseconds = 30;
+                    milliseconds = 15;
                     break;
             }
 
@@ -192,7 +192,7 @@ namespace WhereIsBigfoot
                     consoleColor = ConsoleColor.White;
                     break;
                 default:
-                    consoleColor = ConsoleColor.White;
+                    consoleColor = ConsoleColor.Black;
                     break;
             }
             return consoleColor;
