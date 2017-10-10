@@ -339,7 +339,7 @@ namespace WhereIsBigfoot
                 return;
             }
 
-            string[] splitOn = { "\n\n" };
+            string[] splitOn = { @"\n\n" };
             string[] splitParagraph = paragraph.Split(splitOn, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string para in splitParagraph)
