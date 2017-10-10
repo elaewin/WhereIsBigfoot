@@ -135,8 +135,6 @@ namespace WhereIsBigfoot
 				// split the incoming string and check it against the possible verbs in the parseDict.
 				string[] parsed = input.Split(default(string[]), 2, StringSplitOptions.RemoveEmptyEntries);
 
-				if (this.parseDict.ContainsKey(parsed[0]))
-					verb = this.parseDict[parsed[0]];
 
 				if (parsed.Length == 0)
 				{
@@ -145,12 +143,7 @@ namespace WhereIsBigfoot
 				}
 				else if (parsed.Length == 1)
 				{
-					parsed = new string[2] { verb, "none" };
-					noun = parsed[1];
-				}
-				else
-				{
-					noun = parsed[1];
+					parsed = new string[2] { parsed[0], "none" };
 				}
 
 				// create list of swear words and check to make sure none were entered.
@@ -158,11 +151,17 @@ namespace WhereIsBigfoot
 
 				foreach (string word in blueWords)
 				{
-					if (verb == word || noun == word)
+					if (parsed[0] == word || parsed[1] == word)
 					{
 						commands.WrapText($"\nWay to stay classy there, {this.Player.PlayerName}. I'm sure the trees are very impressed by your masterful command of the English language.");
 						return;
 					}
+				}
+
+				if (this.parseDict.ContainsKey(parsed[0]))
+				{
+					verb = this.parseDict[parsed[0]];
+					noun = parsed[1];
 				}
 
 				if (allowedVerbs.Contains(verb))
@@ -344,7 +343,6 @@ namespace WhereIsBigfoot
 		// Console formatting
 		public void FormatConsole()
 		{
-            
 			Console.Title = "Where Is Bigfoot?";
 			Console.CursorVisible = true;
 			Console.ForegroundColor = ConsoleColor.Green;
@@ -385,7 +383,7 @@ namespace WhereIsBigfoot
 
 		private string[] GetPlayerDetails()
 		{
-            commands.WrapText("First, you need to decide who you are: \n");
+            commands.WrapText("First, you need to decide who you are: ");
 
             string name = "";
 			string gender = "";
@@ -423,8 +421,7 @@ namespace WhereIsBigfoot
 			commands.WrapText("\nNow that that's done with...");
 			return deets;
 		}
-
-
+		
         // Check against a regex string that allows all letters, spaces, apostrophes, dashes.
         private static bool IsValidStartingInput(string str)
         {
@@ -472,22 +469,28 @@ namespace WhereIsBigfoot
             
             Game game = new Game();
             game.FormatConsole();
-            game.LoadData(game);
-            
-            game.StartGame();
+			game.LoadData(game);
+
+			WriteLine($"GAME SETTINGS:\n(Hit enter for default values.)\n");
+            int[] settings = GameSettings.GetGameSettings();
+			GameSettings gameSettings = new GameSettings(settings[0], settings[1], settings[2]);
+            ForegroundColor = gameSettings.ForegroundConverter();
+            BackgroundColor = gameSettings.BackgroundConverter();
+            game.commands.userSpeed = gameSettings.TypeSpeedConverter();
+
             
             // create Player instance
             string[] playerDetails = game.GetPlayerDetails();
             Player newPlayer = new Player(playerDetails[0], playerDetails[1], playerDetails[2]);
             
-            //set the game settings
-            int[] settings = GameSettings.GetGameSettings();
-            GameSettings gameSettings = new GameSettings(settings[0], settings[1], settings[2]);
-            Console.ForegroundColor = gameSettings.ForegroundConverter();
-            Console.BackgroundColor = gameSettings.BackgroundConverter();
-            game.commands.userSpeed = gameSettings.TypeSpeedConverter();
+			game.commands.WrapText($"Press any key to start your game...");
+			ReadKey();
+			Clear();
+            
+			game.StartGame();
 
-            foreach (Location location in game.Locations)
+            //set the game settings
+			foreach (Location location in game.Locations)
             {
                 if (location.Name == "tent")
                     newPlayer.PlayerLocation = location;
