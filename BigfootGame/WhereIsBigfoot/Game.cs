@@ -483,7 +483,7 @@ namespace WhereIsBigfoot
             GameSettings gameSettings = new GameSettings(settings[0], settings[1], settings[2]);
             Console.ForegroundColor = gameSettings.ForegroundConverter();
             Console.BackgroundColor = gameSettings.BackgroundConverter();
-            game.commands.textLoadSpeed = gameSettings.TypeSpeedConverter();
+            game.commands.userSpeed = gameSettings.TypeSpeedConverter();
 
             foreach (Location location in game.Locations)
             {
