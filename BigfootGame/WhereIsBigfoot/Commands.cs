@@ -13,7 +13,7 @@ namespace WhereIsBigfoot
 
     public class Commands
     {
-        private int textLoadSpeed = 15; // Used in TypeLine. Sleep for 15 milliseconds between characters.
+        public int textLoadSpeed = 15; // Used in TypeLine. Sleep for 15 milliseconds between characters.
         // no checks needed 
 
         // DONE
