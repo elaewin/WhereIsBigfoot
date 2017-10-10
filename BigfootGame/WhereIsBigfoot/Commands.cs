@@ -136,13 +136,13 @@ namespace WhereIsBigfoot
             {
                 Console.Title = Console.Title.Remove(16);
                 newLocation = currentLocation.Exits[direction];
-                if (currentLocation.Name == "woods5" && direction == "north")
+                if (currentLocation.Name == "woods5" & direction == "north")
                 {
                     Mountain(p, locations, currentLocation);
                 }
-                else if (currentLocation.Name == "mountain")
+                else if (currentLocation.Exits[direction].StartsWith("tunnel") | currentLocation.Name == "mountain")
                 {
-                    Tunnel(p, locations);
+                    Tunnel(p, locations, currentLocation);
                 }
                 else
                 {
@@ -165,7 +165,7 @@ namespace WhereIsBigfoot
         // DONE
         public void Help(Player p, List<string> allowedVerbs)
         {
-			WrapText("\nYou pull out your Bigfoot Sighting Assistance Manual! It reads:\n\nTrying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command 'Look' in any location will give you a description of that location.\n\nNavigation through the forest of Where Is Bigfoot uses two word commands in the format VERB NOUN. For instance, 'Get Book', or 'Climb Tree'.\n\nTo navigate between different locations in the game, use the verb 'Go', followed by the direction you wish to travel. Many other verbs that describe travel may also be used. We'll let you figure out which ones...\n\n");
+            WrapText("\nYou pull out your Bigfoot Sighting Assistance Manual! It reads:\n\nTrying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command 'Look' in any location will give you a description of that location.\n\nNavigation through the forest of Where Is Bigfoot uses two word commands in the format VERB NOUN. For instance, 'Get Book', or 'Climb Tree'.\n\nTo navigate between different locations in the game, use the verb 'Go', followed by the direction you wish to travel. Many other verbs that describe travel may also be used. We'll let you figure out which ones...\n\n");
 
             WrapText($"Some possible verbs for {p.PlayerName} are: \n");
             foreach (string verb in allowedVerbs)
@@ -332,8 +332,8 @@ namespace WhereIsBigfoot
             }
         }
 
-		// Method adapted from https://rianjs.net/2016/03/line-wrapping-at-word-boundaries-for-console-applications-in-csharp
-		public void WrapText(string paragraph)
+        // Method adapted from https://rianjs.net/2016/03/line-wrapping-at-word-boundaries-for-console-applications-in-csharp
+        public void WrapText(string paragraph)
         {
             if (string.IsNullOrWhiteSpace(paragraph))
             {
@@ -380,7 +380,7 @@ namespace WhereIsBigfoot
         // - if leave counter reset 
         // - special case, handle tunnel 
         // - handle counter for player 
-        private void Tunnel(Player p, List<Location> locations)
+        private void Tunnel(Player p, List<Location> locations, Location currentLocation)
         {
             if (p.Inventory.ContainsKey("glowingLantern"))
             {
@@ -430,14 +430,18 @@ namespace WhereIsBigfoot
                     switch (location.Name)
                     {
                         case "tunnel1":
-                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "mountain")
+                            if (p.GrueCounter < 3)
                             {
-                                GoToLocation(p, location);
-                                WrapText(p.GrueCountdown[p.GrueCounter]);
+                                if (currentLocation.Name == "mountain" || currentLocation.Name == "tunnel2")
+                                {
+                                    GoToLocation(p, location);
+                                    WrapText(p.GrueCountdown[p.GrueCounter]);
+                                }
                             }
                             else
                             {
-
+                                // DELETEME 
+                                WrapText("Death is imminent.");
                             }
                             break;
                         case "tunnel2":
@@ -449,7 +453,8 @@ namespace WhereIsBigfoot
                             }
                             else
                             {
-
+                                // DELETEME 
+                                WrapText("Death is imminent.");
                             }
                             break;
                         case "tunnel3":
@@ -461,7 +466,8 @@ namespace WhereIsBigfoot
                             }
                             else
                             {
-
+                                // DELETEME 
+                                WrapText("Death is imminent.");
                             }
                             break;
                         case "tunnel4":
@@ -473,7 +479,8 @@ namespace WhereIsBigfoot
                             }
                             else
                             {
-
+                                // DELETEME 
+                                WrapText("Death is imminent.");
                             }
                             break;
                         case "tunnel5":
@@ -485,7 +492,8 @@ namespace WhereIsBigfoot
                             }
                             else
                             {
-
+                                // DELETEME 
+                                WrapText("Death is imminent.");
                             }
                             break;
                         default:
@@ -588,13 +596,13 @@ namespace WhereIsBigfoot
             Console.WriteLine();
         }
 
-		private void GameOverMan(Player player, string description)
-		{
-			WrapText(description);
-			player.GameIsRunning = false;
-		}
-		
-	}
+        private void GameOverMan(Player player, string description)
+        {
+            WrapText(description);
+            player.GameIsRunning = false;
+        }
+
+    }
 
 }
 
