@@ -398,10 +398,10 @@ namespace WhereIsBigfoot
             game.StartGame();
 
             // create Player instance
-            string[] playerDetails = gameSettings.GetPlayerDetails();
+            string[] playerDetails = GameSettings.GetPlayerDetails();
             Player newPlayer = new Player(playerDetails[0], playerDetails[1], playerDetails[2]);
 
-            int[] settings = gameSettings.GetGameSettings();
+            int[] settings = GameSettings.GetGameSettings();
             GameSettings gameSettings = new GameSettings(settings[0], settings[1], settings[2]);
 
             foreach (Location location in game.Locations)

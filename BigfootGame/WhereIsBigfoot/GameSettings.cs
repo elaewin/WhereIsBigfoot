@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
+using System.IO;
+using System.Text.RegularExpressions;
 using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
+using static System.Console;
 
 namespace WhereIsBigfoot
 {
     public class GameSettings
     {
         int typeSpeed, foreground, background;
+        Commands commands = new Commands();
 
         public GameSettings(int typeSpeed, int foreground, int background)
         {
@@ -87,61 +91,87 @@ namespace WhereIsBigfoot
             return milliseconds;
         }
 
-        public string ForegroundConverter()
+        public ConsoleColor ForegroundConverter()
         {
+            var consoleColor = new ConsoleColor();
+
             switch (foreground)
             {
                 case 1:
-                    return "black";
+                    consoleColor = ConsoleColor.Black;
+                    break;
                 case 2:
-                    return "Gray";
+                    consoleColor = ConsoleColor.Gray;
+                    break;
                 case 3:
-                    return "Blue";
+                    consoleColor = ConsoleColor.Blue;
+                    break;
                 case 4:
-                    return "Green";
+                    consoleColor = ConsoleColor.Green;
+                    break;
                 case 5:
-                    return "Cyan";
+                    consoleColor = ConsoleColor.Cyan;
+                    break;
                 case 6:
-                    return "Red";
+                    consoleColor = ConsoleColor.Red;
+                    break;
                 case 7:
-                    return "Magenta";
+                    consoleColor = ConsoleColor.Magenta;
+                    break;
                 case 8:
-                    return "Yellow";
+                    consoleColor = ConsoleColor.Yellow;
+                    break;
                 case 9:
-                    return "White";
+                    consoleColor = ConsoleColor.White;
+                    break;
                 default:
-                    return "White";
+                    consoleColor = ConsoleColor.White;
+                    break;
             }
+            return Console.ForegroundColor = consoleColor;
         }
 
-        public string BackgroundConverter()
+        public ConsoleColor BackgroundConverter()
         {
-            switch (background)
+            var consoleColor = new ConsoleColor();
+
+            switch (foreground)
             {
                 case 1:
-                    return "black";
+                    consoleColor = ConsoleColor.Black;
+                    break;
                 case 2:
-                    return "Gray";
+                    consoleColor = ConsoleColor.Gray;
+                    break;
                 case 3:
-                    return "Blue";
+                    consoleColor = ConsoleColor.Blue;
+                    break;
                 case 4:
-                    return "Green";
+                    consoleColor = ConsoleColor.Green;
+                    break;
                 case 5:
-                    return "Cyan";
+                    consoleColor = ConsoleColor.Cyan;
+                    break;
                 case 6:
-                    return "Red";
+                    consoleColor = ConsoleColor.Red;
+                    break;
                 case 7:
-                    return "Magenta";
+                    consoleColor = ConsoleColor.Magenta;
+                    break;
                 case 8:
-                    return "Yellow";
+                    consoleColor = ConsoleColor.Yellow;
+                    break;
                 case 9:
-                    return "White";
+                    consoleColor = ConsoleColor.White;
+                    break;
                 default:
-                    return "White";
+                    consoleColor = ConsoleColor.White;
+                    break;
             }
+            return Console.BackgroundColor = consoleColor;
         }
 
-        public string[] GetPlayerDetails()
+        public static string[] GetPlayerDetails()
         {
             string name = "";
             string gender = "";
@@ -150,29 +180,29 @@ namespace WhereIsBigfoot
             do
             {
                 name = Game.GetInput("What is your name? ");
-                if (!IsValidInfo(name))
+                if (!Game.IsValidInfo(name))
                 {
                     commands.WrapText($"\nHm...I didn't quite get that. Names usually contain just letters (and maybe the occasional hyphen).");
                 }
-            } while (!IsValidInfo(name) && name != "");
+            } while (!Game.IsValidInfo(name) && name != "");
 
             do
             {
                 gender = Game.GetInput("What gender are you? ");
-                if (!IsValidInfo(gender))
+                if (!Game.IsValidInfo(gender))
                 {
                     commands.WrapText($"\nHm...I didn't quite get that. A gender is usually described by words. Made of letters.");
                 }
-            } while (!IsValidInfo(gender) && gender != "");
+            } while (!Game.IsValidInfo(gender) && gender != "");
 
             do
             {
                 hair = Game.GetInput("What color is your hair? ");
-                if (!IsValidInfo(gender))
+                if (!Game.IsValidInfo(gender))
                 {
                     commands.WrapText($"\nHm...I didn't quite get that. Maybe your hair is some crazy, magical color, but you'll have to pick a word to describe it that's just letters.");
                 }
-            } while (!IsValidInfo(hair) && hair != "");
+            } while (!Game.IsValidInfo(hair) && hair != "");
 
             string[] deets = { name, gender, hair };
 
@@ -180,7 +210,7 @@ namespace WhereIsBigfoot
             return deets;
         }
 
-        public int[] GetGameSettings()
+        public static int[] GetGameSettings()
         {
             int typeSpeed;
             int foreground;
