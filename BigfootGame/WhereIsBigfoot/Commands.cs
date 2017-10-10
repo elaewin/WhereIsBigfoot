@@ -130,35 +130,38 @@ namespace WhereIsBigfoot
         {
             Location currentLocation = p.PlayerLocation;
             string newLocation;
-
             if (currentLocation.Exits.ContainsKey(direction))
             {
                 Console.Title = Console.Title.Remove(16);
                 newLocation = currentLocation.Exits[direction];
-
-                // Clear Grue Counter if player enters location outside the tunnel
-                if (newLocation == "mountain" || newLocation == "valley")
-                    p.GrueCounter = 0;
-
-                foreach (Location location in locations)
+                if (currentLocation.Name == "woods5")
                 {
-                    if (location.Name == newLocation)
+                    Mountain(p, locations);
+                }
+                else if (currentLocation.Name == "mountain")
+                {
+                    Tunnel(p, locations);
+                }
+                else
+                {
+                    foreach (Location location in locations)
                     {
-                        p.PlayerLocation = location;
-                        Console.Title += $"? -- {location.Title}";
-                        Console.WriteLine();
-                        ShowLocation(location);
+                        if (location.Name == newLocation)
+                        {
+                            GoToLocation(p, location);
+                        }
                     }
                 }
             }
             else
             {
                 CannotVerbNoun("go", direction);
+                WrapText("Try a different direction. Up is also an option.");
             }
         }
-
-        // DONE
-        public void Help(Player p, List<string> allowedVerbs)
+    
+    // DONE
+    public void Help(Player p, List<string> allowedVerbs)
         {
             WrapText("You pull out your Bigfoot Sighting Assistance Manual! It reads:\n\n");
             WrapText($"Trying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command \"look\" in any location will give you a description of that location.\n\n");
@@ -228,9 +231,18 @@ namespace WhereIsBigfoot
 
         // DONE
         // write like use 
-        public void Put(Player p, Item item, Asset asset)
+        // DONE        
+        public void Put(Player p, Item item, Asset asset, List<Item> items)
         {
-            if (item.Target == asset.Name)
+            if (item.Name == "lantern" & asset.Name == "grease")
+            {
+                Lantern(p, item, asset, items, "filledLantern");
+            }
+            else if (item.Name == "filledLantern" & asset.Name == "matches")
+            {
+                Lantern(p, item, asset, items, "glowingLantern");
+            }
+            else if (item.Target == asset.Name)
             {
                 WrapText(item.Actions["put"]);
             }
@@ -481,6 +493,7 @@ namespace WhereIsBigfoot
             }
         }
 
+
         private void Mountain(Player p, List<Location> locations)
         {
             if (p.Inventory.ContainsKey("stick"))
@@ -495,7 +508,7 @@ namespace WhereIsBigfoot
             }
             else
             {
-                WrapText($"That path is WAY too steep to climb without something to help you keep your balance.");
+                WrapText($"That path is way too steep to climb without something to help you keep your balance.");
             }
         }
 
