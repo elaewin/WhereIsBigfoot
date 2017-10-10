@@ -317,7 +317,7 @@ namespace WhereIsBigfoot
 							string verify = GetInput("Are you sure you want to quit? y/n: ").ToLower();
 							if (verify == "y" || verify == "yes")
 							{
-								this.Player. = false;
+                                this.Player.GameIsRunning = false;
 								WriteLine();
 								commands.WrapText("Thank you for playing Where is Bigfoot!");
 								WriteLine();
