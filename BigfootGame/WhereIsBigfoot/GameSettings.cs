@@ -12,7 +12,6 @@ namespace WhereIsBigfoot
     public class GameSettings
     {
         int typeSpeed, foreground, background;
-        Commands commands = new Commands();
 
         public GameSettings(int typeSpeed, int foreground, int background)
         {
@@ -171,44 +170,7 @@ namespace WhereIsBigfoot
             return Console.BackgroundColor = consoleColor;
         }
 
-        public static string[] GetPlayerDetails()
-        {
-            string name = "";
-            string gender = "";
-            string hair = "";
-
-            do
-            {
-                name = Game.GetInput("What is your name? ");
-                if (!Game.IsValidInfo(name))
-                {
-                    commands.WrapText($"\nHm...I didn't quite get that. Names usually contain just letters (and maybe the occasional hyphen).");
-                }
-            } while (!Game.IsValidInfo(name) && name != "");
-
-            do
-            {
-                gender = Game.GetInput("What gender are you? ");
-                if (!Game.IsValidInfo(gender))
-                {
-                    commands.WrapText($"\nHm...I didn't quite get that. A gender is usually described by words. Made of letters.");
-                }
-            } while (!Game.IsValidInfo(gender) && gender != "");
-
-            do
-            {
-                hair = Game.GetInput("What color is your hair? ");
-                if (!Game.IsValidInfo(gender))
-                {
-                    commands.WrapText($"\nHm...I didn't quite get that. Maybe your hair is some crazy, magical color, but you'll have to pick a word to describe it that's just letters.");
-                }
-            } while (!Game.IsValidInfo(hair) && hair != "");
-
-            string[] deets = { name, gender, hair };
-
-            commands.WrapText("\nNow that that's done with...");
-            return deets;
-        }
+        
 
         public static int[] GetGameSettings()
         {
@@ -233,7 +195,7 @@ namespace WhereIsBigfoot
 
             int[] settings = { typeSpeed, foreground, background };
 
-            commands.TypeLine("Boom! your settings are implemented");
+            Console.WriteLine("Boom! your settings are implemented");
             return settings;
         }
     }
