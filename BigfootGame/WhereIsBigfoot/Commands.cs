@@ -165,8 +165,8 @@ namespace WhereIsBigfoot
         {
             WrapText("You pull out your Bigfoot Sighting Assistance Manual! It reads:\n\n");
             WrapText($"Trying to figure out where you are? Your current location is displayed in the title bar at the top of your the game's console window. Also, entering the command \"look\" in any location will give you a description of that location.\n\n");
-			WrapText("Navigation through the forest of Where Is Bigfoot uses two word commands in the format VERB NOUN. For instance, Get Book, or Climb Tree.\n\n");
-			WrapText("To navigate between different locations in the game, use the verb Go, followed by the direction you wish to travel. Many other verbs that describe travel may also be used. We'll let you figure out which ones...\n");
+			WrapText("Navigation through the forest of Where Is Bigfoot uses two word commands in the format VERB NOUN. For instance, \"Get Book\", or \"Climb Tree\".\n\n");
+			WrapText("To navigate between different locations in the game, use the verb \"Go\", followed by the direction you wish to travel. Many other verbs that describe travel may also be used. We'll let you figure out which ones...\n");
             WrapText($"Some possible verbs for {p.PlayerName} are: ");
             foreach (string verb in allowedVerbs)
             {
