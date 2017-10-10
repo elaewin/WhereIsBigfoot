@@ -91,7 +91,7 @@ namespace WhereIsBigfoot
         public void Give(Player p, Item item, Character character, Dictionary<string, Character> characters)
         {
             // check to see if character is target
-            if (item.Target == "danCooking" | item.Target == "bigfootHostile")
+            if (item.Target == "danCooking" || item.Target == "bigfootHostile")
             {
                 // give Dan book
                 if (item.Name == "book" && character.Name == "danCooking")

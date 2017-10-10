@@ -77,7 +77,6 @@ namespace WhereIsBigfoot
 					if (location.Name == name)
 					{
 						location.Items.Add(key, item);
-						//commands.WrapText($"Assigned item key {key} on location {location.Name}");
 					}
 				}
 			}
@@ -93,7 +92,6 @@ namespace WhereIsBigfoot
 					if (location.Name == name)
 					{
 						location.Characters.Add(key, character);
-						//commands.WrapText($"Assigned character with key {key} on location {location.Name}");
 					}
 				}
 			}
@@ -130,7 +128,7 @@ namespace WhereIsBigfoot
 			string input = GetInput(prompt).ToLower().Trim();
 
 
-			if (IsValidInput(input) && (input != "") && input != null)
+            if (IsValidCommandInput(input) && (input != "") && input != null)
 			{
 				string verb = "";
 				string noun = "";
@@ -190,7 +188,7 @@ namespace WhereIsBigfoot
 
 						case "give":
 							// Get the target character for it item being given.
-							string giveResponse = GetInput($"Who do you want to give {noun}?");
+                            string giveResponse = GetInput($"To who do you want to give the {noun}? ").ToLower();
 
 							// check that item is in player inventory
 							Item itemToGive = ItemExistsIn(this.Player.Inventory, noun);
@@ -224,7 +222,7 @@ namespace WhereIsBigfoot
 							else
 							{
 								// Get the target for the use command
-								string putTarget = GetInput($"What do you want to put the {noun} on?");
+                                string putTarget = GetInput($"What do you want to put the {noun} on?").ToLower();
 
 								//check player inventory items & list of character in location vs. target on each asset.
 								string itemTarget = itemToPut.Target;
@@ -280,7 +278,7 @@ namespace WhereIsBigfoot
 							else
 							{
 								// Get the target for the use commandcommands.WrapText(commands.WrapText
-								string useTarget = GetInput($"What do you want to use the {noun} on?");
+                                string useTarget = GetInput($"What do you want to use the {noun} on?").ToLower();
 
 								//check player inventory items & list of character in location vs. target on each asset.
 								string itemTarget = itemToUse.Target;
@@ -374,7 +372,7 @@ namespace WhereIsBigfoot
 ");
 			commands.WrapText("Where is Bigfoot is a text-based adventure game where you take on the role of a camper who is trying to find that most elusive of cryptids: BIGFOOT!");
 			WriteLine("");
-			commands.WrapText("First, you need to decide who you are... ");
+            Write("");
 			//string startGame = GetInput("Would you like to start the game? (y/n): ");
 			//if (startGame == "yes" || startGame == "y") {
 			//    return;
@@ -388,36 +386,38 @@ namespace WhereIsBigfoot
 
 		private string[] GetPlayerDetails()
 		{
-			string name = "";
+            commands.WrapText("First, you need to decide who you are: \n");
+
+            string name = "";
 			string gender = "";
 			string hair = "";
 
 			do
 			{
 				name = GetInput("What is your name? ");
-				if (!IsValidInfo (name))
+				if (!IsValidStartingInput(name) && name != "")
 				{
 					commands.WrapText($"\nHm...I didn't quite get that. Names usually contain just letters (and maybe the occasional hyphen).");
 				}
-			} while (!IsValidInfo(name) && name != "");
+			} while (!IsValidStartingInput(name) && name != "");
 
 			do
 			{
 				gender = GetInput("What gender are you? ");
-				if (!IsValidInfo(gender))
+				if (!IsValidStartingInput(gender) && gender != "")
 				{
 					commands.WrapText($"\nHm...I didn't quite get that. A gender is usually described by words. Made of letters.");
 				}
-			} while (!IsValidInfo(gender) && gender != "");
+			} while (!IsValidStartingInput(gender) && gender != "");
 
 			do
 			{
 				hair = GetInput("What color is your hair? ");
-				if (!IsValidInfo(gender))
+				if (!IsValidStartingInput(hair) && hair != "")
 				{
 					commands.WrapText($"\nHm...I didn't quite get that. Maybe your hair is some crazy, magical color, but you'll have to pick a word to describe it that's just letters.");
 				}
-			} while (!IsValidInfo(hair) && hair != "");
+			} while (!IsValidStartingInput(hair) && hair != "");
 
 			string[] deets = { name, gender, hair };
 
@@ -427,18 +427,20 @@ namespace WhereIsBigfoot
 
 
         // Check against a regex string that allows all letters, spaces, apostrophes, dashes.
-        private static bool IsValidInput(string str)
+        private static bool IsValidStartingInput(string str)
         {
-            Regex regexString = new Regex(@"^[a-zA-Z\s-']+\z");
-            return regexString.IsMatch(str);
+            Regex regexString = new Regex(@"^[a-zA-Z\s-'\.][^\n\r]+\z");
+            bool result = regexString.IsMatch(str);
+            return result;
         }
 
         // check against a regex string that takes one word of just letters, or two words separated by a space.
         // Format is beginning of line, one or more letters of any length, one or no spaces, zero or more letters of any length, end of line.
-        private static bool IsValidInfo(string str)
+        private static bool IsValidCommandInput(string str)
         {
             Regex regexString = new Regex(@"^[a-zA-Z]+\s?[a-zA-Z]*\z");
-            return regexString.IsMatch(str);
+            bool result = regexString.IsMatch(str);
+            return result;
         }
 
         // Take in string input from the user. Corrects null input.

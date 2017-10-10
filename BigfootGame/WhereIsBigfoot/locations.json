@@ -2,14 +2,15 @@
     {
         "name": "campsite",
         "title": "Your Campsite",
-        "descriptionFirst": "You are camped in a small clearing in the middle of the Mount Rainier National Forest. Second growth cedars tower above you, and heavy underbrush surrounds your campsite on all sides. On the north side of the campsite is your tent. \n\nYou look around and realize that your lantern is missing! You're sure that you left it out here last night, but now you don't see it anywhere. \n\nOh well, it was out of oil anyway, and you're pretty sure that the refill bottle is sitting on your kitchen counter where you left it after forgetting to pack it.",
-        "descriptionLong": "Second growth cedars tower above you, and heavy underbrush surrounds your campsite on all sides. On the north side of the campsite is your tent.",
-        "descriptionShort": "You are at your campsite. On the north side of the campsite is your tent.",
+        "descriptionFirst": "You are camped in a small clearing in the middle of the Mount Rainier National Forest. Second growth cedars tower above you, and heavy underbrush surrounds your campsite on all sides.\n\nYou look around and realize that your lantern is missing! You're sure that you left it out here last night, but now you don't see it anywhere.\n\nOh well, it was out of oil anyway, and you're pretty sure that the refill bottle is sitting on your kitchen counter where you left it after forgetting to pack it.",
+        "descriptionLong": "Second growth cedars tower above you, and heavy underbrush surrounds your campsite on all sides. ",
+        "descriptionShort": "You are at your campsite.",
         "exits": {
             "north": "tent",
+            "south":  "woods3",
             "east": "woods1",
             "in": "tent",
-            "text": "A trail leads off through the underbrush to the east."
+            "text": "On the north side of the campsite is your tent. Trails leads off through the underbrush to the east."
         },
         "characters": {
             "empty": null
@@ -131,7 +132,7 @@
     {
         "name": "tent",
         "title": "Inside Your Tent",
-        "descriptionFirst": "It's so good to have your own tent rather than sharing one with anybody. Your tent contains your sleeping bag, a change of clothes, a small backpack, and the satisfaction of knowing you can rough it in the great outdoors. Oh, you should probably grab your backpack before you go. And charge your phone....Darn. You forgot your phone charger!\n\nThe outdoors are a nightmare.",
+        "descriptionFirst": "You weren't expecting Dan to call you this week. You made friends with Dan in college, and he was always fun. A hoot, one might say. The kind of friend who'd go out on camping trips looking for Bigfoot. (That qualifies as a hoot, doesn't it?) Once or twice, you even took him up on his invitations to go searching for Bigfoot, because why not? But you weren't expecting him to call you up out of the blue and invite you out for another expedition. It's been years since you both graduated. Say what you will about a guy who goes out looking for Bigfoot, but the man finished college. You figured he'd probably given up the Bigfoot search by now. Apparently not, though.\n\nThose trips were always good for some laughs. You remember them being relaxing, too. So, college or no college anymore, why not?\n\n...okay, the driving directions weren't great, so that's one reason why not. You didn't realize that until you found yourself in the wilderness between Mount Rainier and Mount St. Helens. But eventually you found the spot where Dan said he'd be camping...you think...and so you pitched your tent and sacked out for the night. It's good to have your own tent rather than sharing one with anybody!\n\nNow it's morning. Time to find your old buddy. Or Bigfoot. Hopefully both?\n\nYou are in your tent. Your tent contains your sleeping bag, a change of clothes, a small backpack, and the satisfaction of knowing you can rough it in the great outdoors. Oh, you should probably grab your backpack before you go. And charge your phone.\n\n...Darn. You forgot your phone charger. The outdoors are a nightmare.",
         "descriptionLong": "Home sweet camping home. Your tent contains a sleeping bag and a change of clothes. There's not much room for anything else.",
         "descriptionShort": "You are in your tent.",
         "exits": {
