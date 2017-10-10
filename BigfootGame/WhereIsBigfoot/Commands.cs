@@ -159,9 +159,9 @@ namespace WhereIsBigfoot
                 WrapText("Try a different direction. Up is also an option.");
             }
         }
-    
-    // DONE
-    public void Help(Player p, List<string> allowedVerbs)
+
+        // DONE
+        public void Help(Player p, List<string> allowedVerbs)
         {
             WrapText("You pull out your Bigfoot Sighting assistance manual and it reads:");
             TypeLine($"The possible commands for {p.PlayerName} are as follows: ");
@@ -197,7 +197,7 @@ namespace WhereIsBigfoot
             {
                 if (item.ParseValue.Contains(entry))
                 {
-					WrapText($"{item.DescriptionLong} \n");
+                    WrapText($"{item.DescriptionLong} \n");
                     return;
                 }
             }
@@ -252,7 +252,8 @@ namespace WhereIsBigfoot
         }
 
         // DONE
-        public void Quit(Player p){
+        public void Quit(Player p)
+        {
             p.GameIsRunning = false;
             Console.WriteLine();
             WrapText("Thank you for playing Where is Bigfoot!");
@@ -332,36 +333,44 @@ namespace WhereIsBigfoot
 
         public void WrapText(string paragraph)
         {
+
             if (string.IsNullOrWhiteSpace(paragraph))
             {
                 return;
             }
 
-            var approxLineCount = paragraph.Length / Console.WindowWidth;
-            var lines = new StringBuilder(paragraph.Length + (approxLineCount * 4));
+            string[] splitOn = { "\n\n" };
+            string[] splitParagraph = paragraph.Split(splitOn, StringSplitOptions.RemoveEmptyEntries);
 
-            for (var i = 0; i < paragraph.Length;)
+            foreach (string para in splitParagraph)
             {
-                var grabLimit = Math.Min(Console.WindowWidth, paragraph.Length - i);
-                var line = paragraph.Substring(i, grabLimit);
+                var approxLineCount = para.Length / Console.WindowWidth;
+                var lines = new StringBuilder(para.Length + (approxLineCount * 4));
 
-                var isLastChunk = grabLimit + i == paragraph.Length;
-
-                if (isLastChunk)
+                for (var i = 0; i < para.Length;)
                 {
-                    i = i + grabLimit;
-                    lines.Append(line);
-                }
-                else
-                {
-                    var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
-                    lines.AppendLine(line.Substring(0, lastSpace));
+                    var grabLimit = Math.Min(Console.WindowWidth, para.Length - i);
+                    var line = paragraph.Substring(i, grabLimit);
 
-                    //Trailing spaces needn't be displayed as the first character on the new line
-                    i = i + lastSpace + 1;
+                    var isLastChunk = grabLimit + i == para.Length;
+
+                    if (isLastChunk)
+                    {
+                        i = i + grabLimit;
+                        lines.Append(line);
+                    }
+                    else
+                    {
+                        var lastSpace = line.LastIndexOf(" ", StringComparison.Ordinal);
+                        lines.AppendLine(line.Substring(0, lastSpace));
+
+                        //Trailing spaces needn't be displayed as the first character on the new line
+                        i = i + lastSpace + 1;
+                    }
                 }
+                TypeLine(lines.ToString());
+                Console.WriteLine();
             }
-            TypeLine(lines.ToString());
         }
 
         private void GoToLocation(Player p, Location location)
@@ -434,7 +443,7 @@ namespace WhereIsBigfoot
                             }
                             else
                             {
-                                
+
                             }
                             break;
                         case "tunnel2":
@@ -446,7 +455,7 @@ namespace WhereIsBigfoot
                             }
                             else
                             {
-                                
+
                             }
                             break;
                         case "tunnel3":
@@ -458,7 +467,7 @@ namespace WhereIsBigfoot
                             }
                             else
                             {
-                                
+
                             }
                             break;
                         case "tunnel4":
@@ -470,7 +479,7 @@ namespace WhereIsBigfoot
                             }
                             else
                             {
-                                
+
                             }
                             break;
                         case "tunnel5":
@@ -575,7 +584,7 @@ namespace WhereIsBigfoot
             for (int i = 0; i < line.Length; i++)
             {
                 Console.Write(line[i]);
-                Thread.Sleep(textLoadSpeed); 
+                Thread.Sleep(textLoadSpeed);
                 if (Console.KeyAvailable)
                 {
                     textLoadSpeed = 0;
@@ -585,38 +594,38 @@ namespace WhereIsBigfoot
             Console.WriteLine();
         }
 
-		private void GameOverMan(Player player, string description)
-		{
-			WrapText(description);
-			player.GameIsRunning = false;
-		}
-		
-		//public void WrapText(String text)
-		//{
-		//    String[] words = text.Split(' ');
-		//    StringBuilder buffer = new StringBuilder();
+        private void GameOverMan(Player player, string description)
+        {
+            WrapText(description);
+            player.GameIsRunning = false;
+        }
 
-		//    foreach (String word in words)
-		//    {
-		//        buffer.Append(word);
-		//        //see if you can make this dynamic.
-		//        if (buffer.Length >= Console.WindowWidth - 2)
-		//        {
-		//            String line = buffer.ToString().Substring(0, buffer.Length - word.Length);
-		//            Console.WriteLine(line);
-		//            buffer.Clear();
-		//            buffer.Append(word);
-		//        }
+        //public void WrapText(String text)
+        //{
+        //    String[] words = text.Split(' ');
+        //    StringBuilder buffer = new StringBuilder();
 
-		//        buffer.Append(" ");
+        //    foreach (String word in words)
+        //    {
+        //        buffer.Append(word);
+        //        //see if you can make this dynamic.
+        //        if (buffer.Length >= Console.WindowWidth - 2)
+        //        {
+        //            String line = buffer.ToString().Substring(0, buffer.Length - word.Length);
+        //            Console.WriteLine(line);
+        //            buffer.Clear();
+        //            buffer.Append(word);
+        //        }
 
-		//    }
-		//    //buffer.ToString().PadLeft(200);
-		//    //buffer.ToString().PadRight(200);
-		//    //Console.WriteLine(buffer.ToString());
-		//    TypeLine(buffer.ToString());
-		//}
-	}
+        //        buffer.Append(" ");
+
+        //    }
+        //    //buffer.ToString().PadLeft(200);
+        //    //buffer.ToString().PadRight(200);
+        //    //Console.WriteLine(buffer.ToString());
+        //    TypeLine(buffer.ToString());
+        //}
+    }
 
 }
 
