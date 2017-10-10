@@ -447,6 +447,11 @@ namespace WhereIsBigfoot
         {
             Console.Write(prompt);
             string input = ReadLine();
+            while (input == null)
+            {
+                Console.Write(prompt);
+                input = ReadLine();
+            }
             return input.Trim();
         }
 

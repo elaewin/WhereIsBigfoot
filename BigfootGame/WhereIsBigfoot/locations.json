@@ -2,7 +2,7 @@
     {
         "name": "campsite",
         "title": "Your Campsite",
-        "descriptionFirst": "You are camped in a small clearing in the middle of the Mount Rainier National Forest. Second growth cedars tower above you, and heavy underbrush surrounds your campsite on all sides.\n\nYou look around and realize that your lantern is missing! You're sure that you left it out here last night, but now you don't see it anywhere.\n\nOh well, it was out of oil anyway, and you're pretty sure that the refill bottle is sitting on your kitchen counter where you left it after forgetting to pack it.",
+        "descriptionFirst": "You are camped in a small clearing in the middle of the Mount Rainier National Forest. Second growth cedars tower above you, and heavy underbrush surrounds your campsite on all sides.You look around and realize that your lantern is missing! You're sure that you left it out here last night, but now you don't see it anywhere.\n\nOh well, it was out of oil anyway, and you're pretty sure that the refill bottle is sitting on your kitchen counter where you left it after forgetting to pack it.",
         "descriptionLong": "Second growth cedars tower above you, and heavy underbrush surrounds your campsite on all sides. ",
         "descriptionShort": "You are at your campsite.",
         "exits": {
