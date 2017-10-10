@@ -492,9 +492,7 @@ namespace WhereIsBigfoot
             
             // Show starting room
             Console.WriteLine();
-            
-            game.commands.WrapText("Dan, your old buddy from college, was always crazy about finding Bigfoot. You even went on a couple of Bigfoot hunting expeditions with him way back when. But you weren't expecting him to contact you out of the blue and invite you on another one, now that it's been years since you graduated. But the memory of how relaxing those previous trips were made you agree to go along.\n\nYou drove out from Seattle last night, and into the wilderness between Mounts Rainier and St. Helens. You set up your camp near the area where Dan said he'd been camping (you hope--the directions weren't exactly great), and crashed for the night. Now it's morning. Time to find your old buddy.\n");
-            
+
             game.commands.ShowLocation(game.Player.PlayerLocation);
             Console.Title += $" -- {game.Player.PlayerLocation.Title}";
             
@@ -504,19 +502,21 @@ namespace WhereIsBigfoot
                 
             } while (game.Player.GameIsRunning == true);
 
-            string restart = GetInput($"Would you like to start a new game? y/n: ");
-            if (restart == "y" || restart == "yes")
-            {
-                var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "WhereIsBigfoot.exe");
+            // Ask user if they want to restart the game.
 
-                //System.Windows.Forms.Application.Restart();
+            //string restart = GetInput($"Would you like to start a new game? y/n: ");
+            //if (restart == "y" || restart == "yes")
+            //{
+            //    var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "WhereIsBigfoot.exe");
 
-                // Start a new game proces
-                Process.Start(filePath);
+            //    //System.Windows.Forms.Application.Restart();
 
-                // Close current process
-                Environment.Exit(0);
-            }
+            //    // Start a new game proces
+            //    Process.Start(filePath);
+
+            //    // Close current process
+            //    Environment.Exit(0);
+            //}
         }
     }
 }

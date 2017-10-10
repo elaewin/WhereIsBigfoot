@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Data;
 
 namespace WhereIsBigfoot
@@ -12,6 +13,7 @@ namespace WhereIsBigfoot
 
     public class Commands
     {
+        private int textLoadSpeed = 15; // Used in TypeLine. Sleep for 15 milliseconds between characters.
         // no checks needed 
 
         // DONE
@@ -560,8 +562,13 @@ namespace WhereIsBigfoot
             for (int i = 0; i < line.Length; i++)
             {
                 Console.Write(line[i]);
-                System.Threading.Thread.Sleep(15); // Sleep for 15 milliseconds between characters.
+                Thread.Sleep(textLoadSpeed); 
+                if (Console.KeyAvailable)
+                {
+                    textLoadSpeed = 0;
+                }
             }
+            textLoadSpeed = 15;
             Console.WriteLine();
         }
 
