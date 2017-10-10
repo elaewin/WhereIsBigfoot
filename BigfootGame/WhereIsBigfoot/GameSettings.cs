@@ -48,17 +48,17 @@ namespace WhereIsBigfoot
 
             do
             {
-                foreground = Convert.ToInt16(Game.GetInput("Choose a foreground color by entering the corresponding number: \n Black = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n"));
+                foreground = Convert.ToInt16(Game.GetInput("Choose a text color by entering the corresponding number: \nBlack = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n"));
             } while (foreground < 1 || foreground > 9);
 
             do
             {
-                background = Convert.ToInt16(Game.GetInput("Choose a background color by entering the corresponding number: \n Black = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n"));
-            } while (background < 1 || background > 9);
+                background = Convert.ToInt16(Game.GetInput("Choose a background color by entering the corresponding number, cannot be the same as text color: \nBlack = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n"));
+            } while (background < 1 || background > 9 || foreground == background);
 
             int[] settings = { typeSpeed, foreground, background };
 
-            Console.WriteLine("\n Boom! your settings are implemented");
+            Console.WriteLine("\nBoom! your settings are implemented");
             return settings;
         }
 
