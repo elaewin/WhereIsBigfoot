@@ -37,23 +37,35 @@ namespace WhereIsBigfoot
 
         public static int[] GetGameSettings()
         {
+            string speedChosen;
             int typeSpeed;
+            string foreChosen;
             int foreground;
+            string backChosen;
             int background;
 
             do
             {
-                typeSpeed = Convert.ToInt16(Game.GetInput("Choose a gamespeed from 1-10: "));
+                speedChosen = Game.GetInput("Choose a gamespeed from 1-10: ");
+                if (speedChosen == "")
+                    speedChosen = "8";
+                typeSpeed = Convert.ToInt16(speedChosen);
             } while (typeSpeed < 1 || typeSpeed > 10);
 
             do
             {
-                foreground = Convert.ToInt16(Game.GetInput("Choose a text color by entering the corresponding number: \nBlack = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n"));
+                foreChosen = Game.GetInput("Choose a text color by entering the corresponding number: \nBlack = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n");
+                if (foreChosen == "")
+                    foreChosen = "9";
+                foreground = Convert.ToInt16(foreChosen);
             } while (foreground < 1 || foreground > 9);
 
             do
             {
-                background = Convert.ToInt16(Game.GetInput("Choose a background color by entering the corresponding number, cannot be the same as text color: \nBlack = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n"));
+                backChosen = Game.GetInput("Choose a background color by entering the corresponding number, cannot be the same as text color: \nBlack = 1 Gray = 2 Blue = 3 Green = 4 Cyan = 5 Red = 6 Magenta = 7 Yellow = 8 White = 9 \n");
+                if (backChosen == "")
+                    backChosen = "1";
+                background = Convert.ToInt16(backChosen);
             } while (background < 1 || background > 9 || foreground == background);
 
             int[] settings = { typeSpeed, foreground, background };
