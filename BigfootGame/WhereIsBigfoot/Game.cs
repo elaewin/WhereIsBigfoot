@@ -125,9 +125,9 @@ namespace WhereIsBigfoot
 		// Handles the parsing of input from the user.
 		public void ParseInput(string prompt)
 		{
+			WriteLine();
 			string input = GetInput(prompt).ToLower().Trim();
-
-
+			
             if (IsValidCommandInput(input) && (input != "") && input != null)
 			{
 				string verb = "";
@@ -395,29 +395,29 @@ namespace WhereIsBigfoot
 			do
 			{
 				name = GetInput("What is your name? ");
-				if (!IsValidStartingInput(name) && name != "")
+				if (!IsValidStartingInput(name) && name != null)
 				{
 					commands.WrapText($"\nHm...I didn't quite get that. Names usually contain just letters (and maybe the occasional hyphen).");
 				}
-			} while (!IsValidStartingInput(name) && name != "");
+			} while (!IsValidStartingInput(name) || name == null);
 
 			do
 			{
 				gender = GetInput("What gender are you? ");
-				if (!IsValidStartingInput(gender) && gender != "")
+				if (!IsValidStartingInput(gender) && gender != null)
 				{
 					commands.WrapText($"\nHm...I didn't quite get that. A gender is usually described by words. Made of letters.");
 				}
-			} while (!IsValidStartingInput(gender) && gender != "");
+			} while (!IsValidStartingInput(gender) || gender == null);
 
 			do
 			{
 				hair = GetInput("What color is your hair? ");
-				if (!IsValidStartingInput(hair) && hair != "")
+				if (!IsValidStartingInput(hair) && hair != null)
 				{
 					commands.WrapText($"\nHm...I didn't quite get that. Maybe your hair is some crazy, magical color, but you'll have to pick a word to describe it that's just letters.");
 				}
-			} while (!IsValidStartingInput(hair) && hair != "");
+			} while (!IsValidStartingInput(hair) || hair == null);
 
 			string[] deets = { name, gender, hair };
 
@@ -449,7 +449,7 @@ namespace WhereIsBigfoot
             Console.Write(prompt);
             string input = ReadLine();
             if (input == null)
-                return "";
+                return null;
             return input;
         }
 
