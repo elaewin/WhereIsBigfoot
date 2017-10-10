@@ -125,9 +125,9 @@ namespace WhereIsBigfoot
 		// Handles the parsing of input from the user.
 		public void ParseInput(string prompt)
 		{
+			WriteLine();
 			string input = GetInput(prompt).ToLower().Trim();
-
-
+			
             if (IsValidCommandInput(input) && (input != "") && input != null)
 			{
 				string verb = "";
