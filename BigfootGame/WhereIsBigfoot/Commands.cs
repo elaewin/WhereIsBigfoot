@@ -173,7 +173,7 @@ namespace WhereIsBigfoot
                 Console.WriteLine($"    {verb}");
             }
 
-			WrapText($"To load scrolling text instantly, press the spacebar.");
+            WrapText($"To load scrolling text instantly, press the spacebar.");
         }
 
         // DONE
@@ -592,7 +592,7 @@ namespace WhereIsBigfoot
 
                 if (Console.KeyAvailable)
                 {
-                    if (Console.ReadKey().Key == ConsoleKey.Spacebar)
+                    if (Console.ReadKey(true).Key == ConsoleKey.Spacebar)
                     {
                         textLoadSpeed = 0;
                     }
