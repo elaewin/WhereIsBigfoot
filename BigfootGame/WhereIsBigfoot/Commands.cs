@@ -49,7 +49,11 @@ namespace WhereIsBigfoot
             {
                 if (p.PlayerLocation.Items[item.Name].Actions.ContainsKey("get"))
                 {
-                    if (item.Name == "grease")
+					if (item.Name == "lantern" && p.PlayerLocation.Characters.ContainsKey("octopus"))
+					{
+						WrapText($"\n{item.Actions["blocked"]}");
+					}
+					if (item.Name == "grease")
                     {
                         DanCheck(p, item);
                     }
@@ -63,6 +67,7 @@ namespace WhereIsBigfoot
                     }
                 }
             }
+			
             // if asset is a character
             // go back to later
             //else if (p.PlayerLocation.Characters.ContainsKey(a.Name))
