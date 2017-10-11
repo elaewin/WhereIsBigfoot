@@ -117,7 +117,7 @@ namespace WhereIsBigfoot
             else
             {
                 CannotVerbNoun("give", item.Name);
-                TypeLine($"Maybe {character} doesn't want the {item.Name}.");
+                TypeLine($"Maybe {character.Title} doesn't want the {item.Name}.");
             }
         }
 
@@ -133,6 +133,7 @@ namespace WhereIsBigfoot
         // Handle walking stick = checking inventory 
         // If in mountain and try to go to the cave
         // - without walking stick 
+        // if chasm game over 
         public void Go(Player p, string direction, List<Location> locations)
         {
             Location currentLocation = p.PlayerLocation;
@@ -141,13 +142,17 @@ namespace WhereIsBigfoot
             {
                 Console.Title = Console.Title.Remove(16);
                 newLocation = currentLocation.Exits[direction];
-                if (currentLocation.Name == "woods5" && direction == "north")
+                if (currentLocation.Name == "woods5" & direction == "north")
                 {
                     Mountain(p, locations, currentLocation);
                 }
-                else if (currentLocation.Name == "mountain")
+                else if (currentLocation.Exits[direction].StartsWith("tunnel") || currentLocation.Name == "mountain" || currentLocation.Name == "valley")
                 {
-                    Tunnel(p, locations);
+                    if (newLocation == "mountain" || newLocation == "valley")
+                    {
+                        p.GrueCounter = 0;
+                    }
+                    Tunnel(p, locations, currentLocation, direction);
                 }
                 else
                 {
@@ -395,7 +400,33 @@ namespace WhereIsBigfoot
         // - if leave counter reset 
         // - special case, handle tunnel 
         // - handle counter for player 
-        private void Tunnel(Player p, List<Location> locations)
+        private void GoToTunnel(Player p, Location location, Location currentLocation)
+        {
+            if (currentLocation.Exits.ContainsValue(location.Name))
+            {
+                GoToLocation(p, location);
+            }
+        }
+
+        private void GoToGrueDeath(Player p, Location location, Location currentLocation)
+        {
+            if (p.GrueCounter < 4)
+            {
+                if (currentLocation.Exits.ContainsValue(location.Name))
+                {
+                    GoToLocation(p, location);
+                    WrapText(p.GrueCountdown[p.GrueCounter]);
+                    p.GrueCounter++;
+                }
+            }
+            else
+            {
+                // DELETEME 
+                WrapText("Death is imminent.");
+            }
+        }
+
+        private void Tunnel(Player p, List<Location> locations, Location currentLocation, string direction)
         {
             if (p.Inventory.ContainsKey("glowingLantern"))
             {
@@ -404,34 +435,19 @@ namespace WhereIsBigfoot
                     switch (location.Name)
                     {
                         case "tunnel1Lit":
-                            if (p.PlayerLocation.Name == "mountain")
-                            {
-                                GoToLocation(p, location);
-                            }
+                            GoToTunnel(p, location, currentLocation);
                             break;
                         case "tunnel2Lit":
-                            if (p.PlayerLocation.Name == "tunnel1Lit")
-                            {
-                                GoToLocation(p, location);
-                            }
+                            GoToTunnel(p, location, currentLocation);
                             break;
                         case "tunnel3Lit":
-                            if (p.PlayerLocation.Name == "tunnel2Lit")
-                            {
-                                GoToLocation(p, location);
-                            }
+                            GoToTunnel(p, location, currentLocation);
                             break;
                         case "tunnel4Lit":
-                            if (p.PlayerLocation.Name == "tunnel3Lit")
-                            {
-                                GoToLocation(p, location);
-                            }
+                            GoToTunnel(p, location, currentLocation);
                             break;
                         case "tunnel5Lit":
-                            if (p.PlayerLocation.Name == "tunnel4Lit")
-                            {
-                                GoToLocation(p, location);
-                            }
+                            GoToTunnel(p, location, currentLocation);
                             break;
                         default:
                             break;
@@ -445,63 +461,19 @@ namespace WhereIsBigfoot
                     switch (location.Name)
                     {
                         case "tunnel1":
-                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "mountain")
-                            {
-                                GoToLocation(p, location);
-                                WrapText(p.GrueCountdown[p.GrueCounter]);
-                            }
-                            else
-                            {
-
-                            }
+                            GoToGrueDeath(p, location, currentLocation);
                             break;
                         case "tunnel2":
-                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel1")
-                            {
-                                GoToLocation(p, location);
-                                WrapText(p.GrueCountdown[p.GrueCounter]);
-                                p.GrueCounter++;
-                            }
-                            else
-                            {
-
-                            }
+                            GoToGrueDeath(p, location, currentLocation);
                             break;
                         case "tunnel3":
-                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel2")
-                            {
-                                GoToLocation(p, location);
-                                WrapText(p.GrueCountdown[p.GrueCounter]);
-                                p.GrueCounter++;
-                            }
-                            else
-                            {
-
-                            }
+                            GoToGrueDeath(p, location, currentLocation);
                             break;
                         case "tunnel4":
-                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel3")
-                            {
-                                GoToLocation(p, location);
-                                WrapText(p.GrueCountdown[p.GrueCounter]);
-                                p.GrueCounter++;
-                            }
-                            else
-                            {
-
-                            }
+                            GoToGrueDeath(p, location, currentLocation);
                             break;
                         case "tunnel5":
-                            if (p.GrueCounter < 3 && p.PlayerLocation.Name == "tunnel3")
-                            {
-                                GoToLocation(p, location);
-                                WrapText(p.GrueCountdown[p.GrueCounter]);
-                                p.GrueCounter++;
-                            }
-                            else
-                            {
-
-                            }
+                            GoToGrueDeath(p, location, currentLocation);
                             break;
                         default:
                             break;

@@ -14,6 +14,8 @@ namespace WhereIsBigfoot
         Dictionary<string, Item> items;
         bool visited = false;
 
+        // create exits dictionary in location
+
         public Location(string name,
                         string title,
                         string descriptionFirst,

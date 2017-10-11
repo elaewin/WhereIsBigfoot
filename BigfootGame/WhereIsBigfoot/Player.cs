@@ -14,9 +14,10 @@ namespace WhereIsBigfoot
 		private bool gameIsRunning = true;
         private List<string> grueCountdown = new List<string>()
         {
+            "\nThe dark is disorienting.",
             "\nYou think you hear something moving deeper in the cave.", 
             "\nYou definitely hear something. A shuffling noise, that's getting louder, like something is moving towards you.", 
-            "\nWhatever it is that moving towards you is getting closer. You think you can hear breathing. Maybe panting. And there's a smell, like rotten meat, that is getting stronger and stronger..."
+            "\nWhatever it is that moving towards you is getting closer. You think you can hear breathing. Maybe panting. And there's a smell, like rotten meat, that is getting stronger and stronger...",
         };
         private List<string> bigfootCountdown = new List<string>()
         {
