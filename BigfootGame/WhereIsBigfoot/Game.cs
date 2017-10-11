@@ -178,7 +178,7 @@ namespace WhereIsBigfoot
 							Item itemToGet = ItemExistsIn(this.Player.PlayerLocation.Items, noun);
 							if (itemToGet == null)
 							{
-								commands.WrapText($"You're not able to get {noun}.");
+								commands.WrapText($"You're not able to get the {noun}.");
 								break;
 							}
 							commands.Get(this.Player, itemToGet, this.Items);
@@ -383,7 +383,7 @@ namespace WhereIsBigfoot
 
 		private string[] GetPlayerDetails()
 		{
-            commands.WrapText("First, you need to decide who you are: ");
+            commands.WrapText("\nNow you need to decide who you are: ");
 
             string name = "";
 			string gender = "";
@@ -418,7 +418,7 @@ namespace WhereIsBigfoot
 
 			string[] deets = { name, gender, hair };
 
-			commands.WrapText("\nNow that that's done with...");
+			commands.WrapText("\nNow that that's done with:");
 			return deets;
 		}
 		
