@@ -128,6 +128,7 @@ namespace WhereIsBigfoot
         // Handle walking stick = checking inventory 
         // If in mountain and try to go to the cave
         // - without walking stick 
+        // if chasm game over 
         public void Go(Player p, string direction, List<Location> locations)
         {
             Location currentLocation = p.PlayerLocation;
