@@ -49,11 +49,11 @@ namespace WhereIsBigfoot
             {
                 if (p.PlayerLocation.Items[item.Name].Actions.ContainsKey("get"))
                 {
-					if (item.Name == "lantern" && p.PlayerLocation.Characters.ContainsKey("octopus"))
-					{
-						WrapText($"\n{item.Actions["blocked"]}");
-					}
-					if (item.Name == "grease")
+                    if (item.Name == "lantern" && p.PlayerLocation.Characters.ContainsKey("octopus"))
+                    {
+                        WrapText($"\n{item.Actions["blocked"]}");
+                    }
+                    if (item.Name == "grease")
                     {
                         DanCheck(p, item);
                     }
@@ -67,7 +67,7 @@ namespace WhereIsBigfoot
                     }
                 }
             }
-			
+
             // if asset is a character
             // go back to later
             //else if (p.PlayerLocation.Characters.ContainsKey(a.Name))
@@ -421,33 +421,42 @@ namespace WhereIsBigfoot
             }
             else
             {
-                // DELETEME 
-                WrapText("Death is imminent.");
+                // Gruedeath flavor text needed from writer
+                GameOverMan(p, "The rest of your very short life was spent nourishing a rather hungry grue.");
             }
         }
 
         private void Tunnel(Player p, List<Location> locations, Location currentLocation, string direction)
         {
+            Dictionary<string, Location> tunnels = new Dictionary<string, Location>();
+
+            foreach (Location l in locations)
+            {
+                if (l.Name.StartsWith("tunnel"))
+                {
+                    tunnels.Add(l.Name, l);
+                }
+            }
             if (p.Inventory.ContainsKey("glowingLantern"))
             {
-                foreach (Location location in locations)
+                foreach (string key in tunnels.Keys)
                 {
-                    switch (location.Name)
+                    switch (key)
                     {
                         case "tunnel1Lit":
-                            GoToTunnel(p, location, currentLocation);
+                            GoToTunnel(p, tunnels[key], currentLocation);
                             break;
                         case "tunnel2Lit":
-                            GoToTunnel(p, location, currentLocation);
+                            GoToTunnel(p, tunnels[key], currentLocation);
                             break;
                         case "tunnel3Lit":
-                            GoToTunnel(p, location, currentLocation);
+                            GoToTunnel(p, tunnels[key], currentLocation);
                             break;
                         case "tunnel4Lit":
-                            GoToTunnel(p, location, currentLocation);
+                            GoToTunnel(p, tunnels[key], currentLocation);
                             break;
                         case "tunnel5Lit":
-                            GoToTunnel(p, location, currentLocation);
+                            GoToTunnel(p, tunnels[key], currentLocation);
                             break;
                         default:
                             break;
@@ -456,24 +465,24 @@ namespace WhereIsBigfoot
             }
             else
             {
-                foreach (Location location in locations)
+                foreach (string key in tunnels.Keys)
                 {
-                    switch (location.Name)
+                    switch (key)
                     {
                         case "tunnel1":
-                            GoToGrueDeath(p, location, currentLocation);
+                            GoToGrueDeath(p, tunnels[key], currentLocation);
                             break;
                         case "tunnel2":
-                            GoToGrueDeath(p, location, currentLocation);
+                            GoToGrueDeath(p, tunnels[key], currentLocation);
                             break;
                         case "tunnel3":
-                            GoToGrueDeath(p, location, currentLocation);
+                            GoToGrueDeath(p, tunnels[key], currentLocation);
                             break;
                         case "tunnel4":
-                            GoToGrueDeath(p, location, currentLocation);
+                            GoToGrueDeath(p, tunnels[key], currentLocation);
                             break;
                         case "tunnel5":
-                            GoToGrueDeath(p, location, currentLocation);
+                            GoToGrueDeath(p, tunnels[key], currentLocation);
                             break;
                         default:
                             break;
@@ -481,7 +490,6 @@ namespace WhereIsBigfoot
                 }
             }
         }
-
         private void Mountain(Player p, List<Location> locations, Location currentLocation)
         {
             if (p.Inventory.ContainsKey("stick"))
