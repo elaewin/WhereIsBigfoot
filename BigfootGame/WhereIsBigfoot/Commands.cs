@@ -470,8 +470,7 @@ namespace WhereIsBigfoot
                     switch (key)
                     {
                         case "tunnel1":
-                            if (currentLocation.Exits.ContainsValue(tunnels[].Name))
-                                GoToGrueDeath(p, tunnels[key], currentLocation);
+                            GoToGrueDeath(p, tunnels[key], currentLocation);
                             break;
                         case "tunnel2":
                             GoToGrueDeath(p, tunnels[key], currentLocation);
